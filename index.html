@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mule AI - Multi-Agent Software Builder</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #60A5FA, #A78BFA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .feature-card:hover {
+            border-color: #4B5563;
+        }
+        .feature-card {
+            transition: all 0.2s ease-in-out;
+        }
+        .bg-gray-800\/50 {
+            background-color: rgba(31, 41, 55, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-900 text-gray-100">
+    <!-- Navigation -->
+    <nav class="border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <span class="text-xl font-bold">Mule AI</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#features" class="hover:text-blue-400 transition-colors">Features</a>
+                    <a href="#docs" class="hover:text-blue-400 transition-colors">Docs</a>
+                    <a href="https://github.com/mule-ai/mule" class="hover:text-blue-400 transition-colors">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-bold mb-6 gradient-text">
+                Build Multi-Agent Systems with Ease
+            </h1>
+            <p class="text-xl text-gray-400 mb-8">
+                Mule is a powerful software builder that simplifies the creation and deployment of multi-agent systems. Design, test, and deploy your agents in one unified platform.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors">
+                    <span>Get Started</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+                <a href="https://github.com/mule-ai/mule" 
+                   class="border border-gray-700 hover:border-gray-600 px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors">
+                    <i data-lucide="github" class="w-5 h-5"></i>
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="py-20 bg-gray-800" id="features" style="background-color: rgba(31, 41, 55, 0.5);">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Key Features</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700">
+                    <div class="mb-4">
+                        <i data-lucide="bot" class="w-8 h-8 text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Intelligent Agents</h3>
+                    <p class="text-gray-400">Create and customize intelligent agents with advanced behavior patterns and decision-making capabilities.</p>
+                </div>
+                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700">
+                    <div class="mb-4">
+                        <i data-lucide="code" class="w-8 h-8 text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Simple Integration</h3>
+                    <p class="text-gray-400">Seamlessly integrate with existing systems using our intuitive API and comprehensive documentation.</p>
+                </div>
+                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700">
+                    <div class="mb-4">
+                        <i data-lucide="cpu" class="w-8 h-8 text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Scalable Architecture</h3>
+                    <p class="text-gray-400">Build systems that scale from simple prototypes to complex distributed networks of agents.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="py-20 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Get Started?</h2>
+            <p class="text-gray-400 mb-8">
+                Join the growing community of developers building the next generation of multi-agent systems with Mule.
+            </p>
+            <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg transition-colors">
+                Start Building Now
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
