@@ -1,6 +1,8 @@
 module github.com/muleai/muleai.io
 
-go 1.19
+go 1.21
+
+toolchain go1.24.0
 
 require (
 	github.com/colinwilson/lotusdocs v0.2.0 // indirect
