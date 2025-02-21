@@ -1,6 +1,6 @@
 baseURL = 'https://muleai.io'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Mule AI'
 enableEmoji = true
 
 [module]
