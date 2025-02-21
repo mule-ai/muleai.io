@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Repositories on Mule AI</title>
-    <link>http://10.10.199.96:1313/docs/repositories/</link>
+    <link>https://muleai.io/docs/repositories/</link>
     <description>Recent content in Repositories on Mule AI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 20 Feb 2025 21:04:46 -0500</lastBuildDate>
-    <atom:link href="http://10.10.199.96:1313/docs/repositories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://muleai.io/docs/repositories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Adding a Repository</title>
-      <link>http://10.10.199.96:1313/docs/repositories/adding-a-repository/</link>
+      <link>https://muleai.io/docs/repositories/adding-a-repository/</link>
       <pubDate>Thu, 20 Feb 2025 21:04:16 -0500</pubDate>
-      <guid>http://10.10.199.96:1313/docs/repositories/adding-a-repository/</guid>
-      <description></description>
+      <guid>https://muleai.io/docs/repositories/adding-a-repository/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &lt;img src=&#34;https://muleai.io/add-repository_9635024980308063252.png&#34; alt=&#34;add-repository&#34; width=&#34;1681&#34; height=&#34;764&#34; loading=&#34;lazy&#34;&gt;&#xA;    &#xA;  &#xA;&lt;/p&gt;&#xA;&lt;p&gt;Adding a repository is the action that allows mule to monitor issues and create new pull requests.&lt;/p&gt;&#xA;&lt;h3 id=&#34;remote-repository&#34;&gt;Remote Repository &lt;a href=&#34;#remote-repository&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Currently a repository must exist on GitHub in order for it to be selected as a remote repository.&lt;/p&gt;&#xA;&#xA;&lt;div class=&#34;alert alert-default d-flex&#34; role=&#34;alert&#34;&gt;&#xA;  &lt;div class=&#34;flex-shrink-1 alert-icon&#34;&gt;&#xA;  &#xA;  &lt;span class=&#34;material-icons size-20 me-2&#34;&gt;&#xA;  notifications&#xA;  &lt;/span&gt;&lt;/div&gt;&#xA;  &#xA;  &lt;div class=&#34;w-100&#34;&gt;In future releases you will be able to create a new repository from mule or work on a local only repository.&lt;/div&gt;&#xA;  &lt;/div&gt;&#xA;&lt;h3 id=&#34;base-path&#34;&gt;Base Path &lt;a href=&#34;#base-path&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The Base Path is the location where you with to locally clone the repository. When the repository is cloned, the owner and the repository name will be appended to the base path.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Interacting With a Repository</title>
-      <link>http://10.10.199.96:1313/docs/repositories/interacting-with-a-repository/</link>
+      <link>https://muleai.io/docs/repositories/interacting-with-a-repository/</link>
       <pubDate>Thu, 20 Feb 2025 21:04:46 -0500</pubDate>
-      <guid>http://10.10.199.96:1313/docs/repositories/interacting-with-a-repository/</guid>
+      <guid>https://muleai.io/docs/repositories/interacting-with-a-repository/</guid>
       <description></description>
     </item>
   </channel>

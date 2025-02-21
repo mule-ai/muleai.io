@@ -2,66 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mule AI</title>
-    <link>http://10.10.199.96:1313/</link>
+    <link>https://muleai.io/</link>
     <description>Recent content on Mule AI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 20 Feb 2025 21:04:46 -0500</lastBuildDate>
-    <atom:link href="http://10.10.199.96:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://muleai.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>General</title>
-      <link>http://10.10.199.96:1313/docs/settings/general/</link>
+      <link>https://muleai.io/docs/settings/general/</link>
       <pubDate>Thu, 20 Feb 2025 20:53:59 -0500</pubDate>
-      <guid>http://10.10.199.96:1313/docs/settings/general/</guid>
-      <description></description>
+      <guid>https://muleai.io/docs/settings/general/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &lt;img src=&#34;https://muleai.io/general-settings_1098844684254482801.png&#34; alt=&#34;general-settings&#34; width=&#34;1711&#34; height=&#34;777&#34; loading=&#34;lazy&#34;&gt;&#xA;    &#xA;  &#xA;&lt;/p&gt;&#xA;&lt;p&gt;Currently the only thing that gets configured under general is a GitHub token. This token is used to retrieve:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Repositories&lt;/li&gt;&#xA;&lt;li&gt;Issues&lt;/li&gt;&#xA;&lt;li&gt;Pull Requests&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;And various details such as comments and reactions about the above items.&lt;/p&gt;&#xA;&lt;p&gt;In the future we will have the ability to also use this token to clone a repository. For now that is limited to SSH auth on the system where mule is running.&lt;/p&gt;&#xA;&lt;p&gt;For more information on creating a GitHub Token, check out &lt;a href=&#34;https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic&#34; rel=&#34;external&#34; target=&#34;_blank&#34;&gt;their documentation&lt;svg width=&#34;16&#34; height=&#34;16&#34; viewBox=&#34;0 0 24 24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&lt;path fill=&#34;currentColor&#34; d=&#34;M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z&#34;/&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Getting Started</title>
-      <link>http://10.10.199.96:1313/docs/getting-started/</link>
+      <link>https://muleai.io/docs/getting-started/</link>
       <pubDate>Thu, 20 Feb 2025 20:46:32 -0500</pubDate>
-      <guid>http://10.10.199.96:1313/docs/getting-started/</guid>
-      <description>&lt;h2 id=&#34;installation&#34;&gt;Installation &lt;a href=&#34;#installation&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&#xA;&#xA;    &#xA;    &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/mule-ai/mule.git&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd mule&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make run&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&#xA;&lt;h2 id=&#34;running-mule&#34;&gt;Running Mule &lt;a href=&#34;#running-mule&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;</description>
+      <guid>https://muleai.io/docs/getting-started/</guid>
+      <description>&lt;h2 id=&#34;installation&#34;&gt;Installation &lt;a href=&#34;#installation&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&#xA;&#xA;    &#xA;    &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/mule-ai/mule.git&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd mule&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make run&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&#xA;&lt;h2 id=&#34;running-mule&#34;&gt;Running Mule &lt;a href=&#34;#running-mule&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;To get started running mule, follow the steps below:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Set a &lt;a href=&#34;https://muleai.io/docs/settings/general/&#34;&gt;GitHub token&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Set up your &lt;a href=&#34;https://muleai.io/docs/settings/ai-providers/&#34;&gt;AI Providers&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Create some &lt;a href=&#34;https://muleai.io/docs/settings/agents/&#34;&gt;Agents&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Add a &lt;a href=&#34;https://muleai.io/docs/repositories/adding-a-repository/&#34;&gt;Respository&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Create an Issue&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;demo&#34;&gt;Demo &lt;a href=&#34;#demo&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;video controls src=&#34;https://storage.googleapis.com/mule-storage/devteam-local-demo.webm&#34; width=&#34;350&#34; height=&#34;350&#34; type=&#34;video/webm&#34;&gt;&lt;/video&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Adding a Repository</title>
-      <link>http://10.10.199.96:1313/docs/repositories/adding-a-repository/</link>
+      <link>https://muleai.io/docs/repositories/adding-a-repository/</link>
       <pubDate>Thu, 20 Feb 2025 21:04:16 -0500</pubDate>
-      <guid>http://10.10.199.96:1313/docs/repositories/adding-a-repository/</guid>
-      <description></description>
+      <guid>https://muleai.io/docs/repositories/adding-a-repository/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &lt;img src=&#34;https://muleai.io/add-repository_9635024980308063252.png&#34; alt=&#34;add-repository&#34; width=&#34;1681&#34; height=&#34;764&#34; loading=&#34;lazy&#34;&gt;&#xA;    &#xA;  &#xA;&lt;/p&gt;&#xA;&lt;p&gt;Adding a repository is the action that allows mule to monitor issues and create new pull requests.&lt;/p&gt;&#xA;&lt;h3 id=&#34;remote-repository&#34;&gt;Remote Repository &lt;a href=&#34;#remote-repository&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Currently a repository must exist on GitHub in order for it to be selected as a remote repository.&lt;/p&gt;&#xA;&#xA;&lt;div class=&#34;alert alert-default d-flex&#34; role=&#34;alert&#34;&gt;&#xA;  &lt;div class=&#34;flex-shrink-1 alert-icon&#34;&gt;&#xA;  &#xA;  &lt;span class=&#34;material-icons size-20 me-2&#34;&gt;&#xA;  notifications&#xA;  &lt;/span&gt;&lt;/div&gt;&#xA;  &#xA;  &lt;div class=&#34;w-100&#34;&gt;In future releases you will be able to create a new repository from mule or work on a local only repository.&lt;/div&gt;&#xA;  &lt;/div&gt;&#xA;&lt;h3 id=&#34;base-path&#34;&gt;Base Path &lt;a href=&#34;#base-path&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The Base Path is the location where you with to locally clone the repository. When the repository is cloned, the owner and the repository name will be appended to the base path.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Gemini</title>
-      <link>http://10.10.199.96:1313/docs/settings/ai-providers/gemini/</link>
+      <title>AI Providers</title>
+      <link>https://muleai.io/docs/settings/ai-providers/</link>
       <pubDate>Thu, 20 Feb 2025 20:54:21 -0500</pubDate>
-      <guid>http://10.10.199.96:1313/docs/settings/ai-providers/gemini/</guid>
-      <description></description>
+      <guid>https://muleai.io/docs/settings/ai-providers/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &lt;img src=&#34;https://muleai.io/ai-providers_10305659591486048827.png&#34; alt=&#34;ai-providers&#34; width=&#34;1719&#34; height=&#34;1099&#34; loading=&#34;lazy&#34;&gt;&#xA;    &#xA;  &#xA;&lt;/p&gt;&#xA;&lt;p&gt;Mule supports configuring multiple AI providers. These are used to provide the models that will be used by Agents.&lt;/p&gt;&#xA;&lt;p&gt;Currently Mule supports:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Ollama&lt;/li&gt;&#xA;&lt;li&gt;Gemini&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;We plan too add support for OpenAI and Anthropic in the near future.&lt;/p&gt;&#xA;&lt;p&gt;Not all fields are required, only the information that is necessary to interact with your chosen provider must be provided.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Ollama</title>
-      <link>http://10.10.199.96:1313/docs/settings/ai-providers/ollama/</link>
-      <pubDate>Thu, 20 Feb 2025 20:54:15 -0500</pubDate>
-      <guid>http://10.10.199.96:1313/docs/settings/ai-providers/ollama/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Code Agents</title>
-      <link>http://10.10.199.96:1313/docs/settings/agents/code-agents/</link>
+      <title>Agents</title>
+      <link>https://muleai.io/docs/settings/agents/</link>
       <pubDate>Thu, 20 Feb 2025 20:54:52 -0500</pubDate>
-      <guid>http://10.10.199.96:1313/docs/settings/agents/code-agents/</guid>
-      <description></description>
+      <guid>https://muleai.io/docs/settings/agents/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &lt;img src=&#34;https://muleai.io/agents_9669307435511833329.png&#34; alt=&#34;agents&#34; width=&#34;1719&#34; height=&#34;1885&#34; loading=&#34;lazy&#34;&gt;&#xA;    &#xA;  &#xA;&lt;/p&gt;&#xA;&lt;p&gt;Agents are the thing which do the work. In this case, an agent has a selected AI Provider and Model. Additionally, Agents should be provided a prompt template.&lt;/p&gt;&#xA;&lt;p&gt;The prompt template can be filled in with dynamic content by using the variables defined on the page. This will allow an Agent to receive a prompt that contains information about the Issue that you are asking it to generate code for. In more complex use cases we can also fill this in with diff content and Pull Request Comments.&lt;/p&gt;</description>
     </item>
     <item>
       <title>System Agent</title>
-      <link>http://10.10.199.96:1313/docs/settings/agents/system-agent/</link>
+      <link>https://muleai.io/docs/settings/system-agent/</link>
       <pubDate>Thu, 20 Feb 2025 20:54:59 -0500</pubDate>
-      <guid>http://10.10.199.96:1313/docs/settings/agents/system-agent/</guid>
-      <description></description>
+      <guid>https://muleai.io/docs/settings/system-agent/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &lt;img src=&#34;https://muleai.io/system-agent_14681670585535001846.png&#34; alt=&#34;system-agent&#34; width=&#34;1707&#34; height=&#34;1904&#34; loading=&#34;lazy&#34;&gt;&#xA;    &#xA;  &#xA;&lt;/p&gt;&#xA;&lt;p&gt;The system agent is used to perform system tasks such as:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;generating a commit message&lt;/li&gt;&#xA;&lt;li&gt;generating a pull request title&lt;/li&gt;&#xA;&lt;li&gt;generating a pull request description&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;These settings allow you to select the AI Provider, model, and prompt templates. All of the same variables that were available for the other agents are available to the system agent.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Interacting With a Repository</title>
-      <link>http://10.10.199.96:1313/docs/repositories/interacting-with-a-repository/</link>
+      <link>https://muleai.io/docs/repositories/interacting-with-a-repository/</link>
       <pubDate>Thu, 20 Feb 2025 21:04:46 -0500</pubDate>
-      <guid>http://10.10.199.96:1313/docs/repositories/interacting-with-a-repository/</guid>
+      <guid>https://muleai.io/docs/repositories/interacting-with-a-repository/</guid>
       <description></description>
     </item>
   </channel>
