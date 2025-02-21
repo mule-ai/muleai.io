@@ -5,7 +5,6 @@ description: "Getting started with Mule"
 icon: "article"
 date: "2025-02-20T20:46:32-05:00"
 lastmod: "2025-02-20T20:46:32-05:00"
-draft: true
 toc: true
 ---
 
