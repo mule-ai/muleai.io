@@ -9,17 +9,17 @@
     <lastBuildDate>Thu, 20 Feb 2025 21:04:46 -0500</lastBuildDate>
     <atom:link href="http://10.10.199.96:1313/docs/repositories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Interacting With a Repository</title>
-      <link>http://10.10.199.96:1313/docs/repositories/interacting-with-a-repository/</link>
-      <pubDate>Thu, 20 Feb 2025 21:04:46 -0500</pubDate>
-      <guid>http://10.10.199.96:1313/docs/repositories/interacting-with-a-repository/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Adding a Repository</title>
       <link>http://10.10.199.96:1313/docs/repositories/adding-a-repository/</link>
       <pubDate>Thu, 20 Feb 2025 21:04:16 -0500</pubDate>
       <guid>http://10.10.199.96:1313/docs/repositories/adding-a-repository/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Interacting With a Repository</title>
+      <link>http://10.10.199.96:1313/docs/repositories/interacting-with-a-repository/</link>
+      <pubDate>Thu, 20 Feb 2025 21:04:46 -0500</pubDate>
+      <guid>http://10.10.199.96:1313/docs/repositories/interacting-with-a-repository/</guid>
       <description></description>
     </item>
   </channel>

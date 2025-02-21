@@ -1,5 +1,5 @@
 ---
-weight: 999
+weight: 2
 title: "Repositories"
 description: ""
 icon: "article"

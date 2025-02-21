@@ -1,5 +1,5 @@
 ---
-weight: 999
+weight: 2
 title: "Adding a Repository"
 description: ""
 icon: "article"
