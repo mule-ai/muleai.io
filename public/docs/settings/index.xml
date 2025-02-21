@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Settings on My New Hugo Site</title>
+    <link>http://10.10.199.96:1313/docs/settings/</link>
+    <description>Recent content in Settings on My New Hugo Site</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Feb 2025 20:53:59 -0500</lastBuildDate>
+    <atom:link href="http://10.10.199.96:1313/docs/settings/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>General</title>
+      <link>http://10.10.199.96:1313/docs/settings/general/</link>
+      <pubDate>Thu, 20 Feb 2025 20:53:59 -0500</pubDate>
+      <guid>http://10.10.199.96:1313/docs/settings/general/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
