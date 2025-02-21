@@ -1,5 +1,5 @@
 ---
-weight: 999
+weight: 1
 title: "Getting Started"
 description: "Getting started with Mule"
 icon: "article"

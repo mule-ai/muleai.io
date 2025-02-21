@@ -1,5 +1,5 @@
 ---
-weight: 999
+weight: 2
 title: "Gemini"
 description: ""
 icon: "article"

@@ -1,5 +1,5 @@
 ---
-weight: 999
+weight: 3
 title: "Ollama"
 description: ""
 icon: "article"
