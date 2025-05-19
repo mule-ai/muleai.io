@@ -36,18 +36,15 @@ This default workflow is suitable for most use cases and requires minimal config
 
 Each step in a workflow is defined with the following properties:
 
-```json
-{
-  "id": "unique-step-id",
-  "agentID": 1,
-  "agentName": "Agent Name",
-  "outputField": "generatedText",
-  "integration": {
-    "integration": "integration-name",
-    "event": "event-name",
-    "data": "event-data"
-  }
-}
+```yaml
+id: unique-step-id
+agentID: 1
+agentName: Agent Name
+outputField: generatedText
+integration:
+  integration: integration-name
+  event: event-name
+  data: event-data
 ```
 
 - **id**: A unique identifier for the step
@@ -77,10 +74,10 @@ Validation functions run after a workflow step to ensure code quality. Mule incl
 
 You can specify which validation functions to run for each workflow:
 
-```json
-{
-  "validationFunctions": ["goFmt", "goTest"]
-}
+```yaml
+validationFunctions:
+  - goFmt
+  - goTest
 ```
 
 If validation fails, Mule will make additional attempts to fix the issues by asking the agent to revise its output.
@@ -89,30 +86,24 @@ If validation fails, Mule will make additional attempts to fix the issues by ask
 
 More complex tasks can benefit from specialized multi-agent workflows:
 
-```json
-{
-  "id": "code-analysis-workflow",
-  "name": "Code Analysis",
-  "description": "Analyzes code and provides improvement suggestions",
-  "steps": [
-    {
-      "id": "code-analyzer",
-      "agentID": 2,
-      "outputField": "generatedText"
-    },
-    {
-      "id": "improvement-generator",
-      "agentID": 3,
-      "outputField": "generatedText"
-    },
-    {
-      "id": "implementation",
-      "agentID": 1,
-      "outputField": "generatedTextWithReasoning"
-    }
-  ],
-  "validationFunctions": ["goFmt", "golangciLint", "goTest"]
-}
+```yaml
+id: code-analysis-workflow
+name: Code Analysis
+description: Analyzes code and provides improvement suggestions
+steps:
+  - id: code-analyzer
+    agentID: 2
+    outputField: generatedText
+  - id: improvement-generator
+    agentID: 3
+    outputField: generatedText
+  - id: implementation
+    agentID: 1
+    outputField: generatedTextWithReasoning
+validationFunctions:
+  - goFmt
+  - golangciLint
+  - goTest
 ```
 
 In this example:
@@ -125,15 +116,12 @@ In this example:
 
 Workflows can integrate with external systems through the integration field:
 
-```json
-{
-  "id": "discord-notification",
-  "integration": {
-    "integration": "discord",
-    "event": "sendMessage",
-    "data": "Workflow completed successfully!"
-  }
-}
+```yaml
+id: discord-notification
+integration:
+  integration: discord
+  event: sendMessage
+  data: Workflow completed successfully!
 ```
 
 This allows workflows to:

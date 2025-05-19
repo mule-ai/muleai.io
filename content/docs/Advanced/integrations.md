@@ -44,16 +44,13 @@ Each integration is configured in the settings section with its own specific par
 
 ### Discord Configuration
 
-```json
-{
-  "discord": {
-    "enabled": true,
-    "messageOnConnect": true,
-    "botToken": "your-discord-bot-token",
-    "guildId": "your-server-id",
-    "channelId": "your-channel-id"
-  }
-}
+```yaml
+discord:
+  enabled: true
+  messageOnConnect: true
+  botToken: your-discord-bot-token
+  guildId: your-server-id
+  channelId: your-channel-id
 ```
 
 - **enabled**: Toggle Discord integration on/off
@@ -64,20 +61,17 @@ Each integration is configured in the settings section with its own specific par
 
 ### Matrix Configuration
 
-```json
-{
-  "matrix": {
-    "enabled": true,
-    "messageOnConnect": true,
-    "homeServer": "https://matrix.org",
-    "userId": "@mule:matrix.org",
-    "accessToken": "your-matrix-access-token",
-    "deviceId": "your-device-id",
-    "recoveryKey": "your-recovery-key",
-    "pickleKey": "your-pickle-key",
-    "roomId": "!roomid:matrix.org"
-  }
-}
+```yaml
+matrix:
+  enabled: true
+  messageOnConnect: true
+  homeServer: https://matrix.org
+  userId: '@mule:matrix.org'
+  accessToken: your-matrix-access-token
+  deviceId: your-device-id
+  recoveryKey: your-recovery-key
+  pickleKey: your-pickle-key
+  roomId: '!roomid:matrix.org'
 ```
 
 - **enabled**: Toggle Matrix integration on/off

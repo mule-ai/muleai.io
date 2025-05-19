@@ -65,14 +65,11 @@ While RAG will be enabled by default in future releases, you will be able to con
 
 Mule uses an embedding service to create vector representations of code. You'll be able to configure:
 
-```json
-{
-  "embeddingService": {
-    "url": "https://api.your-embedding-service.com",
-    "model": "text-embedding-model",
-    "apiKey": "your-api-key"
-  }
-}
+```yaml
+embeddingService:
+  url: https://api.your-embedding-service.com
+  model: text-embedding-model
+  apiKey: your-api-key
 ```
 
 Supported services will include:
@@ -84,29 +81,28 @@ Supported services will include:
 
 Control how your code is indexed:
 
-```json
-{
-  "indexing": {
-    "excludeDirs": ["node_modules", "vendor", "dist"],
-    "excludeFiles": ["README.md", "LICENSE"],
-    "maxRepoSize": 16384
-  }
-}
+```yaml
+indexing:
+  excludeDirs:
+    - node_modules
+    - vendor
+    - dist
+  excludeFiles:
+    - README.md
+    - LICENSE
+  maxRepoSize: 16384
 ```
 
 ### Query Settings
 
 Configure retrieval behavior:
 
-```json
-{
-  "rag": {
-    "enabled": true,
-    "maxResults": 10,
-    "similarityThreshold": 0.7,
-    "includeRepoMap": true
-  }
-}
+```yaml
+rag:
+  enabled: true
+  maxResults: 10
+  similarityThreshold: 0.7
+  includeRepoMap: true
 ```
 
 ## Best Practices

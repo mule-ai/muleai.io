@@ -164,15 +164,12 @@ To delete an existing file:
 
 Agents can be configured with specific UDiff settings:
 
-```json
-{
-  "udiff": {
-    "enabled": true,
-    "contextLines": 3,
-    "createMissingFiles": true,
-    "allowFileRemoval": false
-  }
-}
+```yaml
+udiff:
+  enabled: true
+  contextLines: 3
+  createMissingFiles: true
+  allowFileRemoval: false
 ```
 
 - **enabled**: Whether to process UDiffs in agent output

@@ -68,16 +68,13 @@ When an agent generates code changes, Mule runs the specified validation functio
 
 Validation functions can be configured at the workflow level:
 
-```json
-{
-  "validationFunctions": [
-    "getDeps",
-    "goFmt",
-    "goModTidy",
-    "golangciLint",
-    "goTest"
-  ]
-}
+```yaml
+validationFunctions:
+  - getDeps
+  - goFmt
+  - goModTidy
+  - golangciLint
+  - goTest
 ```
 
 For specific agents, you can configure different validation sets based on the task requirements.

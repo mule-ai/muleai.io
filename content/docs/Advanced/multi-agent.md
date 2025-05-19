@@ -57,40 +57,30 @@ These agents verify quality:
 
 Here's an example workflow for implementing a complex feature:
 
-```json
-{
-  "id": "feature-implementation",
-  "name": "Feature Implementation",
-  "description": "Implements a new feature with analysis, planning, and testing",
-  "steps": [
-    {
-      "id": "requirements-analysis",
-      "agentID": 1,
-      "outputField": "generatedText"
-    },
-    {
-      "id": "architecture-design",
-      "agentID": 2,
-      "outputField": "generatedText"
-    },
-    {
-      "id": "implementation",
-      "agentID": 3,
-      "outputField": "generatedText"
-    },
-    {
-      "id": "test-creation",
-      "agentID": 4,
-      "outputField": "generatedText"
-    },
-    {
-      "id": "documentation",
-      "agentID": 5,
-      "outputField": "generatedText"
-    }
-  ],
-  "validationFunctions": ["goFmt", "golangciLint", "goTest"]
-}
+```yaml
+id: feature-implementation
+name: Feature Implementation
+description: Implements a new feature with analysis, planning, and testing
+steps:
+  - id: requirements-analysis
+    agentID: 1
+    outputField: generatedText
+  - id: architecture-design
+    agentID: 2
+    outputField: generatedText
+  - id: implementation
+    agentID: 3
+    outputField: generatedText
+  - id: test-creation
+    agentID: 4
+    outputField: generatedText
+  - id: documentation
+    agentID: 5
+    outputField: generatedText
+validationFunctions:
+  - goFmt
+  - golangciLint
+  - goTest
 ```
 
 ## Input and Output Mapping
@@ -105,25 +95,17 @@ By default, each agent receives the complete output from the previous agent. Thi
 
 For more complex workflows, you can map specific output fields to input fields:
 
-```json
-{
-  "steps": [
-    {
-      "id": "code-analyzer",
-      "agentID": 1,
-      "outputField": "analysisResult"
-    },
-    {
-      "id": "implementation",
-      "agentID": 2,
-      "inputMapping": {
-        "codeAnalysis": "$.steps.code-analyzer.output",
-        "issueDescription": "$.input.issueBody"
-      },
-      "outputField": "generatedCode"
-    }
-  ]
-}
+```yaml
+steps:
+  - id: code-analyzer
+    agentID: 1
+    outputField: analysisResult
+  - id: implementation
+    agentID: 2
+    inputMapping:
+      codeAnalysis: $.steps.code-analyzer.output
+      issueDescription: $.input.issueBody
+    outputField: generatedCode
 ```
 
 This approach allows:
