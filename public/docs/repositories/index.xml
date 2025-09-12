@@ -6,7 +6,7 @@
     <description>Recent content in Repositories on Mule AI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Feb 2025 21:04:46 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 19 May 2025 12:00:00 -0500</lastBuildDate>
     <atom:link href="https://muleai.io/docs/repositories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Adding a Repository</title>
@@ -20,7 +20,7 @@
       <link>https://muleai.io/docs/repositories/interacting-with-a-repository/</link>
       <pubDate>Thu, 20 Feb 2025 21:04:46 -0500</pubDate>
       <guid>https://muleai.io/docs/repositories/interacting-with-a-repository/</guid>
-      <description></description>
+      <description>&lt;p&gt;Once you&amp;rsquo;ve added a repository to Mule, you can interact with it in several ways. This page explains how to work with repositories, manage issues, and collaborate with AI agents.&lt;/p&gt;&#xA;&lt;h2 id=&#34;repository-dashboard&#34;&gt;Repository Dashboard &lt;a href=&#34;#repository-dashboard&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;After adding a repository, it will appear in the dashboard with the following information:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Repository Name&lt;/strong&gt;: The name of the repository&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Provider&lt;/strong&gt;: GitHub or Local&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Status&lt;/strong&gt;: Current sync status&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Last Sync&lt;/strong&gt;: When the repository was last synchronized&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Actions&lt;/strong&gt;: Buttons to interact with the repository&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;synchronizing-a-repository&#34;&gt;Synchronizing a Repository &lt;a href=&#34;#synchronizing-a-repository&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Mule will automatically synchronize repositories according to the schedule you specified when adding them. However, you can manually trigger a sync at any time:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

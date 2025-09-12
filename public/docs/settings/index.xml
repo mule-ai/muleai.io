@@ -6,7 +6,7 @@
     <description>Recent content in Settings on Mule AI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Feb 2025 20:54:59 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 19 May 2025 12:00:00 -0500</lastBuildDate>
     <atom:link href="https://muleai.io/docs/settings/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>General</title>
@@ -20,7 +20,7 @@
       <link>https://muleai.io/docs/settings/ai-providers/</link>
       <pubDate>Thu, 20 Feb 2025 20:54:21 -0500</pubDate>
       <guid>https://muleai.io/docs/settings/ai-providers/</guid>
-      <description>&lt;p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &lt;img src=&#34;https://muleai.io/ai-providers_10305659591486048827.png&#34; alt=&#34;ai-providers&#34; width=&#34;1719&#34; height=&#34;1099&#34; loading=&#34;lazy&#34;&gt;&#xA;    &#xA;  &#xA;&lt;/p&gt;&#xA;&lt;p&gt;Mule supports configuring multiple AI providers. These are used to provide the models that will be used by Agents.&lt;/p&gt;&#xA;&lt;p&gt;Currently Mule supports:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Ollama&lt;/li&gt;&#xA;&lt;li&gt;Gemini&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;We plan too add support for OpenAI and Anthropic in the near future.&lt;/p&gt;&#xA;&lt;p&gt;Not all fields are required, only the information that is necessary to interact with your chosen provider must be provided.&lt;/p&gt;</description>
+      <description>&lt;p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &lt;img src=&#34;https://muleai.io/ai-providers_10305659591486048827.png&#34; alt=&#34;ai-providers&#34; width=&#34;1719&#34; height=&#34;1099&#34; loading=&#34;lazy&#34;&gt;&#xA;    &#xA;  &#xA;&lt;/p&gt;&#xA;&lt;p&gt;Mule supports configuring multiple AI providers. These are used to provide the models that will be used by Agents.&lt;/p&gt;&#xA;&lt;p&gt;Currently Mule supports:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;OpenAI&lt;/li&gt;&#xA;&lt;li&gt;Anthropic&lt;/li&gt;&#xA;&lt;li&gt;Google Gemini&lt;/li&gt;&#xA;&lt;li&gt;Ollama (local models)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;All providers are production-ready with full support for model switching, tool assignment, and dynamic configuration.&lt;/p&gt;&#xA;&lt;p&gt;Not all fields are required, only the information that is necessary to interact with your chosen provider must be provided.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Agents</title>
@@ -28,6 +28,13 @@
       <pubDate>Thu, 20 Feb 2025 20:54:52 -0500</pubDate>
       <guid>https://muleai.io/docs/settings/agents/</guid>
       <description>&lt;p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &lt;img src=&#34;https://muleai.io/agents_9669307435511833329.png&#34; alt=&#34;agents&#34; width=&#34;1719&#34; height=&#34;1885&#34; loading=&#34;lazy&#34;&gt;&#xA;    &#xA;  &#xA;&lt;/p&gt;&#xA;&lt;p&gt;Agents are the thing which do the work. In this case, an agent has a selected AI Provider and Model. Additionally, Agents should be provided a prompt template.&lt;/p&gt;&#xA;&lt;p&gt;The prompt template can be filled in with dynamic content by using the variables defined on the page. This will allow an Agent to receive a prompt that contains information about the Issue that you are asking it to generate code for. In more complex use cases we can also fill this in with diff content and Pull Request Comments.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Workflows</title>
+      <link>https://muleai.io/docs/settings/workflows/</link>
+      <pubDate>Mon, 19 May 2025 12:00:00 -0500</pubDate>
+      <guid>https://muleai.io/docs/settings/workflows/</guid>
+      <description>&lt;p&gt;Workflows are at the heart of Mule&amp;rsquo;s ability to coordinate complex AI tasks. A workflow defines a sequence of steps that Mule follows when processing issues and generating code.&lt;/p&gt;&#xA;&lt;h2 id=&#34;workflow-architecture&#34;&gt;Workflow Architecture &lt;a href=&#34;#workflow-architecture&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Each workflow consists of:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Steps&lt;/strong&gt;: Individual tasks performed by specific agents or integrations&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Input Mappings&lt;/strong&gt;: How data flows between steps&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Output Fields&lt;/strong&gt;: What data is produced by each step&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Validation Functions&lt;/strong&gt;: Code quality checks applied to the output&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Workflows enable you to chain together multiple agents, each with specific responsibilities, to solve complex problems collaboratively.&lt;/p&gt;</description>
     </item>
     <item>
       <title>System Agent</title>

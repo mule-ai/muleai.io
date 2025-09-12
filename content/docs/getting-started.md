@@ -10,12 +10,14 @@ toc: true
 
 ## What is Mule?
 
-Mule is an AI Agent that monitors your git repositories and completes issues assigned to it. It serves as your autonomous AI development team, capable of:
+Mule is an advanced multi-agent AI development platform that orchestrates sophisticated workflows and integrations. It serves as your autonomous development infrastructure, capable of:
 
-- Generating code solutions based on issue descriptions
-- Creating pull requests with implemented changes
-- Responding to feedback in pull request comments
-- Applying code quality standards through validation
+- **Multi-Agent Workflows**: Orchestrate complex tasks with sequential steps, sub-workflows, and validation
+- **Production Integrations**: Discord, Matrix, gRPC API, RSS feeds, persistent memory, and more
+- **Multi-Provider Support**: OpenAI, Anthropic, Gemini, and Ollama with dynamic model switching
+- **Autonomous Development**: Monitor repositories, process issues, create PRs, and respond to feedback
+- **Advanced Memory**: ChromeM-based vector database for RAG and context retention
+- **Quality Control**: Built-in validation functions with retry logic for robust outputs
 
 ## Prerequisites
 
@@ -24,7 +26,7 @@ Before installing Mule, ensure you have:
 - **Go 1.24+**: Mule is built with Go 1.24 or newer
 - **Git**: For repository operations
 - **SSH keys**: Configured for GitHub access if using GitHub repositories
-- **AI provider access**: API keys for your chosen AI provider (Ollama, Gemini, etc.)
+- **AI provider access**: API keys for your chosen AI provider (OpenAI, Anthropic, Gemini, Ollama)
 - **GitHub token**: If you plan to use GitHub repositories (optional)
 
 ## Installation
@@ -77,7 +79,7 @@ To get started running Mule, follow these steps:
 
 2. **Set up your [AI Providers](/docs/Settings/ai-providers)**
    - Configure at least one AI provider
-   - Currently supports Ollama and Gemini
+   - Supports OpenAI, Anthropic, Gemini, and Ollama
    - Provide necessary API keys and endpoints
 
 3. **Create [Agents](/docs/Settings/agents)**

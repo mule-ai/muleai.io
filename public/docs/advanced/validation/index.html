@@ -14,8 +14,9 @@
 
 <html lang="en-us"><head>
     <meta charset="utf-8" />
-    <title>General | Mule AI</title>
+    <title>Validation Functions | Mule AI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ensuring code quality with automated validation">
     <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
     <meta name="author" content="Colin Wilson - Lotus Labs" />
     <meta name="email" content="support@aigis.uk" />
@@ -28,63 +29,15 @@
 <link rel="icon" type="image/png" sizes="32x32" href="https://muleai.io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://muleai.io/favicon-16x16.png">
 <link rel="manifest" crossorigin="use-credentials" href="https://muleai.io/site.webmanifest">
-<meta property="og:title" content="General" />
-<meta property="og:description" content="
-
-
-
-
-
-  
-
-
-
-  
-    
-      
-    
-  
-
-Currently the only thing that gets configured under general is a GitHub token. This token is used to retrieve:
-
-Repositories
-Issues
-Pull Requests
-
-And various details such as comments and reactions about the above items.
-In the future we will have the ability to also use this token to clone a repository. For now that is limited to SSH auth on the system where mule is running.
-For more information on creating a GitHub Token, check out their documentation" />
+<meta property="og:title" content="Validation Functions" />
+<meta property="og:description" content="Ensuring code quality with automated validation" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://muleai.io/docs/settings/general/" /><meta property="og:image" content="https://muleai.io/opengraph/card-base-2_hu_248d1a43c10d32f1.png"/><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2025-02-20T20:53:59-05:00" />
-<meta property="article:modified_time" content="2025-02-20T20:53:59-05:00" /><meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://muleai.io/opengraph/card-base-2_hu_248d1a43c10d32f1.png"/>
-<meta name="twitter:title" content="General"/>
-<meta name="twitter:description" content="
-
-
-
-
-
-  
-
-
-
-  
-    
-      
-    
-  
-
-Currently the only thing that gets configured under general is a GitHub token. This token is used to retrieve:
-
-Repositories
-Issues
-Pull Requests
-
-And various details such as comments and reactions about the above items.
-In the future we will have the ability to also use this token to clone a repository. For now that is limited to SSH auth on the system where mule is running.
-For more information on creating a GitHub Token, check out their documentation"/>
+<meta property="og:url" content="https://muleai.io/docs/advanced/validation/" /><meta property="og:image" content="https://muleai.io/opengraph/card-base-2_hu_a00d68368af745d8.png"/><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2025-05-19T12:00:00-05:00" />
+<meta property="article:modified_time" content="2025-05-19T12:00:00-05:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://muleai.io/opengraph/card-base-2_hu_a00d68368af745d8.png"/>
+<meta name="twitter:title" content="Validation Functions"/>
+<meta name="twitter:description" content="Ensuring code quality with automated validation"/>
 
     
         <link rel="alternate" type="application/atom+xml" title="Atom feed for Mule AI" href="/index.xml" />
@@ -157,11 +110,11 @@ For more information on creating a GitHub Token, check out their documentation"/
                 
                     
                     
-                        <li class="sidebar-dropdown no-icon ">
+                        <li class="sidebar-dropdown no-icon current active">
                             <button class="btn">
                                 Advanced Features
                             </button>
-                            <div class="sidebar-submenu ">
+                            <div class="sidebar-submenu d-block">
                                 <ul>
                                     
                                         
@@ -176,7 +129,7 @@ For more information on creating a GitHub Token, check out their documentation"/
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/advanced/validation/">Validation Functions</a></li>
+                                            <li class="current no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/advanced/validation/">Validation Functions</a></li>
                                         
                                     
                                         
@@ -196,16 +149,16 @@ For more information on creating a GitHub Token, check out their documentation"/
                 
                     
                     
-                        <li class="sidebar-dropdown no-icon current active">
+                        <li class="sidebar-dropdown no-icon ">
                             <button class="btn">
                                 Settings
                             </button>
-                            <div class="sidebar-submenu d-block">
+                            <div class="sidebar-submenu ">
                                 <ul>
                                     
                                         
                                         
-                                            <li class="current no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/settings/general/">General</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/settings/general/">General</a></li>
                                         
                                     
                                         
@@ -357,15 +310,15 @@ For more information on creating a GitHub Token, check out their documentation"/
             
             
                 <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="/docs/settings/">
-                        <span itemprop="name">Settings</span>
+                    <a itemprop="item" href="/docs/advanced/">
+                        <span itemprop="name">Advanced Features</span>
                     </a>
                     <meta itemprop="position" content='2' />
                 </li>
             
         
             <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <span itemprop="name">General</span>
+                <span itemprop="name">Validation Functions</span>
                 <meta itemprop="position" content='3' />
             </li>
         
@@ -374,22 +327,78 @@ For more information on creating a GitHub Token, check out their documentation"/
                                     
                                     <div class="row flex-xl-nowrap">
                                         
-                                        <div class="docs-toc col-xl-3  visually-hidden  d-xl-block"><toc>
+                                        <div class="docs-toc col-xl-3    d-xl-block"><toc>
     <div class="fw-bold text-uppercase mb-2">On this page</div>
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#built-in-validation-functions">Built-in Validation Functions</a>
+          <ul>
+            <li><a href="#getdeps">getDeps</a></li>
+            <li><a href="#gofmt">goFmt</a></li>
+            <li><a href="#gomodtidy">goModTidy</a></li>
+            <li><a href="#golangcilint">golangciLint</a></li>
+            <li><a href="#gotest">goTest</a></li>
+          </ul>
+        </li>
+        <li><a href="#how-validation-works">How Validation Works</a></li>
+        <li><a href="#configuring-validations">Configuring Validations</a></li>
+        <li><a href="#creating-custom-validation-functions">Creating Custom Validation Functions</a></li>
+        <li><a href="#language-specific-validations">Language-specific Validations</a>
+          <ul>
+            <li><a href="#javascripttypescript-example">JavaScript/TypeScript Example</a></li>
+            <li><a href="#python-example">Python Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#handling-validation-failures">Handling Validation Failures</a></li>
+        <li><a href="#best-practices">Best Practices</a></li>
+        <li><a href="#debugging-validation-issues">Debugging Validation Issues</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </toc></div>
                                         
                                         
-                                        <div class="docs-toc-mobile  visually-hidden  d-print-none d-xl-none">
+                                        <div class="docs-toc-mobile    d-print-none d-xl-none">
                                             <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
                                                 Table of Contents
                                             </button>
-<nav id="toc-mobile"></nav></div>
-                                        <div class="docs-content col-12  mt-0">
+<nav id="toc-mobile">
+  <ul class="dropdown-menu">
+    <li>
+      <ul>
+        <li><a href="#built-in-validation-functions">Built-in Validation Functions</a>
+          <ul>
+            <li><a href="#getdeps">getDeps</a></li>
+            <li><a href="#gofmt">goFmt</a></li>
+            <li><a href="#gomodtidy">goModTidy</a></li>
+            <li><a href="#golangcilint">golangciLint</a></li>
+            <li><a href="#gotest">goTest</a></li>
+          </ul>
+        </li>
+        <li><a href="#how-validation-works">How Validation Works</a></li>
+        <li><a href="#configuring-validations">Configuring Validations</a></li>
+        <li><a href="#creating-custom-validation-functions">Creating Custom Validation Functions</a></li>
+        <li><a href="#language-specific-validations">Language-specific Validations</a>
+          <ul>
+            <li><a href="#javascripttypescript-example">JavaScript/TypeScript Example</a></li>
+            <li><a href="#python-example">Python Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#handling-validation-failures">Handling Validation Failures</a></li>
+        <li><a href="#best-practices">Best Practices</a></li>
+        <li><a href="#debugging-validation-issues">Debugging Validation Issues</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+                                        <div class="docs-content col-12 col-xl-9 mt-0">
                                             <div class="mb-0 d-flex">
                                                 
                                                 <h1 class="content-title mb-0">
-                                                    General
+                                                    Validation Functions
                                                     
                                                 </h1>
                                             </div>
@@ -398,31 +407,136 @@ For more information on creating a GitHub Token, check out their documentation"/
                                                 
     
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
-        <p>
+        <p>Validation functions in Mule ensure that AI-generated code meets quality standards before being committed. These functions act as automated quality gates, running tests, linters, and other checks on the code.</p>
+<h2 id="built-in-validation-functions">Built-in Validation Functions <a href="#built-in-validation-functions" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Mule includes several built-in validation functions for Go codebases:</p>
+<h3 id="getdeps">getDeps <a href="#getdeps" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
-
-
-
-
-  
-
-
-
-  
     
-      <img src="/general-settings_1098844684254482801.png" alt="general-settings" width="1711" height="777" loading="lazy">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getDeps</span>(<span style="color:#a6e22e">path</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>)</span></span></code></pre></div>
+<p>This function ensures all dependencies are installed by running <code>make download-golangci-lint</code>. It&rsquo;s typically the first validation function to run to ensure other tools are available.</p>
+<h3 id="gofmt">goFmt <a href="#gofmt" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
     
-  
-</p>
-<p>Currently the only thing that gets configured under general is a GitHub token. This token is used to retrieve:</p>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">goFmt</span>(<span style="color:#a6e22e">path</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>)</span></span></code></pre></div>
+<p>Formats Go code according to standard conventions by running <code>go fmt ./...</code>. This ensures consistent code formatting throughout the codebase.</p>
+<h3 id="gomodtidy">goModTidy <a href="#gomodtidy" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">goModTidy</span>(<span style="color:#a6e22e">path</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>)</span></span></code></pre></div>
+<p>Cleans up Go module dependencies by running <code>go mod tidy</code>. This ensures that all imports are properly declared in the go.mod file and removes unused dependencies.</p>
+<h3 id="golangcilint">golangciLint <a href="#golangcilint" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">golangciLint</span>(<span style="color:#a6e22e">path</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>)</span></span></code></pre></div>
+<p>Runs a comprehensive set of linters via <code>make lint</code> to catch common coding issues, potential bugs, and style violations.</p>
+<h3 id="gotest">goTest <a href="#gotest" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">goTest</span>(<span style="color:#a6e22e">path</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>)</span></span></code></pre></div>
+<p>Executes tests with <code>go test ./...</code> to verify that the code functions as expected and doesn&rsquo;t break existing functionality.</p>
+<h2 id="how-validation-works">How Validation Works <a href="#how-validation-works" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>When an agent generates code changes, Mule runs the specified validation functions in sequence:</p>
+<ol>
+<li>The agent makes code changes to the repository</li>
+<li>Each validation function is executed in the order specified</li>
+<li>If any validation fails, the output is captured and sent back to the agent</li>
+<li>The agent attempts to fix the issues based on the validation output</li>
+<li>This process repeats until all validations pass or the maximum retry limit is reached</li>
+</ol>
+<h2 id="configuring-validations">Configuring Validations <a href="#configuring-validations" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Validation functions can be configured at the workflow level:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">validationFunctions</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">getDeps</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">goFmt</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">goModTidy</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">golangciLint</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">goTest</span></span></span></code></pre></div>
+<p>For specific agents, you can configure different validation sets based on the task requirements.</p>
+<h2 id="creating-custom-validation-functions">Creating Custom Validation Functions <a href="#creating-custom-validation-functions" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>You can extend Mule with custom validation functions for your specific needs:</p>
+<ol>
+<li>
+<p>Define your validation function with the signature:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">YourValidator</span>(<span style="color:#a6e22e">path</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>)</span></span></code></pre></div>
+</li>
+<li>
+<p>Register it in the validation function map:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">functions</span> = <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#a6e22e">ValidationFunc</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// existing functions...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;yourValidator&#34;</span>: <span style="color:#a6e22e">YourValidator</span>,
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+<li>
+<p>Add it to your workflow configuration</p>
+</li>
+</ol>
+<h2 id="language-specific-validations">Language-specific Validations <a href="#language-specific-validations" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>While the built-in validators focus on Go, you can create custom validators for other languages:</p>
+<h3 id="javascripttypescript-example">JavaScript/TypeScript Example <a href="#javascripttypescript-example" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">eslint</span>(<span style="color:#a6e22e">path</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmd</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">exec</span>.<span style="color:#a6e22e">Command</span>(<span style="color:#e6db74">&#34;npx&#34;</span>, <span style="color:#e6db74">&#34;eslint&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmd</span>.<span style="color:#a6e22e">Dir</span> = <span style="color:#a6e22e">path</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">out</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cmd</span>.<span style="color:#a6e22e">CombinedOutput</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> string(<span style="color:#a6e22e">out</span>), <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">jest</span>(<span style="color:#a6e22e">path</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmd</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">exec</span>.<span style="color:#a6e22e">Command</span>(<span style="color:#e6db74">&#34;npx&#34;</span>, <span style="color:#e6db74">&#34;jest&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmd</span>.<span style="color:#a6e22e">Dir</span> = <span style="color:#a6e22e">path</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">out</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cmd</span>.<span style="color:#a6e22e">CombinedOutput</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> string(<span style="color:#a6e22e">out</span>), <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="python-example">Python Example <a href="#python-example" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">pylint</span>(<span style="color:#a6e22e">path</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmd</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">exec</span>.<span style="color:#a6e22e">Command</span>(<span style="color:#e6db74">&#34;python&#34;</span>, <span style="color:#e6db74">&#34;-m&#34;</span>, <span style="color:#e6db74">&#34;pylint&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmd</span>.<span style="color:#a6e22e">Dir</span> = <span style="color:#a6e22e">path</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">out</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cmd</span>.<span style="color:#a6e22e">CombinedOutput</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> string(<span style="color:#a6e22e">out</span>), <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">pytest</span>(<span style="color:#a6e22e">path</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmd</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">exec</span>.<span style="color:#a6e22e">Command</span>(<span style="color:#e6db74">&#34;python&#34;</span>, <span style="color:#e6db74">&#34;-m&#34;</span>, <span style="color:#e6db74">&#34;pytest&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmd</span>.<span style="color:#a6e22e">Dir</span> = <span style="color:#a6e22e">path</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">out</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cmd</span>.<span style="color:#a6e22e">CombinedOutput</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> string(<span style="color:#a6e22e">out</span>), <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="handling-validation-failures">Handling Validation Failures <a href="#handling-validation-failures" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>When validation fails, Mule follows a structured approach:</p>
+<ol>
+<li>The validation error output is captured</li>
+<li>The agent is provided with:
 <ul>
-<li>Repositories</li>
-<li>Issues</li>
-<li>Pull Requests</li>
+<li>The specific validation that failed</li>
+<li>The error output from the validation</li>
+<li>The original code changes</li>
 </ul>
-<p>And various details such as comments and reactions about the above items.</p>
-<p>In the future we will have the ability to also use this token to clone a repository. For now that is limited to SSH auth on the system where mule is running.</p>
-<p>For more information on creating a GitHub Token, check out <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic" rel="external" target="_blank">their documentation<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
+</li>
+<li>The agent is asked to fix the issues</li>
+<li>The process is repeated up to 20 times (configurable)</li>
+</ol>
+<h2 id="best-practices">Best Practices <a href="#best-practices" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>To get the most out of validation functions:</p>
+<ol>
+<li><strong>Start simple</strong>: Begin with basic formatting and linting before adding comprehensive tests</li>
+<li><strong>Clear error messages</strong>: Ensure your custom validators provide clear, actionable error messages</li>
+<li><strong>Fast feedback</strong>: Optimize validation functions to run quickly for better agent iteration</li>
+<li><strong>Progressive validation</strong>: Order validations from fastest to slowest for efficiency</li>
+<li><strong>Context-aware validation</strong>: Include repository-specific checks that enforce your project&rsquo;s conventions</li>
+</ol>
+<h2 id="debugging-validation-issues">Debugging Validation Issues <a href="#debugging-validation-issues" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>If validation consistently fails:</p>
+<ol>
+<li>Run the validation commands manually to see the output</li>
+<li>Check if validation requirements are clearly communicated in the agent&rsquo;s prompt</li>
+<li>Verify that validation tools are properly installed and configured</li>
+<li>Consider relaxing validation requirements for initial development phases</li>
+</ol>
 
     </div>
 
@@ -435,20 +549,20 @@ For more information on creating a GitHub Token, check out their documentation"/
 
 	<div class="row flex-xl-nowrap ">
 	<div class="col-sm-6 pt-2 doc-next">
-		<a href="/docs/advanced/rag/">
+		<a href="/docs/settings/ai-providers/">
 			<div class="card h-100 my-1">
 				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Retrieval Augmented Generation (RAG)</p>
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> AI Providers</p>
 					
 				</div>
 			</div>
 		</a>
         </div>
 	<div class="col-sm-6 pt-2 doc-prev">
-		<a class="ms-auto" href="/docs/getting-started/">
+		<a class="ms-auto" href="/docs/advanced/multi-agent/">
 			<div class="card h-100 my-1 text-end">
 				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Getting Started <i class="material-icons align-middle">navigate_next</i></p>
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Multi-Agent Workflows <i class="material-icons align-middle">navigate_next</i></p>
 					
 				</div>
 			</div>

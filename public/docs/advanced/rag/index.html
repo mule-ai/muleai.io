@@ -14,8 +14,9 @@
 
 <html lang="en-us"><head>
     <meta charset="utf-8" />
-    <title>General | Mule AI</title>
+    <title>Retrieval Augmented Generation (RAG) | Mule AI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Leveraging RAG for context-aware code generation">
     <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
     <meta name="author" content="Colin Wilson - Lotus Labs" />
     <meta name="email" content="support@aigis.uk" />
@@ -28,63 +29,15 @@
 <link rel="icon" type="image/png" sizes="32x32" href="https://muleai.io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://muleai.io/favicon-16x16.png">
 <link rel="manifest" crossorigin="use-credentials" href="https://muleai.io/site.webmanifest">
-<meta property="og:title" content="General" />
-<meta property="og:description" content="
-
-
-
-
-
-  
-
-
-
-  
-    
-      
-    
-  
-
-Currently the only thing that gets configured under general is a GitHub token. This token is used to retrieve:
-
-Repositories
-Issues
-Pull Requests
-
-And various details such as comments and reactions about the above items.
-In the future we will have the ability to also use this token to clone a repository. For now that is limited to SSH auth on the system where mule is running.
-For more information on creating a GitHub Token, check out their documentation" />
+<meta property="og:title" content="Retrieval Augmented Generation (RAG)" />
+<meta property="og:description" content="Leveraging RAG for context-aware code generation" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://muleai.io/docs/settings/general/" /><meta property="og:image" content="https://muleai.io/opengraph/card-base-2_hu_248d1a43c10d32f1.png"/><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2025-02-20T20:53:59-05:00" />
-<meta property="article:modified_time" content="2025-02-20T20:53:59-05:00" /><meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://muleai.io/opengraph/card-base-2_hu_248d1a43c10d32f1.png"/>
-<meta name="twitter:title" content="General"/>
-<meta name="twitter:description" content="
-
-
-
-
-
-  
-
-
-
-  
-    
-      
-    
-  
-
-Currently the only thing that gets configured under general is a GitHub token. This token is used to retrieve:
-
-Repositories
-Issues
-Pull Requests
-
-And various details such as comments and reactions about the above items.
-In the future we will have the ability to also use this token to clone a repository. For now that is limited to SSH auth on the system where mule is running.
-For more information on creating a GitHub Token, check out their documentation"/>
+<meta property="og:url" content="https://muleai.io/docs/advanced/rag/" /><meta property="og:image" content="https://muleai.io/opengraph/card-base-2_hu_3f6fdc3104727986.png"/><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2025-05-19T12:00:00-05:00" />
+<meta property="article:modified_time" content="2025-05-19T12:00:00-05:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://muleai.io/opengraph/card-base-2_hu_3f6fdc3104727986.png"/>
+<meta name="twitter:title" content="Retrieval Augmented Generation (RAG)"/>
+<meta name="twitter:description" content="Leveraging RAG for context-aware code generation"/>
 
     
         <link rel="alternate" type="application/atom+xml" title="Atom feed for Mule AI" href="/index.xml" />
@@ -157,16 +110,16 @@ For more information on creating a GitHub Token, check out their documentation"/
                 
                     
                     
-                        <li class="sidebar-dropdown no-icon ">
+                        <li class="sidebar-dropdown no-icon current active">
                             <button class="btn">
                                 Advanced Features
                             </button>
-                            <div class="sidebar-submenu ">
+                            <div class="sidebar-submenu d-block">
                                 <ul>
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/advanced/rag/">Retrieval Augmented Generation (RAG)</a></li>
+                                            <li class="current no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/advanced/rag/">Retrieval Augmented Generation (RAG)</a></li>
                                         
                                     
                                         
@@ -196,16 +149,16 @@ For more information on creating a GitHub Token, check out their documentation"/
                 
                     
                     
-                        <li class="sidebar-dropdown no-icon current active">
+                        <li class="sidebar-dropdown no-icon ">
                             <button class="btn">
                                 Settings
                             </button>
-                            <div class="sidebar-submenu d-block">
+                            <div class="sidebar-submenu ">
                                 <ul>
                                     
                                         
                                         
-                                            <li class="current no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/settings/general/">General</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/settings/general/">General</a></li>
                                         
                                     
                                         
@@ -357,15 +310,15 @@ For more information on creating a GitHub Token, check out their documentation"/
             
             
                 <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="/docs/settings/">
-                        <span itemprop="name">Settings</span>
+                    <a itemprop="item" href="/docs/advanced/">
+                        <span itemprop="name">Advanced Features</span>
                     </a>
                     <meta itemprop="position" content='2' />
                 </li>
             
         
             <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <span itemprop="name">General</span>
+                <span itemprop="name">Retrieval Augmented Generation (RAG)</span>
                 <meta itemprop="position" content='3' />
             </li>
         
@@ -374,22 +327,72 @@ For more information on creating a GitHub Token, check out their documentation"/
                                     
                                     <div class="row flex-xl-nowrap">
                                         
-                                        <div class="docs-toc col-xl-3  visually-hidden  d-xl-block"><toc>
+                                        <div class="docs-toc col-xl-3    d-xl-block"><toc>
     <div class="fw-bold text-uppercase mb-2">On this page</div>
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#how-rag-works-in-mule">How RAG Works in Mule</a></li>
+        <li><a href="#key-features">Key Features</a>
+          <ul>
+            <li><a href="#intelligent-code-chunking">Intelligent Code Chunking</a></li>
+            <li><a href="#real-time-index-updates">Real-time Index Updates</a></li>
+            <li><a href="#repository-map-generation">Repository Map Generation</a></li>
+          </ul>
+        </li>
+        <li><a href="#configuration">Configuration</a>
+          <ul>
+            <li><a href="#embedding-service">Embedding Service</a></li>
+            <li><a href="#indexing-settings">Indexing Settings</a></li>
+            <li><a href="#query-settings">Query Settings</a></li>
+          </ul>
+        </li>
+        <li><a href="#best-practices">Best Practices</a></li>
+        <li><a href="#impact-on-generated-code">Impact on Generated Code</a></li>
+        <li><a href="#example-before-and-after-rag">Example: Before and After RAG</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </toc></div>
                                         
                                         
-                                        <div class="docs-toc-mobile  visually-hidden  d-print-none d-xl-none">
+                                        <div class="docs-toc-mobile    d-print-none d-xl-none">
                                             <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
                                                 Table of Contents
                                             </button>
-<nav id="toc-mobile"></nav></div>
-                                        <div class="docs-content col-12  mt-0">
+<nav id="toc-mobile">
+  <ul class="dropdown-menu">
+    <li>
+      <ul>
+        <li><a href="#how-rag-works-in-mule">How RAG Works in Mule</a></li>
+        <li><a href="#key-features">Key Features</a>
+          <ul>
+            <li><a href="#intelligent-code-chunking">Intelligent Code Chunking</a></li>
+            <li><a href="#real-time-index-updates">Real-time Index Updates</a></li>
+            <li><a href="#repository-map-generation">Repository Map Generation</a></li>
+          </ul>
+        </li>
+        <li><a href="#configuration">Configuration</a>
+          <ul>
+            <li><a href="#embedding-service">Embedding Service</a></li>
+            <li><a href="#indexing-settings">Indexing Settings</a></li>
+            <li><a href="#query-settings">Query Settings</a></li>
+          </ul>
+        </li>
+        <li><a href="#best-practices">Best Practices</a></li>
+        <li><a href="#impact-on-generated-code">Impact on Generated Code</a></li>
+        <li><a href="#example-before-and-after-rag">Example: Before and After RAG</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+                                        <div class="docs-content col-12 col-xl-9 mt-0">
                                             <div class="mb-0 d-flex">
                                                 
                                                 <h1 class="content-title mb-0">
-                                                    General
+                                                    Retrieval Augmented Generation (RAG)
                                                     
                                                 </h1>
                                             </div>
@@ -398,31 +401,134 @@ For more information on creating a GitHub Token, check out their documentation"/
                                                 
     
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
-        <p>
-
-
-
-
-
-  
-
-
-
-  
-    
-      <img src="/general-settings_1098844684254482801.png" alt="general-settings" width="1711" height="777" loading="lazy">
-    
-  
-</p>
-<p>Currently the only thing that gets configured under general is a GitHub token. This token is used to retrieve:</p>
+        <p>Retrieval Augmented Generation (RAG) is a powerful feature in Mule that enhances AI code generation by providing contextual awareness of your codebase. By indexing and retrieving relevant code snippets, Mule can make more informed and consistent changes to your repositories.</p>
+<h2 id="how-rag-works-in-mule">How RAG Works in Mule <a href="#how-rag-works-in-mule" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>RAG in Mule follows a four-step process:</p>
+<ol>
+<li><strong>Indexing</strong>: When a repository is added, Mule analyzes and indexes the codebase</li>
+<li><strong>Retrieval</strong>: When working on an issue, Mule identifies relevant code sections</li>
+<li><strong>Context Enrichment</strong>: The retrieved code context is included in the agent&rsquo;s prompt</li>
+<li><strong>Generation</strong>: The agent creates solutions with awareness of existing patterns and structures</li>
+</ol>
+<p>This approach significantly improves code quality by ensuring generated code follows existing patterns, naming conventions, and architectural decisions in your codebase.</p>
+<h2 id="key-features">Key Features <a href="#key-features" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Mule&rsquo;s RAG implementation includes these specialized features:</p>
+<h3 id="intelligent-code-chunking">Intelligent Code Chunking <a href="#intelligent-code-chunking" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Code is automatically split into meaningful chunks based on language-specific structures:</p>
 <ul>
-<li>Repositories</li>
-<li>Issues</li>
-<li>Pull Requests</li>
+<li><strong>Go</strong>: Functions, structs, interfaces, methods</li>
+<li><strong>JavaScript/TypeScript</strong>: Functions, classes, methods</li>
+<li><strong>HTML</strong>: Elements, sections, components</li>
+<li><strong>CSS</strong>: Rule sets, at-rules, keyframes</li>
 </ul>
-<p>And various details such as comments and reactions about the above items.</p>
-<p>In the future we will have the ability to also use this token to clone a repository. For now that is limited to SSH auth on the system where mule is running.</p>
-<p>For more information on creating a GitHub Token, check out <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic" rel="external" target="_blank">their documentation<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
+<p>This structural chunking ensures that related code stays together for better context.</p>
+<h3 id="real-time-index-updates">Real-time Index Updates <a href="#real-time-index-updates" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>The codebase index is automatically updated when:</p>
+<ul>
+<li>Files are added or modified in the repository</li>
+<li>Changes are committed to the repository</li>
+<li>The repository is synchronized</li>
+</ul>
+<p>This keeps the context current without manual intervention.</p>
+<h3 id="repository-map-generation">Repository Map Generation <a href="#repository-map-generation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Mule can generate a high-level map of repository structure to help agents understand:</p>
+<ul>
+<li>Key files and their purpose</li>
+<li>Important types and interfaces</li>
+<li>Hierarchical relationships between components</li>
+<li>Overall architecture patterns</li>
+</ul>
+<h2 id="configuration">Configuration <a href="#configuration" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2>
+<div class="alert alert-default d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  
+  <span class="material-icons size-20 me-2">
+  notifications
+  </span></div>
+  
+  <div class="w-100">RAG is currently in development and will be fully available in a future release.</div>
+  </div>
+<p>While RAG will be enabled by default in future releases, you will be able to configure its behavior:</p>
+<h3 id="embedding-service">Embedding Service <a href="#embedding-service" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Mule uses an embedding service to create vector representations of code. You&rsquo;ll be able to configure:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">embeddingService</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://api.your-embedding-service.com</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">model</span>: <span style="color:#ae81ff">text-embedding-model</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">apiKey</span>: <span style="color:#ae81ff">your-api-key</span></span></span></code></pre></div>
+<p>Supported services will include:</p>
+<ul>
+<li>OpenAI Embeddings</li>
+<li>Local embedding models</li>
+<li>Custom embedding endpoints</li>
+</ul>
+<h3 id="indexing-settings">Indexing Settings <a href="#indexing-settings" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Control how your code is indexed:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">indexing</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">excludeDirs</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">node_modules</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">vendor</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">dist</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">excludeFiles</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">README.md</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">LICENSE</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">maxRepoSize</span>: <span style="color:#ae81ff">16384</span></span></span></code></pre></div>
+<h3 id="query-settings">Query Settings <a href="#query-settings" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Configure retrieval behavior:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">rag</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">maxResults</span>: <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">similarityThreshold</span>: <span style="color:#ae81ff">0.7</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">includeRepoMap</span>: <span style="color:#66d9ef">true</span></span></span></code></pre></div>
+<h2 id="best-practices">Best Practices <a href="#best-practices" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>To get the most from RAG when it&rsquo;s released:</p>
+<ol>
+<li><strong>Keep repositories focused</strong>: Smaller, more specific repositories yield better results</li>
+<li><strong>Use meaningful comments</strong>: Well-commented code helps the system understand context</li>
+<li><strong>Consistent coding patterns</strong>: Following consistent patterns makes it easier for RAG to understand code relationships</li>
+<li><strong>Clean code organization</strong>: Well-organized code with logical file structure improves retrieval quality</li>
+</ol>
+<h2 id="impact-on-generated-code">Impact on Generated Code <a href="#impact-on-generated-code" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>With RAG, you can expect:</p>
+<ul>
+<li><strong>More consistent style</strong>: Generated code will match existing patterns</li>
+<li><strong>Better integration</strong>: New code will integrate more seamlessly with existing code</li>
+<li><strong>Fewer errors</strong>: Reduced risk of breaking changes or inconsistencies</li>
+<li><strong>Higher relevance</strong>: Solutions more directly addressing the specific issue</li>
+</ul>
+<h2 id="example-before-and-after-rag">Example: Before and After RAG <a href="#example-before-and-after-rag" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p><strong>Without RAG</strong>:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Generated function with generic naming</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ProcessData</span>(<span style="color:#a6e22e">data</span> []<span style="color:#66d9ef">string</span>) ([]<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">0</span>, len(<span style="color:#a6e22e">data</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">item</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">data</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">processed</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">ToUpper</span>(<span style="color:#a6e22e">item</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">result</span> = append(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">processed</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>With RAG</strong>:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Generated function with context-aware naming and error handling</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TransformTaskItems</span>(<span style="color:#a6e22e">items</span> []<span style="color:#66d9ef">string</span>) ([]<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">items</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">ErrNilItems</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">0</span>, len(<span style="color:#a6e22e">items</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">item</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">items</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">processed</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">applyTaskTransformation</span>(<span style="color:#a6e22e">item</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;error transforming item %q: %w&#34;</span>, <span style="color:#a6e22e">item</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">result</span> = append(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">processed</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>The RAG-enhanced version follows existing patterns for error handling, naming conventions, and coding style from the rest of the codebase.</p>
 
     </div>
 
@@ -433,22 +539,12 @@ For more information on creating a GitHub Token, check out their documentation"/
                                             <div><hr class="doc-hr">
 <div id="doc-nav" class="d-print-none">
 
-	<div class="row flex-xl-nowrap ">
-	<div class="col-sm-6 pt-2 doc-next">
-		<a href="/docs/advanced/rag/">
-			<div class="card h-100 my-1">
-				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Retrieval Augmented Generation (RAG)</p>
-					
-				</div>
-			</div>
-		</a>
-        </div>
+	<div class="row flex-xl-nowrap flex-row-reverse">
 	<div class="col-sm-6 pt-2 doc-prev">
-		<a class="ms-auto" href="/docs/getting-started/">
+		<a class="ms-auto" href="/docs/settings/general/">
 			<div class="card h-100 my-1 text-end">
 				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Getting Started <i class="material-icons align-middle">navigate_next</i></p>
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0">General <i class="material-icons align-middle">navigate_next</i></p>
 					
 				</div>
 			</div>

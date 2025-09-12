@@ -14,8 +14,9 @@
 
 <html lang="en-us"><head>
     <meta charset="utf-8" />
-    <title>General | Mule AI</title>
+    <title>Workflows | Mule AI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Understanding and configuring Mule workflows">
     <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
     <meta name="author" content="Colin Wilson - Lotus Labs" />
     <meta name="email" content="support@aigis.uk" />
@@ -28,63 +29,15 @@
 <link rel="icon" type="image/png" sizes="32x32" href="https://muleai.io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://muleai.io/favicon-16x16.png">
 <link rel="manifest" crossorigin="use-credentials" href="https://muleai.io/site.webmanifest">
-<meta property="og:title" content="General" />
-<meta property="og:description" content="
-
-
-
-
-
-  
-
-
-
-  
-    
-      
-    
-  
-
-Currently the only thing that gets configured under general is a GitHub token. This token is used to retrieve:
-
-Repositories
-Issues
-Pull Requests
-
-And various details such as comments and reactions about the above items.
-In the future we will have the ability to also use this token to clone a repository. For now that is limited to SSH auth on the system where mule is running.
-For more information on creating a GitHub Token, check out their documentation" />
+<meta property="og:title" content="Workflows" />
+<meta property="og:description" content="Understanding and configuring Mule workflows" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://muleai.io/docs/settings/general/" /><meta property="og:image" content="https://muleai.io/opengraph/card-base-2_hu_248d1a43c10d32f1.png"/><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2025-02-20T20:53:59-05:00" />
-<meta property="article:modified_time" content="2025-02-20T20:53:59-05:00" /><meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://muleai.io/opengraph/card-base-2_hu_248d1a43c10d32f1.png"/>
-<meta name="twitter:title" content="General"/>
-<meta name="twitter:description" content="
-
-
-
-
-
-  
-
-
-
-  
-    
-      
-    
-  
-
-Currently the only thing that gets configured under general is a GitHub token. This token is used to retrieve:
-
-Repositories
-Issues
-Pull Requests
-
-And various details such as comments and reactions about the above items.
-In the future we will have the ability to also use this token to clone a repository. For now that is limited to SSH auth on the system where mule is running.
-For more information on creating a GitHub Token, check out their documentation"/>
+<meta property="og:url" content="https://muleai.io/docs/settings/workflows/" /><meta property="og:image" content="https://muleai.io/opengraph/card-base-2_hu_3aecf17fb3229c9f.png"/><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2025-05-19T12:00:00-05:00" />
+<meta property="article:modified_time" content="2025-05-19T12:00:00-05:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://muleai.io/opengraph/card-base-2_hu_3aecf17fb3229c9f.png"/>
+<meta name="twitter:title" content="Workflows"/>
+<meta name="twitter:description" content="Understanding and configuring Mule workflows"/>
 
     
         <link rel="alternate" type="application/atom+xml" title="Atom feed for Mule AI" href="/index.xml" />
@@ -205,7 +158,7 @@ For more information on creating a GitHub Token, check out their documentation"/
                                     
                                         
                                         
-                                            <li class="current no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/settings/general/">General</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/settings/general/">General</a></li>
                                         
                                     
                                         
@@ -220,7 +173,7 @@ For more information on creating a GitHub Token, check out their documentation"/
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/settings/workflows/">Workflows</a></li>
+                                            <li class="current no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/settings/workflows/">Workflows</a></li>
                                         
                                     
                                         
@@ -365,7 +318,7 @@ For more information on creating a GitHub Token, check out their documentation"/
             
         
             <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <span itemprop="name">General</span>
+                <span itemprop="name">Workflows</span>
                 <meta itemprop="position" content='3' />
             </li>
         
@@ -374,22 +327,56 @@ For more information on creating a GitHub Token, check out their documentation"/
                                     
                                     <div class="row flex-xl-nowrap">
                                         
-                                        <div class="docs-toc col-xl-3  visually-hidden  d-xl-block"><toc>
+                                        <div class="docs-toc col-xl-3    d-xl-block"><toc>
     <div class="fw-bold text-uppercase mb-2">On this page</div>
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#workflow-architecture">Workflow Architecture</a></li>
+        <li><a href="#default-workflow">Default Workflow</a></li>
+        <li><a href="#workflow-steps">Workflow Steps</a></li>
+        <li><a href="#output-fields">Output Fields</a></li>
+        <li><a href="#validation-functions">Validation Functions</a></li>
+        <li><a href="#advanced-multi-agent-workflows">Advanced: Multi-Agent Workflows</a></li>
+        <li><a href="#integration-with-external-systems">Integration with External Systems</a></li>
+        <li><a href="#workflow-triggers">Workflow Triggers</a></li>
+        <li><a href="#customizing-workflows">Customizing Workflows</a></li>
+        <li><a href="#best-practices">Best Practices</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </toc></div>
                                         
                                         
-                                        <div class="docs-toc-mobile  visually-hidden  d-print-none d-xl-none">
+                                        <div class="docs-toc-mobile    d-print-none d-xl-none">
                                             <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
                                                 Table of Contents
                                             </button>
-<nav id="toc-mobile"></nav></div>
-                                        <div class="docs-content col-12  mt-0">
+<nav id="toc-mobile">
+  <ul class="dropdown-menu">
+    <li>
+      <ul>
+        <li><a href="#workflow-architecture">Workflow Architecture</a></li>
+        <li><a href="#default-workflow">Default Workflow</a></li>
+        <li><a href="#workflow-steps">Workflow Steps</a></li>
+        <li><a href="#output-fields">Output Fields</a></li>
+        <li><a href="#validation-functions">Validation Functions</a></li>
+        <li><a href="#advanced-multi-agent-workflows">Advanced: Multi-Agent Workflows</a></li>
+        <li><a href="#integration-with-external-systems">Integration with External Systems</a></li>
+        <li><a href="#workflow-triggers">Workflow Triggers</a></li>
+        <li><a href="#customizing-workflows">Customizing Workflows</a></li>
+        <li><a href="#best-practices">Best Practices</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+                                        <div class="docs-content col-12 col-xl-9 mt-0">
                                             <div class="mb-0 d-flex">
                                                 
                                                 <h1 class="content-title mb-0">
-                                                    General
+                                                    Workflows
                                                     
                                                 </h1>
                                             </div>
@@ -398,31 +385,131 @@ For more information on creating a GitHub Token, check out their documentation"/
                                                 
     
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
-        <p>
-
-
-
-
-
-  
-
-
-
-  
-    
-      <img src="/general-settings_1098844684254482801.png" alt="general-settings" width="1711" height="777" loading="lazy">
-    
-  
-</p>
-<p>Currently the only thing that gets configured under general is a GitHub token. This token is used to retrieve:</p>
+        <p>Workflows are at the heart of Mule&rsquo;s ability to coordinate complex AI tasks. A workflow defines a sequence of steps that Mule follows when processing issues and generating code.</p>
+<h2 id="workflow-architecture">Workflow Architecture <a href="#workflow-architecture" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Each workflow consists of:</p>
 <ul>
-<li>Repositories</li>
-<li>Issues</li>
-<li>Pull Requests</li>
+<li><strong>Steps</strong>: Individual tasks performed by specific agents or integrations</li>
+<li><strong>Input Mappings</strong>: How data flows between steps</li>
+<li><strong>Output Fields</strong>: What data is produced by each step</li>
+<li><strong>Validation Functions</strong>: Code quality checks applied to the output</li>
 </ul>
-<p>And various details such as comments and reactions about the above items.</p>
-<p>In the future we will have the ability to also use this token to clone a repository. For now that is limited to SSH auth on the system where mule is running.</p>
-<p>For more information on creating a GitHub Token, check out <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic" rel="external" target="_blank">their documentation<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
+<p>Workflows enable you to chain together multiple agents, each with specific responsibilities, to solve complex problems collaboratively.</p>
+<h2 id="default-workflow">Default Workflow <a href="#default-workflow" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Mule comes with a default workflow that follows this sequence:</p>
+<ol>
+<li><strong>Starting Agent</strong>: Analyzes the issue and generates initial code changes</li>
+<li><strong>Commit Agent</strong>: Generates appropriate commit messages for changes</li>
+<li><strong>PR Title Agent</strong>: Creates a descriptive pull request title</li>
+<li><strong>PR Body Agent</strong>: Writes a comprehensive pull request description</li>
+</ol>
+<p>This default workflow is suitable for most use cases and requires minimal configuration.</p>
+<h2 id="workflow-steps">Workflow Steps <a href="#workflow-steps" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Each step in a workflow is defined with the following properties:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">id</span>: <span style="color:#ae81ff">unique-step-id</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">agentID</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">agentName</span>: <span style="color:#ae81ff">Agent Name</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">outputField</span>: <span style="color:#ae81ff">generatedText</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">integration</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">integration</span>: <span style="color:#ae81ff">integration-name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">event</span>: <span style="color:#ae81ff">event-name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">data</span>: <span style="color:#ae81ff">event-data</span></span></span></code></pre></div>
+<ul>
+<li><strong>id</strong>: A unique identifier for the step</li>
+<li><strong>agentID</strong>: The ID of the agent to use for this step</li>
+<li><strong>agentName</strong>: A human-readable name for the agent (optional)</li>
+<li><strong>outputField</strong>: The field to extract from the agent&rsquo;s output</li>
+<li><strong>integration</strong>: Optional integration details if this step uses an external integration</li>
+</ul>
+<h2 id="output-fields">Output Fields <a href="#output-fields" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Output fields define how to process the raw output from an agent:</p>
+<ul>
+<li><strong>generatedText</strong>: Extracts only the final generated content (code, text, etc.)</li>
+<li><strong>generatedTextWithReasoning</strong>: Includes the agent&rsquo;s reasoning along with the final output</li>
+</ul>
+<p>When an agent completes its work, its output is processed according to the outputField setting and then passed to the next step in the workflow.</p>
+<h2 id="validation-functions">Validation Functions <a href="#validation-functions" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Validation functions run after a workflow step to ensure code quality. Mule includes several built-in validation functions:</p>
+<ul>
+<li><strong>getDeps</strong>: Ensures all dependencies are available</li>
+<li><strong>goFmt</strong>: Formats Go code according to standard conventions</li>
+<li><strong>goModTidy</strong>: Cleans up Go module dependencies</li>
+<li><strong>golangciLint</strong>: Runs linters to catch common coding issues</li>
+<li><strong>goTest</strong>: Executes tests to verify functionality</li>
+</ul>
+<p>You can specify which validation functions to run for each workflow:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">validationFunctions</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">goFmt</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">goTest</span></span></span></code></pre></div>
+<p>If validation fails, Mule will make additional attempts to fix the issues by asking the agent to revise its output.</p>
+<h2 id="advanced-multi-agent-workflows">Advanced: Multi-Agent Workflows <a href="#advanced-multi-agent-workflows" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>More complex tasks can benefit from specialized multi-agent workflows:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">id</span>: <span style="color:#ae81ff">code-analysis-workflow</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Code Analysis</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#ae81ff">Analyzes code and provides improvement suggestions</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">code-analyzer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">agentID</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">outputField</span>: <span style="color:#ae81ff">generatedText</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">improvement-generator</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">agentID</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">outputField</span>: <span style="color:#ae81ff">generatedText</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">implementation</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">agentID</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">outputField</span>: <span style="color:#ae81ff">generatedTextWithReasoning</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">validationFunctions</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">goFmt</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">golangciLint</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">goTest</span></span></span></code></pre></div>
+<p>In this example:</p>
+<ol>
+<li>One agent analyzes the code</li>
+<li>A second agent suggests improvements</li>
+<li>A third agent implements those improvements</li>
+<li>Validation ensures code quality</li>
+</ol>
+<h2 id="integration-with-external-systems">Integration with External Systems <a href="#integration-with-external-systems" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Workflows can integrate with external systems through the integration field:</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">id</span>: <span style="color:#ae81ff">discord-notification</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">integration</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">integration</span>: <span style="color:#ae81ff">discord</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">event</span>: <span style="color:#ae81ff">sendMessage</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">data</span>: <span style="color:#ae81ff">Workflow completed successfully!</span></span></span></code></pre></div>
+<p>This allows workflows to:</p>
+<ul>
+<li>Send notifications when tasks complete</li>
+<li>Fetch additional information from external sources</li>
+<li>Trigger actions in other systems</li>
+</ul>
+<h2 id="workflow-triggers">Workflow Triggers <a href="#workflow-triggers" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Workflows can be triggered by:</p>
+<ul>
+<li><strong>Repository synchronization</strong> (automatic)</li>
+<li><strong>Manual sync</strong> button on the repository page</li>
+<li><strong>External triggers</strong> from integrations (Discord, Matrix, etc.)</li>
+</ul>
+<p>When triggered, a workflow will process any eligible issues (those labeled with <code>mule</code> that don&rsquo;t already have pull requests or have unresolved PR comments).</p>
+<h2 id="customizing-workflows">Customizing Workflows <a href="#customizing-workflows" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Mule supports sophisticated multi-agent workflows with full production capabilities:</p>
+<ol>
+<li><strong>Sequential Step Execution</strong>: Chain multiple agents with context passing</li>
+<li><strong>Sub-Workflow Support</strong>: Nest workflows within workflows for complex tasks</li>
+<li><strong>Retry Logic</strong>: Configure retry attempts with delays for robust execution</li>
+<li><strong>Validation Functions</strong>: Apply code quality checks with automatic retry on failure</li>
+<li><strong>Integration Steps</strong>: Call external integrations directly within workflows</li>
+<li><strong>Dynamic Output Processing</strong>: Choose between generatedText, generatedTextWithReasoning, or passthrough modes</li>
+</ol>
+<h2 id="best-practices">Best Practices <a href="#best-practices" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>For optimal workflow performance:</p>
+<ul>
+<li>Start with simple, well-defined tasks</li>
+<li>Ensure agent prompts are clear and specific</li>
+<li>Include relevant context in issue descriptions</li>
+<li>Test workflows with the local provider before using with GitHub</li>
+<li>Review validation function output for common errors</li>
+</ul>
 
     </div>
 
@@ -435,20 +522,20 @@ For more information on creating a GitHub Token, check out their documentation"/
 
 	<div class="row flex-xl-nowrap ">
 	<div class="col-sm-6 pt-2 doc-next">
-		<a href="/docs/advanced/rag/">
+		<a href="/docs/settings/agents/">
 			<div class="card h-100 my-1">
 				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Retrieval Augmented Generation (RAG)</p>
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Agents</p>
 					
 				</div>
 			</div>
 		</a>
         </div>
 	<div class="col-sm-6 pt-2 doc-prev">
-		<a class="ms-auto" href="/docs/getting-started/">
+		<a class="ms-auto" href="/docs/settings/system-agent/">
 			<div class="card h-100 my-1 text-end">
 				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Getting Started <i class="material-icons align-middle">navigate_next</i></p>
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0">System Agent <i class="material-icons align-middle">navigate_next</i></p>
 					
 				</div>
 			</div>

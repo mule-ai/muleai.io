@@ -109,6 +109,45 @@
                     
                         <li class="sidebar-dropdown no-icon ">
                             <button class="btn">
+                                Advanced Features
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/advanced/rag/">Retrieval Augmented Generation (RAG)</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/advanced/integrations/">Integration Capabilities</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/advanced/validation/">Validation Functions</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/advanced/multi-agent/">Multi-Agent Workflows</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/advanced/udiff/">Unified Diff (UDiff) Implementation</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
                                 Settings
                             </button>
                             <div class="sidebar-submenu ">
@@ -127,6 +166,11 @@
                                         
                                         
                                             <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/settings/agents/">Agents</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="https://muleai.io/docs/settings/workflows/">Workflows</a></li>
                                         
                                     
                                         
@@ -323,7 +367,7 @@
                     </span>
                     <div class="card-body p-0 content">
                         <p class="fs-5 fw-semibold card-title mb-1">Interacting With a Repository</p>
-                        <p class="para card-text mb-0"></p>
+                        <p class="para card-text mb-0">Learn how to interact with repositories in Mule</p>
                     </div>
                     
                 </div>
@@ -564,6 +608,55 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
     
@@ -573,6 +666,15 @@
     index.add(
             {
                 id:  0 ,
+                href: "\/docs\/advanced\/rag\/",
+                title: "Retrieval Augmented Generation (RAG)",
+                description: "Leveraging RAG for context-aware code generation",
+                content: "Retrieval Augmented Generation (RAG) is a powerful feature in Mule that enhances AI code generation by providing contextual awareness of your codebase. By indexing and retrieving relevant code snippets, Mule can make more informed and consistent changes to your repositories.\nHow RAG Works in Mule linkRAG in Mule follows a four-step process:\nIndexing: When a repository is added, Mule analyzes and indexes the codebase Retrieval: When working on an issue, Mule identifies relevant code sections Context Enrichment: The retrieved code context is included in the agent’s prompt Generation: The agent creates solutions with awareness of existing patterns and structures This approach significantly improves code quality by ensuring generated code follows existing patterns, naming conventions, and architectural decisions in your codebase.\nKey Features linkMule’s RAG implementation includes these specialized features:\nIntelligent Code Chunking linkCode is automatically split into meaningful chunks based on language-specific structures:\nGo: Functions, structs, interfaces, methods JavaScript/TypeScript: Functions, classes, methods HTML: Elements, sections, components CSS: Rule sets, at-rules, keyframes This structural chunking ensures that related code stays together for better context.\nReal-time Index Updates linkThe codebase index is automatically updated when:\nFiles are added or modified in the repository Changes are committed to the repository The repository is synchronized This keeps the context current without manual intervention.\nRepository Map Generation linkMule can generate a high-level map of repository structure to help agents understand:\nKey files and their purpose Important types and interfaces Hierarchical relationships between components Overall architecture patterns Configuration link notifications RAG is currently in development and will be fully available in a future release. While RAG will be enabled by default in future releases, you will be able to configure its behavior:\nEmbedding Service linkMule uses an embedding service to create vector representations of code. You’ll be able to configure:\nembeddingService: url: https://api.your-embedding-service.com model: text-embedding-model apiKey: your-api-key Supported services will include:\nOpenAI Embeddings Local embedding models Custom embedding endpoints Indexing Settings linkControl how your code is indexed:\nindexing: excludeDirs: - node_modules - vendor - dist excludeFiles: - README.md - LICENSE maxRepoSize: 16384 Query Settings linkConfigure retrieval behavior:\nrag: enabled: true maxResults: 10 similarityThreshold: 0.7 includeRepoMap: true Best Practices linkTo get the most from RAG when it’s released:\nKeep repositories focused: Smaller, more specific repositories yield better results Use meaningful comments: Well-commented code helps the system understand context Consistent coding patterns: Following consistent patterns makes it easier for RAG to understand code relationships Clean code organization: Well-organized code with logical file structure improves retrieval quality Impact on Generated Code linkWith RAG, you can expect:\nMore consistent style: Generated code will match existing patterns Better integration: New code will integrate more seamlessly with existing code Fewer errors: Reduced risk of breaking changes or inconsistencies Higher relevance: Solutions more directly addressing the specific issue Example: Before and After RAG linkWithout RAG:\n// Generated function with generic naming func ProcessData(data []string) ([]string, error) { result := make([]string, 0, len(data)) for _, item := range data { processed := strings.ToUpper(item) result = append(result, processed) } return result, nil } With RAG:\n// Generated function with context-aware naming and error handling func TransformTaskItems(items []string) ([]string, error) { if items == nil { return nil, ErrNilItems } result := make([]string, 0, len(items)) for _, item := range items { processed, err := applyTaskTransformation(item) if err != nil { return nil, fmt.Errorf(\"error transforming item %q: %w\", item, err) } result = append(result, processed) } return result, nil } The RAG-enhanced version follows existing patterns for error handling, naming conventions, and coding style from the rest of the codebase.\n"
+            }
+        );
+    index.add(
+            {
+                id:  1 ,
                 href: "\/docs\/settings\/general\/",
                 title: "General",
                 description: " Currently the only thing that gets configured under general is a GitHub token. This token is used to retrieve:\nRepositories Issues Pull Requests And various details such as comments and reactions about the above items.\nIn the future we will have the ability to also use this token to clone a repository. For now that is limited to SSH auth on the system where mule is running.\nFor more information on creating a GitHub Token, check out their documentation\n",
@@ -581,16 +683,25 @@
         );
     index.add(
             {
-                id:  1 ,
+                id:  2 ,
                 href: "\/docs\/getting-started\/",
                 title: "Getting Started",
                 description: "Getting started with Mule",
-                content: "Installation link git clone https://github.com/mule-ai/mule.git cd mule make run Running Mule linkTo get started running mule, follow the steps below:\nSet a GitHub token Set up your AI Providers Create some Agents Add a Respository Create an Issue Demo link\n"
+                content: "What is Mule? linkMule is an advanced multi-agent AI development platform that orchestrates sophisticated workflows and integrations. It serves as your autonomous development infrastructure, capable of:\nMulti-Agent Workflows: Orchestrate complex tasks with sequential steps, sub-workflows, and validation Production Integrations: Discord, Matrix, gRPC API, RSS feeds, persistent memory, and more Multi-Provider Support: OpenAI, Anthropic, Gemini, and Ollama with dynamic model switching Autonomous Development: Monitor repositories, process issues, create PRs, and respond to feedback Advanced Memory: ChromeM-based vector database for RAG and context retention Quality Control: Built-in validation functions with retry logic for robust outputs Prerequisites linkBefore installing Mule, ensure you have:\nGo 1.24+: Mule is built with Go 1.24 or newer Git: For repository operations SSH keys: Configured for GitHub access if using GitHub repositories AI provider access: API keys for your chosen AI provider (OpenAI, Anthropic, Gemini, Ollama) GitHub token: If you plan to use GitHub repositories (optional) Installation linkStandard Installation link git clone https://github.com/mule-ai/mule.git cd mule make run Docker Installation link git clone https://github.com/mule-ai/mule.git cd mule make docker-build make docker-run Installing Dependencies linkFor development or contributing to Mule:\nmake download-golangci-lint # Install linting tools make deps # Install Go dependencies Configuration linkMule stores its configuration in a standard location based on your operating system:\nLinux: ~/.config/mule/ macOS: ~/Library/Application Support/mule/ Windows: %APPDATA%\\mule\\ The primary configuration is automatically created on first run.\nRunning Mule linkAfter installation, Mule is accessible through a web interface at http://localhost:8083.\nTo get started running Mule, follow these steps:\nSet a GitHub token (optional)\nThis allows Mule to interact with GitHub repositories Required for working with private repositories Set up your AI Providers\nConfigure at least one AI provider Supports OpenAI, Anthropic, Gemini, and Ollama Provide necessary API keys and endpoints Create Agents\nConfigure agents with appropriate models and prompts Set up the tools agents can access Define validation functions to ensure code quality Configure the System Agent\nHandles system tasks like commit messages and PR descriptions Uses the same AI providers as regular agents Add a Repository\nConnect to GitHub repositories or use local ones Set up sync schedules to monitor for issues Create an Issue\nIn GitHub: Create an issue and add the mule label With Local Provider: Use the Mule interface to create an issue Once set up, Mule will automatically:\nMonitor repositories on the schedule you defined Find issues labeled with mule Generate solutions and create pull requests Respond to any comments on those pull requests Command Line Options linkMule supports several command line options:\nmule [options] Options:\n--config: Specify a custom config path --port: Set a custom port (default: 8083) --debug: Enable debug logging --help: Display help information Demo linkSee Mule in action with this demonstration using the Local Provider:\nNext Steps linkAfter getting Mule running, you might want to:\nLearn about interacting with repositories Understand agent configuration in more detail Explore advanced features like RAG and integrations Configure workflows for complex tasks Troubleshooting linkCommon Issues linkMule can’t connect to GitHub\nVerify your GitHub token has the required permissions Check network connectivity and firewall settings AI provider connection fails\nEnsure API keys are correctly entered Verify endpoint URLs are accessible Check rate limits on your AI provider Repository sync fails\nEnsure SSH keys are properly configured Verify repository path permissions Check for available disk space No changes generated\nReview issue description for clarity Check agent prompt templates Verify that selected AI model is capable of code generation For more help, check the logs at ~/.config/mule/mule.log or use the Logs page in the web interface.\n"
             }
         );
     index.add(
             {
-                id:  2 ,
+                id:  3 ,
+                href: "\/docs\/advanced\/integrations\/",
+                title: "Integration Capabilities",
+                description: "Connecting Mule with external messaging and notification systems",
+                content: "Mule can integrate with external messaging and notification platforms, allowing it to receive commands and send updates about its activities. This enables seamless collaboration between AI agents and human teams.\nSupported Integrations linkMule currently supports 8+ production-ready integrations:\nDiscord linkConnect Mule to Discord channels to:\nReceive commands via mentions and slash commands Send notifications about repository activity Share results of AI-generated code Generate RSS feeds from Discord messages Persistent memory integration for conversation context Matrix linkConnect Mule to Matrix rooms for:\nSecure, encrypted communication Command and control of Mule agents ChromeM-based persistent memory for context retention Status updates and notifications File sharing and code snippets gRPC API linkExternal API access for:\nFull workflow execution control Agent and provider management Asynchronous execution tracking Type-safe external system integration Production-ready external interfaces RSS Feeds linkGenerate and consume RSS feeds:\nMulti-instance RSS generation Discord message feeds Hacker News integration Custom feed configuration Automatic content aggregation Memory System linkChromeM-based persistent memory:\nVector database backend for semantic search Conversation history retention Context enhancement for agents Integration-specific memory spaces RAG capabilities for improved responses HTTP API Integration linkREST API endpoints for:\nExternal system communication Webhook reception Status queries Workflow triggers Agent management System Integration linkLocal system operations:\nCommand execution File system operations Process management Environment interaction Script execution Task Integration linkAdvanced task management:\nCron-based scheduled execution Workflow triggering Task queue management Dependency handling Retry and error recovery Configuration linkEach integration is configured in the settings section with its own specific parameters:\nDiscord Configuration link discord: enabled: true messageOnConnect: true botToken: your-discord-bot-token guildId: your-server-id channelId: your-channel-id enabled: Toggle Discord integration on/off messageOnConnect: Send a notification when Mule connects botToken: Your Discord bot’s authentication token guildId: ID of the server (guild) to connect to channelId: ID of the default channel for messages Matrix Configuration link matrix: enabled: true messageOnConnect: true homeServer: https://matrix.org userId: '@mule:matrix.org' accessToken: your-matrix-access-token deviceId: your-device-id recoveryKey: your-recovery-key pickleKey: your-pickle-key roomId: '!roomid:matrix.org' enabled: Toggle Matrix integration on/off messageOnConnect: Send a notification when Mule connects homeServer: URL of your Matrix server userId: Matrix user ID for the bot accessToken: Authentication token for the Matrix account deviceId: Device identifier for end-to-end encryption recoveryKey: Key for recovering encrypted messages pickleKey: Key for session storage roomId: ID of the default room for messages Interaction Patterns linkCommand Processing linkIntegrations support different command patterns:\nMention-based: Trigger Mule by mentioning it in a message\n@Mule help Slash commands: Use slash commands for specific actions\n/mule status Direct messages: Send private messages to the Mule bot\nNotifications linkMule can send various notifications:\nIssue updates: When new issues are assigned to Mule PR creation: When a pull request is created Validation results: Success or failure of code validation Error alerts: When something goes wrong Creating Custom Integrations linkMule’s integration system is designed to be extensible. To create a custom integration:\nImplement the Integration interface:\ntype Integration interface { Call(name string, data any) (any, error) GetChannel() chan any Name() string Send(message any) error RegisterTrigger(trigger string, data any, channel chan any) } Add your integration to the integration loader\nConfigure it in the settings\nSecurity Considerations linkWhen setting up integrations:\nStore tokens and credentials securely Use minimal permissions required for functionality For Discord, create a dedicated bot with limited server access For Matrix, use a dedicated account with room-specific permissions Example: Setting Up Discord Integration link Create a Discord bot:\nGo to Discord Developer Portal Create a new application Add a bot to your application Copy the bot token Invite the bot to your server:\nGenerate an OAuth2 URL with bot scope and appropriate permissions Visit the URL to add the bot to your server Configure in Mule:\nOpen Mule settings Navigate to the Integrations section Enable Discord integration Enter your bot token, server ID, and channel ID Save settings Test the integration:\nMention the bot in your Discord channel The bot should respond and be ready to process commands "
+            }
+        );
+    index.add(
+            {
+                id:  4 ,
                 href: "\/docs\/repositories\/adding-a-repository\/",
                 title: "Adding a Repository",
                 description: " Adding a repository is the action that allows mule to monitor issues and create new pull requests.\nRemote Repository linkCurrently a repository must exist on GitHub in order for it to be selected as a remote repository.\nnotifications In future releases you will be able to create a new repository from mule or work on a local only repository. Base Path linkThe Base Path is the location where you with to locally clone the repository. When the repository is cloned, the owner and the repository name will be appended to the base path.\n",
@@ -599,7 +710,7 @@
         );
     index.add(
             {
-                id:  3 ,
+                id:  5 ,
                 href: "\/docs\/repositories\/",
                 title: "Repositories",
                 description: "",
@@ -608,16 +719,52 @@
         );
     index.add(
             {
-                id:  4 ,
+                id:  6 ,
                 href: "\/docs\/settings\/ai-providers\/",
                 title: "AI Providers",
-                description: " Mule supports configuring multiple AI providers. These are used to provide the models that will be used by Agents.\nCurrently Mule supports:\nOllama Gemini We plan too add support for OpenAI and Anthropic in the near future.\nNot all fields are required, only the information that is necessary to interact with your chosen provider must be provided.\n",
-                content: " Mule supports configuring multiple AI providers. These are used to provide the models that will be used by Agents.\nCurrently Mule supports:\nOllama Gemini We plan too add support for OpenAI and Anthropic in the near future.\nNot all fields are required, only the information that is necessary to interact with your chosen provider must be provided.\n"
+                description: " Mule supports configuring multiple AI providers. These are used to provide the models that will be used by Agents.\nCurrently Mule supports:\nOpenAI Anthropic Google Gemini Ollama (local models) All providers are production-ready with full support for model switching, tool assignment, and dynamic configuration.\nNot all fields are required, only the information that is necessary to interact with your chosen provider must be provided.\n",
+                content: " Mule supports configuring multiple AI providers. These are used to provide the models that will be used by Agents.\nCurrently Mule supports:\nOpenAI Anthropic Google Gemini Ollama (local models) All providers are production-ready with full support for model switching, tool assignment, and dynamic configuration.\nNot all fields are required, only the information that is necessary to interact with your chosen provider must be provided.\n"
             }
         );
     index.add(
             {
-                id:  5 ,
+                id:  7 ,
+                href: "\/docs\/advanced\/",
+                title: "Advanced Features",
+                description: "Advanced features and capabilities of Mule",
+                content: "This section covers advanced features of Mule that enable more sophisticated AI-driven development workflows.\nAdvanced features include:\nRetrieval Augmented Generation (RAG): Context-aware code generation using your codebase Integration Capabilities: Connecting Mule with Discord, Matrix, and other systems Validation Functions: Ensuring code quality with automated validation Multi-agent Workflows: Coordinating specialized agents for complex tasks Unified Diff (UDiff) Implementation: How Mule handles precise code changes These advanced features work together to make Mule a powerful, flexible AI development assistant. While some features are still in development, this documentation provides a preview of the full capabilities that will be available in upcoming releases.\n"
+            }
+        );
+    index.add(
+            {
+                id:  8 ,
+                href: "\/docs\/advanced\/validation\/",
+                title: "Validation Functions",
+                description: "Ensuring code quality with automated validation",
+                content: "Validation functions in Mule ensure that AI-generated code meets quality standards before being committed. These functions act as automated quality gates, running tests, linters, and other checks on the code.\nBuilt-in Validation Functions linkMule includes several built-in validation functions for Go codebases:\ngetDeps link func getDeps(path string) (string, error) This function ensures all dependencies are installed by running make download-golangci-lint. It’s typically the first validation function to run to ensure other tools are available.\ngoFmt link func goFmt(path string) (string, error) Formats Go code according to standard conventions by running go fmt ./.... This ensures consistent code formatting throughout the codebase.\ngoModTidy link func goModTidy(path string) (string, error) Cleans up Go module dependencies by running go mod tidy. This ensures that all imports are properly declared in the go.mod file and removes unused dependencies.\ngolangciLint link func golangciLint(path string) (string, error) Runs a comprehensive set of linters via make lint to catch common coding issues, potential bugs, and style violations.\ngoTest link func goTest(path string) (string, error) Executes tests with go test ./... to verify that the code functions as expected and doesn’t break existing functionality.\nHow Validation Works linkWhen an agent generates code changes, Mule runs the specified validation functions in sequence:\nThe agent makes code changes to the repository Each validation function is executed in the order specified If any validation fails, the output is captured and sent back to the agent The agent attempts to fix the issues based on the validation output This process repeats until all validations pass or the maximum retry limit is reached Configuring Validations linkValidation functions can be configured at the workflow level:\nvalidationFunctions: - getDeps - goFmt - goModTidy - golangciLint - goTest For specific agents, you can configure different validation sets based on the task requirements.\nCreating Custom Validation Functions linkYou can extend Mule with custom validation functions for your specific needs:\nDefine your validation function with the signature:\nfunc YourValidator(path string) (string, error) Register it in the validation function map:\nvar functions = map[string]ValidationFunc{ // existing functions... \"yourValidator\": YourValidator, } Add it to your workflow configuration\nLanguage-specific Validations linkWhile the built-in validators focus on Go, you can create custom validators for other languages:\nJavaScript/TypeScript Example link func eslint(path string) (string, error) { cmd := exec.Command(\"npx\", \"eslint\", \".\") cmd.Dir = path out, err := cmd.CombinedOutput() return string(out), err } func jest(path string) (string, error) { cmd := exec.Command(\"npx\", \"jest\") cmd.Dir = path out, err := cmd.CombinedOutput() return string(out), err } Python Example link func pylint(path string) (string, error) { cmd := exec.Command(\"python\", \"-m\", \"pylint\", \".\") cmd.Dir = path out, err := cmd.CombinedOutput() return string(out), err } func pytest(path string) (string, error) { cmd := exec.Command(\"python\", \"-m\", \"pytest\") cmd.Dir = path out, err := cmd.CombinedOutput() return string(out), err } Handling Validation Failures linkWhen validation fails, Mule follows a structured approach:\nThe validation error output is captured The agent is provided with: The specific validation that failed The error output from the validation The original code changes The agent is asked to fix the issues The process is repeated up to 20 times (configurable) Best Practices linkTo get the most out of validation functions:\nStart simple: Begin with basic formatting and linting before adding comprehensive tests Clear error messages: Ensure your custom validators provide clear, actionable error messages Fast feedback: Optimize validation functions to run quickly for better agent iteration Progressive validation: Order validations from fastest to slowest for efficiency Context-aware validation: Include repository-specific checks that enforce your project’s conventions Debugging Validation Issues linkIf validation consistently fails:\nRun the validation commands manually to see the output Check if validation requirements are clearly communicated in the agent’s prompt Verify that validation tools are properly installed and configured Consider relaxing validation requirements for initial development phases "
+            }
+        );
+    index.add(
+            {
+                id:  9 ,
+                href: "\/docs\/advanced\/multi-agent\/",
+                title: "Multi-Agent Workflows",
+                description: "Coordinating specialized AI agents for complex tasks",
+                content: "Multi-agent workflows enable Mule to tackle complex tasks by coordinating specialized AI agents. This advanced feature allows you to decompose tasks into smaller pieces, with each handled by an agent with specific expertise.\nHow Multi-Agent Workflows Work linkIn multi-agent workflows:\nEach agent is responsible for a specific aspect of the task Agents execute in a defined sequence Output from one agent becomes input for the next The final result integrates all agents’ contributions This approach enables more complex reasoning and better results than using a single agent for everything.\nTypes of Specialized Agents linkMulti-agent workflows can incorporate various specialized agents:\nAnalysis Agents linkThese agents focus on understanding code and requirements:\nCode analyzer: Examines existing code to understand patterns and structure Requirements analyzer: Breaks down issue descriptions into actionable tasks Test analyzer: Evaluates test coverage and identifies test needs Design Agents linkThese agents plan solutions without writing code:\nArchitecture designer: Creates high-level design for complex features Interface designer: Defines API contracts and interfaces Database designer: Plans data structures and relationships Implementation Agents linkThese agents write the actual code:\nFeature implementer: Writes code for new features Bug fixer: Creates patches for specific issues Test writer: Creates comprehensive test suites Validation Agents linkThese agents verify quality:\nCode reviewer: Checks code for best practices and potential issues Security auditor: Identifies security vulnerabilities Performance analyzer: Looks for optimization opportunities Example Multi-Agent Workflow linkHere’s an example workflow for implementing a complex feature:\nid: feature-implementation name: Feature Implementation description: Implements a new feature with analysis, planning, and testing steps: - id: requirements-analysis agentID: 1 outputField: generatedText - id: architecture-design agentID: 2 outputField: generatedText - id: implementation agentID: 3 outputField: generatedText - id: test-creation agentID: 4 outputField: generatedText - id: documentation agentID: 5 outputField: generatedText validationFunctions: - goFmt - golangciLint - goTest Input and Output Mapping linkOne of the key aspects of multi-agent workflows is controlling how information flows between agents:\nStandard Mapping linkBy default, each agent receives the complete output from the previous agent. This works well for sequential reasoning tasks where each agent builds on the previous work.\nCustom Field Mapping linkFor more complex workflows, you can map specific output fields to input fields:\nsteps: - id: code-analyzer agentID: 1 outputField: analysisResult - id: implementation agentID: 2 inputMapping: codeAnalysis: $.steps.code-analyzer.output issueDescription: $.input.issueBody outputField: generatedCode This approach allows:\nCombining inputs from multiple previous steps Accessing original inputs at any step Filtering specific information for each agent Special Agent Types linkMulti-agent workflows can leverage several special agent types:\nChain-of-Thought Agent linkThis agent type explicitly shows its reasoning:\nFirst, I need to understand what the issue is asking for. The user wants a function to validate email addresses. I should use a regex pattern for this. Let me write a function that: 1. Takes an email string as input 2. Returns a boolean indicating validity 3. Uses a proper regex pattern for emails func IsValidEmail(email string) bool { pattern := `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$` re := regexp.MustCompile(pattern) return re.MatchString(email) } The section is stripped when using the generatedText output field but preserved with generatedTextWithReasoning.\nTool-Using Agent linkThis agent has access to external tools like:\nCode search Documentation lookup Command execution File operations These tools enhance the agent’s capabilities by providing external context and validation.\nBest Practices linkFor effective multi-agent workflows:\nClear agent responsibilities: Each agent should have a specific, focused task Thoughtful sequencing: Order agents logically based on dependencies Appropriate context passing: Only pass relevant information between agents Specialized prompts: Customize each agent’s prompt for its specific task Validation between steps: Consider adding validation between critical steps Example: Bug Fix Workflow linkHere’s a real-world example of a multi-agent workflow for fixing bugs:\nBug analyzer: Examines the issue description and related code to understand the bug Test writer: Creates a failing test that reproduces the bug Bug fixer: Implements a fix that makes the test pass Reviewer: Checks the fix for potential side effects and ensures best practices By distributing the work across specialized agents, the quality and robustness of the solution improves significantly.\nLimitations and Considerations link notifications Multi-agent workflows are currently in development and will be fully available in a future release. When planning multi-agent workflows, consider:\nToken usage: More agents means higher token consumption Latency: Sequential processing increases overall completion time Error propagation: Mistakes in early steps can amplify through the chain Complexity management: Balance the benefits of specialization against increased system complexity "
+            }
+        );
+    index.add(
+            {
+                id:  10 ,
+                href: "\/docs\/advanced\/udiff\/",
+                title: "Unified Diff (UDiff) Implementation",
+                description: "How Mule handles code changes using unified diffs",
+                content: "Unified Diff (UDiff) is the mechanism Mule uses to represent and apply code changes. This approach allows AI agents to specify precise modifications to files without needing to understand or generate the entire codebase.\nWhat is UDiff? linkUDiff (Unified Diff) is a standard format for representing differences between text files. It shows:\nWhich files are being modified Which lines are being added, removed, or changed Context surrounding the changes A simple UDiff looks like this:\n--- a/path/to/file.go +++ b/path/to/file.go @@ -10,7 +10,7 @@ func example() { // Some code here - fmt.Println(\"Old code\") + fmt.Println(\"New code\") // More code } In this example:\nThe file being modified is path/to/file.go Line 10 provides context Line 11 shows the removed code (prefixed with -) Line 12 shows the added code (prefixed with +) Line 13 provides more context How Mule Uses UDiff linkIn Mule, UDiff serves several crucial purposes:\nOutput Format: AI agents can generate UDiffs rather than complete files Change Application: Mule applies these UDiffs to the actual codebase Change Representation: UDiffs are used to show changes in pull requests Context for Feedback: UDiffs provide context for PR comments and iterations Advantages of UDiff linkUsing UDiff offers significant benefits:\nPrecision: Changes are applied exactly where intended Context: The surrounding code provides context for changes Efficiency: Only the changes are transmitted, not entire files Readability: Diffs are human-readable and easy to review Compatibility: Standard format works with existing tools and platforms UDiff Format in Mule linkMule expects AI-generated UDiffs to follow this format:\n```diff --- a/path/to/file1.go +++ b/path/to/file1.go @@ -10,7 +10,7 @@ func example() { // Some code - oldCode() + newCode() // More code } ``` Key requirements:\nThe diff must be wrapped in triple backticks with diff language specifier File paths must be correct relative to the repository root Line numbers in the hunk header (@@ -10,7 +10,7 @@) should be accurate Context lines should match the actual file content Multiple File Changes linkUDiffs can represent changes to multiple files:\n```diff --- a/path/to/file1.go +++ b/path/to/file1.go @@ -10,7 +10,7 @@ func example() { // Some code - oldCode() + newCode() // More code } --- a/path/to/file2.go +++ b/path/to/file2.go @@ -15,6 +15,9 @@ func anotherExample() { // Some code + // New functionality + additionalCode() + // More code } ``` Processing UDiffs linkWhen an agent returns output containing UDiffs, Mule processes them as follows:\nParsing: The output is scanned for UDiff blocks Validation: Each UDiff is validated for correct format and paths Application: Changes are applied to the repository files Verification: Modified files are checked for expected changes Creating New Files linkTo create a new file with UDiff:\n```diff --- /dev/null +++ b/path/to/newfile.go @@ -0,0 +1,10 @@ +package example + +import ( + \"fmt\" +) + +func NewFunction() { + fmt.Println(\"This is a new file\") +} + ``` Deleting Files linkTo delete an existing file:\n```diff --- a/path/to/oldfile.go +++ /dev/null @@ -1,10 +0,0 @@ -package example - -import ( - \"fmt\" -) - -func OldFunction() { - fmt.Println(\"This file will be deleted\") -} - ``` UDiff Settings linkAgents can be configured with specific UDiff settings:\nudiff: enabled: true contextLines: 3 createMissingFiles: true allowFileRemoval: false enabled: Whether to process UDiffs in agent output contextLines: Number of context lines to include around changes createMissingFiles: Allow creation of new files allowFileRemoval: Permit deletion of existing files Best Practices linkFor optimal UDiff usage:\nInclude sufficient context: Provide enough surrounding lines for proper placement Use relative paths: Ensure file paths are relative to repository root Binary files: Avoid UDiffs for binary files; use base64 encoding if necessary Large changes: Break large changes into smaller, logical UDiffs Rename operations: Represent renames as a deletion and creation Troubleshooting linkCommon UDiff issues and solutions:\n“Failed to apply patch”\nVerify file paths are correct Ensure context lines match the actual file Check if line numbers need adjustment “Hunk failed to apply”\nThe file may have changed since the UDiff was generated Increase context lines for better matching Update the UDiff based on current file state “No valid UDiffs found”\nCheck the formatting of your UDiff blocks Ensure triple backticks and diff language specifier are included Verify the UDiff follows standard format "
+            }
+        );
+    index.add(
+            {
+                id:  11 ,
                 href: "\/docs\/settings\/agents\/",
                 title: "Agents",
                 description: " Agents are the thing which do the work. In this case, an agent has a selected AI Provider and Model. Additionally, Agents should be provided a prompt template.\nThe prompt template can be filled in with dynamic content by using the variables defined on the page. This will allow an Agent to receive a prompt that contains information about the Issue that you are asking it to generate code for. In more complex use cases we can also fill this in with diff content and Pull Request Comments.\n",
@@ -626,7 +773,16 @@
         );
     index.add(
             {
-                id:  6 ,
+                id:  12 ,
+                href: "\/docs\/settings\/workflows\/",
+                title: "Workflows",
+                description: "Understanding and configuring Mule workflows",
+                content: "Workflows are at the heart of Mule’s ability to coordinate complex AI tasks. A workflow defines a sequence of steps that Mule follows when processing issues and generating code.\nWorkflow Architecture linkEach workflow consists of:\nSteps: Individual tasks performed by specific agents or integrations Input Mappings: How data flows between steps Output Fields: What data is produced by each step Validation Functions: Code quality checks applied to the output Workflows enable you to chain together multiple agents, each with specific responsibilities, to solve complex problems collaboratively.\nDefault Workflow linkMule comes with a default workflow that follows this sequence:\nStarting Agent: Analyzes the issue and generates initial code changes Commit Agent: Generates appropriate commit messages for changes PR Title Agent: Creates a descriptive pull request title PR Body Agent: Writes a comprehensive pull request description This default workflow is suitable for most use cases and requires minimal configuration.\nWorkflow Steps linkEach step in a workflow is defined with the following properties:\nid: unique-step-id agentID: 1 agentName: Agent Name outputField: generatedText integration: integration: integration-name event: event-name data: event-data id: A unique identifier for the step agentID: The ID of the agent to use for this step agentName: A human-readable name for the agent (optional) outputField: The field to extract from the agent’s output integration: Optional integration details if this step uses an external integration Output Fields linkOutput fields define how to process the raw output from an agent:\ngeneratedText: Extracts only the final generated content (code, text, etc.) generatedTextWithReasoning: Includes the agent’s reasoning along with the final output When an agent completes its work, its output is processed according to the outputField setting and then passed to the next step in the workflow.\nValidation Functions linkValidation functions run after a workflow step to ensure code quality. Mule includes several built-in validation functions:\ngetDeps: Ensures all dependencies are available goFmt: Formats Go code according to standard conventions goModTidy: Cleans up Go module dependencies golangciLint: Runs linters to catch common coding issues goTest: Executes tests to verify functionality You can specify which validation functions to run for each workflow:\nvalidationFunctions: - goFmt - goTest If validation fails, Mule will make additional attempts to fix the issues by asking the agent to revise its output.\nAdvanced: Multi-Agent Workflows linkMore complex tasks can benefit from specialized multi-agent workflows:\nid: code-analysis-workflow name: Code Analysis description: Analyzes code and provides improvement suggestions steps: - id: code-analyzer agentID: 2 outputField: generatedText - id: improvement-generator agentID: 3 outputField: generatedText - id: implementation agentID: 1 outputField: generatedTextWithReasoning validationFunctions: - goFmt - golangciLint - goTest In this example:\nOne agent analyzes the code A second agent suggests improvements A third agent implements those improvements Validation ensures code quality Integration with External Systems linkWorkflows can integrate with external systems through the integration field:\nid: discord-notification integration: integration: discord event: sendMessage data: Workflow completed successfully! This allows workflows to:\nSend notifications when tasks complete Fetch additional information from external sources Trigger actions in other systems Workflow Triggers linkWorkflows can be triggered by:\nRepository synchronization (automatic) Manual sync button on the repository page External triggers from integrations (Discord, Matrix, etc.) When triggered, a workflow will process any eligible issues (those labeled with mule that don’t already have pull requests or have unresolved PR comments).\nCustomizing Workflows linkMule supports sophisticated multi-agent workflows with full production capabilities:\nSequential Step Execution: Chain multiple agents with context passing Sub-Workflow Support: Nest workflows within workflows for complex tasks Retry Logic: Configure retry attempts with delays for robust execution Validation Functions: Apply code quality checks with automatic retry on failure Integration Steps: Call external integrations directly within workflows Dynamic Output Processing: Choose between generatedText, generatedTextWithReasoning, or passthrough modes Best Practices linkFor optimal workflow performance:\nStart with simple, well-defined tasks Ensure agent prompts are clear and specific Include relevant context in issue descriptions Test workflows with the local provider before using with GitHub Review validation function output for common errors "
+            }
+        );
+    index.add(
+            {
+                id:  13 ,
                 href: "\/docs\/settings\/system-agent\/",
                 title: "System Agent",
                 description: " The system agent is used to perform system tasks such as:\ngenerating a commit message generating a pull request title generating a pull request description These settings allow you to select the AI Provider, model, and prompt templates. All of the same variables that were available for the other agents are available to the system agent.\n",
@@ -635,16 +791,16 @@
         );
     index.add(
             {
-                id:  7 ,
+                id:  14 ,
                 href: "\/docs\/repositories\/interacting-with-a-repository\/",
                 title: "Interacting With a Repository",
-                description: "",
-                content: ""
+                description: "Learn how to interact with repositories in Mule",
+                content: "Once you’ve added a repository to Mule, you can interact with it in several ways. This page explains how to work with repositories, manage issues, and collaborate with AI agents.\nRepository Dashboard linkAfter adding a repository, it will appear in the dashboard with the following information:\nRepository Name: The name of the repository Provider: GitHub or Local Status: Current sync status Last Sync: When the repository was last synchronized Actions: Buttons to interact with the repository Synchronizing a Repository linkMule will automatically synchronize repositories according to the schedule you specified when adding them. However, you can manually trigger a sync at any time:\nClick the “Sync” button next to the repository Mule will immediately fetch new issues and pull requests from the provider The status indicator will update to show the synchronization progress Repository Providers linkMule supports two types of repository providers:\nGitHub Provider linkWith the GitHub provider, Mule interacts directly with GitHub repositories:\nMonitors issues with the mule label Creates branches, commits, and pull requests on GitHub Responds to comments on pull requests Updates pull requests based on feedback Local Provider linkThe Local provider offers an offline experience for testing or local development:\nCreate issues directly in the Mule interface View AI-generated changes before they’re pushed Add comments to pull requests Test workflows without pushing to a remote repository You can switch between providers using the “Switch Provider” button next to the repository.\nWorking with Issues linkIssues are the primary way to interact with Mule. When an issue is labeled with mule, it becomes available for the AI to work on.\nCreating Issues (Local Provider) linkWith the Local provider, you can create issues directly in Mule:\nNavigate to the Local Provider page Click “Create Issue” Enter a title and description Click “Save” The issue will be automatically labeled with mule and will be processed during the next sync.\nCommenting on Pull Requests linkWhen Mule creates a pull request, you can interact with it by adding comments:\nNavigate to the pull request (on GitHub or in the Local Provider view) Add a comment with specific feedback or requests Mule will process your comment and update the pull request accordingly Comment types that trigger responses:\nCode review comments on specific lines General comments asking for changes Questions about implementation details Closing or Merging Pull Requests linkWhen you’re satisfied with the changes:\nFor GitHub repositories, merge the pull request using GitHub’s interface For Local repositories, use the “Close” or “Merge” buttons in Mule’s interface After a pull request is closed or merged, Mule will consider the issue resolved and will not make further changes unless the issue is reopened.\nBehind the Scenes linkWhen Mule processes a repository, it follows this workflow:\nClone or update the local copy of the repository Scan for issues labeled with mule For each issue without a pull request: Create a new branch Generate code changes using AI Commit and push changes Create a pull request For each pull request with unresolved comments: Process the comments Make additional changes Update the pull request Troubleshooting linkIf you encounter issues with a repository:\nRepository Locked: The repository is currently being processed. Wait for the operation to complete. Sync Failed: Check network connectivity and GitHub token permissions. No Changes Generated: The AI may not have enough context. Try adding more details to the issue description. Permission Errors: Ensure your GitHub token has the required permissions to push to the repository. "
             }
         );
     index.add(
             {
-                id:  8 ,
+                id:  15 ,
                 href: "\/docs\/settings\/",
                 title: "Settings",
                 description: "The Settings page allows a user to configure most system behaviors. Currently we have the following:\nGeneral\nAdd a GitHub Token AI Providers\nConfigure the AI Providers that you wish to use for your Agents Agents\nConfigure Agents to use for code generation System Agent\nConfigure the Agent that is used for system tasks such as generating a commit message ",
@@ -653,7 +809,7 @@
         );
     index.add(
             {
-                id:  9 ,
+                id:  16 ,
                 href: "\/docs\/",
                 title: "Docs",
                 description: "",

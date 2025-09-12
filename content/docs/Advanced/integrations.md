@@ -12,7 +12,7 @@ Mule can integrate with external messaging and notification platforms, allowing 
 
 ## Supported Integrations
 
-Mule currently supports the following integrations:
+Mule currently supports 8+ production-ready integrations:
 
 ### Discord
 
@@ -20,23 +20,71 @@ Connect Mule to Discord channels to:
 - Receive commands via mentions and slash commands
 - Send notifications about repository activity
 - Share results of AI-generated code
-- Provide status updates on ongoing tasks
+- Generate RSS feeds from Discord messages
+- Persistent memory integration for conversation context
 
 ### Matrix
 
 Connect Mule to Matrix rooms for:
 - Secure, encrypted communication
 - Command and control of Mule agents
+- ChromeM-based persistent memory for context retention
 - Status updates and notifications
 - File sharing and code snippets
 
+### gRPC API
+
+External API access for:
+- Full workflow execution control
+- Agent and provider management
+- Asynchronous execution tracking
+- Type-safe external system integration
+- Production-ready external interfaces
+
+### RSS Feeds
+
+Generate and consume RSS feeds:
+- Multi-instance RSS generation
+- Discord message feeds
+- Hacker News integration
+- Custom feed configuration
+- Automatic content aggregation
+
+### Memory System
+
+ChromeM-based persistent memory:
+- Vector database backend for semantic search
+- Conversation history retention
+- Context enhancement for agents
+- Integration-specific memory spaces
+- RAG capabilities for improved responses
+
+### HTTP API Integration
+
+REST API endpoints for:
+- External system communication
+- Webhook reception
+- Status queries
+- Workflow triggers
+- Agent management
+
+### System Integration
+
+Local system operations:
+- Command execution
+- File system operations
+- Process management
+- Environment interaction
+- Script execution
+
 ### Task Integration
 
-Internal integration for workflow task management:
-- Schedule and queue tasks
-- Track task completion status
-- Handle dependencies between tasks
-- Manage retries and error handling
+Advanced task management:
+- Cron-based scheduled execution
+- Workflow triggering
+- Task queue management
+- Dependency handling
+- Retry and error recovery
 
 ## Configuration
 

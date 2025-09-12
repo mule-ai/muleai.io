@@ -141,13 +141,14 @@ When triggered, a workflow will process any eligible issues (those labeled with 
 
 ## Customizing Workflows
 
-{{< alert text="Currently multiple agents can be defined but only the first one will be used. Multi-agent workflows will be fully enabled in a future update." />}}
+Mule supports sophisticated multi-agent workflows with full production capabilities:
 
-While full workflow customization is coming in a future update, you can currently influence the workflow by:
-
-1. Modifying agent prompts to change their behavior
-2. Adjusting the default validation functions
-3. Configuring external integrations for notifications
+1. **Sequential Step Execution**: Chain multiple agents with context passing
+2. **Sub-Workflow Support**: Nest workflows within workflows for complex tasks
+3. **Retry Logic**: Configure retry attempts with delays for robust execution
+4. **Validation Functions**: Apply code quality checks with automatic retry on failure
+5. **Integration Steps**: Call external integrations directly within workflows
+6. **Dynamic Output Processing**: Choose between generatedText, generatedTextWithReasoning, or passthrough modes
 
 ## Best Practices
 

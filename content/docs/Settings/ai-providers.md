@@ -14,9 +14,11 @@ Mule supports configuring multiple AI providers. These are used to provide the m
 
 Currently Mule supports:
 
-* Ollama
-* Gemini
+* OpenAI
+* Anthropic  
+* Google Gemini
+* Ollama (local models)
 
-We plan too add support for OpenAI and Anthropic in the near future.
+All providers are production-ready with full support for model switching, tool assignment, and dynamic configuration.
 
 Not all fields are required, only the information that is necessary to interact with your chosen provider must be provided.
