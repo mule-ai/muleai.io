@@ -1,1 +1,7 @@
 dev-server.sh
+
+# Project management files (generated per run)
+spec.md
+plan.md
+progress.md
+SUMMARY.md
