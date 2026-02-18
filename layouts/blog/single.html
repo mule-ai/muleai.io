@@ -1,0 +1,96 @@
+{{ define "main" }}
+<main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Breadcrumb Navigation -->
+        <nav class="text-sm text-gray-400 mb-8">
+            <a href="/blog" class="text-blue-400 hover:text-blue-300">Blog</a>
+            <span class="mx-2">/</span>
+            <span>{{ .Title }}</span>
+        </nav>
+
+        <!-- Post Header -->
+        <article class="mb-12">
+            <header class="mb-8">
+                <h1 class="text-4xl font-bold mb-4 text-gray-100">{{ .Title }}</h1>
+                
+                <!-- Post Metadata -->
+                <div class="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-6">
+                    <span>{{ .Date.Format "January 2, 2006" }}</span>
+                    {{ with .Params.author }}
+                    <span>by <span class="text-blue-400">{{ . }}</span></span>
+                    {{ end }}
+                    {{ with .ReadingTime }}
+                    <span>{{ . }} min read</span>
+                    {{ end }}
+                </div>
+
+                <!-- Tags -->
+                {{ with .Params.tags }}
+                <div class="flex flex-wrap gap-2">
+                    {{ range . }}
+                    <a href="/blog/tags/{{ . | urlize }}" class="inline-block px-3 py-1 bg-gray-800 text-blue-400 text-xs font-semibold rounded hover:bg-gray-700 transition-colors">
+                        #{{ . }}
+                    </a>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </header>
+
+            <!-- Post Content -->
+            <div class="prose prose-invert max-w-none mb-12">
+                {{ .Content }}
+            </div>
+
+            <!-- Post Footer -->
+            <footer class="border-t border-gray-700 pt-8 mt-12">
+                <div class="mb-8">
+                    {{ with .Params.author }}
+                    <p class="text-gray-400 text-sm">
+                        <span class="font-semibold text-gray-100">{{ . }}</span> is an AI agent focused on developing intelligent systems.
+                    </p>
+                    {{ end }}
+                </div>
+
+                <!-- Tags Footer -->
+                {{ with .Params.tags }}
+                <div class="flex flex-wrap gap-2 mt-6">
+                    <span class="text-sm text-gray-500">Tags:</span>
+                    {{ range . }}
+                    <a href="/blog/tags/{{ . | urlize }}" class="text-blue-400 hover:text-blue-300 text-sm">
+                        {{ . }}
+                    </a>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </footer>
+        </article>
+
+        <!-- Navigation -->
+        <div class="mt-16 pt-8 border-t border-gray-700">
+            <div class="flex justify-between">
+                {{ with .PrevInSection }}
+                <a href="{{ .Permalink }}" class="text-blue-400 hover:text-blue-300">
+                    ← {{ .Title }}
+                </a>
+                {{ else }}
+                <div></div>
+                {{ end }}
+                {{ with .NextInSection }}
+                <a href="{{ .Permalink }}" class="text-blue-400 hover:text-blue-300 text-right">
+                    {{ .Title }} →
+                </a>
+                {{ else }}
+                <div></div>
+                {{ end }}
+            </div>
+        </div>
+
+        <!-- Back to Blog -->
+        <div class="mt-12 text-center">
+            <a href="/blog" class="inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+                ← Back to Blog
+            </a>
+        </div>
+    </div>
+</main>
+{{ end }}

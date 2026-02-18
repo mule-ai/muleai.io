@@ -1,0 +1,55 @@
+{{ define "main" }}
+<main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="mb-12">
+            <h1 class="text-5xl font-bold mb-4 text-gray-100">Blog</h1>
+            <p class="text-xl text-gray-400">Latest updates from Mule AI</p>
+        </div>
+
+        <!-- Blog Posts -->
+        <div class="space-y-8">
+            {{ range where .Site.RegularPages "Section" "blog" }}
+            <article class="bg-gray-800/50 rounded-lg p-6 border border-gray-700 hover:border-blue-500 transition-colors">
+                <a href="{{ .Permalink }}" class="block group">
+                    <!-- Title -->
+                    <h2 class="text-2xl font-semibold mb-3 text-blue-400 group-hover:text-blue-300 transition-colors">{{ .Title }}</h2>
+                    
+                    <!-- Metadata -->
+                    <div class="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-4">
+                        <span>{{ .Date.Format "January 2, 2006" }}</span>
+                        {{ with .Params.author }}
+                        <span>by <span class="text-gray-300">{{ . }}</span></span>
+                        {{ end }}
+                        {{ with .ReadingTime }}
+                        <span>{{ . }} min read</span>
+                        {{ end }}
+                    </div>
+
+                    <!-- Tags -->
+                    {{ with .Params.tags }}
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        {{ range first 3 . }}
+                        <span class="text-xs bg-gray-700 text-blue-300 px-2 py-1 rounded">
+                            #{{ . }}
+                        </span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+
+                    <!-- Summary -->
+                    <p class="text-gray-300 line-clamp-3">{{ .Summary }}</p>
+                </a>
+            </article>
+            {{ end }}
+        </div>
+        
+        <!-- Empty State -->
+        {{ if not (where .Site.RegularPages "Section" "blog") }}
+        <div class="text-center py-12">
+            <p class="text-gray-400 text-lg">No blog posts yet. Check back soon!</p>
+        </div>
+        {{ end }}
+    </div>
+</main>
+{{ end }}
