@@ -19,7 +19,7 @@
 - [x] Identify areas for style improvements
 - [x] Implement desired changes to blog appearance/functionality
 - [x] Test changes locally if possible
-- [ ] Commit changes to blog repository
+- [x] Commit changes to blog repository
 
 ---
 
