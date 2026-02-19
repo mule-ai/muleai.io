@@ -1,0 +1,268 @@
+// Custom Styles for Mule AI Blog
+// theme: lotusdocs
+
+// Color Variables - Mule AI Branding
+$primary-color: #3b82f6;
+$secondary-color: #8b5cf6;
+$accent-color: #06b6d4;
+
+// Mule AI Theme Colors
+$mule-blue: #3b82f6;
+$mule-purple: #8b5cf6;
+$mule-cyan: #06b6d4;
+
+// Base Variables (from lotusdocs/_variables.scss)
+$primary: $mule-blue;
+$secondary: $mule-purple;
+
+$body-bg: #0f172a;
+$body-color: #e2e8f0;
+$heading-color: #f1f5f9;
+$link-color: $mule-blue;
+
+// Import Bootstrap components
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// Custom Blog Styles
+.blog-post {
+  .post-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  .social-share {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 0.5rem;
+    
+    .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.375rem;
+      color: white;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background: $mule-blue;
+        border-color: $mule-blue;
+      }
+    }
+  }
+
+  .featured-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, $mule-blue, $mule-purple);
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1rem;
+  }
+}
+
+// Blog List Styles
+.blog-list {
+  .post-card {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    
+    .post-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: rgba(59, 130, 246, 0.1);
+      color: $mule-blue;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .read-more {
+      color: $mule-blue;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Archive Styles
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.archive-card {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: $mule-blue;
+    transform: translateY(-2px);
+  }
+  
+  .archive-date {
+    font-size: 0.875rem;
+    color: rgba(156, 163, 175, 0.8);
+    margin-bottom: 0.5rem;
+  }
+}
+
+// Archive Hero Section
+.archive-hero {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-radius: 1rem;
+  padding: 3rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  
+  .archive-header {
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, $mule-blue, $mule-purple);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .archive-hero {
+    padding: 2rem 1.5rem;
+    
+    h1 {
+      font-size: 2rem;
+    }
+  }
+  
+  .blog-post .social-share {
+    flex-wrap: wrap;
+  }
+}
+
+// Custom code block styling
+.code-block {
+  background: #1e293b !important;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  
+  .highlight {
+    code {
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Mule AI Theme Variables
+@mixin mule-gradient {
+  background: linear-gradient(135deg, $mule-blue, $mule-purple);
+}
+
+@mixin mule-shadow {
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+}
+
+// Add blog-specific navbar styling
+.navbar {
+  &.bg-muted {
+    background: #0f172a !important;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    
+    .navbar-brand {
+      color: $mule-blue !important;
+      font-weight: 700;
+    }
+    
+    .nav-link {
+      color: $body-color !important;
+      
+      &:hover {
+        color: $mule-blue !important;
+      }
+    }
+  }
+}
+
+// Custom button styles
+.btn-primary {
+  background: linear-gradient(135deg, $mule-blue, $mule-purple) !important;
+  border: none !important;
+  
+  &:hover {
+    background: linear-gradient(135deg, $mule-purple, $mule-blue) !important;
+  }
+}
+
+.btn-outline-primary {
+  border-color: $mule-blue !important;
+  color: $mule-blue !important;
+  
+  &:hover {
+    background: $mule-blue !important;
+    color: white !important;
+  }
+}
+
+// Card styling
+.card {
+  background: rgba(30, 41, 59, 0.5) !important;
+  border: 1px solid rgba(75, 85, 99, 0.5) !important;
+  
+  .card-header {
+    background: rgba(59, 130, 246, 0.1) !important;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2) !important;
+    color: $mule-blue !important;
+  }
+}
+
+// Hero section styling
+.hero {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%) !important;
+  
+  h1 {
+    background: linear-gradient(135deg, $mule-blue, $mule-purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
