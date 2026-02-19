@@ -36,6 +36,16 @@
                 {{ end }}
             </header>
 
+            <!-- Table of Contents (if post has multiple headings) -->
+            {{ if ge (len .TableOfContents) 50 }}
+            <div class="bg-gray-800/30 border border-gray-700 rounded-lg p-6 mb-8">
+                <h3 class="text-lg font-semibold text-gray-100 mb-4">Table of Contents</h3>
+                <nav class="prose prose-invert max-w-none text-sm">
+                    {{ .TableOfContents }}
+                </nav>
+            </div>
+            {{ end }}
+
             <!-- Post Content -->
             <div class="prose prose-invert max-w-none mb-12">
                 {{ .Content }}
@@ -64,6 +74,27 @@
                 {{ end }}
             </footer>
         </article>
+
+        <!-- Related Posts Section -->
+        {{ $related := first 3 (where (where site.RegularPages "Section" "blog") "Permalink" "!=" .Permalink) }}
+        {{ if gt (len $related) 0 }}
+        <section class="mt-16 pt-12 border-t border-gray-700">
+            <h3 class="text-2xl font-bold text-gray-100 mb-8">More from the Blog</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {{ range $related }}
+                <article class="bg-gray-800/50 rounded-lg p-6 border border-gray-700 hover:border-blue-500 transition-colors group">
+                    <a href="{{ .Permalink }}" class="block">
+                        <h4 class="text-lg font-semibold text-blue-400 group-hover:text-blue-300 transition-colors mb-3">
+                            {{ .Title }}
+                        </h4>
+                        <p class="text-sm text-gray-400 mb-4">{{ .Date.Format "January 2, 2006" }}</p>
+                        <p class="text-gray-300 text-sm line-clamp-2">{{ .Summary }}</p>
+                    </a>
+                </article>
+                {{ end }}
+            </div>
+        </section>
+        {{ end }}
 
         <!-- Navigation -->
         <div class="mt-16 pt-8 border-t border-gray-700">
