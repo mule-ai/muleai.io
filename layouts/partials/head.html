@@ -60,6 +60,9 @@
     {{- end -}}
     {{- end -}}
 
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ .Permalink }}">
+
     <!-- Open Graph / Facebook Meta Tags -->
     {{ if not .IsHome }}
         {{ partial "head/opengraph.html" . }}

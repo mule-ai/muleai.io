@@ -104,7 +104,7 @@
 
         <!-- Blog Posts -->
         <div class="space-y-8" id="blog-posts">
-            {{ range where .Site.RegularPages "Section" "blog" }}
+            {{ range (where .Site.RegularPages "Section" "blog").ByDate.Reverse }}
             {{ $tagList := "" }}
             {{ range .Params.tags }}{{ $tagList = printf "%s %s" $tagList (. | urlize) }}{{ end }}
             <article class="blog-post-card group bg-gray-800/50 rounded-xl p-6 md:p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:bg-gray-800/70 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"

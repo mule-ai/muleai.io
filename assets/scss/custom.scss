@@ -198,6 +198,162 @@ $link-color: $mule-blue;
   }
 }
 
+// Blog post prose typography enhancements
+// Applies to post body content rendered inside .prose or article tags
+.prose {
+  // Body text readability
+  font-size: 1.0625rem;  // 17px — slightly larger than default
+  line-height: 1.8;
+  color: #cbd5e1;         // slate-300 — softer than pure white
+  max-width: 72ch;
+
+  // Paragraph spacing
+  p {
+    margin-bottom: 1.5em;
+  }
+
+  // Headings — gradient accent for H2, clean for H3/H4
+  h1, h2, h3, h4, h5, h6 {
+    color: #f1f5f9;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 2em;
+    margin-bottom: 0.75em;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    border-left: 3px solid $mule-blue;
+    padding-left: 0.75rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    color: #93c5fd; // blue-300
+  }
+
+  // Inline code
+  code:not(pre code) {
+    background: rgba(59, 130, 246, 0.12);
+    color: #93c5fd;
+    padding: 0.15em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  // Code blocks
+  pre {
+    background: #0f1929 !important;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1.5em 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+
+    code {
+      background: none !important;
+      color: #e2e8f0;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      border: none !important;
+      padding: 0 !important;
+    }
+  }
+
+  // Blockquotes
+  blockquote {
+    border-left: 3px solid $mule-purple;
+    padding-left: 1.25rem;
+    margin-left: 0;
+    color: #94a3b8;
+    font-style: italic;
+    background: rgba(139, 92, 246, 0.06);
+    border-radius: 0 0.5rem 0.5rem 0;
+    padding: 1rem 1.25rem;
+    margin: 1.5em 0;
+  }
+
+  // Links
+  a {
+    color: $mule-blue;
+    text-decoration: underline;
+    text-decoration-color: rgba(59, 130, 246, 0.4);
+    text-underline-offset: 3px;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+
+    &:hover {
+      color: $mule-cyan;
+      text-decoration-color: $mule-cyan;
+    }
+  }
+
+  // Lists
+  ul, ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25em;
+    color: #cbd5e1;
+
+    li {
+      margin-bottom: 0.5em;
+      line-height: 1.75;
+    }
+  }
+
+  ul li::marker {
+    color: $mule-blue;
+  }
+
+  ol li::marker {
+    color: $mule-purple;
+    font-weight: 600;
+  }
+
+  // Horizontal rule
+  hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, $mule-blue, transparent);
+    margin: 2.5em 0;
+  }
+
+  // Tables
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-size: 0.9rem;
+
+    th {
+      background: rgba(59, 130, 246, 0.15);
+      color: #93c5fd;
+      font-weight: 600;
+      text-align: left;
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    td {
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid rgba(75, 85, 99, 0.4);
+      color: #cbd5e1;
+    }
+
+    tr:hover td {
+      background: rgba(59, 130, 246, 0.05);
+    }
+  }
+
+  // Strong / bold
+  strong, b {
+    color: #f1f5f9;
+    font-weight: 600;
+  }
+}
+
 // Mule AI Theme Variables
 @mixin mule-gradient {
   background: linear-gradient(135deg, $mule-blue, $mule-purple);
