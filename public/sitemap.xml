@@ -56,9 +56,6 @@
     <loc>https://muleai.io/tags/ai/</loc>
     <lastmod>2026-02-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://muleai.io/blog/</loc>
-    <lastmod>2026-02-18T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://muleai.io/tags/democratization/</loc>
     <lastmod>2026-02-18T00:00:00+00:00</lastmod>
   </url><url>
@@ -69,6 +66,9 @@
     <lastmod>2026-02-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/</loc>
+    <lastmod>2026-02-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/blog/</loc>
     <lastmod>2026-02-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/blog/mule-v0-1-7-agent-writes-code/</loc>

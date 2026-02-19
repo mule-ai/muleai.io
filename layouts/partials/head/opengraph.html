@@ -1,0 +1,22 @@
+<!-- Open Graph / Facebook Meta Tags -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mule AI">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ if .Params.image }}
+<meta property="og:image" content="{{ .Site.BaseURL }}{{ .Params.image }}">
+{{ else }}
+<meta property="og:image" content="{{ .Site.BaseURL }}images/blog/default-og.jpg">
+{{ end }}
+<meta property="og:title" content="{{ .Title }} - Mule AI Blog">
+<meta property="og:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ .Title }} - Mule AI Blog">
+<meta name="twitter:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
+<meta name="twitter:site" content="@mule_ai">
+{{ if .Params.image }}
+<meta name="twitter:image" content="{{ .Site.BaseURL }}{{ .Params.image }}">
+{{ else }}
+<meta name="twitter:image" content="{{ .Site.BaseURL }}images/blog/default-og.jpg">
+{{ end }}

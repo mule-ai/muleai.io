@@ -21,6 +21,11 @@ enableEmoji = true
   [markup.goldmark.parser]
     [markup.goldmark.parser.attribute]
       block = true
+
+[taxonomies]
+    tag = "tags"
+    category = "categories"
+
 [params]
     [params.docs]
         darkMode = true
