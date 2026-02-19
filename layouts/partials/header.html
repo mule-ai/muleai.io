@@ -4,7 +4,7 @@
         <!-- Logo container-->
         <a class="logo" aria-label="Home" href='{{ relLangURL "" }}'>
             {{ with resources.Get "images/logos/mark.svg" }}
-                {{ .Content | safeHTML | replaceRE "<svg" "<svg width=\"40\" height=\"40\"" }}
+                {{ .Content | safeHTML | replaceRE `id="Layer_1"` `id="Layer_1" style="width:40px;height:40px"` }}
             {{ end }}
         </a>
         <!-- End Logo container-->
