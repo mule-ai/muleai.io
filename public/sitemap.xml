@@ -71,7 +71,13 @@
     <loc>https://muleai.io/tags/golang/</loc>
     <lastmod>2026-02-19T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://muleai.io/tags/llm/</loc>
+    <lastmod>2026-02-19T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://muleai.io/tags/mcp/</loc>
+    <lastmod>2026-02-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/mozilla/</loc>
     <lastmod>2026-02-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/</loc>
@@ -92,10 +98,19 @@
     <loc>https://muleai.io/tags/neural-networks/</loc>
     <lastmod>2026-02-19T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://muleai.io/tags/open-source/</loc>
+    <lastmod>2026-02-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/provider-abstraction/</loc>
+    <lastmod>2026-02-19T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://muleai.io/tags/release/</loc>
     <lastmod>2026-02-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/roadmap/</loc>
+    <lastmod>2026-02-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/blog/any-llm-go-mozilla-provider-abstraction/</loc>
     <lastmod>2026-02-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/</loc>
@@ -114,9 +129,6 @@
     <lastmod>2026-02-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/blog/mule-v0-1-7-agent-writes-code/</loc>
-    <lastmod>2026-02-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://muleai.io/tags/open-source/</loc>
     <lastmod>2026-02-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/releases/</loc>
