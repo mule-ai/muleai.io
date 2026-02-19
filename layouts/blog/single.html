@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             );
 
             progressBar.style.transform = `scaleX(${progress})`;
-            
+
             // Show/hide back to top button
             if (scrollTop > 500) {
                 backToTop.classList.remove('opacity-0', 'invisible');
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('scroll', updateProgress, { passive: true });
         updateProgress(); // Initial call
     }
-    
+
     // Back to top click handler
     if (backToTop) {
         backToTop.addEventListener('click', function() {
@@ -339,6 +339,159 @@ document.addEventListener('DOMContentLoaded', function() {
     position: relative !important;
 }
 </style>
+
+<!-- Theme Toggle Styles -->
+<style>
+/* Light mode overrides */
+:root[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --code-bg: #f1f5f9;
+}
+
+/* Dark mode defaults (current theme) */
+:root[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --card-bg: #1e293b;
+    --card-border: #334155;
+    --code-bg: #0f1929;
+}
+
+/* Apply theme classes to body */
+body[data-theme="light"] {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+body[data-theme="light"] .bg-gray-800\/50,
+body[data-theme="light"] .bg-gray-800\/30,
+body[data-theme="light"] .bg-gray-800,
+body[data-theme="light"] .bg-gray-700\/50,
+body[data-theme="light"] .bg-gray-700,
+body[data-theme="light"] .bg-gradient-to-r,
+body[data-theme="light"] .bg-gradient-to-br {
+    background-color: var(--card-bg) !important;
+}
+
+body[data-theme="light"] .border-gray-700,
+body[data-theme="light"] .border-gray-600,
+body[data-theme="light"] .border-gray-800,
+body[data-theme="light"] .border-gray-900 {
+    border-color: var(--border-color) !important;
+}
+
+body[data-theme="light"] .text-gray-400,
+body[data-theme="light"] .text-gray-500,
+body[data-theme="light"] .text-gray-600 {
+    color: var(--text-secondary) !important;
+}
+
+body[data-theme="light"] .text-gray-100,
+body[data-theme="light"] .text-white {
+    color: var(--text-primary) !important;
+}
+
+body[data-theme="light"] .prose code:not(pre code),
+body[data-theme="light"] .prose pre,
+body[data-theme="light"] .code-block {
+    background-color: var(--code-bg) !important;
+}
+
+/* Code block copy button colors for light mode */
+body[data-theme="light"] .code-copy-btn {
+    color: #64748b;
+    background: rgba(255, 255, 255, 0.85);
+    border-color: #e2e8f0;
+}
+
+body[data-theme="light"] .code-copy-btn:hover {
+    color: #4f46e5;
+    border-color: rgba(79, 70, 229, 0.6);
+    background: rgba(79, 70, 229, 0.1);
+}
+
+body[data-theme="light"] .code-copy-btn.copied {
+    color: #10b981;
+    border-color: rgba(16, 185, 129, 0.5);
+    background: rgba(16, 185, 129, 0.1);
+}
+</style>
+
+<!-- Theme Toggle Script -->
+<script>
+(function() {
+    // Check for saved user preference
+    const savedTheme = localStorage.getItem('theme') || null;
+
+    // Check system preference
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Determine initial theme
+    let theme = 'dark'; // Default to dark
+    if (savedTheme) {
+        theme = savedTheme;
+    } else if (systemPrefersDark) {
+        theme = 'dark';
+    }
+
+    // Apply theme to document
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // Update button icons
+    updateThemeIcons(theme);
+
+    // Toggle function
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        // Save preference
+        localStorage.setItem('theme', newTheme);
+
+        // Apply new theme
+        document.documentElement.setAttribute('data-theme', newTheme);
+
+        // Update icons
+        updateThemeIcons(newTheme);
+    }
+
+    // Update button icons based on theme
+    function updateThemeIcons(theme) {
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+
+        if (theme === 'dark') {
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+    }
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        // Only switch if user hasn't manually set a preference
+        if (!localStorage.getItem('theme')) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            updateThemeIcons(newTheme);
+        }
+    });
+
+    // Expose toggle function globally
+    window.toggleTheme = toggleTheme;
+})();
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
