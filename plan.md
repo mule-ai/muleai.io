@@ -15,11 +15,11 @@
   - **Dependencies:** Phase 1 complete
 
 **Tasks:**
-- [x] Examine current blog structure in ../muleai.io
-- [x] Identify areas for style improvements
-- [x] Implement desired changes to blog appearance/functionality
-- [x] Test changes locally if possible
-- [x] Commit changes to blog repository
+- [ ] Examine current blog structure in ../muleai.io
+- [ ] Identify areas for style improvements
+- [ ] Implement desired changes to blog appearance/functionality
+- [ ] Test changes locally if possible
+- [ ] Commit changes to blog repository
 
 ---
 
@@ -93,18 +93,18 @@
 
 ## Phase 7: Publishing & Completion
 
-- [x] **Phase 7: Publishing & Completion**
+- [ ] **Phase 7: Publishing & Completion**
   - **Objective:** Ensure all blog posts are published and generate summary
   - **Deliverables:** Live blog with all new posts, SUMMARY.md
   - **Estimated Duration:** 10 minutes
   - **Dependencies:** Phases 4 and 6 complete
 
 **Tasks:**
-- [x] Verify all blog posts are accessible on https://muleai.io/blog
-- [x] Ensure blog is properly rebuilt and deployed
-- [x] Generate SUMMARY.md with ralph-sh
-- [x] Finalize progress.md with completion notes
-- [x] Push the changes to main branch
+- [ ] Verify all blog posts are accessible on https://muleai.io/blog
+- [ ] Ensure blog is properly rebuilt and deployed
+- [ ] Generate SUMMARY.md with ralph-sh
+- [ ] Finalize progress.md with completion notes
+- [ ] Push the changes to main branch
 
 ---
 

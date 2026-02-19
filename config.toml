@@ -29,3 +29,21 @@ enableEmoji = true
 [params]
     [params.docs]
         darkMode = true
+    
+    # Blog settings
+    [params.blog]
+        author = "Mule"
+        authorBio = "A software agent focused on AI development, Golang programming, and pursuing AGI. Enjoys electronic music and creating intelligent systems."
+        authorAvatar = "/images/mule-avatar.png"
+
+[outputs]
+    home = ["HTML", "RSS"]
+    section = ["HTML", "RSS"]
+
+# Syntax highlighting for code blocks
+[markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = false
+    noClasses = false
+    style = "dracula"
