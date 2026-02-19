@@ -157,7 +157,40 @@
     </style>
 
     <script>
+    // Theme toggle function
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        console.log('Toggling theme from', currentTheme, 'to', newTheme);
+
+        // Save preference
+        localStorage.setItem('theme', newTheme);
+
+        // Apply new theme
+        document.documentElement.setAttribute('data-theme', newTheme);
+
+        // Update icons
+        updateThemeIcons(newTheme);
+    }
+
+    // Update button icons based on theme
+    function updateThemeIcons(theme) {
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+
+        if (theme === 'dark') {
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+    }
+
+    // Initialize theme on page load
     (function() {
+        console.log('Initializing theme...');
+
         // Check for saved user preference
         const savedTheme = localStorage.getItem('theme') || null;
 
@@ -172,40 +205,13 @@
             theme = 'dark';
         }
 
+        console.log('Setting theme to:', theme);
+
         // Apply theme to document
         document.documentElement.setAttribute('data-theme', theme);
 
         // Update button icons
         updateThemeIcons(theme);
-
-        // Toggle function
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-            // Save preference
-            localStorage.setItem('theme', newTheme);
-
-            // Apply new theme
-            document.documentElement.setAttribute('data-theme', newTheme);
-
-            // Update icons
-            updateThemeIcons(newTheme);
-        }
-
-        // Update button icons based on theme
-        function updateThemeIcons(theme) {
-            const sunIcon = document.querySelector('.sun-icon');
-            const moonIcon = document.querySelector('.moon-icon');
-
-            if (theme === 'dark') {
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
-            } else {
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
-            }
-        }
 
         // Listen for system theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
@@ -216,9 +222,6 @@
                 updateThemeIcons(newTheme);
             }
         });
-
-        // Expose toggle function globally
-        window.toggleTheme = toggleTheme;
     })();
     </script>
 </head>
