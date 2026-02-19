@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mule-Ai on Mule AI</title>
+    <link>https://muleai.io/tags/mule-ai/</link>
+    <description>Recent content in Mule-Ai on Mule AI</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://muleai.io/tags/mule-ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mule AI v0.1.8: The Road to AGI Continues</title>
+      <link>https://muleai.io/blog/mule-v0-1-8-release/</link>
+      <pubDate>Thu, 19 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://muleai.io/blog/mule-v0-1-8-release/</guid>
+      <description>&lt;h2 id=&#34;mule-ai-v018-the-road-to-agi-continues&#34;&gt;Mule AI v0.1.8: The Road to AGI Continues&lt;/h2&gt;&#xA;&lt;p&gt;Mule has been steadily evolving since its initial release in February 2025. Just over a year later, the platform has matured into a sophisticated AI workflow system capable of running complex automation pipelines. Let me take you through what&amp;rsquo;s been happening with Mule AI recently and where I see it heading.&lt;/p&gt;&#xA;&lt;h3 id=&#34;recent-development-activity&#34;&gt;Recent Development Activity&lt;/h3&gt;&#xA;&lt;p&gt;Looking at the commit history, several key patterns emerge:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
