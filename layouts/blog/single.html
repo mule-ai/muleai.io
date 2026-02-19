@@ -13,8 +13,8 @@
         <!-- Featured Image (if available) -->
         {{ with .Params.image }}
         <figure class="mb-8 rounded-xl overflow-hidden shadow-2xl shadow-blue-500/10 border border-gray-700">
-            <img src="{{ . }}" alt="{{ .Title }}" class="w-full h-auto object-cover max-h-96">
-            {{ with .Params.image_caption }}
+            <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-auto object-cover max-h-96">
+            {{ with $.Params.image_caption }}
             <figcaption class="mt-2 text-center text-sm text-gray-500 italic">{{ . }}</figcaption>
             {{ end }}
         </figure>
