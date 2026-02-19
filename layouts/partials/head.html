@@ -15,6 +15,8 @@
     {{ block "head/favicon" . }}{{ partialCached "head/favicon.html" . }}{{ end }}
     <!-- Google Fonts -->
     {{- partial "google-fonts" . }}
+    <!-- Tailwind CSS (for blog pages using Tailwind utilities) -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom CSS -->
     {{- $options := dict "enableSourceMap" true }}
     {{- if hugo.IsProduction}}
