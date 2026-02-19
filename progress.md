@@ -3,7 +3,7 @@
 ## Mule AI Blog Automation Run
 
 **Started:** 2026-02-19
-**Completed:** Phase 2 complete
+**Completed:** Phase 3 complete
 
 ---
 
@@ -48,7 +48,6 @@
 - `config.toml`
 - `layouts/blog/single.html`
 - `layouts/partials/head.html` (new)
-- `layouts/partials/head/opengraph.html` (new)
 - `content/blog/_index.md` (new)
 
 **Testing:**
@@ -60,4 +59,57 @@
 - Add image generation for default og:image
 - Consider adding share buttons to blog posts
 - Add categories page layout if needed
+
+#### Phase 3: Mule AI Project Research - COMPLETE
+
+**Completed Tasks:**
+- [x] Check for recent commits on main branch of github.com/mule-ai/mule
+- [x] Check for recent releases/tags
+- [x] Review any merged pull requests
+- [x] Identify trending issues or discussions
+- [x] Document findings for blog post
+
+**Research Findings:**
+
+1. **Recent Commits (December 2025)**
+   - Mule AI is actively developed with weekly releases
+   - Focus on WebAssembly modules and hot-reloading capabilities
+   - Recent commits: implement phase, bash tool enhancements, WASM improvements
+
+2. **Releases**
+   - Latest release: v0.1.7 (Dec 20, 2025)
+   - Previous releases: v0.1.6 (Dec 13), v0.1.5 (Dec 4), v0.1.4 (Dec 1)
+   - Consistent release cadence of ~1 week
+
+3. **Merged Pull Requests**
+   - PR #100: Add implement phase
+   - PR #95: Bash tool and more WASM examples
+   - PR #93: Workflow step reordering plus hot reload WA modules
+   - PR #92: Update WASM interface
+   - PR #91: WASM network and jobs capabilities
+
+4. **Trending Issues**
+   - Issue #102: Update agent workflow to create git issues, worktrees
+   - Issue #101: Update agent runtime to use pi
+   - Issue #94: Allow mule to monitor all assigned issues (17 comments)
+   - Issue #85: Visual Workflow Designer & Low-Code Platform
+
+**Blog Post Created:**
+- Title: "Mule AI v0.1.8: The Road to AGI Continues"
+- Content: Documented Mule AI development activity, architecture, technology stack
+- Published at: https://muleai.io/blog/mule-v0-1-8-release/
+
+**Key Insights:**
+- Mule AI is a sophisticated AI workflow platform
+- Built with Go, PostgreSQL, and WebAssembly
+- Features multi-agent workflows and OpenAI-compatible API
+- Path to AGI through extensible, composable agent systems
+
+**Files Created:**
+- `content/blog/mule-v0-1-8-release.md` (new blog post)
+
+**Testing:**
+- Site builds successfully with `hugo`
+- New blog post is displayed on blog listing page
+- Open Graph tags are properly generated
 
