@@ -158,7 +158,7 @@
 
     <script>
     // Theme toggle function
-    function toggleTheme() {
+    window.toggleTheme = function() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         console.log('Toggling theme from', currentTheme, 'to', newTheme);
