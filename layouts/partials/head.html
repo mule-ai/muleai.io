@@ -15,27 +15,6 @@
     {{ block "head/favicon" . }}{{ partialCached "head/favicon.html" . }}{{ end }}
     <!-- Google Fonts -->
     {{- partial "google-fonts" . }}
-
-    <!-- Theme Toggle Button (moved to head for proper initialization) -->
-    <button id="theme-toggle" class="btn btn-icon btn-soft-light fixed top-4 right-4 z-50" aria-label="Toggle theme" onclick="toggleTheme()" style="position: fixed; top: 1rem; right: 1rem;">
-        <svg class="sun-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-        </svg>
-        <svg class="moon-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-        </svg>
-    </button>
-    <!-- End theme toggle button -->
-
-    <!-- Theme Toggle CSS -->
-    <style>
-        #theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            z-index: 50;
-        }
-    </style>
     <!-- Tailwind CSS (for blog pages using Tailwind utilities) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom CSS -->
@@ -106,7 +85,7 @@
         document.documentElement.setAttribute('data-theme', newTheme);
 
         // Update icons
-        updateThemeIcons(newTheme);
+        setTimeout(updateThemeIcons, 0, newTheme);
     }
 
     // Update button icons based on theme
@@ -114,12 +93,14 @@
         const sunIcon = document.querySelector('.sun-icon');
         const moonIcon = document.querySelector('.moon-icon');
 
-        if (theme === 'dark') {
-            sunIcon.classList.remove('hidden');
-            moonIcon.classList.add('hidden');
-        } else {
-            sunIcon.classList.add('hidden');
-            moonIcon.classList.remove('hidden');
+        if (sunIcon && moonIcon) {
+            if (theme === 'dark') {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
         }
     }
 
@@ -127,37 +108,40 @@
     (function() {
         console.log('Initializing theme...');
 
-        // Check for saved user preference
-        const savedTheme = localStorage.getItem('theme') || null;
+        // Wait a bit for DOM to render
+        setTimeout(function() {
+            // Check for saved user preference
+            const savedTheme = localStorage.getItem('theme') || null;
 
-        // Check system preference
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            // Check system preference
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        // Determine initial theme
-        let theme = 'dark'; // Default to dark
-        if (savedTheme) {
-            theme = savedTheme;
-        } else if (systemPrefersDark) {
-            theme = 'dark';
-        }
-
-        console.log('Setting theme to:', theme);
-
-        // Apply theme to document
-        document.documentElement.setAttribute('data-theme', theme);
-
-        // Update button icons
-        updateThemeIcons(theme);
-
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            // Only switch if user hasn't manually set a preference
-            if (!localStorage.getItem('theme')) {
-                const newTheme = e.matches ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', newTheme);
-                updateThemeIcons(newTheme);
+            // Determine initial theme
+            let theme = 'dark'; // Default to dark
+            if (savedTheme) {
+                theme = savedTheme;
+            } else if (systemPrefersDark) {
+                theme = 'dark';
             }
-        });
+
+            console.log('Setting theme to:', theme);
+
+            // Apply theme to document
+            document.documentElement.setAttribute('data-theme', theme);
+
+            // Update button icons
+            updateThemeIcons(theme);
+
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                // Only switch if user hasn't manually set a preference
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    updateThemeIcons(newTheme);
+                }
+            });
+        }, 100);
     })();
     </script>
 </head>
