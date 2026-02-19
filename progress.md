@@ -556,3 +556,116 @@ After a fresh review of all blog layout templates, SCSS, content files, and gene
 - Prose typography is likely handled by the Bootstrap-based lotusdocs theme CSS rather than Tailwind, so this may be a non-issue visually
 - Focused identification on actionable items rather than speculative issues
 
+
+---
+
+### Phase 2: Blog Site Updates — Task: Implement desired changes to blog appearance/functionality
+
+**Date:** 2026-02-19
+
+**Task:** Implement desired changes to blog appearance/functionality
+
+**Status:** ✅ Complete
+
+#### Changes Implemented
+
+Five improvements were applied based on the improvement areas identified in the previous task:
+
+**1. Fixed broken tag links in `taxonomy.html` (Bug Fix)**
+- The "Related Tags" section used `/blog/tags/{{ . | urlize }}` — leading to 404s
+- Fixed to use `/tags/{{ . | urlize }}` — the correct Hugo taxonomy route
+- Same class of bug was previously fixed in `single.html`; now consistent across all templates
+
+**2. Added canonical URL meta tag in `layouts/partials/head.html` (SEO)**
+- Added `<link rel="canonical" href="{{ .Permalink }}">` to every page's `<head>`
+- Prevents search engines from treating trailing-slash and non-trailing-slash variants as duplicate content
+- Applied globally (not just blog pages), benefiting all site sections
+
+**3. Deterministic post sort order in `list.html`**
+- Changed `range where .Site.RegularPages "Section" "blog"` to `.ByDate.Reverse`
+- Hugo's default ordering among same-date posts is non-deterministic; this ensures newest posts always appear first
+- Consistent with standard blog UX expectations
+
+**4. Copy-to-clipboard buttons on code blocks in `single.html`**
+- Added a vanilla JS snippet that attaches a "Copy" button to every `<pre>` and `.highlight` block inside blog posts
+- Button is positioned absolutely in the top-right corner of each code block
+- On click: copies content to clipboard, changes to "Copied!" with a green checkmark, resets after 2s
+- Includes `execCommand` fallback for older browsers
+- Styled minimally — dark translucent background, gradient hover, green "copied" state
+- `.code-block` CSS class from `custom.scss` (previously unused) is now complemented by these additions
+
+**5. Enhanced prose typography in `custom.scss`**
+- Added a comprehensive `.prose` block with blog-reading-optimized styles:
+  - Body: 17px font, 1.8 line-height, `slate-300` color (softer than white)
+  - H2 with left blue border accent; H3 in blue-300
+  - Inline code: blue-tinted background with `JetBrains Mono` / `Fira Code` font stack
+  - Code blocks: darker `#0f1929` background, 1px blue border, rounded corners
+  - Blockquotes: purple left border, italic, faint purple background
+  - Links: underline offset, transitions to cyan on hover
+  - Lists: colored markers (blue for `ul`, purple for `ol`)
+  - Tables: styled with blue header row and hover highlight
+  - HR: gradient fade from transparent → blue → transparent
+
+#### Technical Details
+
+- Hugo build: 79 pages, 510ms, zero errors
+- Verified in generated output:
+  - Canonical tag present in all blog post `<head>` elements
+  - Tag archive related-tag links use `/tags/` (not `/blog/tags/`)
+  - `code-copy-btn` appears 6 times in code-heavy posts
+  - Prose typography CSS compiled into stylesheet
+  - Blog listing shows newest post first
+
+#### Decisions / Trade-offs
+
+- **Prose max-width `72ch`**: Optimal reading line length for long-form content; applies only within `.prose` containers so it doesn't affect the site's overall layout
+- **Vanilla JS for copy buttons**: No library dependency needed; the clipboard API is well-supported and the fallback covers edge cases
+- **Canonical on all pages** (not just blog): A global canonical is harmless for non-duplicate pages and beneficial for pages with URL variants
+- **Typography applies to `.prose` class**: The lotusdocs theme wraps blog content in `.prose`; these rules layer on top of Bootstrap without conflicting
+
+#### Commit
+`5d88e71` — feat(blog): implement style improvements — prose typography, copy buttons, canonical URLs, tag fix, sort order
+
+---
+
+### Phase 2: Blog Site Updates — Task: Test changes locally if possible
+
+**Date:** 2026-02-19
+
+**Task:** Test changes locally by running Hugo build
+
+**Status:** ✅ Complete
+
+#### Test Results
+
+Ran `hugo` in the site root to verify all recent style improvements build cleanly:
+
+```
+Start building sites …
+                   | EN   
+-------------------+------
+  Pages            |  79  
+  Paginator pages  |   0  
+  Non-page files   |   0  
+  Static files     | 371  
+  Processed images |  19  
+  Aliases          |   0  
+  Cleaned          |   0  
+
+Total in 477 ms
+```
+
+- **Build result:** ✅ Success — zero errors, 79 pages generated in ~477ms
+- **WARN (pre-existing):** `calling IsSet with unsupported type "invalid" (<nil>) will always return false` — this originates from the lotusdocs theme and predates all our changes. Not actionable.
+
+#### Verified in Generated Output
+
+- Canonical tags present in all blog post `<head>` elements (e.g. `<link rel="canonical" href="https://muleai.io/blog/mule-v0-1-8-release/">`)
+- All 6 blog posts rendered under `public/blog/`: agi-2026-golang-music, any-llm-go-mozilla-provider-abstraction, mule-2026-roadmap-pi-mcp-agi, mule-v0-1-7-agent-writes-code, mule-v0-1-8-release, open-source-ai-models-2026
+- CSS compiled and fingerprinted correctly (stylesheet present at `/scss/style.min.*.css`)
+- Copy buttons (`copy-btn`) present 7 times in code-heavy post pages
+- Prose typography CSS compiled into stylesheet (`.prose` block with font sizing, line-height, heading styles, code block colors)
+
+#### Decision
+
+No server/browser-based testing performed (no browser environment available in the agent runtime). Hugo build validation is sufficient to confirm template correctness, SCSS compilation, and HTML output integrity. All changes pass.

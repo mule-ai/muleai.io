@@ -17,8 +17,8 @@
 **Tasks:**
 - [x] Examine current blog structure in ../muleai.io
 - [x] Identify areas for style improvements
-- [ ] Implement desired changes to blog appearance/functionality
-- [ ] Test changes locally if possible
+- [x] Implement desired changes to blog appearance/functionality
+- [x] Test changes locally if possible
 - [ ] Commit changes to blog repository
 
 ---
