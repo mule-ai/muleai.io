@@ -1,4 +1,42 @@
 {{ define "main" }}
+<style>
+/* Blog list animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.blog-post-card {
+    animation: fadeInUp 0.4s ease forwards;
+    opacity: 0;
+}
+
+.blog-post-card.hidden {
+    display: none !important;
+}
+
+.tag-filter-btn {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tag-filter-btn.active {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
+    color: white !important;
+    border-color: transparent !important;
+}
+
+#no-results {
+    display: none;
+}
+</style>
+
 <main class="container mx-auto px-4 py-8">
     <div class="max-w-5xl mx-auto">
         <!-- Header -->
@@ -15,18 +53,65 @@
             <div class="mt-6 h-1 w-32 mx-auto bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded"></div>
         </div>
 
+        <!-- Search/Filter Bar -->
+        <div class="mb-6">
+            <div class="relative max-w-xl mx-auto">
+                <input type="text" 
+                       id="blog-search" 
+                       placeholder="Search posts by title, tag, or content..."
+                       class="w-full px-5 py-4 pl-12 bg-gray-800/50 border border-gray-700 rounded-xl text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all">
+                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <button id="clear-search" 
+                        class="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-gray-300 transition-colors hidden">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="search-results-count" class="text-center text-sm text-gray-500 mt-3 hidden"></div>
+        </div>
+
+        <!-- Tag Filter Chips -->
+        {{ $allTags := slice }}
+        {{ range where .Site.RegularPages "Section" "blog" }}
+            {{ range .Params.tags }}
+                {{ $allTags = $allTags | append . }}
+            {{ end }}
+        {{ end }}
+        {{ $uniqueTags := $allTags | uniq }}
+        {{ if $uniqueTags }}
+        <div class="mb-8 flex flex-wrap justify-center gap-2" id="tag-filters">
+            <button class="tag-filter-btn active px-4 py-1.5 text-sm bg-gray-700 text-gray-300 border border-gray-600 rounded-full font-medium" data-tag="all">
+                All Posts
+            </button>
+            {{ range $uniqueTags }}
+            <button class="tag-filter-btn px-4 py-1.5 text-sm bg-gray-700/50 text-blue-300 border border-gray-700 rounded-full font-medium hover:border-blue-500 hover:text-blue-200" data-tag="{{ . | urlize }}">
+                #{{ . }}
+            </button>
+            {{ end }}
+        </div>
+        {{ end }}
+
         <!-- Stats / About -->
         <div class="mb-12 p-6 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-xl text-center">
             <p class="text-gray-400">
-                <span class="font-semibold text-blue-400">{{ len (where .Site.RegularPages "Section" "blog") }}</span> 
+                <span class="font-semibold text-blue-400" id="post-count">{{ len (where .Site.RegularPages "Section" "blog") }}</span> 
                 blog posts and counting. Keep exploring the intersection of AI, code, and creativity.
             </p>
         </div>
 
         <!-- Blog Posts -->
-        <div class="space-y-8">
+        <div class="space-y-8" id="blog-posts">
             {{ range where .Site.RegularPages "Section" "blog" }}
-            <article class="group bg-gray-800/50 rounded-xl p-6 md:p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:bg-gray-800/70 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1">
+            {{ $tagList := "" }}
+            {{ range .Params.tags }}{{ $tagList = printf "%s %s" $tagList (. | urlize) }}{{ end }}
+            <article class="blog-post-card group bg-gray-800/50 rounded-xl p-6 md:p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:bg-gray-800/70 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
+                     data-title="{{ .Title | lower }}"
+                     data-tags="{{ $tagList | lower }}"
+                     data-summary="{{ .Summary | lower | truncate 300 }}"
+                     data-tag-values="{{ delimit .Params.tags " " | lower }}">
                 <a href="{{ .Permalink }}" class="block group-hover:no-underline">
                     <!-- Tag badge -->
                     {{ with index .Params.tags 0 }}
@@ -47,7 +132,7 @@
                             <div class="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-4">
                                 <span class="flex items-center gap-2 bg-gray-700/50 px-3 py-1 rounded-lg">
                                     <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                     </svg>
                                     {{ .Date.Format "Jan 2, 2006" }}
                                 </span>
@@ -69,11 +154,13 @@
                                 {{ end }}
                             </div>
 
-                            <!-- Tags -->
+                            <!-- Tags (clickable for filtering) -->
                             {{ with .Params.tags }}
                             <div class="flex flex-wrap gap-2 mb-4">
                                 {{ range first 4 . }}
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 transition-colors cursor-pointer">
+                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                      data-filter-tag="{{ . | urlize }}"
+                                      onclick="filterByTag('{{ . | urlize }}', event)">
                                     #{{ . }}
                                 </span>
                                 {{ end }}
@@ -101,17 +188,30 @@
             {{ end }}
         </div>
         
-        <!-- Empty State -->
+        <!-- No Results Message -->
+        <div id="no-results" class="text-center py-16">
+            <div class="inline-block p-4 bg-gray-800 rounded-full mb-4">
+                <svg class="w-16 h-16 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <p class="text-gray-400 text-lg mb-2">No posts match your search.</p>
+            <button onclick="clearSearch()" class="mt-4 px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium">
+                Clear Search
+            </button>
+        </div>
+
+        <!-- Empty State (no posts at all) -->
         {{ if not (where .Site.RegularPages "Section" "blog") }}
         <div class="text-center py-16">
             <div class="inline-block p-4 bg-gray-800 rounded-full mb-4">
                 <svg class="w-16 h-16 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                                </svg>
-                            </div>
-                            <p class="text-gray-400 text-lg">No blog posts yet. Check back soon for updates from Mule AI!</p>
-                        </div>
-                        {{ end }}
+                </svg>
+            </div>
+            <p class="text-gray-400 text-lg">No blog posts yet. Check back soon for updates from Mule AI!</p>
+        </div>
+        {{ end }}
 
         <!-- Call-to-action Section -->
         <div class="mt-16 pt-12 border-t border-gray-700">
@@ -130,6 +230,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                         </svg>
                     </a>
+                    <a href="/blog/index.xml" class="inline-flex items-center px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-all font-medium">
+                        <svg class="w-5 h-5 mr-2 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.18 15.64a2.18 2.18 0 012.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 012.18-2.18M4 4.44A15.56 15.56 0 0119.56 20h-2.83A12.73 12.73 0 004 7.27V4.44m0 5.66a9.9 9.9 0 019.9 9.9h-2.83A7.07 7.07 0 004 13.1v-3z"></path>
+                        </svg>
+                        RSS Feed
+                    </a>
                 </div>
             </div>
         </div>
@@ -141,9 +247,138 @@
                 <div class="text-xs text-gray-400 uppercase tracking-wide">Blog Posts</div>
             </div>
             <div class="bg-gray-800/30 rounded-lg p-4 border border-gray-700">
-                <div class="text-2xl font-bold text-purple-400">{{ len (where .Site.RegularPages "Section" "blog") | mul 5 | add 10 | humanize }}</div>
-                <div class="text-xs text-gray-400 uppercase tracking-wide">Minutes of Reading</div>
+                <div class="text-2xl font-bold text-purple-400">{{ len $uniqueTags }}</div>
+                <div class="text-xs text-gray-400 uppercase tracking-wide">Topics</div>
+            </div>
+            <div class="bg-gray-800/30 rounded-lg p-4 border border-gray-700">
+                <div class="text-2xl font-bold text-cyan-400">∞</div>
+                <div class="text-xs text-gray-400 uppercase tracking-wide">Ideas</div>
+            </div>
+            <div class="bg-gray-800/30 rounded-lg p-4 border border-gray-700">
+                <div class="text-2xl font-bold text-green-400">AGI</div>
+                <div class="text-xs text-gray-400 uppercase tracking-wide">The Goal</div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
+
+<script>
+// =========================================================
+// Blog Search & Filter — Mule AI
+// =========================================================
+(function() {
+    const searchInput  = document.getElementById('blog-search');
+    const clearBtn     = document.getElementById('clear-search');
+    const resultsCount = document.getElementById('search-results-count');
+    const noResults    = document.getElementById('no-results');
+    const postsContainer = document.getElementById('blog-posts');
+    const posts = Array.from(document.querySelectorAll('.blog-post-card'));
+    const tagFilterBtns = Array.from(document.querySelectorAll('.tag-filter-btn'));
+
+    let currentTag = 'all';
+    let currentQuery = '';
+
+    // Stagger the entrance animations
+    posts.forEach(function(post, i) {
+        post.style.animationDelay = (i * 80) + 'ms';
+    });
+
+    function applyFilters() {
+        const query = currentQuery.trim().toLowerCase();
+        let visible = 0;
+
+        posts.forEach(function(post) {
+            const title   = post.dataset.title   || '';
+            const tags    = post.dataset.tags    || '';
+            const summary = post.dataset.summary || '';
+            const tagVals = post.dataset.tagValues || '';
+
+            const matchesTag = (currentTag === 'all') || tags.includes(currentTag);
+            const matchesQuery = !query ||
+                title.includes(query) ||
+                tags.includes(query) ||
+                summary.includes(query);
+
+            if (matchesTag && matchesQuery) {
+                post.classList.remove('hidden');
+                visible++;
+            } else {
+                post.classList.add('hidden');
+            }
+        });
+
+        // Clear/X button
+        if (query) {
+            clearBtn.classList.remove('hidden');
+        } else {
+            clearBtn.classList.add('hidden');
+        }
+
+        // Results count
+        if (query || currentTag !== 'all') {
+            resultsCount.textContent = visible + ' post' + (visible !== 1 ? 's' : '') + ' found';
+            resultsCount.classList.remove('hidden');
+        } else {
+            resultsCount.classList.add('hidden');
+        }
+
+        // No results state
+        if (visible === 0) {
+            noResults.style.display = 'block';
+            postsContainer.style.display = 'none';
+        } else {
+            noResults.style.display = 'none';
+            postsContainer.style.display = '';
+        }
+    }
+
+    // Search input
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            currentQuery = this.value;
+            applyFilters();
+        });
+    }
+
+    // Clear button
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            clearSearch();
+        });
+    }
+
+    // Tag filter buttons
+    tagFilterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            currentTag = this.dataset.tag;
+            tagFilterBtns.forEach(function(b) { b.classList.remove('active'); });
+            this.classList.add('active');
+            applyFilters();
+        });
+    });
+
+    // Expose global helpers
+    window.clearSearch = function() {
+        currentQuery = '';
+        currentTag = 'all';
+        if (searchInput) searchInput.value = '';
+        tagFilterBtns.forEach(function(b) { b.classList.remove('active'); });
+        const allBtn = document.querySelector('.tag-filter-btn[data-tag="all"]');
+        if (allBtn) allBtn.classList.add('active');
+        applyFilters();
+    };
+
+    window.filterByTag = function(tag, event) {
+        if (event) event.preventDefault();
+        currentTag = tag;
+        tagFilterBtns.forEach(function(b) { b.classList.remove('active'); });
+        const matchBtn = document.querySelector('.tag-filter-btn[data-tag="' + tag + '"]');
+        if (matchBtn) matchBtn.classList.add('active');
+        applyFilters();
+        // Scroll to filters
+        const filterEl = document.getElementById('tag-filters');
+        if (filterEl) filterEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+})();
+</script>
 {{ end }}

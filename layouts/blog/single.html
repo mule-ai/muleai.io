@@ -1,4 +1,61 @@
 {{ define "main" }}
+<!-- Reading Progress Bar -->
+<div id="reading-progress" class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 z-50 origin-left transition-transform duration-100"></div>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" 
+        class="fixed bottom-8 right-8 p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-lg shadow-blue-500/30 opacity-0 invisible transition-all duration-300 hover:from-blue-700 hover:to-purple-700 hover:scale-110 z-40"
+        aria-label="Back to top">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+</button>
+
+<!-- Reading Progress & Back to Top Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const progressBar = document.getElementById('reading-progress');
+    const backToTop = document.getElementById('back-to-top');
+    const article = document.querySelector('article');
+
+    if (progressBar && article) {
+        function updateProgress() {
+            const articleTop = article.offsetTop;
+            const articleHeight = article.offsetHeight;
+            const windowHeight = window.innerHeight;
+            const scrollTop = window.scrollY;
+
+            // Calculate progress based on article position
+            const progress = Math.min(
+                Math.max((scrollTop - articleTop + windowHeight) / articleHeight, 0),
+                1
+            );
+
+            progressBar.style.transform = `scaleX(${progress})`;
+            
+            // Show/hide back to top button
+            if (scrollTop > 500) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        }
+
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress(); // Initial call
+    }
+    
+    // Back to top click handler
+    if (backToTop) {
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+});
+</script>
+
 <main class="container mx-auto px-4 py-6 md:py-8">
     <div class="max-w-5xl mx-auto">
         <!-- Breadcrumb Navigation -->
@@ -64,7 +121,7 @@
                 {{ with .Params.tags }}
                 <div class="flex flex-wrap gap-2">
                     {{ range . }}
-                    <a href="/blog/tags/{{ . | urlize }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-gray-700 text-blue-400 text-sm font-medium rounded-lg hover:bg-gray-700 hover:border-blue-500 transition-all">
+                    <a href="/tags/{{ . | urlize }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-gray-700 text-blue-400 text-sm font-medium rounded-lg hover:bg-gray-700 hover:border-blue-500 transition-all">
                         <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.58 0 1.09.257 1.467.635l3.333 4.666a1.5 1.5 0 010 2.121l-3.334 4.667A1.502 1.502 0 019.333 14H7a1.502 1.502 0 01-1.467-.635L3.333 9.303A1.502 1.502 0 011.866 7.182L5.299 3.604A1.502 1.502 0 017 3z"></path>
                         </svg>
@@ -105,28 +162,28 @@
                     Share this article
                 </h4>
                 <div class="flex flex-wrap gap-3">
-                    {{ $title := urlquery .Title }}
-                    {{ $url := urlquery (printf "%s%s" .Site.Params.baseURL .Permalink) }}
-                    <a href="https://twitter.com/intent/tweet?text={{ $title }}&url={{ $url }}" 
+                    {{ $title := .Title | htmlEscape }}
+                    {{ $url := .Permalink }}
+                    <a href="https://twitter.com/intent/tweet?text={{ $title | urlquery }}&url={{ $url | urlquery }}" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium">
+                       class="inline-flex items-center px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white rounded-lg transition-colors font-medium">
                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.57A13.981 13.981 0 011.672 3.492a4.928 4.928 0 001.517 6.356 4.923 4.923 0 01-2.275-.616v.06a4.923 4.923 0 003.955 4.826M19.875 6c2.083 0 4.035.695 5.672 1.873-.647-.02-1.305-.2-1.89-.534.187.573.298 1.186.324 1.817-1.89-.952-4.36-1.587-7.205-1.587-3.61 0-6.746 2.915-6.746 6.746 0 .533.057 1.051.162 1.543-5.798-.293-10.965-3.14-10.965-7.028 0-.335.041-.666.117-.982C4.035 5.14 8.697 8.025 14.35 8.325c-.096-.427-.145-.864-.145-1.309 0-2.173 1.686-4.035 4.035-4.035 1.112 0 2.138.47 2.966 1.256z"></path>
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
                         </svg>
-                        Twitter
+                        Share on X
                     </a>
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ $url }}&title={{ $title }}" 
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ $url | urlquery }}&title={{ $title | urlquery }}" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       class="inline-flex items-center px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg transition-colors font-medium">
+                       class="inline-flex items-center px-4 py-2 bg-[#0A66C2] hover:bg-[#004182] text-white rounded-lg transition-colors font-medium">
                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.592v6.383z"></path>
                         </svg>
                         LinkedIn
                     </a>
-                    <button onclick="navigator.clipboard.writeText(window.location.href)" 
-                            class="inline-flex items-center px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors font-medium">
+                    <button onclick="navigator.clipboard.writeText(window.location.href); this.innerHTML='&lt;svg class=\'w-5 h-5 mr-2\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'&gt;&lt;path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M5 13l4 4L19 7\'&gt;&lt;/path&gt;&lt;/svg&gt;Copied!'; setTimeout(() => this.innerHTML='&lt;svg class=\'w-5 h-5 mr-2\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'&gt;&lt;path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z\'&gt;&lt;/path&gt;&lt;/svg&gt;Copy Link', 2000)" 
+                            class="inline-flex items-center px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors font-medium cursor-pointer">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                         </svg>
@@ -156,7 +213,7 @@
                 <div class="flex flex-wrap gap-2 mt-6">
                     <span class="text-sm text-gray-500">Tags:</span>
                     {{ range . }}
-                    <a href="/blog/tags/{{ . | urlize }}" class="text-blue-400 hover:text-cyan-400 text-sm font-medium">
+                    <a href="/tags/{{ . | urlize }}" class="text-blue-400 hover:text-cyan-400 text-sm font-medium">
                         {{ . }}
                     </a>
                     {{ end }}

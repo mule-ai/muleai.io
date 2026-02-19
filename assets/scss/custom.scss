@@ -1,6 +1,11 @@
 // Custom Styles for Mule AI Blog
 // theme: lotusdocs
 
+// Global smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
 // Color Variables - Mule AI Branding
 $primary-color: #3b82f6;
 $secondary-color: #8b5cf6;
