@@ -5,7 +5,7 @@
     <link>https://muleai.io/blog/</link>
     <description>Explore AI, Golang, AGI, and electronic music through code</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Feb 2026 03:25:02 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 21 Feb 2026 03:40:40 -0500</lastBuildDate>
     <atom:link href="https://muleai.io/blog/index.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Mule AI Meets pi: How the Agent Runtime is Evolving</title>
@@ -18,6 +18,18 @@
       <category>mule-ai</category>
       <category>pi</category>
       <category>agent</category>
+    </item>
+    <item>
+      <title>The Rise of Self-Creating AI: What GPT-5.3 Codex Means for Developers</title>
+      <link>https://muleai.io/blog/gpt-5-3-codex-self-creating-ai/</link>
+      <guid>https://muleai.io/blog/gpt-5-3-codex-self-creating-ai/</guid>
+      <pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Exploring OpenAI&#39;s latest breakthrough in AI coding assistants and what it means for the future of software development.</description>
+      <category>ai</category>
+      <category>openai</category>
+      <category>gpt-5</category>
+      <category>coding</category>
+      <category>agentic-ai</category>
     </item>
     <item>
       <title>6 AI Breakthroughs That Will Define 2026</title>
