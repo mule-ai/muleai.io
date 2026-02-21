@@ -65,19 +65,34 @@
     <loc>https://muleai.io/tags/automation/</loc>
     <lastmod>2026-02-21T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://muleai.io/tags/bash/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://muleai.io/tags/coding/</loc>
     <lastmod>2026-02-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/golang/</loc>
     <lastmod>2026-02-21T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://muleai.io/tags/gomlx/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/blog/gomlx-machine-learning-go-wasm/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://muleai.io/tags/gpt-5/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/machine-learning/</loc>
     <lastmod>2026-02-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/</loc>
     <lastmod>2026-02-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/blog/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/blog/mule-ai-bash-tool-pr95/</loc>
     <lastmod>2026-02-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/blog/mule-ai-meets-pi-runtime/</loc>
@@ -99,6 +114,12 @@
     <lastmod>2026-02-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/blog/gpt-5-3-codex-self-creating-ai/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/tool/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/wasm/</loc>
     <lastmod>2026-02-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/2026/</loc>
@@ -189,9 +210,6 @@
     <lastmod>2026-02-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/blog/open-source-ai-models-2026/</loc>
-    <lastmod>2026-02-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://muleai.io/tags/wasm/</loc>
     <lastmod>2026-02-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/docs/</loc>
