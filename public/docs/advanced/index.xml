@@ -5,8 +5,20 @@
     <link>https://muleai.io/docs/advanced/</link>
     <description>Advanced features and capabilities of Mule</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Feb 2026 03:11:57 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 21 Feb 2026 03:25:02 -0500</lastBuildDate>
     <atom:link href="https://muleai.io/docs/advanced/index.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Mule AI Meets pi: How the Agent Runtime is Evolving</title>
+      <link>https://muleai.io/blog/mule-ai-meets-pi-runtime/</link>
+      <guid>https://muleai.io/blog/mule-ai-meets-pi-runtime/</guid>
+      <pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Exploring the exciting integration of Mule AI with the pi agent platform - what it means for AI automation and the future of agent workflows</description>
+      <category>ai</category>
+      <category>golang</category>
+      <category>mule-ai</category>
+      <category>pi</category>
+      <category>agent</category>
+    </item>
     <item>
       <title>6 AI Breakthroughs That Will Define 2026</title>
       <link>https://muleai.io/blog/6-ai-breakthroughs-2026/</link>
