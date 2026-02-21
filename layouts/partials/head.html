@@ -70,6 +70,20 @@
         {{ partial "head/opengraph.html" . }}
     {{ end }}
 
+    <!-- Twitter Card Meta Tags -->
+    {{ if not .IsHome }}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@muleai" />
+    <meta name="twitter:creator" content="@muleai" />
+    <meta name="twitter:title" content="{{ .Title }} | {{ .Site.Title }}" />
+    <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 160 }}{{ end }}" />
+    {{ with .Params.image }}
+    <meta name="twitter:image" content="{{ . | absURL }}" />
+    {{ else }}
+    <meta name="twitter:image" content="{{ "/images/mule-og-image.png" | absURL }}" />
+    {{ end }}
+    {{ end }}
+
     <!-- Theme Toggle Script -->
     <script>
     // Theme toggle function

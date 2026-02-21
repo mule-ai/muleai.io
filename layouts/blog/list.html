@@ -35,9 +35,53 @@
 #no-results {
     display: none;
 }
+
+/* Accessibility: Focus styles */
+*:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.3);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .blog-post-card {
+        animation: none;
+        opacity: 1;
+    }
+    
+    * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .tag-filter-btn.active {
+        outline: 2px solid white;
+        outline-offset: 2px;
+    }
+    
+    .blog-post-card {
+        border-width: 2px;
+    }
+}
 </style>
 
 <main class="container mx-auto px-4 py-8">
+    <!-- Skip to content link for accessibility -->
+    <a href="#blog-posts" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        Skip to blog posts
+    </a>
+    
     <div class="max-w-5xl mx-auto">
         <!-- Header -->
         <div class="mb-12 text-center">
@@ -67,6 +111,19 @@
                         class="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-gray-300 transition-colors hidden">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <!-- Theme Toggle Button -->
+                <button id="blog-theme-toggle"
+                        class="absolute right-14 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-200 hover:bg-gray-700 rounded-lg transition-all"
+                        aria-label="Toggle theme">
+                    <!-- Sun icon (shown in dark mode) -->
+                    <svg class="w-5 h-5 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <!-- Moon icon (shown in light mode) -->
+                    <svg class="w-5 h-5 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                     </svg>
                 </button>
             </div>
@@ -196,9 +253,15 @@
                 </svg>
             </div>
             <p class="text-gray-400 text-lg mb-2">No posts match your search.</p>
-            <button onclick="clearSearch()" class="mt-4 px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium">
-                Clear Search
-            </button>
+            <p class="text-gray-500 text-sm mb-6">Try different keywords or browse by tags</p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <button onclick="clearSearch()" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium">
+                    Clear Search
+                </button>
+                <button onclick="document.querySelector('.tag-filter-btn[data-tag=\'all\']').click()" class="px-5 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors text-sm font-medium">
+                    View All Posts
+                </button>
+            </div>
         </div>
 
         <!-- Empty State (no posts at all) -->
@@ -275,38 +338,61 @@
     --card-border: #e2e8f0;
 }
 
-/* Apply theme classes to blog list */
+/* Light mode specific improvements */
 body[data-theme="light"] {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: #f8fafc;
 }
 
-body[data-theme="light"] .bg-gray-800\/50,
-body[data-theme="light"] .bg-gray-800\/30,
-body[data-theme="light"] .bg-gray-800,
+body[data-theme="light"] .bg-gray-800\/50 {
+    background-color: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="light"] .bg-gray-800\/30 {
+    background-color: #f1f5f9 !important;
+}
+
+body[data-theme="light"] .bg-gray-800 {
+    background-color: #ffffff !important;
+}
+
 body[data-theme="light"] .bg-gray-700\/50,
-body[data-theme="light"] .bg-gray-700,
-body[data-theme="light"] .bg-gradient-to-r,
+body[data-theme="light"] .bg-gray-700 {
+    background-color: #f1f5f9 !important;
+}
+
+body[data-theme="light"] .bg-gradient-to-r {
+    background: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
+}
+
 body[data-theme="light"] .bg-gradient-to-br {
-    background-color: var(--card-bg) !important;
+    background: linear-gradient(to bottom right, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
 }
 
 body[data-theme="light"] .border-gray-700,
 body[data-theme="light"] .border-gray-600,
 body[data-theme="light"] .border-gray-800,
 body[data-theme="light"] .border-gray-900 {
-    border-color: var(--border-color) !important;
+    border-color: #e2e8f0 !important;
 }
 
 body[data-theme="light"] .text-gray-400,
 body[data-theme="light"] .text-gray-500,
 body[data-theme="light"] .text-gray-600 {
-    color: var(--text-secondary) !important;
+    color: #64748b !important;
 }
 
 body[data-theme="light"] .text-gray-100,
 body[data-theme="light"] .text-white {
-    color: var(--text-primary) !important;
+    color: #1e293b !important;
+}
+
+body[data-theme="light"] .text-gray-300 {
+    color: #475569 !important;
+}
+
+body[data-theme="light"] .group:hover .group-hover\:text-transparent {
+    color: #3b82f6 !important;
 }
 
 body[data-theme="light"] .prose code:not(pre code),
@@ -331,6 +417,33 @@ body[data-theme="light"] .code-copy-btn.copied {
     color: #10b981;
     border-color: rgba(16, 185, 129, 0.5);
     background: rgba(16, 185, 129, 0.1);
+}
+
+/* Light mode - input styling */
+body[data-theme="light"] input[type="text"] {
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+    color: #1e293b;
+}
+
+body[data-theme="light"] input[type="text"]:focus {
+    border-color: #3b82f6;
+}
+
+body[data-theme="light"] input[type="text"]::placeholder {
+    color: #94a3b8;
+}
+
+/* Light mode - card hover effects */
+body[data-theme="light"] .group:hover {
+    background-color: #f8fafc !important;
+}
+
+/* Light mode - gradient text visibility */
+body[data-theme="light"] .bg-clip-text.text-transparent {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 </style>
 
@@ -404,6 +517,52 @@ body[data-theme="light"] .code-copy-btn.copied {
 // =========================================================
 // Blog Search & Filter — Mule AI
 // =========================================================
+
+// Theme Toggle for Blog List
+(function() {
+    const themeToggle = document.getElementById('blog-theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            window.toggleTheme();
+            updateBlogThemeIcons();
+        });
+        
+        // Update icons on load
+        updateBlogThemeIcons();
+        
+        // Listen for theme changes
+        window.addEventListener('storage', updateBlogThemeIcons);
+    }
+    
+    function updateBlogThemeIcons() {
+        const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const sunIcon = themeToggle.querySelector('.sun-icon');
+        const moonIcon = themeToggle.querySelector('.moon-icon');
+        
+        if (theme === 'dark') {
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+    }
+    
+    // Add keyboard shortcut 'T' to toggle theme
+    document.addEventListener('keydown', function(e) {
+        // 'T' key to toggle theme (when not typing in input)
+        if (e.key === 't' || e.key === 'T') {
+            if (document.activeElement.tagName !== 'INPUT' && 
+                document.activeElement.tagName !== 'TEXTAREA' &&
+                document.activeElement.tagName !== 'SEARCH') {
+                e.preventDefault();
+                window.toggleTheme();
+                if (themeToggle) updateBlogThemeIcons();
+            }
+        }
+    });
+})();
+
 (function() {
     const searchInput  = document.getElementById('blog-search');
     const clearBtn     = document.getElementById('clear-search');
@@ -471,6 +630,13 @@ body[data-theme="light"] .code-copy-btn.copied {
         const query = currentQuery.trim().toLowerCase();
         let visible = 0;
 
+        // Clear previous highlights first
+        document.querySelectorAll('.search-highlight').forEach(function(el) {
+            const parent = el.parentNode;
+            parent.replaceChild(document.createTextNode(el.textContent), el);
+            parent.normalize();
+        });
+
         posts.forEach(function(post) {
             const title   = post.dataset.title   || '';
             const tags    = post.dataset.tags    || '';
@@ -486,10 +652,50 @@ body[data-theme="light"] .code-copy-btn.copied {
             if (matchesTag && matchesQuery) {
                 post.classList.remove('hidden');
                 visible++;
+                
+                // Highlight matching text in title
+                if (query) {
+                    const titleEl = post.querySelector('h2');
+                    if (titleEl) {
+                        highlightText(titleEl, query);
+                    }
+                }
             } else {
                 post.classList.add('hidden');
             }
         });
+
+        // Helper function to highlight text
+        function highlightText(element, searchQuery) {
+            if (!searchQuery || element.querySelector('.search-highlight')) return;
+            
+            const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            while(walker.nextNode()) textNodes.push(walker.currentNode);
+            
+            textNodes.forEach(function(node) {
+                const text = node.nodeValue;
+                const lowerText = text.toLowerCase();
+                const index = lowerText.indexOf(searchQuery);
+                
+                if (index !== -1) {
+                    const before = text.substring(0, index);
+                    const match = text.substring(index, index + searchQuery.length);
+                    const after = text.substring(index + searchQuery.length);
+                    
+                    const span = document.createElement('span');
+                    span.className = 'search-highlight bg-yellow-500/30 text-yellow-200 dark:text-yellow-300 px-0.5 rounded';
+                    span.textContent = match;
+                    
+                    const fragment = document.createDocumentFragment();
+                    fragment.appendChild(document.createTextNode(before));
+                    fragment.appendChild(span);
+                    fragment.appendChild(document.createTextNode(after));
+                    
+                    node.parentNode.replaceChild(fragment, node);
+                }
+            });
+        }
 
         // Clear/X button
         if (query) {
@@ -541,6 +747,55 @@ body[data-theme="light"] .code-copy-btn.copied {
         });
     });
 
+    // Swipe gestures for tag filtering on mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const tagFilterContainer = document.getElementById('tag-filters');
+    
+    if (tagFilterContainer) {
+        tagFilterContainer.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        tagFilterContainer.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                // Get all tag buttons (excluding "all")
+                const tagBtns = Array.from(document.querySelectorAll('.tag-filter-btn[data-tag]:not([data-tag="all"])'));
+                if (tagBtns.length === 0) return;
+                
+                // Find current active tag
+                let currentIndex = 0;
+                const activeBtn = document.querySelector('.tag-filter-btn.active');
+                if (activeBtn) {
+                    const activeTag = activeBtn.dataset.tag;
+                    const idx = tagBtns.findIndex(b => b.dataset.tag === activeTag);
+                    if (idx !== -1) currentIndex = idx;
+                }
+                
+                // Calculate new index
+                let newIndex;
+                if (diff > 0) {
+                    // Swipe left - next tag
+                    newIndex = (currentIndex + 1) % tagBtns.length;
+                } else {
+                    // Swipe right - previous tag
+                    newIndex = (currentIndex - 1 + tagBtns.length) % tagBtns.length;
+                }
+                
+                // Click the new tag
+                tagBtns[newIndex].click();
+            }
+        }
+    }
+
     // Expose global helpers
     window.clearSearch = function() {
         currentQuery = '';
@@ -550,6 +805,12 @@ body[data-theme="light"] .code-copy-btn.copied {
         const allBtn = document.querySelector('.tag-filter-btn[data-tag="all"]');
         if (allBtn) allBtn.classList.add('active');
         applyFilters();
+        // Remove highlighting
+        document.querySelectorAll('.search-highlight').forEach(function(el) {
+            const parent = el.parentNode;
+            parent.replaceChild(document.createTextNode(el.textContent), el);
+            parent.normalize();
+        });
     };
 
     window.filterByTag = function(tag, event) {
