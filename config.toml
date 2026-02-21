@@ -22,6 +22,14 @@ enableEmoji = true
     [markup.goldmark.parser.attribute]
       block = true
 
+[frontmatter]
+  date = ["date", "publishDate", "lastmod"]
+  expiryDate = "expiryDate"
+  modifiedDate = "lastmod" # set to git lastmod
+  publishDate = ["publishDate", "date"]
+  # enableReadingTime = true # Uncomment if you want reading time
+  enableReadingTime = true
+
 [taxonomies]
     tag = "tags"
     category = "categories"
