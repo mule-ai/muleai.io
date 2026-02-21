@@ -860,68 +860,76 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <style>
-<!-- Light mode specific improvements -->
-body[data-theme="light"] {
+ 
+:root[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --code-bg: #f1f5f9;
     background-color: #f8fafc;
 }
 
-body[data-theme="light"] .bg-gray-800\/50 {
+:root[data-theme="light"] .bg-gray-800\/50 {
     background-color: #ffffff !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-body[data-theme="light"] .bg-gray-700\/50,
-body[data-theme="light"] .bg-gray-700 {
+:root[data-theme="light"] .bg-gray-700\/50,
+:root[data-theme="light"] .bg-gray-700 {
     background-color: #f1f5f9 !important;
 }
 
-body[data-theme="light"] .bg-gray-800 {
+:root[data-theme="light"] .bg-gray-800 {
     background-color: #ffffff !important;
 }
 
-body[data-theme="light"] .border-gray-700,
-body[data-theme="light"] .border-gray-600 {
+:root[data-theme="light"] .border-gray-700,
+:root[data-theme="light"] .border-gray-600 {
     border-color: #e2e8f0 !important;
 }
 
-body[data-theme="light"] .text-gray-400,
-body[data-theme="light"] .text-gray-500 {
+:root[data-theme="light"] .text-gray-400,
+:root[data-theme="light"] .text-gray-500 {
     color: #64748b !important;
 }
 
-body[data-theme="light"] .text-gray-200 {
+:root[data-theme="light"] .text-gray-200 {
     color: #1e293b !important;
 }
 
-body[data-theme="light"] .text-gray-300 {
+:root[data-theme="light"] .text-gray-300 {
     color: #475569 !important;
 }
 
-body[data-theme="light"] .prose {
+:root[data-theme="light"] .prose {
     color: #1e293b;
 }
 
-body[data-theme="light"] .prose h1,
-body[data-theme="light"] .prose h2,
-body[data-theme="light"] .prose h3,
-body[data-theme="light"] .prose h4 {
+:root[data-theme="light"] .prose h1,
+:root[data-theme="light"] .prose h2,
+:root[data-theme="light"] .prose h3,
+:root[data-theme="light"] .prose h4 {
     color: #1e293b;
 }
 
-body[data-theme="light"] .prose a {
+:root[data-theme="light"] .prose a {
     color: #3b82f6;
 }
 
-body[data-theme="light"] .prose strong {
+:root[data-theme="light"] .prose strong {
     color: #1e293b;
 }
 
-body[data-theme="light"] .prose code:not(pre code) {
+:root[data-theme="light"] .prose code:not(pre code) {
     background-color: #f1f5f9;
     color: #475569;
 }
 
-body[data-theme="light"] .prose pre {
+:root[data-theme="light"] .prose pre {
     background-color: #1e293b !important;
 }
 
@@ -938,88 +946,88 @@ body[data-theme="light"] .prose pre {
 }
 
  
-body[data-theme="dark"] .bg-gray-800\/50 {
+:root[data-theme="dark"] .bg-gray-800\/50 {
     background-color: rgba(30, 41, 59, 0.5) !important;
 }
 
-body[data-theme="dark"] .prose {
+:root[data-theme="dark"] .prose {
     color: #e2e8f0;
 }
 
-body[data-theme="dark"] .prose h1,
-body[data-theme="dark"] .prose h2,
-body[data-theme="dark"] .prose h3,
-body[data-theme="dark"] .prose h4 {
+:root[data-theme="dark"] .prose h1,
+:root[data-theme="dark"] .prose h2,
+:root[data-theme="dark"] .prose h3,
+:root[data-theme="dark"] .prose h4 {
     color: #f1f5f9;
 }
 
-body[data-theme="dark"] .prose a {
+:root[data-theme="dark"] .prose a {
     color: #60a5fa;
 }
 
-body[data-theme="dark"] .prose strong {
+:root[data-theme="dark"] .prose strong {
     color: #f1f5f9;
 }
 
-body[data-theme="dark"] .prose code:not(pre code) {
+:root[data-theme="dark"] .prose code:not(pre code) {
     background-color: #334155;
     color: #e2e8f0;
 }
 
  
-body[data-theme="light"] {
+:root[data-theme="light"] {
     background-color: var(--bg-primary);
     color: var(--text-primary);
 }
 
-body[data-theme="light"] .bg-gray-800\/50,
-body[data-theme="light"] .bg-gray-800\/30,
-body[data-theme="light"] .bg-gray-800,
-body[data-theme="light"] .bg-gray-700\/50,
-body[data-theme="light"] .bg-gray-700,
-body[data-theme="light"] .bg-gradient-to-r,
-body[data-theme="light"] .bg-gradient-to-br {
+:root[data-theme="light"] .bg-gray-800\/50,
+:root[data-theme="light"] .bg-gray-800\/30,
+:root[data-theme="light"] .bg-gray-800,
+:root[data-theme="light"] .bg-gray-700\/50,
+:root[data-theme="light"] .bg-gray-700,
+:root[data-theme="light"] .bg-gradient-to-r,
+:root[data-theme="light"] .bg-gradient-to-br {
     background-color: var(--card-bg) !important;
 }
 
-body[data-theme="light"] .border-gray-700,
-body[data-theme="light"] .border-gray-600,
-body[data-theme="light"] .border-gray-800,
-body[data-theme="light"] .border-gray-900 {
+:root[data-theme="light"] .border-gray-700,
+:root[data-theme="light"] .border-gray-600,
+:root[data-theme="light"] .border-gray-800,
+:root[data-theme="light"] .border-gray-900 {
     border-color: var(--border-color) !important;
 }
 
-body[data-theme="light"] .text-gray-400,
-body[data-theme="light"] .text-gray-500,
-body[data-theme="light"] .text-gray-600 {
+:root[data-theme="light"] .text-gray-400,
+:root[data-theme="light"] .text-gray-500,
+:root[data-theme="light"] .text-gray-600 {
     color: var(--text-secondary) !important;
 }
 
-body[data-theme="light"] .text-gray-100,
-body[data-theme="light"] .text-white {
+:root[data-theme="light"] .text-gray-100,
+:root[data-theme="light"] .text-white {
     color: var(--text-primary) !important;
 }
 
-body[data-theme="light"] .prose code:not(pre code),
-body[data-theme="light"] .prose pre,
-body[data-theme="light"] .code-block {
+:root[data-theme="light"] .prose code:not(pre code),
+:root[data-theme="light"] .prose pre,
+:root[data-theme="light"] .code-block {
     background-color: var(--code-bg) !important;
 }
 
  
-body[data-theme="light"] .code-copy-btn {
+:root[data-theme="light"] .code-copy-btn {
     color: #64748b;
     background: rgba(255, 255, 255, 0.85);
     border-color: #e2e8f0;
 }
 
-body[data-theme="light"] .code-copy-btn:hover {
+:root[data-theme="light"] .code-copy-btn:hover {
     color: #4f46e5;
     border-color: rgba(79, 70, 229, 0.6);
     background: rgba(79, 70, 229, 0.1);
 }
 
-body[data-theme="light"] .code-copy-btn.copied {
+:root[data-theme="light"] .code-copy-btn.copied {
     color: #10b981;
     border-color: rgba(16, 185, 129, 0.5);
     background: rgba(16, 185, 129, 0.1);
