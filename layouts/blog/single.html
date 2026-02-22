@@ -636,7 +636,38 @@ body {
 :root[data-theme="light"] .bg-clip-text.text-transparent {
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
+    color: transparent !important;
+    /* Ensure gradient shows on light backgrounds */
+    background-image: linear-gradient(to right, #3b82f6, #8b5cf6, #06b6d4) !important;
+}
+
+/* Header/Navbar - Dark mode fix */
+#topnav,
+header#topnav,
+#topnav .container {
+    background-color: #0f172a !important;
+}
+
+:root[data-theme="light"] #topnav,
+:root[data-theme="light"] header#topnav,
+:root[data-theme="light"] #topnav .container {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+#topnav .navigation-menu a,
+#topnav .nav-right a {
+    color: #e2e8f0 !important;
+}
+
+:root[data-theme="light"] #topnav .navigation-menu a,
+:root[data-theme="light"] #topnav .nav-right a {
+    color: #334155 !important;
+}
+
+#topnav .navigation-menu a:hover,
+#topnav .nav-right a:hover {
+    color: #3b82f6 !important;
 }
 
 /* Light mode - Focus states */
