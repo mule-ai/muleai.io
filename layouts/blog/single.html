@@ -389,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </style>
 
-<!-- Theme Toggle Styles -->
+<!-- Theme Toggle Styles - Comprehensive Light/Dark Mode Support -->
 <style>
 /* Light mode specific improvements - using :root to match HTML element */
 :root[data-theme="light"] {
@@ -401,6 +401,10 @@ document.addEventListener('DOMContentLoaded', function() {
     --card-bg: #ffffff;
     --card-border: #e2e8f0;
     --code-bg: #f1f5f9;
+    background-color: #f8fafc;
+}
+
+:root[data-theme="light"] main {
     background-color: #f8fafc;
 }
 
@@ -418,24 +422,49 @@ document.addEventListener('DOMContentLoaded', function() {
     background-color: #ffffff !important;
 }
 
+:root[data-theme="light"] .bg-gray-900\/50 {
+    background-color: #f8fafc !important;
+}
+
+:root[data-theme="light"] .bg-gray-900 {
+    background-color: #f1f5f9 !important;
+}
+
 :root[data-theme="light"] .border-gray-700,
-:root[data-theme="light"] .border-gray-600 {
+:root[data-theme="light"] .border-gray-600,
+:root[data-theme="light"] .border-gray-800,
+:root[data-theme="light"] .border-gray-900 {
     border-color: #e2e8f0 !important;
 }
 
+:root[data-theme="light"] .border-gray-500 {
+    border-color: #cbd5e1 !important;
+}
+
+/* Light mode - Text colors */
 :root[data-theme="light"] .text-gray-400,
 :root[data-theme="light"] .text-gray-500 {
     color: #64748b !important;
 }
 
 :root[data-theme="light"] .text-gray-200 {
-    color: #1e293b !important;
+    color: #334155 !important;
 }
 
 :root[data-theme="light"] .text-gray-300 {
     color: #475569 !important;
 }
 
+:root[data-theme="light"] .text-gray-600 {
+    color: #475569 !important;
+}
+
+:root[data-theme="light"] .text-gray-100,
+:root[data-theme="light"] .text-white {
+    color: #1e293b !important;
+}
+
+/* Light mode - Prose content */
 :root[data-theme="light"] .prose {
     color: #1e293b;
 }
@@ -443,7 +472,9 @@ document.addEventListener('DOMContentLoaded', function() {
 :root[data-theme="light"] .prose h1,
 :root[data-theme="light"] .prose h2,
 :root[data-theme="light"] .prose h3,
-:root[data-theme="light"] .prose h4 {
+:root[data-theme="light"] .prose h4,
+:root[data-theme="light"] .prose h5,
+:root[data-theme="light"] .prose h6 {
     color: #1e293b;
 }
 
@@ -464,7 +495,40 @@ document.addEventListener('DOMContentLoaded', function() {
     background-color: #1e293b !important;
 }
 
-/* Dark mode defaults (current theme) */
+:root[data-theme="light"] .prose blockquote {
+    border-left-color: #3b82f6;
+    color: #475569;
+    background-color: #f8fafc;
+}
+
+:root[data-theme="light"] .prose ul,
+:root[data-theme="light"] .prose ol {
+    color: #334155;
+}
+
+:root[data-theme="light"] .prose li {
+    color: #334155;
+}
+
+:root[data-theme="light"] .prose hr {
+    border-color: #e2e8f0;
+}
+
+:root[data-theme="light"] .prose table {
+    border-color: #e2e8f0;
+}
+
+:root[data-theme="light"] .prose th {
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+:root[data-theme="light"] .prose td {
+    border-color: #e2e8f0;
+    color: #334155;
+}
+
+/* Dark mode defaults */
 :root[data-theme="dark"] {
     --bg-primary: #0f172a;
     --bg-secondary: #1e293b;
@@ -505,50 +569,45 @@ document.addEventListener('DOMContentLoaded', function() {
     color: #e2e8f0;
 }
 
-/* Apply theme classes using CSS variables */
-:root[data-theme="light"] {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-}
+/* Light mode - All text colors */
+:root[data-theme="light"] .text-blue-400 { color: #3b82f6 !important; }
+:root[data-theme="light"] .text-blue-300 { color: #60a5fa !important; }
+:root[data-theme="light"] .text-purple-400 { color: #8b5cf6 !important; }
+:root[data-theme="light"] .text-cyan-400 { color: #22d3ee !important; }
+:root[data-theme="light"] .text-green-400 { color: #22c55e !important; }
+:root[data-theme="light"] .text-orange-400 { color: #f97316 !important; }
 
-:root[data-theme="light"] .bg-gray-800\/50,
-:root[data-theme="light"] .bg-gray-800\/30,
-:root[data-theme="light"] .bg-gray-800,
-:root[data-theme="light"] .bg-gray-700\/50,
-:root[data-theme="light"] .bg-gray-700,
+/* Light mode - Gradient backgrounds */
 :root[data-theme="light"] .bg-gradient-to-r,
-:root[data-theme="light"] .bg-gradient-to-br {
+:root[data-theme="light"] .bg-gradient-to-br,
+:root[data-theme="light"] .bg-gradient-to-b {
     background-color: var(--card-bg) !important;
 }
 
-:root[data-theme="light"] .border-gray-700,
-:root[data-theme="light"] .border-gray-600,
-:root[data-theme="light"] .border-gray-800,
-:root[data-theme="light"] .border-gray-900 {
-    border-color: var(--border-color) !important;
+/* Light mode - Article and card backgrounds */
+:root[data-theme="light"] article,
+:root[data-theme="light"] .bg-gray-800\/30 {
+    background-color: #ffffff !important;
 }
 
-:root[data-theme="light"] .text-gray-400,
-:root[data-theme="light"] .text-gray-500,
+/* Light mode - Links */
+:root[data-theme="light"] a:not(.bg-gradient-to-r):not(.btn):not(.tag-filter-btn) {
+    color: #3b82f6;
+}
+
+:root[data-theme="light"] a:hover:not(.bg-gradient-to-r):not(.btn):not(.tag-filter-btn) {
+    color: #2563eb;
+}
+
+/* Light mode - Breadcrumb */
 :root[data-theme="light"] .text-gray-600 {
-    color: var(--text-secondary) !important;
+    color: #64748b !important;
 }
 
-:root[data-theme="light"] .text-gray-100,
-:root[data-theme="light"] .text-white {
-    color: var(--text-primary) !important;
-}
-
-:root[data-theme="light"] .prose code:not(pre code),
-:root[data-theme="light"] .prose pre,
-:root[data-theme="light"] .code-block {
-    background-color: var(--code-bg) !important;
-}
-
-/* Code block copy button colors for light mode */
+/* Light mode - Code copy buttons */
 :root[data-theme="light"] .code-copy-btn {
     color: #64748b;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.9);
     border-color: #e2e8f0;
 }
 
@@ -563,82 +622,69 @@ document.addEventListener('DOMContentLoaded', function() {
     border-color: rgba(16, 185, 129, 0.5);
     background: rgba(16, 185, 129, 0.1);
 }
+
+/* Light mode - Gradient text */
+:root[data-theme="light"] .bg-clip-text.text-transparent {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Light mode - Focus states */
+:root[data-theme="light"] *:focus-visible {
+    outline-color: #3b82f6;
+}
+
+/* Light mode - Selection */
+:root[data-theme="light"] ::selection {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: #1e293b;
+}
 </style>
 
-<!-- Theme Toggle Script -->
+<!-- Theme Toggle Script - Using global toggleTheme from head.html -->
 <script>
-(function() {
-    // Check for saved user preference
-    const savedTheme = localStorage.getItem('theme') || null;
-
-    // Check system preference
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    // Determine initial theme
-    let theme = 'dark'; // Default to dark
-    if (savedTheme) {
-        theme = savedTheme;
-    } else if (systemPrefersDark) {
-        theme = 'dark';
-    }
-
-    // Apply theme to document
-    document.documentElement.setAttribute('data-theme', theme);
-
-    // Update button icons
-    updateThemeIcons(theme);
-
-    // Toggle function
-    function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-        // Save preference
-        localStorage.setItem('theme', newTheme);
-
-        // Apply new theme
-        document.documentElement.setAttribute('data-theme', newTheme);
-
-        // Update icons
-        updateThemeIcons(newTheme);
-    }
-
-    // Update button icons based on theme
-    function updateThemeIcons(theme) {
-        const sunIcon = document.querySelector('.sun-icon');
-        const moonIcon = document.querySelector('.moon-icon');
-
-        if (theme === 'dark') {
-            if (sunIcon) sunIcon.classList.remove('hidden');
-            if (moonIcon) moonIcon.classList.add('hidden');
-        } else {
-            if (sunIcon) sunIcon.classList.add('hidden');
-            if (moonIcon) moonIcon.classList.remove('hidden');
-        }
-    }
-
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        // Only switch if user hasn't manually set a preference
-        if (!localStorage.getItem('theme')) {
-            const newTheme = e.matches ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            updateThemeIcons(newTheme);
-        }
-    });
-
-    // Expose toggle function globally
-    window.toggleTheme = toggleTheme;
-    
-    // Add single post theme toggle handler
+// Initialize single post theme toggle (uses global toggleTheme from head.html)
+document.addEventListener('DOMContentLoaded', function() {
     const singleThemeToggle = document.getElementById('single-theme-toggle');
+    
+    function updateSingleThemeIcons() {
+        const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+        
+        const sunIcon = singleThemeToggle?.querySelector('.sun-icon');
+        const moonIcon = singleThemeToggle?.querySelector('.moon-icon');
+        
+        if (sunIcon && moonIcon) {
+            if (theme === 'dark') {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+    }
+    
+    // Add click handler that calls global toggleTheme
     if (singleThemeToggle) {
         singleThemeToggle.addEventListener('click', function() {
-            window.toggleTheme();
-            updateThemeIcons(document.documentElement.getAttribute('data-theme'));
+            if (window.toggleTheme) {
+                window.toggleTheme();
+            }
+            updateSingleThemeIcons();
         });
+        
+        // Initial icon update
+        updateSingleThemeIcons();
     }
-})();
+    
+    // Listen for theme changes from storage
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'theme') {
+            updateSingleThemeIcons();
+        }
+    });
+});
 </script>
 
 <script>
