@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="50%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#bgGrad)"/>
+  <!-- M letter stylized as AI/mule -->
+  <text x="100" y="130" font-family="Arial, sans-serif" font-size="100" font-weight="bold" fill="white" text-anchor="middle">M</text>
+  <!-- Small circuit/AI detail -->
+  <circle cx="100" cy="55" r="8" fill="white" opacity="0.8"/>
+  <line x1="100" y1="63" x2="100" y2="80" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="85" y1="70" x2="115" y2="70" stroke="white" stroke-width="2" opacity="0.6"/>
+</svg>

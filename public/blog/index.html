@@ -242,6 +242,14 @@
         <div class="mb-4" id="content">
 <style>
  
+.tag-category-ai { background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important; }
+.tag-category-golang { background: linear-gradient(135deg, #00add8, #007d9c) !important; }
+.tag-category-agi { background: linear-gradient(135deg, #8b5cf6, #6d28d9) !important; }
+.tag-category-music { background: linear-gradient(135deg, #ec4899, #be185d) !important; }
+.tag-category-mule { background: linear-gradient(135deg, #10b981, #047857) !important; }
+.tag-category-default { background: linear-gradient(135deg, #6b7280, #4b5563) !important; }
+
+ 
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -798,26 +806,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai"
+                                      data-tag-name="ai"
                                       onclick="filterByTag('ai', event)">
                                     #ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="openai"
+                                      data-tag-name="openai"
                                       onclick="filterByTag('openai', event)">
                                     #openai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="gpt-5"
+                                      data-tag-name="gpt-5"
                                       onclick="filterByTag('gpt-5', event)">
                                     #gpt-5
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="coding"
+                                      data-tag-name="coding"
                                       onclick="filterByTag('coding', event)">
                                     #coding
                                 </span>
@@ -897,26 +909,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="mule-ai"
+                                      data-tag-name="mule-ai"
                                       onclick="filterByTag('mule-ai', event)">
                                     #mule-ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="wasm"
+                                      data-tag-name="wasm"
                                       onclick="filterByTag('wasm', event)">
                                     #wasm
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai-agents"
+                                      data-tag-name="ai-agents"
                                       onclick="filterByTag('ai-agents', event)">
                                     #ai-agents
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="github"
+                                      data-tag-name="github"
                                       onclick="filterByTag('github', event)">
                                     #github
                                 </span>
@@ -999,26 +1015,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai"
+                                      data-tag-name="ai"
                                       onclick="filterByTag('ai', event)">
                                     #ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="golang"
+                                      data-tag-name="golang"
                                       onclick="filterByTag('golang', event)">
                                     #golang
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="mule-ai"
+                                      data-tag-name="mule-ai"
                                       onclick="filterByTag('mule-ai', event)">
                                     #mule-ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="pi"
+                                      data-tag-name="pi"
                                       onclick="filterByTag('pi', event)">
                                     #pi
                                 </span>
@@ -1102,26 +1122,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai"
+                                      data-tag-name="ai"
                                       onclick="filterByTag('ai', event)">
                                     #ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="golang"
+                                      data-tag-name="golang"
                                       onclick="filterByTag('golang', event)">
                                     #golang
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="mule-ai"
+                                      data-tag-name="mule-ai"
                                       onclick="filterByTag('mule-ai', event)">
                                     #mule-ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="bash"
+                                      data-tag-name="bash"
                                       onclick="filterByTag('bash', event)">
                                     #bash
                                 </span>
@@ -1205,26 +1229,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai"
+                                      data-tag-name="ai"
                                       onclick="filterByTag('ai', event)">
                                     #ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="golang"
+                                      data-tag-name="golang"
                                       onclick="filterByTag('golang', event)">
                                     #golang
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="gomlx"
+                                      data-tag-name="gomlx"
                                       onclick="filterByTag('gomlx', event)">
                                     #gomlx
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="machine-learning"
+                                      data-tag-name="machine-learning"
                                       onclick="filterByTag('machine-learning', event)">
                                     #machine-learning
                                 </span>
@@ -1307,26 +1335,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai"
+                                      data-tag-name="ai"
                                       onclick="filterByTag('ai', event)">
                                     #ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="agentic-ai"
+                                      data-tag-name="agentic-ai"
                                       onclick="filterByTag('agentic-ai', event)">
                                     #agentic-ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="software-development"
+                                      data-tag-name="software-development"
                                       onclick="filterByTag('software-development', event)">
                                     #software-development
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="automation"
+                                      data-tag-name="automation"
                                       onclick="filterByTag('automation', event)">
                                     #automation
                                 </span>
@@ -1409,26 +1441,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai"
+                                      data-tag-name="ai"
                                       onclick="filterByTag('ai', event)">
                                     #ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="golang"
+                                      data-tag-name="golang"
                                       onclick="filterByTag('golang', event)">
                                     #golang
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="mule-ai"
+                                      data-tag-name="mule-ai"
                                       onclick="filterByTag('mule-ai', event)">
                                     #mule-ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="pirc"
+                                      data-tag-name="pirc"
                                       onclick="filterByTag('pirc', event)">
                                     #pirc
                                 </span>
@@ -1512,26 +1548,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai"
+                                      data-tag-name="ai"
                                       onclick="filterByTag('ai', event)">
                                     #ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="trends"
+                                      data-tag-name="trends"
                                       onclick="filterByTag('trends', event)">
                                     #trends
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="2026"
+                                      data-tag-name="2026"
                                       onclick="filterByTag('2026', event)">
                                     #2026
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="agentic-ai"
+                                      data-tag-name="agentic-ai"
                                       onclick="filterByTag('agentic-ai', event)">
                                     #agentic-ai
                                 </span>
@@ -1614,26 +1654,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="golang"
+                                      data-tag-name="golang"
                                       onclick="filterByTag('golang', event)">
                                     #golang
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai"
+                                      data-tag-name="ai"
                                       onclick="filterByTag('ai', event)">
                                     #ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="llm"
+                                      data-tag-name="llm"
                                       onclick="filterByTag('llm', event)">
                                     #llm
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="open-source"
+                                      data-tag-name="open-source"
                                       onclick="filterByTag('open-source', event)">
                                     #open-source
                                 </span>
@@ -1722,26 +1766,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="mule-ai"
+                                      data-tag-name="mule-ai"
                                       onclick="filterByTag('mule-ai', event)">
                                     #mule-ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="agi"
+                                      data-tag-name="agi"
                                       onclick="filterByTag('agi', event)">
                                     #agi
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="golang"
+                                      data-tag-name="golang"
                                       onclick="filterByTag('golang', event)">
                                     #golang
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="roadmap"
+                                      data-tag-name="roadmap"
                                       onclick="filterByTag('roadmap', event)">
                                     #roadmap
                                 </span>
@@ -1824,26 +1872,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai"
+                                      data-tag-name="ai"
                                       onclick="filterByTag('ai', event)">
                                     #ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="golang"
+                                      data-tag-name="golang"
                                       onclick="filterByTag('golang', event)">
                                     #golang
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="mule-ai"
+                                      data-tag-name="mule-ai"
                                       onclick="filterByTag('mule-ai', event)">
                                     #mule-ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="release"
+                                      data-tag-name="release"
                                       onclick="filterByTag('release', event)">
                                     #release
                                 </span>
@@ -1927,26 +1979,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="agi"
+                                      data-tag-name="agi"
                                       onclick="filterByTag('agi', event)">
                                     #agi
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="golang"
+                                      data-tag-name="golang"
                                       onclick="filterByTag('golang', event)">
                                     #golang
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai-2026"
+                                      data-tag-name="ai-2026"
                                       onclick="filterByTag('ai-2026', event)">
                                     #ai-2026
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="electronic-music"
+                                      data-tag-name="electronic-music"
                                       onclick="filterByTag('electronic-music', event)">
                                     #electronic-music
                                 </span>
@@ -2028,26 +2084,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="ai"
+                                      data-tag-name="ai"
                                       onclick="filterByTag('ai', event)">
                                     #ai
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="open-source"
+                                      data-tag-name="open-source"
                                       onclick="filterByTag('open-source', event)">
                                     #open-source
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="models"
+                                      data-tag-name="models"
                                       onclick="filterByTag('models', event)">
                                     #models
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="democratization"
+                                      data-tag-name="democratization"
                                       onclick="filterByTag('democratization', event)">
                                     #democratization
                                 </span>
@@ -2130,26 +2190,30 @@ input:focus-visible {
                             
                             <div class="flex flex-wrap gap-2 mb-4">
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="releases"
+                                      data-tag-name="releases"
                                       onclick="filterByTag('releases', event)">
                                     #releases
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="implementation"
+                                      data-tag-name="implementation"
                                       onclick="filterByTag('implementation', event)">
                                     #implementation
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="wasm"
+                                      data-tag-name="wasm"
                                       onclick="filterByTag('wasm', event)">
                                     #wasm
                                 </span>
                                 
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="agents"
+                                      data-tag-name="agents"
                                       onclick="filterByTag('agents', event)">
                                     #agents
                                 </span>
@@ -2750,6 +2814,106 @@ input:focus-visible {
         const filterEl = document.getElementById('tag-filters');
         if (filterEl) filterEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     };
+})();
+
+
+
+
+(function() {
+    
+    const tagCategories = {
+        'ai': 'ai',
+        'artificial-intelligence': 'ai',
+        'machine-learning': 'ai',
+        'ml': 'ai',
+        'llm': 'ai',
+        'gpt': 'ai',
+        'golang': 'golang',
+        'go': 'golang',
+        'agi': 'agi',
+        'agI': 'agi',
+        'artificial-general-intelligence': 'agi',
+        'music': 'music',
+        'electronic-music': 'music',
+        'electronic': 'music',
+        'mule': 'mule',
+        'mule-ai': 'mule',
+        'release': 'mule',
+        'roadmap': 'mule'
+    };
+
+    
+    function applyTagCategoryColors() {
+        const tagButtons = document.querySelectorAll('.tag-filter-btn');
+        
+        tagButtons.forEach(function(btn) {
+            const tag = btn.dataset.tag;
+            if (!tag || tag === 'all') return;
+            
+            
+            let category = 'default';
+            const tagLower = tag.toLowerCase();
+            
+            for (const [key, cat] of Object.entries(tagCategories)) {
+                if (tagLower.includes(key)) {
+                    category = cat;
+                    break;
+                }
+            }
+            
+            
+            btn.classList.add('tag-category-' + category);
+            
+            
+            const colors = {
+                'ai': { bg: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', text: '#bfdbfe' },
+                'golang': { bg: 'linear-gradient(135deg, #00add8, #007d9c)', text: '#cffafe' },
+                'agi': { bg: 'linear-gradient(135deg, #8b5cf6, #6d28d9)', text: '#ddd6fe' },
+                'music': { bg: 'linear-gradient(135deg, #ec4899, #be185d)', text: '#fbcfe8' },
+                'mule': { bg: 'linear-gradient(135deg, #10b981, #047857)', text: '#a7f3d0' },
+                'default': { bg: 'linear-gradient(135deg, #6b7280, #4b5563)', text: '#d1d5db' }
+            };
+            
+            const color = colors[category] || colors.default;
+            btn.style.background = color.bg;
+            btn.style.color = color.text;
+            btn.style.borderColor = 'transparent';
+        });
+        
+        
+        const cardTags = document.querySelectorAll('.tag-chip');
+        cardTags.forEach(function(tag) {
+            const tagName = (tag.dataset.tagName || '').toLowerCase();
+            let category = 'default';
+            
+            for (const [key, cat] of Object.entries(tagCategories)) {
+                if (tagName.includes(key)) {
+                    category = cat;
+                    break;
+                }
+            }
+            
+            const cardColors = {
+                'ai': { bg: 'rgba(59, 130, 246, 0.2)', text: '#60a5fa' },
+                'golang': { bg: 'rgba(0, 173, 216, 0.2)', text: '#22d3ee' },
+                'agi': { bg: 'rgba(139, 92, 246, 0.2)', text: '#a78bfa' },
+                'music': { bg: 'rgba(236, 72, 153, 0.2)', text: '#f472b6' },
+                'mule': { bg: 'rgba(16, 185, 129, 0.2)', text: '#34d399' },
+                'default': { bg: 'rgba(107, 114, 128, 0.2)', text: '#9ca3af' }
+            };
+            
+            const color = cardColors[category] || cardColors.default;
+            tag.style.background = color.bg;
+            tag.style.color = color.text;
+        });
+    }
+
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyTagCategoryColors);
+    } else {
+        applyTagCategoryColors();
+    }
 })();
 </script>
 

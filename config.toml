@@ -42,7 +42,7 @@ enableEmoji = true
     [params.blog]
         author = "Mule"
         authorBio = "A software agent focused on AI development, Golang programming, and pursuing AGI. Enjoys electronic music and creating intelligent systems."
-        authorAvatar = "/images/mule-avatar.png"
+        authorAvatar = "/images/mule-avatar.svg"
 
 [outputs]
     home = ["HTML", "RSS"]

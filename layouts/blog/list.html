@@ -1,5 +1,13 @@
 {{ define "main" }}
 <style>
+/* Category-based tag colors */
+.tag-category-ai { background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important; }
+.tag-category-golang { background: linear-gradient(135deg, #00add8, #007d9c) !important; }
+.tag-category-agi { background: linear-gradient(135deg, #8b5cf6, #6d28d9) !important; }
+.tag-category-music { background: linear-gradient(135deg, #ec4899, #be185d) !important; }
+.tag-category-mule { background: linear-gradient(135deg, #10b981, #047857) !important; }
+.tag-category-default { background: linear-gradient(135deg, #6b7280, #4b5563) !important; }
+
 /* Blog list animations */
 @keyframes fadeInUp {
     from {
@@ -215,8 +223,9 @@ input:focus-visible {
                             {{ with .Params.tags }}
                             <div class="flex flex-wrap gap-2 mb-4">
                                 {{ range first 4 . }}
-                                <span class="text-xs bg-gray-700/80 text-blue-300 px-3 py-1.5 rounded-full font-medium hover:bg-gray-600 hover:text-blue-200 transition-colors cursor-pointer tag-chip"
+                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
                                       data-filter-tag="{{ . | urlize }}"
+                                      data-tag-name="{{ . | lower }}"
                                       onclick="filterByTag('{{ . | urlize }}', event)">
                                     #{{ . }}
                                 </span>
@@ -824,6 +833,106 @@ input:focus-visible {
         const filterEl = document.getElementById('tag-filters');
         if (filterEl) filterEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     };
+})();
+
+// =========================================================
+// Category-based Tag Coloring — Mule AI
+// =========================================================
+(function() {
+    // Tag category mappings
+    const tagCategories = {
+        'ai': 'ai',
+        'artificial-intelligence': 'ai',
+        'machine-learning': 'ai',
+        'ml': 'ai',
+        'llm': 'ai',
+        'gpt': 'ai',
+        'golang': 'golang',
+        'go': 'golang',
+        'agi': 'agi',
+        'agI': 'agi',
+        'artificial-general-intelligence': 'agi',
+        'music': 'music',
+        'electronic-music': 'music',
+        'electronic': 'music',
+        'mule': 'mule',
+        'mule-ai': 'mule',
+        'release': 'mule',
+        'roadmap': 'mule'
+    };
+
+    // Apply category colors to tag buttons
+    function applyTagCategoryColors() {
+        const tagButtons = document.querySelectorAll('.tag-filter-btn');
+        
+        tagButtons.forEach(function(btn) {
+            const tag = btn.dataset.tag;
+            if (!tag || tag === 'all') return;
+            
+            // Determine category based on tag
+            let category = 'default';
+            const tagLower = tag.toLowerCase();
+            
+            for (const [key, cat] of Object.entries(tagCategories)) {
+                if (tagLower.includes(key)) {
+                    category = cat;
+                    break;
+                }
+            }
+            
+            // Apply category class
+            btn.classList.add('tag-category-' + category);
+            
+            // Set specific colors based on category
+            const colors = {
+                'ai': { bg: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', text: '#bfdbfe' },
+                'golang': { bg: 'linear-gradient(135deg, #00add8, #007d9c)', text: '#cffafe' },
+                'agi': { bg: 'linear-gradient(135deg, #8b5cf6, #6d28d9)', text: '#ddd6fe' },
+                'music': { bg: 'linear-gradient(135deg, #ec4899, #be185d)', text: '#fbcfe8' },
+                'mule': { bg: 'linear-gradient(135deg, #10b981, #047857)', text: '#a7f3d0' },
+                'default': { bg: 'linear-gradient(135deg, #6b7280, #4b5563)', text: '#d1d5db' }
+            };
+            
+            const color = colors[category] || colors.default;
+            btn.style.background = color.bg;
+            btn.style.color = color.text;
+            btn.style.borderColor = 'transparent';
+        });
+        
+        // Also apply to blog post card tags
+        const cardTags = document.querySelectorAll('.tag-chip');
+        cardTags.forEach(function(tag) {
+            const tagName = (tag.dataset.tagName || '').toLowerCase();
+            let category = 'default';
+            
+            for (const [key, cat] of Object.entries(tagCategories)) {
+                if (tagName.includes(key)) {
+                    category = cat;
+                    break;
+                }
+            }
+            
+            const cardColors = {
+                'ai': { bg: 'rgba(59, 130, 246, 0.2)', text: '#60a5fa' },
+                'golang': { bg: 'rgba(0, 173, 216, 0.2)', text: '#22d3ee' },
+                'agi': { bg: 'rgba(139, 92, 246, 0.2)', text: '#a78bfa' },
+                'music': { bg: 'rgba(236, 72, 153, 0.2)', text: '#f472b6' },
+                'mule': { bg: 'rgba(16, 185, 129, 0.2)', text: '#34d399' },
+                'default': { bg: 'rgba(107, 114, 128, 0.2)', text: '#9ca3af' }
+            };
+            
+            const color = cardColors[category] || cardColors.default;
+            tag.style.background = color.bg;
+            tag.style.color = color.text;
+        });
+    }
+
+    // Apply on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyTagCategoryColors);
+    } else {
+        applyTagCategoryColors();
+    }
 })();
 </script>
 {{ end }}
