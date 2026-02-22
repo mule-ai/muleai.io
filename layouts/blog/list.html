@@ -96,7 +96,7 @@ input:focus-visible {
             <div class="inline-block px-4 py-1 mb-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full">
                 <span class="text-sm font-semibold text-white">Latest Updates from Mule AI</span>
             </div>
-            <h1 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent relative z-10">
                 Blog
             </h1>
             <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto">
@@ -152,7 +152,7 @@ input:focus-visible {
                 All Posts
             </button>
             {{ range $uniqueTags }}
-            <button class="tag-filter-btn px-4 py-1.5 text-sm bg-gray-700/50 text-blue-300 border border-gray-700 rounded-full font-medium hover:border-blue-500 hover:text-blue-200" data-tag="{{ . | urlize }}">
+            <button class="tag-filter-btn px-4 py-1.5 text-sm bg-gray-700/50 text-gray-300 border border-gray-700 rounded-full font-medium hover:border-blue-500 hover:text-white" data-tag="{{ . | urlize }}">
                 #{{ . }}
             </button>
             {{ end }}
@@ -234,7 +234,7 @@ input:focus-visible {
                             {{ end }}
 
                             <!-- Summary -->
-                            <p class="text-gray-300 line-clamp-2 text-lg leading-relaxed mb-4 group-hover:text-gray-200 transition-colors">
+                            <p class="text-white dark:text-gray-300 line-clamp-2 text-lg leading-relaxed mb-4 group-hover:text-gray-200 transition-colors">
                                 {{ .Summary }}
                             </p>
                             
@@ -445,7 +445,7 @@ body {
 }
 
 :root[data-theme="light"] .text-gray-300 {
-    color: #475569 !important;
+    color: #1e293b !important;  /* Dark text for article previews in light mode */
 }
 
 :root[data-theme="light"] .text-gray-700 {
@@ -592,6 +592,24 @@ body {
     border-color: transparent !important;
 }
 
+/* Light mode - Filter tag buttons - make them readable */
+:root[data-theme="light"] .tag-filter-btn {
+    background-color: #f1f5f9 !important;
+    color: #374151 !important;
+    border-color: #e2e8f0 !important;
+}
+
+:root[data-theme="light"] .tag-filter-btn:hover {
+    border-color: #3b82f6 !important;
+    color: #1e293b !important;
+}
+
+:root[data-theme="light"] .tag-filter-btn.active {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
+    color: white !important;
+    border-color: transparent !important;
+}
+
 /* Light mode - Tag chips (on blog cards) */
 :root[data-theme="light"] .tag-chip {
     background-color: rgba(59, 130, 246, 0.1) !important;
@@ -606,6 +624,24 @@ body {
     /* Ensure gradient shows on light backgrounds */
     background-image: linear-gradient(to right, #3b82f6, #8b5cf6, #06b6d4) !important;
 }
+
+/* Light mode - Header section - ensure no background covers text */
+:root[data-theme="light"] .mb-12.text-center {
+    background-color: transparent !important;
+}
+
+:root[data-theme="light"] h1.text-5xl {
+    background: transparent !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+}
+
+/* Light mode - Subtitle text */
+:root[data-theme="light"] .text-gray-400 {
+    color: #64748b !important;
+}
+
+:root[data-theme="light"] .text-gray-500 {
 
 /* Blog title h1 - ensure visible background in dark mode */
 h1.text-5xl,
