@@ -364,6 +364,44 @@ $link-color: $mule-blue;
 }
 
 // Add blog-specific navbar styling
+#topnav {
+    background: #0f172a !important;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    
+    .logo {
+        color: $mule-blue !important;
+        font-weight: 700;
+    }
+    
+    .navigation-menu .nav-link,
+    .nav-right a {
+      color: $body-color !important;
+      
+      &:hover {
+        color: $mule-blue !important;
+      }
+    }
+}
+
+// Light mode navbar override
+:root[data-theme="light"] #topnav {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    
+    .logo {
+        color: $mule-blue !important;
+    }
+    
+    .navigation-menu .nav-link,
+    .nav-right a {
+      color: #334155 !important;
+      
+      &:hover {
+        color: $mule-blue !important;
+      }
+    }
+}
+
 .navbar {
   &.bg-muted {
     background: #0f172a !important;

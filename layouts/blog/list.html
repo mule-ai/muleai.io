@@ -1,5 +1,15 @@
 {{ define "main" }}
 <style>
+/* Header/Navbar - Force dark background in dark mode */
+#topnav {
+    background-color: #0f172a !important;
+}
+
+:root[data-theme="light"] #topnav {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
 /* Category-based tag colors */
 .tag-category-ai { background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important; }
 .tag-category-golang { background: linear-gradient(135deg, #00add8, #007d9c) !important; }

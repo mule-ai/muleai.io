@@ -1,4 +1,15 @@
 {{ define "main" }}
+<style>
+/* Header/Navbar - Force dark background in dark mode */
+#topnav {
+    background-color: #0f172a !important;
+}
+
+:root[data-theme="light"] #topnav {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+</style>
 <!-- Reading Progress Bar -->
 <div id="reading-progress" class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 z-50 origin-left transition-transform duration-100"></div>
 
