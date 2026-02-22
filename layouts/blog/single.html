@@ -391,6 +391,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Theme Toggle Styles - Comprehensive Light/Dark Mode Support -->
 <style>
+/* CRITICAL: Override Bootstrap's body background for both light and dark modes */
+body {
+    background-color: #0f172a !important;
+}
+
+:root[data-theme="light"] body {
+    background-color: #f8fafc !important;
+}
+
 /* Light mode specific improvements - using :root to match HTML element */
 :root[data-theme="light"] {
     --bg-primary: #ffffff;
