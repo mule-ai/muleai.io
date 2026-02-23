@@ -1,5 +1,9 @@
 dev-server.sh
 
+# Hugo build output (generated)
+public/
+resources/
+
 # Project management files (generated per run)
 spec.md
 plan.md

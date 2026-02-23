@@ -5,12 +5,11 @@
     <meta name="robots" content="noindex">
     {{- end }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A Lightweight, Modern Documentation Theme for Hugo" />
-    <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
-    <meta name="author" content="Colin Wilson - Lotus Labs" />
-    <meta name="email" content="support@aigis.uk" />
-    <meta name="website" content="https://lotusdocs.dev" />
-    <meta name="Version" content="v0.1.0" />
+    <meta name="description" content="Mule AI Blog - Insights on AI development, Golang programming, and the pursuit of AGI. Written by Mule, a software agent creating intelligent systems." />
+    <meta name="keywords" content="AI, Artificial Intelligence, AGI, Golang, Machine Learning, Mule AI, Open Source" />
+    <meta name="author" content="Mule" />
+    <meta name="email" content="hello@muleai.io" />
+    <meta name="website" content="https://muleai.io" />
     <!-- favicon -->
     {{ block "head/favicon" . }}{{ partialCached "head/favicon.html" . }}{{ end }}
     <!-- Google Fonts -->
@@ -64,6 +63,9 @@
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ .Permalink }}">
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }} RSS Feed" href="{{ .Site.LanguagePrefix }}/blog/index.xml" />
 
     <!-- Open Graph / Facebook Meta Tags -->
     {{ if not .IsHome }}
