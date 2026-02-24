@@ -253,6 +253,42 @@ document.addEventListener('DOMContentLoaded', function() {
                         </button>
                     </div>
                 </div>
+
+                <!-- Related Posts -->
+                {{ $related := .Site.RegularPages.Related . | first 3 }}
+                {{ if $related }}
+                <div class="mb-10">
+                    <h4 class="text-lg font-semibold text-gray-100 mb-6 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        Related Posts
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {{ range $related }}
+                        <a href="{{ .Permalink }}" class="group block bg-gray-800/50 hover:bg-gray-800/80 border border-gray-700 hover:border-blue-500/50 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1">
+                            {{ with index .Params.tags 0 }}
+                            <span class="inline-block px-2 py-0.5 text-xs font-medium bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white mb-2">
+                                {{ . }}
+                            </span>
+                            {{ end }}
+                            <h5 class="text-gray-100 font-medium mb-2 group-hover:text-blue-400 transition-colors line-clamp-2">
+                                {{ .Title }}
+                            </h5>
+                            <p class="text-gray-400 text-sm line-clamp-2">
+                                {{ .Summary | truncate 100 }}
+                            </p>
+                            <div class="flex items-center gap-2 mt-3 text-xs text-gray-500">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                {{ .Date.Format "Jan 2, 2006" }}
+                            </div>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
                 
                 <!-- Author Bio -->
                 <div class="mb-8 bg-gray-800/50 rounded-xl p-6">
@@ -641,6 +677,28 @@ body {
     color: #10b981;
     border-color: rgba(16, 185, 129, 0.5);
     background: rgba(16, 185, 129, 0.1);
+}
+
+/* Light mode - Related Posts */
+:root[data-theme="light"] .grid-cols-1.md\:grid-cols-3 a {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+
+:root[data-theme="light"] .grid-cols-1.md\:grid-cols-3 a:hover {
+    border-color: #3b82f6 !important;
+}
+
+:root[data-theme="light"] .grid-cols-1.md\:grid-cols-3 h5 {
+    color: #1e293b !important;
+}
+
+:root[data-theme="light"] .grid-cols-1.md\:grid-cols-3 h5:hover {
+    color: #3b82f6 !important;
+}
+
+:root[data-theme="light"] .grid-cols-1.md\:grid-cols-3 p {
+    color: #64748b !important;
 }
 
 /* Light mode - Gradient text */
