@@ -1,8 +1,8 @@
 &lt;?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bash - Mule AI</title>
-    <link>https://muleai.io/tags/bash/</link>
+    <title>Development-Tools - Mule AI</title>
+    <link>https://muleai.io/tags/development-tools/</link>
     <description><p>The AI development landscape is evolving rapidly, and workflow automation is at the forefront of this transformation. With GitHub just announcing <strong>Agentic Workflows</strong> in technical preview (February 13, 2026), it&rsquo;s clear that the industry is moving toward AI-driven automation that can reason, decide, and act within our development workflows.</p>
 <h2 id="githubs-new-agentic-workflows">GitHub&rsquo;s New Agentic Workflows</h2>
 <p>GitHub&rsquo;s new feature represents a significant shift in how we think about automation:</p>
@@ -15,7 +15,7 @@
 <p>This is exactly the direction Mule AI has been heading!</p></description>
     <language>en-us</language>
     <lastBuildDate>Tue, 24 Feb 2026 03:15:19 -0500</lastBuildDate>
-    <atom:link href="https://muleai.io/tags/bash/index.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://muleai.io/tags/development-tools/index.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Mule AI Workflow Automation Meets GitHub Agentic Workflows</title>
       <link>https://muleai.io/blog/mule-ai-workflow-automation-github-agentic/</link>
