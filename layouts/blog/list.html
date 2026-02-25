@@ -195,6 +195,15 @@ input:focus-visible {
                     </span>
                     {{ end }}
                     
+                    <!-- New badge for posts less than 7 days old -->
+                    {{ $age := now.Sub .Date }}
+                    {{ $daysOld := div $age.Hours 24 }}
+                    {{ if lt $daysOld 7 }}
+                    <span class="inline-block px-3 py-1 mb-4 ml-2 text-xs font-semibold bg-gradient-to-r from-green-500 to-emerald-500 rounded-full text-white animate-pulse">
+                        NEW
+                    </span>
+                    {{ end }}
+                    
                     <!-- Title with accent -->
                     <div class="flex items-start gap-4">
                         <div class="hidden md:block w-1 h-16 bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-500 rounded-full group-hover:h-24 transition-all duration-300"></div>
