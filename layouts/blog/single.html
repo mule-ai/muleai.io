@@ -22,6 +22,86 @@
     </svg>
 </button>
 
+<!-- Keyboard Shortcuts Help Modal -->
+<div id="keyboard-shortcuts-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="keyboard-shortcuts-title">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-2xl max-w-md w-full p-6 transform transition-all">
+            <div class="flex items-center justify-between mb-6">
+                <h2 id="keyboard-shortcuts-title" class="text-xl font-bold text-white flex items-center gap-3">
+                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                    </svg>
+                    Keyboard Shortcuts
+                </h2>
+                <button id="close-shortcuts-modal" class="text-gray-400 hover:text-white transition-colors p-1" aria-label="Close modal">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                    <span class="text-gray-300">Show keyboard shortcuts</span>
+                    <kbd class="px-2 py-1 bg-gray-700 text-gray-200 text-sm rounded font-mono">? / K</kbd>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                    <span class="text-gray-300">Go to top</span>
+                    <kbd class="px-2 py-1 bg-gray-700 text-gray-200 text-sm rounded font-mono">↑</kbd>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                    <span class="text-gray-300">Go to bottom</span>
+                    <kbd class="px-2 py-1 bg-gray-700 text-gray-200 text-sm rounded font-mono">↓</kbd>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                    <span class="text-gray-300">Toggle theme</span>
+                    <kbd class="px-2 py-1 bg-gray-700 text-gray-200 text-sm rounded font-mono">T</kbd>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                    <span class="text-gray-300">Search</span>
+                    <kbd class="px-2 py-1 bg-gray-700 text-gray-200 text-sm rounded font-mono">/</kbd>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                    <span class="text-gray-300">Close modal</span>
+                    <kbd class="px-2 py-1 bg-gray-700 text-gray-200 text-sm rounded font-mono">Esc</kbd>
+                </div>
+            </div>
+            <p class="mt-6 text-xs text-gray-500 text-center">Press <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-300">?</kbd> or <kbd class="px-1.5 py-0.5 bg-gray-700 rounded text-gray-300">K</kbd> anytime to show this help</p>
+        </div>
+    </div>
+</div>
+
+<!-- Keyboard Shortcuts CSS -->
+<style>
+#keyboard-shortcuts-modal {
+    animation: fadeIn 0.2s ease;
+}
+#keyboard-shortcuts-modal.hidden {
+    animation: fadeOut 0.2s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+#keyboard-shortcuts-modal > div > div {
+    animation: slideUp 0.2s ease;
+}
+#keyboard-shortcuts-modal.hidden > div > div {
+    animation: slideDown 0.2s ease;
+}
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+@keyframes slideDown {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(20px); opacity: 0; }
+}
+</style>
+
 <!-- Reading Progress & Back to Top Script -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -757,6 +837,94 @@ header#topnav,
     background-color: rgba(59, 130, 246, 0.3);
     color: #1e293b;
 }
+
+/* Code Copy Button Styles */
+.code-copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 6px 10px;
+    background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 6px;
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 10;
+}
+
+.code-copy-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+pre:hover .code-copy-btn,
+.code-copy-btn:focus {
+    opacity: 1;
+}
+
+.code-copy-btn:hover {
+    background: rgba(59, 130, 246, 0.4);
+    color: #e2e8f0;
+}
+
+.code-copy-btn.copied {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: #10b981;
+}
+
+/* Light mode code copy button */
+:root[data-theme="light"] .code-copy-btn {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.2);
+    color: #64748b;
+}
+
+:root[data-theme="light"] .code-copy-btn:hover {
+    background: rgba(59, 130, 246, 0.2);
+    color: #1e293b;
+}
+
+:root[data-theme="light"] .code-copy-btn.copied {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #059669;
+}
+
+/* Keyboard Shortcuts Modal - Light Mode */
+:root[data-theme="light"] #keyboard-shortcuts-modal > div > div {
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+
+:root[data-theme="light"] #keyboard-shortcuts-modal h2 {
+    color: #1e293b;
+}
+
+:root[data-theme="light"] #keyboard-shortcuts-modal .text-gray-300 {
+    color: #475569;
+}
+
+:root[data-theme="light"] #keyboard-shortcuts-modal .border-gray-700 {
+    border-color: #e2e8f0;
+}
+
+:root[data-theme="light"] #keyboard-shortcuts-modal kbd {
+    background: #f1f5f9;
+    color: #475569;
+    border-color: #cbd5e1;
+}
+
+:root[data-theme="light"] #keyboard-shortcuts-modal .text-gray-500 {
+    color: #64748b;
+}
 </style>
 
 <!-- Theme Toggle Script - Using global toggleTheme from head.html -->
@@ -801,6 +969,67 @@ document.addEventListener('DOMContentLoaded', function() {
             updateSingleThemeIcons();
         }
     });
+});
+</script>
+
+<script>
+// Keyboard Shortcuts Modal Handler
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('keyboard-shortcuts-modal');
+    const closeBtn = document.getElementById('close-shortcuts-modal');
+    
+    function openModal() {
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.setAttribute('aria-hidden', 'false');
+            // Focus the close button for accessibility
+            closeBtn?.focus();
+        }
+    }
+    
+    function closeModal() {
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+    }
+    
+    // Toggle modal with ? or K key
+    document.addEventListener('keydown', function(e) {
+        // Don't trigger shortcuts when typing in input/textarea
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) {
+            return;
+        }
+        
+        // ? or K to open modal
+        if (e.key === '?' || (e.key === 'k' && !e.ctrlKey && !e.metaKey && !e.altKey)) {
+            e.preventDefault();
+            if (modal && modal.classList.contains('hidden')) {
+                openModal();
+            } else if (modal && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        }
+        
+        // Escape to close modal
+        if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+    
+    // Close button click handler
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+    
+    // Click outside to close
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal || e.target.closest('.flex.items-center.justify-center') === e.target) {
+                closeModal();
+            }
+        });
+    }
 });
 </script>
 
