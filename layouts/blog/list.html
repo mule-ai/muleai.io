@@ -101,6 +101,58 @@ input:focus-visible {
     </a>
     
     <div class="max-w-5xl mx-auto">
+        <!-- Featured Posts Section -->
+        {{ $featuredPosts := where (where .Site.RegularPages "Section" "blog") "Params.featured" true }}
+        {{ if $featuredPosts }}
+        <div class="mb-12">
+            <h2 class="text-xl font-semibold text-gray-300 mb-6 flex items-center gap-2">
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                Featured Posts
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {{ range $featuredPosts }}
+                <a href="{{ .Permalink }}" class="group block relative bg-gradient-to-br from-blue-900/40 via-purple-900/40 to-cyan-900/40 rounded-xl p-6 border border-yellow-500/30 hover:border-yellow-500/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-yellow-500/10">
+                    <div class="absolute top-3 right-3">
+                        <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-yellow-500/20 text-yellow-400 rounded-full">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            Featured
+                        </span>
+                    </div>
+                    {{ with index .Params.tags 0 }}
+                    <span class="inline-block px-2 py-0.5 text-xs font-medium bg-blue-600/50 text-blue-200 rounded-full mb-3">
+                        {{ . }}
+                    </span>
+                    {{ end }}
+                    <h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-purple-400 group-hover:to-cyan-400 transition-all">
+                        {{ .Title }}
+                    </h3>
+                    <p class="text-gray-400 text-sm line-clamp-2 mb-3">
+                        {{ .Summary | truncate 120 }}
+                    </p>
+                    <div class="flex items-center gap-3 text-xs text-gray-500">
+                        <span class="flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            {{ .Date.Format "Jan 2, 2006" }}
+                        </span>
+                        <span class="flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            {{ .ReadingTime }} min read
+                        </span>
+                    </div>
+                </a>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+
         <!-- Header -->
         <div class="mb-12 text-center">
             <div class="inline-block px-4 py-1 mb-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full">
@@ -179,7 +231,11 @@ input:focus-visible {
 
         <!-- Blog Posts -->
         <div class="space-y-8" id="blog-posts">
+            {{ $featuredPosts := where (where .Site.RegularPages "Section" "blog") "Params.featured" true }}
+            {{ $featuredTitles := slice }}
+            {{ range $featuredPosts }}{{ $featuredTitles = $featuredTitles | append .Title }}{{ end }}
             {{ range (where .Site.RegularPages "Section" "blog").ByDate.Reverse }}
+            {{ if not (in $featuredTitles .Title) }}
             {{ $tagList := "" }}
             {{ range .Params.tags }}{{ $tagList = printf "%s %s" $tagList (. | urlize) }}{{ end }}
             <article class="blog-post-card group bg-gray-800/50 rounded-xl p-6 md:p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:bg-gray-800/70 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
@@ -270,6 +326,7 @@ input:focus-visible {
                     </div>
                 </a>
             </article>
+            {{ end }}
             {{ end }}
         </div>
         
