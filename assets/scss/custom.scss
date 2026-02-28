@@ -465,3 +465,260 @@ $link-color: $mule-blue;
     background-clip: text;
   }
 }
+
+// ============================================
+// Phase 2: Style Improvements
+// ============================================
+
+// Category-based tag colors for single post pages
+.tag-category-ai { 
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important; 
+  &:hover { background: linear-gradient(135deg, #2563eb, #1e40af) !important; }
+}
+.tag-category-golang { 
+  background: linear-gradient(135deg, #00add8, #007d9c) !important; 
+  &:hover { background: linear-gradient(135deg, #0891b2, #065f73) !important; }
+}
+.tag-category-agi { 
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9) !important; 
+  &:hover { background: linear-gradient(135deg, #7c3aed, #5b21b6) !important; }
+}
+.tag-category-music { 
+  background: linear-gradient(135deg, #ec4899, #be185d) !important; 
+  &:hover { background: linear-gradient(135deg, #db2777, #9d174d) !important; }
+}
+.tag-category-mule { 
+  background: linear-gradient(135deg, #10b981, #047857) !important; 
+  &:hover { background: linear-gradient(135deg, #059669, #065f46) !important; }
+}
+.tag-category-default { 
+  background: linear-gradient(135deg, #6b7280, #4b5563) !important; 
+  &:hover { background: linear-gradient(135deg, #4b5563, #374151) !important; }
+}
+
+// Apply category-based tag colors in single post header
+.single-post-tags {
+  .tag-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.875rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white !important;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    }
+    
+    svg {
+      width: 14px;
+      height: 14px;
+      margin-right: 0.375rem;
+    }
+  }
+}
+
+// Improved author bio section
+.author-bio {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 1rem;
+  margin-top: 2rem;
+  
+  .author-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    object-fit: cover;
+  }
+  
+  .author-info {
+    flex: 1;
+    
+    .author-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 0.25rem;
+    }
+    
+    .author-description {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Enhanced light mode support
+:root[data-theme="light"] {
+  // Light mode body
+  --light-body-bg: #f8fafc;
+  --light-body-color: #334155;
+  --light-heading-color: #0f172a;
+  
+  body {
+    background-color: var(--light-body-bg) !important;
+    color: var(--light-body-color) !important;
+  }
+  
+  // Light mode cards
+  .blog-post-card,
+  .card,
+  article.bg-gray-800 {
+    background: white !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    
+    &:hover {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    }
+  }
+  
+  // Light mode typography
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--light-heading-color) !important;
+  }
+  
+  // Light mode text
+  .text-gray-100,
+  .text-gray-200,
+  .text-gray-300 {
+    color: #1e293b !important;
+  }
+  
+  .text-gray-400 {
+    color: #64748b !important;
+  }
+  
+  // Light mode borders
+  .border-gray-700,
+  .border-gray-600 {
+    border-color: #e2e8f0 !important;
+  }
+  
+  // Light mode hero sections
+  .bg-gray-800\/50,
+  .bg-gray-700\/50 {
+    background: rgba(248, 250, 252, 0.8) !important;
+  }
+  
+  // Light mode inputs
+  input[type="text"],
+  input[type="search"] {
+    background: white !important;
+    border-color: #e2e8f0 !important;
+    color: #1e293b !important;
+    
+    &:focus {
+      border-color: $mule-blue !important;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    }
+  }
+  
+  // Light mode gradients (make them subtle)
+  .bg-gradient-to-br {
+    background: white !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+  
+  // Light mode author bio
+  .author-bio {
+    background: white !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    
+    .author-info .author-name {
+      color: #0f172a !important;
+    }
+    
+    .author-info .author-description {
+      color: #64748b !important;
+    }
+  }
+  
+  // Light mode prose (for blog content)
+  .prose {
+    color: #334155 !important;
+    
+    h2 {
+      color: #0f172a !important;
+      border-left-color: $mule-blue !important;
+    }
+    
+    h3 {
+      color: #1e293b !important;
+    }
+    
+    a {
+      color: #2563eb !important;
+      
+      &:hover {
+        color: #1d4ed8 !important;
+      }
+    }
+    
+    blockquote {
+      color: #475569 !important;
+      background: rgba(59, 130, 246, 0.05) !important;
+    }
+    
+    code:not(pre code) {
+      color: #1e40af !important;
+      background: rgba(59, 130, 246, 0.1) !important;
+    }
+    
+    table {
+      th {
+        background: rgba(59, 130, 246, 0.1) !important;
+        color: #1e293b !important;
+      }
+      
+      td {
+        color: #475569 !important;
+        border-color: #e2e8f0 !important;
+      }
+    }
+  }
+}
+
+// Enhanced scrollbar styling
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 41, 59, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, $mule-blue, $mule-purple);
+  border-radius: 5px;
+  
+  &:hover {
+    background: linear-gradient(180deg, lighten($mule-blue, 10%), lighten($mule-purple, 10%));
+  }
+}
+
+// Print styles
+@media print {
+  .blog-post-card,
+  article {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+}
