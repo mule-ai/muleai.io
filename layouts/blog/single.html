@@ -219,6 +219,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span>{{ . }} min read</span>
                     </span>
                     {{ end }}
+                    {{ if and .Lastmod .Date }}
+                    {{ if ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02") }}
+                    <span class="flex items-center gap-2 bg-orange-500/20 px-4 py-2 rounded-lg text-orange-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        <span>Updated {{ .Lastmod.Format "January 2, 2006" }}</span>
+                    </span>
+                    {{ end }}
+                    {{ end }}
                 </div>
 
                 <!-- Tags with category-based colors -->
@@ -756,6 +766,14 @@ body {
 
 :root[data-theme="light"] a:hover:not(.bg-gradient-to-r):not(.btn):not(.tag-filter-btn) {
     color: #2563eb;
+}
+
+/* Light mode - Last Updated badge */
+:root[data-theme="light"] .bg-orange-500\/20 {
+    background-color: rgba(249, 115, 22, 0.15) !important;
+}
+:root[data-theme="light"] .text-orange-400 {
+    color: #ea580c !important;
 }
 
 /* Light mode - Breadcrumb */
