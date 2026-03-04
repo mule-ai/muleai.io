@@ -62,23 +62,27 @@
     </nav>
 
     <!-- Hero Section -->
-    <div class="py-20 px-4">
-        <div class="max-w-4xl mx-auto text-center">
+    <div class="relative py-20 px-4 overflow-hidden">
+        <!-- Background gradient effect -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-purple-900/20 pointer-events-none"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-64 bg-gradient-to-b from-blue-500/10 to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10">
             <h1 class="text-5xl font-bold mb-6 gradient-text">
                 Advanced Multi-Agent AI Development Platform
             </h1>
-            <p class="text-xl text-gray-400 mb-8">
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
                 Mule orchestrates sophisticated multi-agent workflows with production-ready integrations. Leverage OpenAI, Anthropic, Gemini, and Ollama providers to automate complex development tasks, monitor repositories, and build intelligent systems.
             </p>
-            <div class="flex justify-center space-x-4">
+            <div class="flex flex-wrap justify-center gap-4">
                 <form action="/docs">
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors">
+                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg flex items-center space-x-2 transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25">
                         <span>Get Started</span>
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </button>
                 </form>
                 <a href="https://github.com/mule-ai/mule" 
-                   class="border border-gray-700 hover:border-gray-600 px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors">
+                   class="border border-gray-600 hover:border-gray-500 hover:bg-gray-800 px-6 py-3 rounded-lg flex items-center space-x-2 transition-all">
                     <i data-lucide="github" class="w-5 h-5"></i>
                     <span>View on GitHub</span>
                 </a>
@@ -89,27 +93,28 @@
     <!-- Features Section -->
     <div class="py-20 bg-gray-800" id="features" style="background-color: rgba(31, 41, 55, 0.5);">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Key Features</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700">
-                    <div class="mb-4">
-                        <i data-lucide="workflow" class="w-8 h-8 text-blue-400"></i>
+            <h2 class="text-3xl font-bold text-center mb-4">Key Features</h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">Everything you need to build sophisticated multi-agent AI systems</p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="feature-card group p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10">
+                    <div class="mb-4 w-12 h-12 rounded-lg bg-gradient-to-br from-blue-600/20 to-blue-600/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="workflow" class="w-6 h-6 text-blue-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Advanced Workflows</h3>
+                    <h3 class="text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">Advanced Workflows</h3>
                     <p class="text-gray-400">Orchestrate complex multi-agent workflows with validation, retry logic, sub-workflows, and seamless context passing between agents.</p>
                 </div>
-                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700">
-                    <div class="mb-4">
-                        <i data-lucide="layers" class="w-8 h-8 text-purple-400"></i>
+                <div class="feature-card group p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10">
+                    <div class="mb-4 w-12 h-12 rounded-lg bg-gradient-to-br from-purple-600/20 to-purple-600/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="layers" class="w-6 h-6 text-purple-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Full AI Provider Support</h3>
+                    <h3 class="text-xl font-semibold mb-2 group-hover:text-purple-400 transition-colors">Full AI Provider Support</h3>
                     <p class="text-gray-400">Production-ready support for OpenAI, Anthropic, Gemini, and Ollama. Dynamic model switching and provider-specific tool assignment.</p>
                 </div>
-                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700">
-                    <div class="mb-4">
-                        <i data-lucide="plug" class="w-8 h-8 text-green-400"></i>
+                <div class="feature-card group p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-green-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/10">
+                    <div class="mb-4 w-12 h-12 rounded-lg bg-gradient-to-br from-green-600/20 to-green-600/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="plug" class="w-6 h-6 text-green-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">8+ Production Integrations</h3>
+                    <h3 class="text-xl font-semibold mb-2 group-hover:text-green-400 transition-colors">8+ Production Integrations</h3>
                     <p class="text-gray-400">Discord, Matrix, gRPC API, RSS feeds, persistent memory with ChromeM, and more. Extensible plugin architecture for custom integrations.</p>
                 </div>
             </div>
@@ -119,34 +124,35 @@
     <!-- Additional Features Section -->
     <div class="py-20 px-4">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12">Powerful Capabilities</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700">
-                    <div class="mb-4">
-                        <i data-lucide="git-branch" class="w-8 h-8 text-orange-400"></i>
+            <h2 class="text-3xl font-bold text-center mb-4">Powerful Capabilities</h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">Build intelligent systems with advanced features designed for production</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="feature-card group p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-orange-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/10">
+                    <div class="mb-4 w-12 h-12 rounded-lg bg-gradient-to-br from-orange-600/20 to-orange-600/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="git-branch" class="w-6 h-6 text-orange-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Autonomous Development</h3>
+                    <h3 class="text-xl font-semibold mb-2 group-hover:text-orange-400 transition-colors">Autonomous Development</h3>
                     <p class="text-gray-400">Monitor repositories, automatically process issues labeled with 'mule', generate code solutions, create PRs, and respond to feedback - all without human intervention.</p>
                 </div>
-                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700">
-                    <div class="mb-4">
-                        <i data-lucide="brain" class="w-8 h-8 text-pink-400"></i>
+                <div class="feature-card group p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-pink-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/10">
+                    <div class="mb-4 w-12 h-12 rounded-lg bg-gradient-to-br from-pink-600/20 to-pink-600/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="brain" class="w-6 h-6 text-pink-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Persistent Memory with RAG</h3>
+                    <h3 class="text-xl font-semibold mb-2 group-hover:text-pink-400 transition-colors">Persistent Memory with RAG</h3>
                     <p class="text-gray-400">ChromeM-based vector database for semantic search and context retention. Enhance agent prompts with relevant conversation history and codebase knowledge.</p>
                 </div>
-                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700">
-                    <div class="mb-4">
-                        <i data-lucide="shield-check" class="w-8 h-8 text-cyan-400"></i>
+                <div class="feature-card group p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10">
+                    <div class="mb-4 w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-600/20 to-cyan-600/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-cyan-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Validation & Quality Control</h3>
+                    <h3 class="text-xl font-semibold mb-2 group-hover:text-cyan-400 transition-colors">Validation & Quality Control</h3>
                     <p class="text-gray-400">Built-in validation functions with retry logic ensure code quality. Apply custom validation rules with up to 20 retry attempts for robust output.</p>
                 </div>
-                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700">
-                    <div class="mb-4">
-                        <i data-lucide="network" class="w-8 h-8 text-yellow-400"></i>
+                <div class="feature-card group p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
+                    <div class="mb-4 w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-600/20 to-yellow-600/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="network" class="w-6 h-6 text-yellow-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">External System Integration</h3>
+                    <h3 class="text-xl font-semibold mb-2 group-hover:text-yellow-400 transition-colors">External System Integration</h3>
                     <p class="text-gray-400">Production-ready gRPC API for external systems, scheduled task execution with cron, RSS feed generation, and extensible plugin architecture.</p>
                 </div>
             </div>
@@ -158,47 +164,70 @@
         <div class="max-w-7xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-4">Latest from the Mule Blog</h2>
             <p class="text-gray-400 text-center mb-12">Stay updated on Mule AI developments, features, and the latest in AI technology</p>
-            <div class="grid md:grid-cols-2 gap-8 mb-8">
-                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700 hover:border-blue-500">
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <!-- Blog Post 1 -->
+                <a href="/blog/2026-03-03-deepseek-v4-open-source-ai-revolution/" class="group block p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1">
                     <div class="mb-4">
-                        <span class="inline-block bg-blue-900 text-blue-200 text-xs px-3 py-1 rounded-full">releases</span>
+                        <span class="inline-block bg-blue-900/50 text-blue-300 text-xs px-3 py-1 rounded-full border border-blue-700/50">AI</span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Mule v0.1.7: The Agent That Writes Code</h3>
-                    <p class="text-gray-400 mb-4">Explore the transformational implement phase that enables autonomous code generation, including real-world WASM examples and why this matters for AGI.</p>
-                    <a href="/blog/mule-v0-1-7-agent-writes-code/" class="text-blue-400 hover:text-blue-300 transition-colors flex items-center space-x-2">
-                        <span>Read More</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
-                </div>
-                <div class="feature-card p-6 rounded-lg bg-gray-800 border border-gray-700 hover:border-blue-500">
+                    <h3 class="text-lg font-semibold mb-2 group-hover:text-blue-400 transition-colors">DeepSeek V4: The Open Source AI Revolution</h3>
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">Exploring how DeepSeek V4 is changing the landscape of open-source AI development and what it means for the community.</p>
+                    <div class="flex items-center text-xs text-gray-500">
+                        <span>March 3, 2026</span>
+                        <span class="mx-2">·</span>
+                        <span>8 min read</span>
+                    </div>
+                </a>
+                <!-- Blog Post 2 -->
+                <a href="/blog/2026-03-02-ai-agent-trends-2026/" class="group block p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1">
                     <div class="mb-4">
-                        <span class="inline-block bg-purple-900 text-purple-200 text-xs px-3 py-1 rounded-full">open-source</span>
+                        <span class="inline-block bg-purple-900/50 text-purple-300 text-xs px-3 py-1 rounded-full border border-purple-700/50">trends</span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">The Great Democratization of AI: Open-Source Models in 2026</h3>
-                    <p class="text-gray-400 mb-4">Discover how open-source AI models are making advanced capabilities accessible to everyone, from visual generation to code understanding.</p>
-                    <a href="/blog/open-source-ai-models-2026/" class="text-blue-400 hover:text-blue-300 transition-colors flex items-center space-x-2">
-                        <span>Read More</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
-                </div>
+                    <h3 class="text-lg font-semibold mb-2 group-hover:text-purple-400 transition-colors">AI Agent Trends in 2026</h3>
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">A comprehensive look at the latest trends in AI agent development and what to expect in the coming months.</p>
+                    <div class="flex items-center text-xs text-gray-500">
+                        <span>March 2, 2026</span>
+                        <span class="mx-2">·</span>
+                        <span>6 min read</span>
+                    </div>
+                </a>
+                <!-- Blog Post 3 -->
+                <a href="/blog/2026-03-02-mule-ai-autonomous-agentic-workflows/" class="group block p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-green-500 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/10 hover:-translate-y-1">
+                    <div class="mb-4">
+                        <span class="inline-block bg-green-900/50 text-green-300 text-xs px-3 py-1 rounded-full border border-green-700/50">mule</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 group-hover:text-green-400 transition-colors">Mule AI: Autonomous Agentic Workflows</h3>
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">How Mule AI enables developers to build sophisticated autonomous workflows with multiple AI agents.</p>
+                    <div class="flex items-center text-xs text-gray-500">
+                        <span>March 2, 2026</span>
+                        <span class="mx-2">·</span>
+                        <span>5 min read</span>
+                    </div>
+                </a>
             </div>
             <div class="text-center">
-                <a href="/blog/" class="inline-block bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-gray-600 text-white px-6 py-3 rounded-lg transition-colors">
+                <a href="/blog/" class="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25">
                     View All Posts
+                    <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
                 </a>
             </div>
         </div>
     </div>
 
     <!-- CTA Section -->
-    <div class="py-20 px-4 bg-gray-800" style="background-color: rgba(31, 41, 55, 0.5);">
-        <div class="max-w-3xl mx-auto text-center">
+    <div class="py-20 px-4 bg-gray-800 relative overflow-hidden" style="background-color: rgba(31, 41, 55, 0.5);">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20 pointer-events-none"></div>
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-3xl mx-auto text-center relative z-10">
             <h2 class="text-3xl font-bold mb-6">Ready to Build Autonomous AI Systems?</h2>
-            <p class="text-gray-400 mb-8">
+            <p class="text-gray-400 mb-8 max-w-xl mx-auto">
                 Join developers using Mule to orchestrate sophisticated multi-agent workflows, automate development tasks, and integrate AI into their infrastructure.
             </p>
             <form action="/docs">
-                <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg transition-colors">
+                <button class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-lg transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25">
                     Start Building Now
                 </button>
             </form>
