@@ -50,6 +50,63 @@
     <loc>https://muleai.io/docs/settings/</loc>
     <lastmod>2025-02-20T21:01:12-05:00</lastmod>
   </url><url>
+    <loc>https://muleai.io/categories/ai-development/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/ai-agents/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/ai-tools/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/categories/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/golang/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/machine-learning/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/monitoring/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/blog/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/blog/2026-03-04-mule-ai-observability-platform/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/categories/mule-ai-updates/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/mule-ai/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/observability/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/production/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/programming-languages/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/python/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/blog/2026-03-04-python-vs-rust-vs-go-ai-tooling/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/rust/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/</loc>
+    <lastmod>2026-03-04T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://muleai.io/tags/2026/</loc>
     <lastmod>2026-03-03T00:00:00+00:00</lastmod>
   </url><url>
@@ -65,9 +122,6 @@
     <loc>https://muleai.io/tags/architecture/</loc>
     <lastmod>2026-03-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://muleai.io/categories/</loc>
-    <lastmod>2026-03-03T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://muleai.io/tags/coding/</loc>
     <lastmod>2026-03-03T00:00:00+00:00</lastmod>
   </url><url>
@@ -77,19 +131,7 @@
     <loc>https://muleai.io/blog/2026-03-03-deepseek-v4-open-source-ai-revolution/</loc>
     <lastmod>2026-03-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://muleai.io/tags/golang/</loc>
-    <lastmod>2026-03-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://muleai.io/</loc>
-    <lastmod>2026-03-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://muleai.io/blog/</loc>
-    <lastmod>2026-03-03T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://muleai.io/blog/mule-ai-embraces-pi/</loc>
-    <lastmod>2026-03-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://muleai.io/tags/mule-ai/</loc>
     <lastmod>2026-03-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/open-source/</loc>
@@ -99,9 +141,6 @@
     <lastmod>2026-03-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/categories/project-updates/</loc>
-    <lastmod>2026-03-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://muleai.io/tags/</loc>
     <lastmod>2026-03-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/a2a/</loc>
@@ -137,9 +176,6 @@
     <loc>https://muleai.io/tags/trends/</loc>
     <lastmod>2026-03-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://muleai.io/tags/ai-agents/</loc>
-    <lastmod>2026-02-28T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://muleai.io/tags/development/</loc>
     <lastmod>2026-02-28T00:00:00+00:00</lastmod>
   </url><url>
@@ -174,12 +210,6 @@
     <lastmod>2026-02-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/future/</loc>
-    <lastmod>2026-02-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://muleai.io/tags/machine-learning/</loc>
-    <lastmod>2026-02-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://muleai.io/tags/observability/</loc>
     <lastmod>2026-02-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/opentelemetry/</loc>
