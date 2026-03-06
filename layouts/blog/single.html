@@ -280,7 +280,9 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- Social Share Section -->
-            {{ if gt (len .Params.tags) 0 }}
+            {{ $page := . }}
+            {{ with .Params.tags }}
+            {{ if gt (len .) 0 }}
             <div class="my-8 p-6 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-cyan-900/20 border border-blue-500/30 rounded-xl">
                 <h4 class="text-lg font-semibold text-gray-100 mb-3 flex items-center gap-2">
                     <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -289,8 +291,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     Share this article
                 </h4>
                 <div class="flex flex-wrap gap-3">
-                    {{ $title := .Title | htmlEscape }}
-                    {{ $url := .Permalink }}
+                    {{ $title := $page.Title | htmlEscape }}
+                    {{ $url := $page.Permalink }}
                     <a href="https://twitter.com/intent/tweet?text={{ $title | urlquery }}&url={{ $url | urlquery }}" 
                        target="_blank" 
                        rel="noopener noreferrer"
@@ -318,6 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </button>
                 </div>
             </div>
+            {{ end }}
             {{ end }}
 
             <!-- Post Footer -->

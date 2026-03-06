@@ -1,0 +1,13 @@
+# Robots.txt for muleai.io
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://muleai.io/sitemap.xml
+
+# Disallow admin/private areas
+Disallow: /search/
+Disallow: /404.html
+
+# Crawl-delay (optional, for politeness)
+Crawl-delay: 1
