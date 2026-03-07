@@ -92,6 +92,47 @@ input:focus-visible {
         border-width: 2px;
     }
 }
+
+/* Mobile optimizations - better touch targets */
+@media (max-width: 640px) {
+    /* Larger touch targets for tag filters */
+    .tag-filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Better card spacing on mobile */
+    .blog-post-card {
+        padding: 1.25rem;
+    }
+    
+    /* Larger tap targets for tags in post cards */
+    .tag-chip {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+    }
+    
+    /* Larger close/search button on mobile */
+    #clear-search {
+        padding: 0.5rem;
+    }
+    
+    /* Better search input on mobile */
+    #blog-search {
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        font-size: 1rem;
+    }
+    
+    /* Improve metadata display on mobile */
+    .blog-post-card .flex.flex-wrap.items-center.gap-4 {
+        gap: 0.5rem;
+    }
+    
+    .blog-post-card .flex.flex-wrap.items-center.gap-4 > span {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+}
 </style>
 
 <main class="container mx-auto px-4 py-8">
@@ -209,14 +250,23 @@ input:focus-visible {
             <div id="search-results-count" class="text-center text-sm text-gray-500 mt-3 hidden"></div>
         </div>
 
-        <!-- Tag Filter Chips -->
-        {{ $allTags := slice }}
+        <!-- Tag Filter Chips with Counts -->
+        {{ $tagCounts := slice }}
         {{ range where .Site.RegularPages "Section" "blog" }}
             {{ range .Params.tags }}
-                {{ $allTags = $allTags | append . }}
+                {{ $tagCounts = $tagCounts | append . }}
             {{ end }}
         {{ end }}
-        {{ $uniqueTags := $allTags | uniq }}
+        
+        {{/* Count occurrences of each tag */}}
+        {{ $tagCountsMap := dict }}
+        {{ range $tag := $tagCounts }}
+            {{ $count := 0 }}
+            {{ with index $tagCountsMap $tag }}{{ $count = . }}{{ end }}
+            {{ $tagCountsMap = merge $tagCountsMap (dict $tag (add $count 1)) }}
+        {{ end }}
+        
+        {{ $uniqueTags := $tagCounts | uniq }}
         {{ if $uniqueTags }}
         <div class="mb-8 flex flex-wrap justify-center gap-2" id="tag-filters">
             <button class="tag-filter-btn active px-4 py-1.5 text-sm bg-gray-700 text-gray-300 border border-gray-600 rounded-full font-medium" data-tag="all">
