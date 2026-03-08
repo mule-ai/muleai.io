@@ -148,6 +148,41 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <main class="container mx-auto px-4 py-6 md:py-8">
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{ .Title | htmlEscape }}",
+        "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | htmlEscape }}{{ end }}",
+        "image": "{{ with .Params.image }}{{ . | absURL }}{{ else }}{{ "/images/blog/default-og.jpg" | absURL }}{{ end }}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ with .Params.author }}{{ . }}{{ else }}Mule{{ end }}",
+            "url": "https://muleai.io/about"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Mule AI",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://muleai.io/images/logos/logo.png"
+            }
+        },
+        "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+        "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ .Permalink }}"
+        },
+        "keywords": {{ with .Params.tags }}{{ . | jsonify }}{{ else }}[]{{ end }},
+        "wordCount": {{ .WordCount }},
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
+        "url": "{{ .Permalink }}"
+    }
+    </script>
+
     <div class="max-w-5xl mx-auto">
         <!-- Breadcrumb Navigation -->
         <nav class="text-sm text-gray-400 mb-6" aria-label="Breadcrumb">
