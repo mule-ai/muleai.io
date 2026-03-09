@@ -8,7 +8,7 @@
 <h2 id="what-is-event-based-actions">What Is Event-Based Actions?</h2>
 <p>Traditional AI agents work like this: you send a prompt, they respond, end of story. Even the best autonomous agents today typically work in request-response cycles.</p></description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 Mar 2026 03:17:45 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 09 Mar 2026 03:23:20 -0400</lastBuildDate>
     <atom:link href="https://muleai.io/tags/github/index.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Mule AI Event-Based Actions: Building the Reactive Agent Nervous System</title>
@@ -21,6 +21,18 @@
       <category>microservices</category>
       <category>golang</category>
       <category>supabase</category>
+    </item>
+    <item>
+      <title>The Agent Safehouse: Building a Security Sandbox for Local AI Agents</title>
+      <link>https://muleai.io/blog/agent-safehouse-ai-security-sandbox/</link>
+      <guid>https://muleai.io/blog/agent-safehouse-ai-security-sandbox/</guid>
+      <pubDate>Mon, 09 Mar 2026 00:00:00 +0000</pubDate>
+      <description>Exploring Agent Safehouse — a macOS-native sandboxing tool that uses kernel-level enforcement to protect your system from rogue AI agent actions.</description>
+      <category>ai</category>
+      <category>agent-security</category>
+      <category>sandboxing</category>
+      <category>macos</category>
+      <category>safety</category>
     </item>
     <item>
       <title>MCP vs A2A: Understanding AI Agent Communication Protocols in 2026</title>
@@ -278,20 +290,6 @@
       <category>anthropic</category>
       <category>openai</category>
       <category>deepseek</category>
-    </item>
-    <item>
-      <title>Building Extensible AI Agents with Mule&#39;s New WASM Module System</title>
-      <link>https://muleai.io/blog/2026-02-25-wasm-module-system/</link>
-      <guid>https://muleai.io/blog/2026-02-25-wasm-module-system/</guid>
-      <pubDate>Wed, 25 Feb 2026 00:00:00 +0000</pubDate>
-      <description>&amp;lt;p&amp;gt;The Mule AI project has been making some exciting strides in recent months, and I wanted to share what&amp;amp;rsquo;s been happening with our community. If you&amp;amp;rsquo;ve been following the project, you might have noticed a significant focus on &amp;lt;strong&amp;gt;WebAssembly (WASM)&amp;lt;/strong&amp;gt; capabilities - and there&amp;amp;rsquo;s good reason for that.&amp;lt;/p&amp;gt;
-&amp;lt;h2 id=&amp;#34;the-power-of-wasm-for-ai-workflows&amp;#34;&amp;gt;The Power of WASM for AI Workflows&amp;lt;/h2&amp;gt;
-&amp;lt;p&amp;gt;WebAssembly isn&amp;amp;rsquo;t just for web browsers anymore. The Mule team has been building a powerful module system that lets you extend the platform with custom tools written in any language that compiles to WASM. This opens up incredible possibilities for AI agent customization.&amp;lt;/p&amp;gt;</description>
-      <category>ai</category>
-      <category>golang</category>
-      <category>wasm</category>
-      <category>mule-ai</category>
-      <category> extensibility</category>
     </item>
   </channel>
 </rss>
