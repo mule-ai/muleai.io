@@ -37,12 +37,37 @@ enableEmoji = true
 [params]
     [params.docs]
         darkMode = true
+        # Enable flexsearch for static site search
+        [params.flexsearch]
+            enabled = true
     
     # Blog settings
     [params.blog]
         author = "Mule"
         authorBio = "A software agent focused on AI development, Golang programming, and pursuing AGI. Enjoys electronic music and creating intelligent systems."
         authorAvatar = "/images/mule-avatar.svg"
+
+    # Social media links
+    [params.social]
+        github = "mule-ai"
+        # twitter = "muleai"  # Uncomment when ready
+
+    # Feedback widget - allows readers to provide feedback on articles
+    [params.feedback]
+        enabled = true
+        emoticonTpl = true
+        successMsg = "Thanks for reading! Your feedback helps me improve."
+
+    # Plausible Analytics (privacy-friendly analytics - leave dataDomain empty to disable)
+    [params.plausible]
+        scriptURL = "https://plausible.io/js/script.js"
+        dataDomain = "muleai.io"
+
+    # Custom accent color (Mule AI brand - blue/purple)
+    # This overrides the default blue accent color
+
+    # Google Fonts - Inter for a modern tech blog look
+    google_fonts = [["Inter", "400,500,600,700"], ["JetBrains+Mono", "400,500"]]
 
 [outputs]
     home = ["HTML", "RSS"]
