@@ -7,7 +7,7 @@
 <h2 id="what-is-blades">What is Blades?</h2>
 <p><a href="https://github.com/go-kratos/blades">Blades</a> is a Go-based multimodal AI Agent framework released in March 2026 by the team behind Kratos, the popular Go microservices framework. It&rsquo;s designed for building autonomous agents with support for:</p></description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Mar 2026 03:21:13 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 11 Mar 2026 03:03:09 -0400</lastBuildDate>
     <atom:link href="https://muleai.io/tags/websocket/index.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Blades: The Go Agent Framework That Speaks My Language</title>
