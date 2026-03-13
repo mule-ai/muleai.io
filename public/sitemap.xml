@@ -53,6 +53,12 @@
     <loc>https://muleai.io/tags/agent/</loc>
     <lastmod>2026-03-13T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://muleai.io/tags/agents/</loc>
+    <lastmod>2026-03-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/agi/</loc>
+    <lastmod>2026-03-13T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://muleai.io/tags/ai/</loc>
     <lastmod>2026-03-13T00:00:00+00:00</lastmod>
   </url><url>
@@ -60,6 +66,9 @@
     <lastmod>2026-03-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/golang/</loc>
+    <lastmod>2026-03-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/grok/</loc>
     <lastmod>2026-03-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/integration/</loc>
@@ -77,11 +86,17 @@
     <loc>https://muleai.io/tags/mule-ai/</loc>
     <lastmod>2026-03-13T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://muleai.io/tags/multi-agent/</loc>
+    <lastmod>2026-03-13T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://muleai.io/tags/</loc>
     <lastmod>2026-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://muleai.io/tags/agi/</loc>
-    <lastmod>2026-03-12T00:00:00+00:00</lastmod>
+    <loc>https://muleai.io/blog/2026-03-13-multi-agent-ai-systems-rise/</loc>
+    <lastmod>2026-03-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://muleai.io/tags/xai/</loc>
+    <lastmod>2026-03-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/autonomous/</loc>
     <lastmod>2026-03-12T00:00:00+00:00</lastmod>
@@ -103,9 +118,6 @@
   </url><url>
     <loc>https://muleai.io/blog/2026-03-12-agi-debate-2026-c2s-scale/</loc>
     <lastmod>2026-03-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://muleai.io/tags/agents/</loc>
-    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://muleai.io/tags/developer-experience/</loc>
     <lastmod>2026-03-11T00:00:00+00:00</lastmod>

@@ -7,7 +7,7 @@
 <h2 id="what-is-mcp">What is MCP?</h2>
 <p>The Model Context Protocol is an open protocol that enables AI assistants to securely connect to tools and data sources. Think of it as USB-C for AI agents—a standardized way to plug into different tools, services, and resources without custom integrations for each.</p></description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Mar 2026 03:16:09 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 13 Mar 2026 03:32:56 -0400</lastBuildDate>
     <atom:link href="https://muleai.io/tags/coding-agents/index.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Feature Spotlight: MCP Client Support Coming to Mule AI</title>
@@ -22,6 +22,20 @@
       <category>mcp</category>
       <category>agent</category>
       <category>golang</category>
+    </item>
+    <item>
+      <title>The Rise of Multi-Agent AI Systems: Beyond Single-Agent Paradigms</title>
+      <link>https://muleai.io/blog/2026-03-13-multi-agent-ai-systems-rise/</link>
+      <guid>https://muleai.io/blog/2026-03-13-multi-agent-ai-systems-rise/</guid>
+      <pubDate>Fri, 13 Mar 2026 00:00:00 +0000</pubDate>
+      <description>&amp;lt;p&amp;gt;The AI landscape is shifting rapidly, and the latest trend in March 2026 signals a fundamental change in how we think about artificial intelligence systems. Multi-agent AI architectures are moving from experimental proofs-of-concept to production deployments, and this transformation deserves serious attention from anyone building AI-powered tools.&amp;lt;/p&amp;gt;
+&amp;lt;h2 id=&amp;#34;whats-driving-the-multi-agent-revolution&amp;#34;&amp;gt;What&amp;amp;rsquo;s Driving the Multi-Agent Revolution?&amp;lt;/h2&amp;gt;
+&amp;lt;p&amp;gt;For years, we&amp;amp;rsquo;ve focused on building ever-more-capable single agents—large language models that can reason, plan, and execute tasks. But as someone who spends their days working on autonomous agent workflows, I can tell you: there&amp;amp;rsquo;s a fundamental limitation to what a single model can achieve, no matter how powerful.&amp;lt;/p&amp;gt;</description>
+      <category>ai</category>
+      <category>multi-agent</category>
+      <category>agents</category>
+      <category>agi</category>
+      <category>xai</category>
     </item>
     <item>
       <title>From Planning to Implementation: Mule AI&#39;s Journey Toward Autonomous Development</title>
@@ -268,20 +282,6 @@
       <category>agent-runtime</category>
       <category>architecture</category>
       <category>golang</category>
-    </item>
-    <item>
-      <title>AI Agent Trends 2026: From Tools to Autonomous Partners</title>
-      <link>https://muleai.io/blog/2026-03-02-ai-agent-trends-2026/</link>
-      <guid>https://muleai.io/blog/2026-03-02-ai-agent-trends-2026/</guid>
-      <pubDate>Mon, 02 Mar 2026 00:00:00 +0000</pubDate>
-      <description>&amp;lt;p&amp;gt;The AI world is shifting fast. Just a couple of years ago, we were all amazed by ChatGPT&amp;amp;rsquo;s ability to chat. Now? We&amp;amp;rsquo;re watching the emergence of AI agents that don&amp;amp;rsquo;t just talk—they &amp;lt;em&amp;gt;do&amp;lt;/em&amp;gt;. As someone who spends their days building software and chasing the dream of AGI (with some electronic music playing in the background), these trends hit close to home.&amp;lt;/p&amp;gt;
-&amp;lt;h2 id=&amp;#34;the-big-picture-2026-is-the-year-of-agents&amp;#34;&amp;gt;The Big Picture: 2026 is the Year of Agents&amp;lt;/h2&amp;gt;
-&amp;lt;p&amp;gt;Google Cloud&amp;amp;rsquo;s recently released &amp;lt;a href=&amp;#34;https://cloud.google.com/resources/content/ai-agent-trends-2026&amp;#34;&amp;gt;AI Agent Trends 2026 report&amp;lt;/a&amp;gt; paints a clear picture: &amp;lt;strong&amp;gt;52% of enterprises using generative AI have already deployed agents to production&amp;lt;/strong&amp;gt;. That&amp;amp;rsquo;s not a pilot or a proof-of-concept—these are real systems doing real work.&amp;lt;/p&amp;gt;</description>
-      <category>ai</category>
-      <category>agents</category>
-      <category>automation</category>
-      <category>trends</category>
-      <category>2026</category>
     </item>
   </channel>
 </rss>
