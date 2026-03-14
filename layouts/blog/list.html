@@ -233,6 +233,11 @@ input:focus-visible {
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
+                <!-- Keyboard shortcut hint -->
+                <div class="absolute right-12 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 text-xs text-gray-500 pointer-events-none">
+                    <kbd class="px-1.5 py-0.5 bg-gray-700/70 text-gray-400 rounded border border-gray-600/50">⌘</kbd>
+                    <kbd class="px-1.5 py-0.5 bg-gray-700/70 text-gray-400 rounded border border-gray-600/50">K</kbd>
+                </div>
                 <!-- Theme Toggle Button -->
                 <button id="blog-theme-toggle"
                         class="absolute right-14 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-200 hover:bg-gray-700 rounded-lg transition-all"
@@ -999,6 +1004,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Keyboard shortcuts
     document.addEventListener('keydown', function(e) {
+        // "⌘K" or "Ctrl+K" to focus search
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            if (searchInput) {
+                searchInput.focus();
+                searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
         // "/" to focus search - only if not already typing in an input
         if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
             e.preventDefault();
