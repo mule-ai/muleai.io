@@ -190,6 +190,61 @@
             });
         }, 100);
     })();
+
+    
+    (function() {
+        
+        const progressBar = document.createElement('div');
+        progressBar.className = 'scroll-progress-bar';
+        document.body.appendChild(progressBar);
+
+        
+        const backToTop = document.createElement('button');
+        backToTop.className = 'back-to-top';
+        backToTop.setAttribute('aria-label', 'Back to top');
+        backToTop.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>';
+        document.body.appendChild(backToTop);
+
+        
+        function handleScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+
+            
+            progressBar.style.width = scrollPercent + '%';
+
+            
+            if (scrollTop > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+
+        
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    handleScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        
+        handleScroll();
+    })();
     </script>
 </head><body>
         <div>
@@ -831,6 +886,100 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
             </script>
+            
+            
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const tocContainer = document.querySelector('.toc-nav');
+                if (!tocContainer) return;
+                
+                const tocLinks = tocContainer.querySelectorAll('a');
+                if (tocLinks.length === 0) return;
+                
+                
+                const content = document.getElementById('post-content');
+                if (!content) return;
+                
+                const headings = content.querySelectorAll('h2, h3, h4, h5, h6');
+                if (headings.length === 0) return;
+                
+                
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '-80px 0px -70% 0px',
+                    threshold: 0
+                };
+                
+                const headingMap = {};
+                headings.forEach(function(heading) {
+                    if (!heading.id) {
+                        heading.id = heading.textContent
+                            .toLowerCase()
+                            .replace(/[^a-z0-9]+/g, '-')
+                            .replace(/(^-|-$)/g, '');
+                    }
+                    headingMap[heading.id] = heading;
+                });
+                
+                function setActiveLink(id) {
+                    tocLinks.forEach(function(link) {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+                
+                
+                if (tocLinks.length > 0) {
+                    const firstHref = tocLinks[0].getAttribute('href');
+                    if (firstHref) {
+                        const firstId = firstHref.replace('#', '');
+                        setActiveLink(firstId);
+                    }
+                }
+                
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            setActiveLink(entry.target.id);
+                        }
+                    });
+                }, observerOptions);
+                
+                headings.forEach(function(heading) {
+                    observer.observe(heading);
+                });
+                
+                
+                tocLinks.forEach(function(link) {
+                    link.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        if (href && href.startsWith('#')) {
+                            const id = href.substring(1);
+                            setActiveLink(id);
+                        }
+                    });
+                });
+            });
+            </script>
+            
+            <style>
+             
+            .toc-nav a.active {
+                color: #60a5fa !important;
+                font-weight: 600;
+                background: linear-gradient(90deg, rgba(96, 165, 250, 0.15) 0%, transparent 100%);
+                padding-left: 0.75rem;
+                border-left: 2px solid #60a5fa;
+                margin-left: -0.75rem;
+            }
+            .toc-nav a.active::before {
+                content: "▶" !important;
+                color: #60a5fa !important;
+                font-size: 0.65rem !important;
+            }
+            </style>
             
             <style>
              

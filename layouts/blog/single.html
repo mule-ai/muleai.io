@@ -385,6 +385,100 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             </script>
             
+            <!-- Table of Contents Active Section Highlighting -->
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const tocContainer = document.querySelector('.toc-nav');
+                if (!tocContainer) return;
+                
+                const tocLinks = tocContainer.querySelectorAll('a');
+                if (tocLinks.length === 0) return;
+                
+                // Get all headings from the content
+                const content = document.getElementById('post-content');
+                if (!content) return;
+                
+                const headings = content.querySelectorAll('h2, h3, h4, h5, h6');
+                if (headings.length === 0) return;
+                
+                // Create intersection observer to track visible headings
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '-80px 0px -70% 0px',
+                    threshold: 0
+                };
+                
+                const headingMap = {};
+                headings.forEach(function(heading) {
+                    if (!heading.id) {
+                        heading.id = heading.textContent
+                            .toLowerCase()
+                            .replace(/[^a-z0-9]+/g, '-')
+                            .replace(/(^-|-$)/g, '');
+                    }
+                    headingMap[heading.id] = heading;
+                });
+                
+                function setActiveLink(id) {
+                    tocLinks.forEach(function(link) {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+                
+                // Set first link as active initially
+                if (tocLinks.length > 0) {
+                    const firstHref = tocLinks[0].getAttribute('href');
+                    if (firstHref) {
+                        const firstId = firstHref.replace('#', '');
+                        setActiveLink(firstId);
+                    }
+                }
+                
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            setActiveLink(entry.target.id);
+                        }
+                    });
+                }, observerOptions);
+                
+                headings.forEach(function(heading) {
+                    observer.observe(heading);
+                });
+                
+                // Also handle direct clicks on TOC links
+                tocLinks.forEach(function(link) {
+                    link.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        if (href && href.startsWith('#')) {
+                            const id = href.substring(1);
+                            setActiveLink(id);
+                        }
+                    });
+                });
+            });
+            </script>
+            
+            <style>
+            /* TOC Active Link Styles */
+            .toc-nav a.active {
+                color: #60a5fa !important;
+                font-weight: 600;
+                background: linear-gradient(90deg, rgba(96, 165, 250, 0.15) 0%, transparent 100%);
+                padding-left: 0.75rem;
+                border-left: 2px solid #60a5fa;
+                margin-left: -0.75rem;
+            }
+            .toc-nav a.active::before {
+                content: "▶" !important;
+                color: #60a5fa !important;
+                font-size: 0.65rem !important;
+            }
+            </style>
+            
             <style>
             /* Heading anchor link styles */
             .heading-anchor {
