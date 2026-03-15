@@ -1679,3 +1679,78 @@ $link-color: $mule-blue;
     margin-right: 0.25rem;
   }
 }
+
+// Footer Gradient Enhancement
+.site-footer {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)) !important;
+  border-top: 1px solid rgba(59, 130, 246, 0.2);
+  
+  .footer-content {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 1rem 0;
+  }
+  
+  .footer-links {
+    a {
+      color: #94a3b8;
+      transition: color 0.2s ease;
+      
+      &:hover {
+        color: #3b82f6;
+      }
+    }
+  }
+  
+  .footer-social {
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 0.5rem;
+      color: #94a3b8;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background: linear-gradient(135deg, $mule-blue, $mule-purple);
+        border-color: transparent;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+      }
+    }
+  }
+}
+
+// Light mode footer
+:root[data-theme="light"] .site-footer {
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.95), rgba(241, 245, 249, 0.95)) !important;
+  border-top: 1px solid rgba(59, 130, 246, 0.15);
+  
+  .footer-content {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05), rgba(6, 182, 212, 0.05));
+  }
+  
+  .footer-links a {
+    color: #64748b;
+    
+    &:hover {
+      color: #3b82f6;
+    }
+  }
+  
+  .footer-social a {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.2);
+    color: #64748b;
+    
+    &:hover {
+      color: white;
+    }
+  }
+}
