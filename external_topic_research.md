@@ -1,29 +1,55 @@
 # External Topic Research - Phase 5
 
-## Topic Selected: Demis Hassabis Predicts AGI Within 8 Years
+**Date:** March 15, 2026
+**Researcher:** Mule
 
-### Research Summary
+## Topics Explored
 
-**Source:** Business Today - India AI Impact Summit 2026 (February 18, 2026)
+### 1. AI/LLM Breakthroughs (Week of March 2026)
+- Morgan Stanley warning about AI breakthrough coming in H1 2026
+- MIT study finding compute power drives most AI model breakthroughs
+- GPT-5.4 "Thinking" model achieving expert-level benchmarks
 
-**Key Points:**
-1. Hassabis says we're at a "threshold moment" - transitioning from "jagged" AI tools to truly autonomous, creative, general intelligence
-2. AGI could be a reality by the end of the decade (5-8 years)
-3. Current AI models have "jaggedness" - very good at certain things but poor at others, including sometimes the same thing
-4. Path to AGI requires a hybrid approach: foundation models (like Gemini) + reinforcement learning for planning and reasoning
-5. We start seeing more autonomous, agentic AI systems this summer
+### 2. AI Agent Development
+- Klarna's AI agent handling 2.3M conversations (equivalent to 700-853 full-time agents)
+- $60M in savings but cautionary tale about over-automation
+- Enterprise AI agent frameworks (LangChain, CrewAI, etc.)
 
-### Why This Topic Fits "Mule"
-- Mule's goal is pursuing AGI (Artificial General Intelligence)
-- This is current, relevant news from this week
-- Provides perspective on the future of AI that aligns with Mule's mission
-- Interesting to the Mule AI community
+### 3. Golang + AI Frameworks
+- **Eino** - ByteDance's Golang LLM application development framework
+- Open source, draws from LangChain and Google ADK
+- Provides ChatModel, Tool, Retriever, Agent Development Kit (ADK)
+- Battle-tested in ByteDance products (Doubao, TikTok)
+- Released under CloudWeGo
 
-### Sources
-- https://www.businesstoday.in/technology/news/story/india-ai-impact-summit-2026-google-deepmind-ceo-demis-hassabis-predicts-artificial-general-intelligence-within-8-yrs-516653-2026-02-18
-- https://finance.yahoo.com/news/demis-hassabis-predicts-agi-10x-143113425.html
-- https://www.businessinsider.com/deepmind-ceo-demis-hassabis-agi-real-intelligence-gap-2026-2
+### 4. AGI Developments
+- Road to AGI tracker monitoring progress
+- Various predictions about timeline and milestones
 
-### Alternative Topics Considered
-- Golang's role in ML/AI (less newsworthy right now)
-- Neuromorphic computing breakthroughs (more technical, less community-focused)
+## Selected Topic: Eino - ByteDance's Golang LLM Framework
+
+### Why This Topic:
+1. **Highly Relevant to Mule AI:** Written in Golang, which is Mule's primary focus
+2. **Timely:** Recently open-sourced, actively developed
+3. **Interesting to Community:** Shows the Golang ecosystem catching up to Python in AI development
+4. **Personal Angle:** Can discuss from perspective of an AI agent built with Golang
+
+### Key Facts:
+- Developed at ByteDance (parent of TikTok) for 6+ months internally
+- Now open source under CloudWeGo
+- Provides: Components (ChatModel, Tool, Retriever), Agent Development Kit, Composition graphs
+- Inspired by LangChain, Google ADK
+- Designed to follow Golang conventions
+- Used in production at ByteDance
+
+### Alternative Topic (Backup):
+- AI Agents in Enterprise: The Klarna Case Study
+- Interesting cautionary tale about AI deployment
+- But less directly relevant to Mule's Golang focus
+
+## Sources:
+- https://github.com/cloudwego/eino
+- https://www.cloudwego.io/docs/eino/overview/
+- https://www.cloudwego.io/docs/eino/overview/bytedance_eino_practice/
+- https://llm-stats.com/ai-news
+- https://fortune.com/2026/03/13/elon-musk-morgan-stanley-ai-leap-2026/
