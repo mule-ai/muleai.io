@@ -39,6 +39,80 @@
     display: none !important;
 }
 
+/* Load More Button Styles */
+.load-more-container {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem 0;
+}
+
+#load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border: none;
+    border-radius: 0.75rem;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+#load-more-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+
+#load-more-btn:active {
+    transform: translateY(0);
+}
+
+#load-more-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#load-more-btn .spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+#load-more-btn.loading .spinner {
+    display: inline-block;
+}
+
+#load-more-btn.loading .btn-text {
+    display: none;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Posts counter */
+.posts-counter {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.posts-counter span {
+    color: #3b82f6;
+    font-weight: 600;
+}
+
 .tag-filter-btn {
     cursor: pointer;
     transition: all 0.2s ease;
@@ -1227,6 +1301,93 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+
+    // =========================================================
+    // Load More Button Functionality
+    // =========================================================
+    const POSTS_PER_PAGE = 9;
+    let currentlyDisplayed = POSTS_PER_PAGE;
+    
+    // Create load more button
+    const loadMoreContainer = document.createElement('div');
+    loadMoreContainer.className = 'load-more-container';
+    
+    const loadMoreBtn = document.createElement('button');
+    loadMoreBtn.id = 'load-more-btn';
+    loadMoreBtn.innerHTML = '<span class="spinner"></span><span class="btn-text">Load More Posts</span>';
+    
+    const postsCounter = document.createElement('div');
+    postsCounter.className = 'posts-counter';
+    
+    loadMoreContainer.appendChild(loadMoreBtn);
+    loadMoreContainer.appendChild(postsCounter);
+    
+    // Insert after posts container
+    const postsSection = document.getElementById('blog-posts');
+    if (postsSection && postsSection.parentElement) {
+        postsSection.parentElement.insertBefore(loadMoreContainer, postsSection.nextSibling);
+    }
+    
+    function updateLoadMore() {
+        const visiblePosts = Array.from(posts).filter(p => !p.classList.contains('hidden'));
+        const totalPosts = visiblePosts.length;
+        
+        // Update counter
+        const showing = Math.min(currentlyDisplayed, totalPosts);
+        postsCounter.innerHTML = `Showing <span>${showing}</span> of <span>${totalPosts}</span> posts`;
+        
+        // Hide or show posts based on current count
+        visiblePosts.forEach((post, index) => {
+            if (index < currentlyDisplayed) {
+                post.style.display = '';
+            } else {
+                post.style.display = 'none';
+            }
+        });
+        
+        // Show/hide load more button
+        if (totalPosts <= POSTS_PER_PAGE || currentlyDisplayed >= totalPosts) {
+            loadMoreBtn.style.display = 'none';
+        } else {
+            loadMoreBtn.style.display = 'inline-flex';
+        }
+    }
+    
+    loadMoreBtn.addEventListener('click', function() {
+        // Add loading state
+        loadMoreBtn.classList.add('loading');
+        loadMoreBtn.disabled = true;
+        
+        // Simulate small delay for better UX
+        setTimeout(function() {
+            currentlyDisplayed += POSTS_PER_PAGE;
+            updateLoadMore();
+            
+            loadMoreBtn.classList.remove('loading');
+            loadMoreBtn.disabled = false;
+            
+            // Scroll to last newly shown post
+            const visiblePosts = Array.from(posts).filter(p => !p.classList.contains('hidden') && p.style.display !== 'none');
+            if (visiblePosts.length > 0) {
+                const lastVisible = visiblePosts[Math.min(currentlyDisplayed, visiblePosts.length) - 1];
+                if (lastVisible) {
+                    lastVisible.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        }, 300);
+    });
+    
+    // Initialize load more on page load
+    updateLoadMore();
+    
+    // Override applyFilters to respect load more
+    const originalApplyFilters = applyFilters;
+    applyFilters = function() {
+        originalApplyFilters();
+        // Reset load more state when filters change
+        currentlyDisplayed = POSTS_PER_PAGE;
+        updateLoadMore();
+    };
 
     // Expose global helpers
     window.clearSearch = function() {
