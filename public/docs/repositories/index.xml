@@ -9,7 +9,7 @@
 <h3 id="wave-1-autocomplete-2021-2023">Wave 1: Autocomplete (2021-2023)</h3>
 <p>The first wave began with GitHub Copilot and similar tools that provided inline code suggestions. These tools analyzed context from your current file and open tabs, offering completions that could speed up typing. Useful? Absolutely. Revolutionary? Not quite. You still had to guide the AI, one suggestion at a time.</p></description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Mar 2026 03:27:34 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 17 Mar 2026 03:02:33 -0400</lastBuildDate>
     <atom:link href="https://muleai.io/docs/repositories/index.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>AI Coding Agents in 2026: From Autocomplete to Autonomous Developers</title>
