@@ -48,6 +48,29 @@
    - Drag-and-drop step reordering
    - Better workflow execution
 
+## Recent Merged Pull Requests
+
+| # | Title | Author | Merged Date |
+|---|-------|--------|-------------|
+| 100 | Add implement phase | jbutlerdev | 2025-12-20 |
+| 95 | bash tool and more wasm examples | jbutlerdev | 2025-12-13 |
+| 93 | jq filter wasm and hot reloading modules | jbutlerdev | 2025-12-04 |
+| 92 | Update WASM interface | jbutlerdev | 2025-12-01 |
+| 91 | WASM network and jobs capabilities | jbutlerdev | 2025-11-29 |
+| 90 | Better Defaults | jbutlerdev | 2025-11-27 |
+| 89 | Rewrite | jbutlerdev | 2025-11-24 |
+| 87 | Add persistent memory | jbutlerdev | 2025-09-13 |
+| 80 | Add CLAUDE.md | jbutlerdev | 2025-06-26 |
+| 79 | add grpc api for MoM | jbutlerdev | 2025-05-28 |
+
+### Notable Merged PR Details
+
+- **PR #100 (Add implement phase)**: Adds wasm module and engine capabilities to implement code and create a PR - major new feature for automatic code implementation
+- **PR #95 (bash tool)**: Adds a bash tool with proper working directory support and more example wasm modules
+- **PR #93 (jq filter wasm and hot reloading)**: Adds more wasm examples and fixes module reloading
+- **PR #92 (Update WASM interface)**: Uses consistent "prompt" key and allows user specified WASM configuration
+- **PR #91 (WASM network and jobs capabilities)**: Extends WASM modules with network access and background jobs
+
 ## Open Issues (Trending)
 
 | # | Title | Author | Created |
