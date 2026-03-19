@@ -18,21 +18,57 @@
 .tag-category-mule { background: linear-gradient(135deg, #10b981, #047857) !important; }
 .tag-category-default { background: linear-gradient(135deg, #6b7280, #4b5563) !important; }
 
-/* Blog list animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* ENHANCED: Tag chip hover effects with scale and glow */
+.tag-chip {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
+.tag-chip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.tag-chip:hover {
+    transform: scale(1.08) translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.tag-chip:hover::before {
+    opacity: 1;
+}
+
+.tag-chip:active {
+    transform: scale(0.98);
+}
+
+/* ENHANCED: Blog card with animated border glow on hover */
 .blog-post-card {
     animation: fadeInUp 0.4s ease forwards;
     opacity: 0;
+    position: relative;
+}
+
+.blog-post-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+    border-radius: inherit;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    filter: blur(8px);
+}
+
+.blog-post-card:hover::before {
+    opacity: 0.4;
 }
 
 .blog-post-card.hidden {
@@ -58,8 +94,25 @@
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+#load-more-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+#load-more-btn:hover::before {
+    left: 100%;
 }
 
 #load-more-btn:hover {
@@ -98,6 +151,29 @@
 
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+/* ENHANCED: Search input with animated gradient border */
+#blog-search {
+    background-image: linear-gradient(#1e293b, #1e293b), 
+                      linear-gradient(to right, #3b82f6, #8b5cf6, #06b6d4);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    transition: all 0.3s ease;
+}
+
+#blog-search:focus {
+    background-image: linear-gradient(#1e293b, #1e293b), 
+                      linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
+    background-size: 100% 100%, 200% 100%;
+    animation: gradientShift 2s linear infinite;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 0%, 0% 50%; }
+    50% { background-position: 0% 0%, 100% 50%; }
+    100% { background-position: 0% 0%, 200% 50%; }
 }
 
 /* Posts counter */
@@ -206,6 +282,60 @@ input:focus-visible {
         padding: 0.25rem 0.5rem;
         font-size: 0.75rem;
     }
+}
+
+/* ENHANCED: Stats cards with hover effects and subtle pulse */
+.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30 {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30:hover::before {
+    opacity: 1;
+}
+
+/* ENHANCED: Stats numbers with subtle glow on hover */
+.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .text-2xl {
+    transition: all 0.3s ease;
+}
+
+.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30:hover .text-2xl {
+    text-shadow: 0 0 20px currentColor;
+}
+
+/* ENHANCED: Featured posts with enhanced hover */
+a.group.block.relative.bg-gradient-to-br {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a.group.block.relative.bg-gradient-to-br:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
+}
+
+/* ENHANCED: Quick links with hover animation */
+.inline-flex.items-center.gap-2.px-4.py-2 {
+    transition: all 0.2s ease;
+}
+
+.inline-flex.items-center.gap-2.px-4.py-2:hover {
+    transform: translateX(4px);
 }
 </style>
 
@@ -737,7 +867,11 @@ body {
 :root[data-theme="light"] input[type="text"]:focus,
 :root[data-theme="light"] input[type="search"]:focus {
     border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 0 20px rgba(139, 92, 246, 0.1) !important;
+    background-image: linear-gradient(#ffffff, #ffffff), 
+                      linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6) !important;
+    background-size: 100% 100%, 200% 100% !important;
+    animation: gradientShift 2s linear infinite !important;
 }
 
 :root[data-theme="light"] input[type="text"]::placeholder,
@@ -758,6 +892,21 @@ body {
 :root[data-theme="light"] .blog-post-card:hover {
     background-color: #f8fafc !important;
     border-color: #3b82f6 !important;
+}
+
+/* Light mode - Enhanced blog card glow */
+:root[data-theme="light"] .blog-post-card::before {
+    filter: blur(8px) brightness(1.2);
+}
+
+:root[data-theme="light"] .blog-post-card:hover::before {
+    opacity: 0.3;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+}
+
+/* Light mode - Enhanced tag chip */
+:root[data-theme="light"] .tag-chip:hover {
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
 }
 
 /* Light mode - Button styles */
@@ -998,6 +1147,16 @@ header#topnav,
 /* Light mode - Stats cards */
 :root[data-theme="light"] .bg-gray-800\/30.rounded-lg {
     background-color: #f1f5f9 !important;
+}
+
+/* Light mode - Enhanced stats cards hover */
+:root[data-theme="light"] .grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30:hover {
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+:root[data-theme="light"] .grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30::before {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
 }
 </style>
 
