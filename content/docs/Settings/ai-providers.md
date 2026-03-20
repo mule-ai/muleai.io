@@ -4,7 +4,7 @@ title: "AI Providers"
 description: ""
 icon: "article"
 date: "2025-02-20T20:54:21-05:00"
-lastmod: "2025-02-20T20:54:21-05:00"
+lastmod: "2026-03-20T00:00:00-05:00"
 toc: true
 ---
 
@@ -12,13 +12,32 @@ toc: true
 
 Mule supports configuring multiple AI providers. These are used to provide the models that will be used by Agents.
 
-Currently Mule supports:
+Mule uses [pi](https://pi.dev) as its AI runtime, which supports a wide range of providers:
 
+**API Key Authentication:**
 * OpenAI
-* Anthropic  
+* Anthropic
 * Google Gemini
-* Ollama (local models)
+* Azure OpenAI
+* Google Vertex
+* Amazon Bedrock
+* Mistral
+* Groq
+* Cerebras
+* xAI
+* OpenRouter
+* Vercel AI Gateway
+* OpenCode Zen
 
-All providers are production-ready with full support for model switching, tool assignment, and dynamic configuration.
+**Subscription Support:**
+* Anthropic Claude Pro/Max
+* OpenAI ChatGPT Plus/Pro
+* GitHub Copilot
+* Google Gemini CLI
 
-Not all fields are required, only the information that is necessary to interact with your chosen provider must be provided.
+For local models, you can also configure:
+* Ollama
+
+All providers support model switching, tool assignment, and dynamic configuration.
+
+Not all fields are required—only the information necessary to interact with your chosen provider must be provided.

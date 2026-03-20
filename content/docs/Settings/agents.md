@@ -18,4 +18,4 @@ In order to interact with the filesystem, select the tools you wish to present t
 
 When an Agent has performed its generation, validation functions can be run. This allows you to perform actions such as linting and running tests.
 
-{{< alert text="Currently multiple agents can be defined but only the first one will be used. This will be updated in the future when multi-agent workflows are enabled." />}}
+{{< alert text="Multiple agents can be defined and used together in workflows. Each agent can be assigned to different steps in a workflow, enabling complex multi-agent pipelines. See the Workflows documentation for details on chaining agents together." />}}

@@ -64,23 +64,18 @@ When an agent completes its work, its output is processed according to the outpu
 
 ## Validation Functions
 
-Validation functions run after a workflow step to ensure code quality. Mule includes several built-in validation functions:
+Validation functions run after a workflow step to ensure code quality. Validation is handled through WASM modules that implement custom validation logic.
 
-- **getDeps**: Ensures all dependencies are available
-- **goFmt**: Formats Go code according to standard conventions
-- **goModTidy**: Cleans up Go module dependencies
-- **golangciLint**: Runs linters to catch common coding issues
-- **goTest**: Executes tests to verify functionality
+You can create custom validation WASM modules to:
+- Check code formatting
+- Run linters and formatters (e.g., gofmt, golangci-lint)
+- Execute tests (e.g., go test)
+- Validate dependencies
+- Run custom build checks
 
-You can specify which validation functions to run for each workflow:
+Validation modules receive the generated code as input and return validation results. If validation fails, Mule can make additional attempts to fix the issues by asking the agent to revise its output.
 
-```yaml
-validationFunctions:
-  - goFmt
-  - goTest
-```
-
-If validation fails, Mule will make additional attempts to fix the issues by asking the agent to revise its output.
+See the [WASM validation module example](https://github.com/mule-ai/mule/tree/main/examples/wasm/validation-module) for guidance on creating custom validators.
 
 ## Advanced: Multi-Agent Workflows
 
@@ -100,17 +95,14 @@ steps:
   - id: implementation
     agentID: 1
     outputField: generatedTextWithReasoning
-validationFunctions:
-  - goFmt
-  - golangciLint
-  - goTest
 ```
 
 In this example:
 1. One agent analyzes the code
 2. A second agent suggests improvements
 3. A third agent implements those improvements
-4. Validation ensures code quality
+
+Custom validation WASM modules can be attached to validate the final output.
 
 ## Integration with External Systems
 
@@ -158,4 +150,4 @@ For optimal workflow performance:
 - Ensure agent prompts are clear and specific
 - Include relevant context in issue descriptions
 - Test workflows with the local provider before using with GitHub
-- Review validation function output for common errors
+- Review output for common errors and iterate on prompts

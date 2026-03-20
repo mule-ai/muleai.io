@@ -10,14 +10,14 @@ toc: true
 
 The Settings page allows a user to configure most system behaviors. Currently we have the following:
 
-* [General](/docs/settings/general)
+* [General](/docs/Settings/general)
   * Add a GitHub Token
 
-* [AI Providers](/docs/settings/ai-providers)
+* [AI Providers](/docs/Settings/ai-providers)
   * Configure the AI Providers that you wish to use for your Agents
 
-* [Agents](/docs/settings/agents)
+* [Agents](/docs/Settings/agents)
   * Configure Agents to use for code generation
 
-* [System Agent](/docs/settings/system-agent)
+* [System Agent](/docs/Settings/system-agent)
   * Configure the Agent that is used for system tasks such as generating a commit message
