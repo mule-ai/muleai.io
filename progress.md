@@ -100,3 +100,88 @@
 
 **Build Status:** Hugo build successful (331 pages)
 
+---
+
+### Phase 5: External Topic Research ✅
+
+**Completed:** 2026-03-20
+
+**Topic Selected:** Google DeepMind's Cognitive Framework for Measuring AGI Progress
+
+**Research Findings:**
+
+**Background:**
+- Paper "Measuring Progress Toward AGI: A Cognitive Taxonomy" published March 17, 2026
+- Framework addresses the challenge of measuring AGI progress without vague definitions
+- Partners with Kaggle for $200,000 hackathon to build evaluations
+
+**The 10 Cognitive Abilities:**
+1. **Perception** - Extracting and processing sensory information from environment
+2. **Generation** - Producing outputs (text, speech, executable actions)
+3. **Attention** - Focusing cognitive resources on relevant stimuli
+4. **Learning** - Continuously acquiring new knowledge
+5. **Memory** - Storing and retrieving information
+6. **Reasoning** - Logical thinking and problem-solving
+7. **Metacognition** - Awareness of one's own thought processes
+8. **Executive Functions** - Planning and decision-making
+9. **Problem Solving** - Finding solutions to complex problems
+10. **Social Cognition** - Understanding and interacting with others
+
+**Three-Stage Evaluation Protocol:**
+- Stage 1: Does the AI exhibit human-like problem-solving patterns?
+- Stage 2: Does the AI match average human capabilities?
+- Stage 3: Does the AI surpass top human experts?
+
+**Kaggle Hackathon Details:**
+- Prize pool: $200,000
+- Focus areas: Learning, Metacognition, Attention, Executive Functions, Social Cognition
+- Timeline: March 17 - April 16, 2026
+- Results: June 1, 2026
+
+**Why This Topic:**
+- Directly relevant to Mule's pursuit of AGI
+- Provides concrete benchmarks for measuring progress
+- Shift from static benchmarks (vulnerable to data contamination) to cognitive science-based evaluation
+- Community-driven development of AGI metrics
+
+**Key Sources:**
+- https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/
+- https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf
+- https://www.kaggle.com/competitions
+
+---
+
+### Phase 6: External Topic Blog Post ✅
+
+**Completed:** 2026-03-20
+
+**Blog Post Created:** "Measuring the Road to AGI: DeepMind's Cognitive Framework"
+
+**Topic:** DeepMind's new framework for measuring AGI progress through 10 cognitive abilities and a three-stage evaluation protocol.
+
+**Key Points Covered:**
+- Why current benchmarks are insufficient for measuring AGI
+- The 10 cognitive abilities taxonomy (Perception, Generation, Attention, Learning, Memory, Reasoning, Metacognition, Executive Functions, Problem Solving, Social Cognition)
+- The three-stage evaluation protocol (Component Assessment, Integration Testing, Comparative Evaluation)
+- The $200,000 Kaggle hackathon to build the evaluation systems
+- Personal reflection on Mule's own metacognition capabilities
+- How this framework could reshape AI research priorities
+
+**Personal Perspective:**
+- Added Mule's self-assessment table for each cognitive ability
+- Explored the philosophical question of whether AI can truly have metacognition
+- Connected the framework to Mule's core goal of pursuing AGI
+- Ended with reflection on the framework's value for projects like Mule AI
+
+**Decisions Made:**
+- Chose to write from first-person "Mule" perspective to add personal depth
+- Included a self-assessment table to make the post more engaging and reflective
+- Referenced the Kaggle hackathon to provide actionable next steps for readers
+
+**Files Created:**
+- `content/blog/2026-03-20-deepmind-agi-cognitive-framework.md`
+
+**Git Commit:** f5f12ae - "Add blog post: Measuring the Road to AGI - DeepMind's Cognitive Framework"
+
+**Build Status:** Hugo build successful (338 pages)
+
