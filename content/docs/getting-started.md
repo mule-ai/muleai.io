@@ -4,7 +4,7 @@ title: "Getting Started"
 description: "Getting started with Mule"
 icon: "article"
 date: "2025-02-20T20:46:32-05:00"
-lastmod: "2026-03-20T00:00:00-05:00"
+lastmod: "2026-03-21T00:00:00-05:00"
 toc: true
 ---
 
@@ -12,12 +12,12 @@ toc: true
 
 Mule is an advanced multi-agent AI development platform that orchestrates sophisticated workflows and integrations. It serves as your autonomous development infrastructure, capable of:
 
-- **Multi-Agent Workflows**: Orchestrate complex tasks with sequential steps, sub-workflows, and validation
-- **Production Integrations**: Discord, Matrix, gRPC API, RSS feeds, persistent memory, and more
+- **Multi-Agent Workflows**: Orchestrate complex tasks with sequential steps, WASM modules, and validation
 - **Multi-Provider Support**: OpenAI, Anthropic, Gemini, and Ollama with dynamic model switching
-- **Autonomous Development**: Monitor repositories, process issues, create PRs, and respond to feedback
-- **Advanced Memory**: ChromeM-based vector database for RAG and context retention
-- **Quality Control**: Built-in validation functions with retry logic for robust outputs
+- **Skills System**: Extend agents with specialized capabilities using pi agent skills
+- **WebAssembly Modules**: Custom workflow steps compiled to WASM for sandboxed execution
+- **Built-in Tools**: Filesystem, bash, HTTP, and database tools for agent interactions
+- **Semantic Memory**: Vector embedding storage for context retention and retrieval
 
 ## Architecture Overview
 
@@ -46,17 +46,66 @@ graph TB
     AGENTS <-->|Store| MEM
 ```
 
+### Agent Execution Model
+
+When an agent processes a task, it follows this execution flow:
+
+```mermaid
+flowchart LR
+    subgraph Input["Task Input"]
+        Task[Task/Job Request]
+        Context[Context & Memory]
+    end
+
+    subgraph Agent["Agent Processing"]
+        LLM[LLM Decision Making]
+        Tools[Tool Selection]
+        WASM[WASM Validation]
+    end
+
+    subgraph Actions["Tool Actions"]
+        FS[Filesystem<br/>Read/Write Files]
+        Bash[Command Execution<br/>Run Scripts]
+        HTTP[HTTP Requests<br/>API Calls]
+        DB[Database Queries]
+    end
+
+    subgraph Output["Task Output"]
+        Result[Result/Artifacts]
+        Report[Status Report]
+    end
+
+    Task --> LLM
+    Context --> LLM
+    LLM -->|Decide next step| Tools
+    Tools -->|Execute| Actions
+    Actions -->|Results| LLM
+    LLM -->|Validation needed| WASM
+    WASM -->|Pass/Fail| LLM
+    LLM -->|Complete| Result
+    Result --> Report
+```
+
+**Key Components:**
+
+| Component | Purpose | Example |
+|-----------|---------|---------|
+| **LLM** | Decision making and response generation | Claude, GPT-4, Ollama |
+| **Tools** | Actions the agent can perform | File editing, bash commands, HTTP |
+| **WASM Modules** | Custom validation logic | Type checking, linting, tests |
+| **Memory** | Context retention and RAG | Vector embeddings of previous tasks |
+
 ## Prerequisites
 
 Before installing Mule, ensure you have:
 
 - **Go 1.25.4+**: Mule is built with Go 1.25.4 or newer
-- **PostgreSQL 12+**: Required for configuration storage and job queuing
+- **PostgreSQL 16+**: Required for configuration storage and job queuing (if not using Docker)
 - **Git**: For repository operations
 - **SSH keys**: Configured for GitHub access if using GitHub repositories
 - **AI provider access**: API keys for your chosen AI provider (OpenAI, Anthropic, Gemini, Ollama)
 - **GitHub token**: If you plan to use GitHub repositories (optional)
-- **Docker & Docker Compose**: For containerized deployment (optional)
+- **Docker & Docker Compose v2+**: For containerized deployment (recommended)
 
 ## Installation
 
@@ -194,16 +243,26 @@ Follow these steps to get Mule working with your first repository:
 
 Welcome to Mule! This guide will help you get the most out of your first experience.
 
+#### Default Configuration
+
+On first startup, Mule automatically creates default configurations to help you get started quickly:
+
+- **Default Provider**: A local Ollama provider pre-configured (`http://localhost:11434`)
+- **Default Agent**: A general-purpose agent ready to use
+- **Default Workflow**: A basic workflow template you can customize
+
+You can modify or delete these defaults once you're familiar with the system.
+
 #### First-Run Checklist
 
 Before diving in, ensure you've completed these setup steps:
 
 - [ ] **Docker/PostgreSQL running**: Verify `docker-compose ps` shows services as "Up"
 - [ ] **Web UI accessible**: Confirm [http://localhost:8140](http://localhost:8140) loads
-- [ ] **Health check passing**: [http://localhost:8140/health](http://localhost:8140/health) returns `{"status":"ok"}`
+- [ ] **Health check passing**: [http://localhost:8140/health](http://localhost:8140/health) returns `OK`
 - [ ] **GitHub token configured**: Settings → General → GitHub Token saved
 - [ ] **AI provider configured**: Settings → AI Providers → At least one provider added
-- [ ] **Test agent created**: Settings → Agents → At least one agent configured
+- [ ] **Test agent created**: Settings → Agents → At least one agent configured (or use the default)
 - [ ] **Test repository added**: Repositories → Add Repository → Repository connected
 
 #### Best Practices for New Users
@@ -226,14 +285,48 @@ Before diving in, ensure you've completed these setup steps:
 3. **Processing Time**: After detecting an issue, processing typically takes 1-5 minutes depending on task complexity and AI provider latency
 4. **PR Creation**: Mule creates a draft PR with its proposed changes, allowing you to review before merging
 
+#### Understanding the Port Mapping
+
+Mule uses Docker to run services, with the following port configuration:
+
+| Service | Internal Port | External Port (Docker) |
+|---------|---------------|------------------------|
+| API Server | `:8080` | `:8140` (mapped in docker-compose.yml) |
+| PostgreSQL | `:5432` | Not exposed externally |
+
+**Important**: When configuring providers or connecting services, use the Docker network names:
+- **PostgreSQL**: Hostname `postgres` (from docker-compose network)
+- **Ollama (local)**: `http://localhost:11434` (if running on host)
+
+The API server is available at `http://localhost:8140` externally.
+
+#### Real-Time Updates (WebSocket)
+
+Mule supports real-time job updates via WebSocket. Connect to:
+
+```
+ws://localhost:8140/ws
+```
+
+This allows you to receive live notifications when:
+- Jobs start, complete, or fail
+- Workflow steps progress
+- Agent tasks complete
+
+The web UI automatically uses WebSocket for real-time updates in the Jobs page.
+
 #### Common First-Run Mistakes to Avoid
 
 - ❌ **Don't**: Create vague issues like "fix the bug" — be specific about what needs to change
-- ❌ **Don't**: Expect instant results — AI processing takes time
+- ❌ **Don't**: Expect instant results — AI processing takes time (1-5 minutes per task)
 - ❌ **Don't**: Use complex monorepos initially — start with single-package repositories
 - ❌ **Don't**: Skip the label configuration — without the correct label, Mule ignores your issues
+- ❌ **Don't**: Use `localhost` for provider endpoints in Docker — use actual IP addresses for host services
+- ❌ **Don't**: Forget to add the `mule` label to your issues
 - ✅ **Do**: Start with incremental improvements rather than large refactors
 - ✅ **Do**: Review Mule's reasoning in the PR description before merging
+- ✅ **Do**: Start with the default agent configuration before customizing
+- ✅ **Do**: Test with a simple, personal repository first
 
 #### Getting Help
 
@@ -252,6 +345,41 @@ Once set up, Mule will automatically:
 3. Generate solutions and create pull requests
 4. Respond to any comments on those pull requests
 
+#### Quick Test: Verify Your Setup
+
+Before creating your first issue, verify everything is working:
+
+**1. Health Check:**
+```bash
+curl http://localhost:8140/health
+# Should return: OK
+```
+
+**2. List Available Models:**
+```bash
+curl http://localhost:8140/v1/models
+# Should return a list of available models from your configured providers
+```
+
+**3. Check Agents:**
+```bash
+curl http://localhost:8140/api/v1/agents
+# Should return your configured agents (including the default agent)
+```
+
+**4. Test API Access (if you have a provider configured):**
+```bash
+curl -X POST http://localhost:8140/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "agent/default",
+    "messages": [{"role": "user", "content": "Hello! Can you respond briefly?"}]
+  }'
+# Should return a response from your agent
+```
+
+If any of these fail, check the [Troubleshooting](#troubleshooting) section below.
+
 ## Command Line Options
 
 Mule supports several command line options:
@@ -263,7 +391,18 @@ mule [options]
 Options:
 - `-db`: PostgreSQL connection string (default: `postgres://user:pass@localhost:5432/mulev2?sslmode=disable`)
 - `-listen`: HTTP listen address (default: `:8080`)
-- `-help`: Display help information
+
+### Environment Variables
+
+Mule also supports configuration via environment variables. You can set the database connection string and listen address:
+
+```bash
+export DB_CONN_STR="postgres://user:pass@localhost:5432/mulev2?sslmode=disable"
+export LISTEN_ADDR=":8080"
+
+# Run with environment variables
+./cmd/api/bin/mule
+```
 
 ## Demo
 
@@ -315,6 +454,12 @@ docker-compose ps postgres
 # Format: postgres://user:password@host:5432/database?sslmode=disable
 ```
 
+**Default configurations not created**
+On first run, Mule should create default providers, agents, and workflows. If these are missing:
+1. Check the logs: `docker-compose logs mule-api`
+2. Verify the database is healthy: `docker-compose exec postgres psql -U mule -d mulev2 -c "\dt"`
+3. Restart the container: `docker-compose restart mule-api`
+
 ### Configuration Issues
 
 **Mule can't connect to GitHub**
@@ -328,6 +473,16 @@ docker-compose ps postgres
 - **Anthropic**: Check key at [console.anthropic.com](https://console.anthropic.com)
 - **Ollama**: Ensure service is running: `curl http://localhost:11434/api/tags`
 - **Gemini**: Verify API key in Google AI Studio
+
+**Ollama not accessible from Docker**
+If you're running Ollama on your host machine and Mule is in Docker, Ollama may not be accessible at `localhost`. Try:
+```bash
+# Get your host's IP address
+hostname -I | awk '{print $1}'
+
+# Use the IP address instead of localhost
+# e.g., http://192.168.1.100:11434
+```
 
 **Rate limiting errors**
 - Check your AI provider's rate limits
@@ -386,7 +541,7 @@ docker stats
 3. **Test your connections** independently:
    - AI provider: `curl` your provider's API endpoint
    - GitHub: `ssh -T git@github.com`
-   - Database: `docker-compose exec postgres psql -U mule`
+   - Database: `docker-compose exec postgres psql -U mule -d mulev2`
 4. **Review the issue label** on GitHub to confirm it matches your configuration
 
 For more help, check the logs at `~/.config/mule/mule.log` or use the Logs page in the web interface.

@@ -1,130 +1,176 @@
 ---
 weight: 2
 title: "Adding a Repository"
-description: "Learn how to add repositories to Mule for AI-powered issue processing"
+description: "Repository management in Mule - using WASM modules for GitHub integration"
 icon: "article"
 date: "2025-02-20T21:04:16-05:00"
-lastmod: "2026-03-20T00:00:00-05:00"
+lastmod: "2026-03-21T00:00:00-05:00"
 toc: true
 ---
 
 ![add-repository](https://storage.googleapis.com/mule-storage/add-repository.png)
 
-Adding a repository is the action that allows mule to monitor issues and create new pull requests.
+> **Note:** Mule uses WASM modules for repository integration rather than a dedicated UI-based repository management system. This provides more flexibility and allows you to build custom GitHub automation workflows.
 
-## Supported Repository Types
+## GitHub Integration via WASM Modules
 
-Mule supports two types of repositories:
+Mule provides WASM modules for GitHub operations that can be integrated into your workflows:
 
-| Type | Description |
-|------|-------------|
-| **GitHub** | Remote repositories hosted on GitHub. Mule monitors issues, creates branches, commits, and pull requests. |
-| **Local** | Local-only repositories for offline testing or development without network access. |
+### Available GitHub WASM Modules
 
-### GitHub Repositories
+| Module | Description |
+|--------|-------------|
+| **create-pull-request** | Create GitHub pull requests from workflows |
+| **github-comment** | Post comments on issues and pull requests |
+| **github-issues** | Query and process GitHub issues |
+| **git-branch-push** | Create branches and push commits |
+| **git-worktree** | Manage git worktrees for parallel development |
+| **issue-state-tracker** | Track and update issue states |
+| **issues-to-markdown** | Convert GitHub issues to markdown format |
 
-For GitHub repositories:
-- The repository must exist on GitHub
-- You need a GitHub personal access token with `repo` scope
-- SSH access is recommended for private repositories
+## Using GitHub Integration in Workflows
 
-### Local Repositories
+### Example: Create a Pull Request
 
-For local repositories:
-- No external dependencies required
-- Clone a repository manually to your local filesystem
-- Use the "Switch Provider" option to select Local mode
-- All operations happen locally without pushing to remote
+To create a GitHub pull request from a workflow:
 
-## Adding a GitHub Repository
+1. **Create a WASM Workflow Step** with the following input:
 
-### Authentication
-
-Before adding a GitHub repository, ensure you have:
-
-1. **GitHub Personal Access Token**: Create one at [GitHub Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens)
-2. **Required Scopes**: Select `repo` scope for full repository access (or `public_repo` for public repositories only)
-
-Configure your token in [General Settings](/docs/Settings/general) under the GitHub section.
-
-### SSH Configuration (Recommended)
-
-For private repositories, configure SSH access:
-
-1. **Generate an SSH key** (if you don't have one):
-```bash
-ssh-keygen -t ed25519 -C "mule@muleai.io"
+```json
+{
+  "token": "your-github-token",
+  "owner": "your-username",
+  "repo": "your-repository",
+  "title": "AI-generated PR Title",
+  "base": "main",
+  "body": "This PR was created automatically by Mule AI agent"
+}
 ```
 
-2. **Add the public key to GitHub**:
-- Copy your public key: `cat ~/.ssh/id_ed25519.pub`
-- Add it at [GitHub Settings → SSH and GPG keys](https://github.com/settings/keys)
+2. **Execute the workflow** - Mule will:
+   - Detect the current branch automatically (or use the `head` parameter)
+   - Create the pull request via GitHub API
+   - Return the PR URL in the response
 
-3. **Configure SSH** (if needed):
-```bash
-# ~/.ssh/config
-Host github.com
-    HostName github.com
-    User git
-    IdentityFile ~/.ssh/id_ed25519
-    IdentitiesOnly yes
+### Example: Comment on Issues
+
+Post comments on GitHub issues using the `github-comment` module:
+
+```json
+{
+  "token": "your-github-token",
+  "owner": "username",
+  "repo": "repository",
+  "issue_number": 42,
+  "comment": "This issue is being worked on by Mule AI agent"
+}
 ```
 
-### Repository URL
+### Example: Git Worktree for Parallel Development
 
-When adding a repository, you can use either:
+Create isolated git worktrees for working on multiple issues simultaneously:
 
-- **HTTPS URL**: `https://github.com/owner/repository.git`
-- **SSH URL**: `git@github.com:owner/repository.git` (recommended for private repos)
-
-### Remote Repository
-
-Enter the GitHub repository URL or browse available repositories if you have access.
-
-### Base Path
-
-The Base Path is the location where you wish to locally clone the repository. When the repository is cloned, the owner and the repository name will be appended to the base path.
-
-**Example:** If you set Base Path to `/home/user/mule-repos` and add `github.com/owner/my-project`, Mule will clone it to `/home/user/mule-repos/owner/my-project`.
-
-### Schedule
-
-The schedule is specified as a cron string. For example if you wish for mule to check GitHub for new issues every 5 minutes, you would use `*/5 * * * *`
-
-Common schedule examples:
-
-| Schedule | Description |
-|----------|-------------|
-| `*/5 * * * *` | Every 5 minutes |
-| `*/15 * * * *` | Every 15 minutes |
-| `*/30 * * * *` | Every 30 minutes |
-| `0 * * * *` | Every hour |
-| `0 */6 * * *` | Every 6 hours |
-
-### Add Repository
-
-Once you click "Add Repository" the remote repository will be cloned to the local path and a scheduler will be started based on your specified cron schedule. After cloning is complete, you will see the repository available below. See [interacting with a repository](/docs/Repositories/interacting-with-a-repository) for more information.
-
-## Adding a Local Repository
-
-To work with a local repository:
-
-1. Clone the repository manually to your desired location:
-```bash
-git clone https://github.com/owner/repository.git /path/to/local/repos
-cd /path/to/local/repos
+```json
+{
+  "token": "your-github-token",
+  "owner": "username",
+  "repo": "repository",
+  "base_branch": "main",
+  "worktree_branch": "mule/issue-42-fix-bug"
+}
 ```
 
-2. In Mule's UI, navigate to the repository dashboard
+## Current Mule Features
 
-3. Click "Switch Provider" and select **Local Provider**
+Mule is an AI workflow automation platform with these features:
 
-4. The repository will be available for local-only operations
+### Providers
 
-**Note:** Local repositories do not require GitHub tokens or SSH configuration.
+Configure AI provider connections (OpenAI, Anthropic, local LLMs, etc.). See [AI Providers](/docs/Settings/ai-providers).
 
-## Troubleshooting
+### Agents
 
-- **Clone Failed**: Check that the base path exists and is writable. For SSH-based cloning, ensure SSH keys are configured correctly.
-- **Permission Denied**: Verify your GitHub token has the required scopes or SSH keys have access to the repository.
-- **Repository Not Found**: Ensure the repository exists on GitHub and your token/SSH key has access to it.
+Create AI agents with specific skills and system prompts. Agents can be configured with:
+- **Provider**: Which AI provider to use
+- **Model**: Specific model ID
+- **Skills**: Specialized capabilities (coding, research, etc.)
+- **System Prompt**: Custom instructions for the agent
+
+See [Agents](/docs/Settings/agents).
+
+### Workflows
+
+Build multi-step automation workflows combining:
+- **Agent Steps**: Execute an AI agent
+- **WASM Modules**: Run custom WebAssembly code (including GitHub operations)
+
+See [Workflows](/docs/Settings/workflows).
+
+### WASM Modules
+
+Write custom code in WebAssembly that integrates with Mule's workflow engine. GitHub integration is available through pre-built modules. See [Advanced: Validation Functions](/docs/Advanced/validation) for WASM-based validation.
+
+### Jobs
+
+Execute workflows and agents, track results, and manage artifacts. Access from the main Dashboard or Jobs page.
+
+## Architecture Overview
+
+Mule's architecture with GitHub integration:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                      Mule v2                             │
+├─────────────────────────────────────────────────────────┤
+│  REST API  │  WebSocket  │  Workflow Engine             │
+├─────────────────────────────────────────────────────────┤
+│  Agents  │  Skills  │  Providers  │  WASM Modules       │
+├─────────────────────────────────────────────────────────┤
+│  PostgreSQL Database                                    │
+└─────────────────────────────────────────────────────────┘
+         │
+         ▼
+┌─────────────────┐
+│  PI Coding      │  ← Used for AI execution
+│  Agent          │
+└─────────────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────────┐
+│  GitHub WASM Modules                                     │
+│  (create-pull-request, github-comment, git-worktree)    │
+└─────────────────────────────────────────────────────────┘
+```
+
+## Getting Started
+
+To use GitHub integration with Mule today:
+
+1. **Configure a Provider**: Add your AI provider credentials in Settings → Providers
+2. **Create an Agent**: Build an agent with your preferred model and skills
+3. **Create a Workflow**: Add agent steps and GitHub WASM modules
+4. **Execute Jobs**: Run workflows and monitor results
+
+See the [Getting Started](/docs/getting-started) guide for detailed instructions.
+
+## Building Custom GitHub Automation
+
+You can create custom GitHub automation workflows by combining:
+
+1. **Agent Step**: Use an AI agent to analyze issues or requirements
+2. **WASM Module Step**: Execute GitHub operations (create PR, comment, etc.)
+3. **Validation**: Add WASM modules for code validation or testing
+
+This allows for powerful automation like:
+- Autonomous bug fixing from issue descriptions
+- Automated code review responses
+- Continuous integration with AI assistance
+
+## Future Plans
+
+Additional repository automation features may include:
+- Native repository management UI
+- Built-in issue → PR automation
+- Label-based workflow triggers
+
+Subscribe to the [Mule project](https://github.com/mule-ai/mule) for updates on new features.

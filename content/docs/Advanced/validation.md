@@ -1,170 +1,351 @@
 ---
-weight: 3
+weight: 2
 title: "Validation Functions"
-description: "Ensuring code quality with automated validation"
+description: "Understanding validation in Mule"
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
-lastmod: "2025-05-19T12:00:00-05:00"
+lastmod: "2026-03-21T03:01:00-05:00"
 toc: true
 ---
 
-Validation functions in Mule ensure that AI-generated code meets quality standards before being committed. These functions act as automated quality gates, running tests, linters, and other checks on the code.
+Validation in Mule operates at two levels: data structure validation and workflow execution validation.
 
-## Built-in Validation Functions
+## Data Structure Validation
 
-Mule includes several built-in validation functions for Go codebases:
+Mule includes validation functions for ensuring data integrity when creating and updating resources:
 
-### getDeps
-
-```go
-func getDeps(path string) (string, error)
-```
-
-This function ensures all dependencies are installed by running `make download-golangci-lint`. It's typically the first validation function to run to ensure other tools are available.
-
-### goFmt
+### Agent Validation
 
 ```go
-func goFmt(path string) (string, error)
+func (v *Validator) ValidateAgent(agent *primitive.Agent) ValidationErrors
 ```
 
-Formats Go code according to standard conventions by running `go fmt ./...`. This ensures consistent code formatting throughout the codebase.
+Validates:
+- Name is required and non-empty
+- Provider ID is required
+- Model ID is required
+- System prompt is required
 
-### goModTidy
+### Provider Validation
 
 ```go
-func goModTidy(path string) (string, error)
+func (v *Validator) ValidateProvider(provider *primitive.Provider) ValidationErrors
 ```
 
-Cleans up Go module dependencies by running `go mod tidy`. This ensures that all imports are properly declared in the go.mod file and removes unused dependencies.
+Validates:
+- Name is required and non-empty
+- API base URL is required and must be a valid URL
+- API key is required
 
-### golangciLint
+### Workflow Validation
 
 ```go
-func golangciLint(path string) (string, error)
+func (v *Validator) ValidateWorkflow(workflow *primitive.Workflow) ValidationErrors
 ```
 
-Runs a comprehensive set of linters via `make lint` to catch common coding issues, potential bugs, and style violations.
+Validates:
+- Name is required and non-empty
 
-### goTest
+### Workflow Step Validation
 
 ```go
-func goTest(path string) (string, error)
+func (v *Validator) ValidateWorkflowStep(step *primitive.WorkflowStep) ValidationErrors
 ```
 
-Executes tests with `go test ./...` to verify that the code functions as expected and doesn't break existing functionality.
+Validates:
+- Workflow ID is required
+- Step order must be non-negative
+- Step type must be either `agent` or `wasm_module`
+- For agent steps: agent ID is required
+- For WASM steps: WASM module ID is required
 
-## How Validation Works
+### Tool Validation
 
-When an agent generates code changes, Mule runs the specified validation functions in sequence:
+```go
+func (v *Validator) ValidateTool(tool *primitive.Tool) ValidationErrors
+```
 
-1. The agent makes code changes to the repository
-2. Each validation function is executed in the order specified
-3. If any validation fails, the output is captured and sent back to the agent
-4. The agent attempts to fix the issues based on the validation output
-5. This process repeats until all validations pass or the maximum retry limit is reached
+Validates:
+- Name is required
+- Metadata is required
+- Tool type must be one of: `http`, `database`, `memory`, `filesystem`
 
-## Configuring Validations
+### Skill Validation
 
-Validation functions can be configured at the workflow level:
+```go
+func (v *Validator) ValidateSkill(skill *primitive.Skill) ValidationErrors
+```
+
+Validates:
+- Name is required
+- Path is required
+
+## Workflow Execution Validation
+
+### Job Timeout Validation
+
+Workflows have configurable timeouts:
 
 ```yaml
-validationFunctions:
-  - getDeps
-  - goFmt
-  - goModTidy
-  - golangciLint
-  - goTest
+settings:
+  - key: "timeout_job_seconds"
+    value: "3600"  # Default: 1 hour
 ```
 
-For specific agents, you can configure different validation sets based on the task requirements.
+When a job exceeds the timeout, it's marked as failed with the error: `"job timed out after X seconds"`
 
-## Creating Custom Validation Functions
+### Step Type Validation
 
-You can extend Mule with custom validation functions for your specific needs:
+Workflow steps are validated at execution time:
 
-1. Define your validation function with the signature:
-   ```go
-   func YourValidator(path string) (string, error)
-   ```
+1. **Agent Steps**: Require a valid agent ID
+2. **WASM Steps**: Require a valid WASM module ID
 
-2. Register it in the validation function map:
-   ```go
-   var functions = map[string]ValidationFunc{
-       // existing functions...
-       "yourValidator": YourValidator,
-   }
-   ```
+If either is missing, the step fails with an appropriate error message.
 
-3. Add it to your workflow configuration
+### Working Directory Persistence
 
-## Language-specific Validations
+Each workflow maintains a working directory that persists across steps:
 
-While the built-in validators focus on Go, you can create custom validators for other languages:
+1. The initial working directory can be provided when submitting a job
+2. WASM modules can update the working directory by returning `new_working_directory` in their output
+3. Subsequent steps receive the updated working directory
 
-### JavaScript/TypeScript Example
+## Custom Validation via WASM Modules
+
+For code quality validation, you can create custom WASM modules that:
+
+1. Execute linting tools (golangci-lint, eslint, pylint)
+2. Run tests (go test, jest, pytest)
+3. Run formatters (go fmt, prettier)
+4. Perform custom validation logic
+5. Trigger automatic corrections via corrective workflows
+
+### WASM Validation Module Features
+
+The Mule validation module (`examples/wasm/validation-module`) provides:
+
+- **Retry logic**: Configurable maximum attempts before failure
+- **Corrective workflows**: Automatic execution of fix workflows on failure
+- **Working directory handling**: Automatic detection or explicit configuration
+- **Detailed error reporting**: Exit codes, stdout/stderr capture
+
+### Configuration
+
+```json
+{
+  "validation_command": "golangci-lint run ./...",
+  "corrective_workflow_id": "workflow-uuid-for-fixes",
+  "max_attempts": 3,
+  "working_directory": "/path/to/project"
+}
+```
+
+| Field | Required | Default | Description |
+|-------|----------|---------|-------------|
+| `validation_command` | Yes | - | Command to execute for validation |
+| `corrective_workflow_id` | No | - | UUID of workflow to run on failure |
+| `max_attempts` | No | 3 | Maximum retry attempts |
+| `working_directory` | No | host-provided | Working directory for command execution |
+
+### Complete Validation Workflow Example
+
+Create a validation workflow with retry logic:
+
+```bash
+# 1. Create the validation workflow
+curl -X POST http://localhost:8080/api/v1/workflows \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "lint-and-fix",
+    "description": "Run linter with automatic fixes on failure",
+    "is_async": false
+  }'
+
+WORKFLOW_UUID="workflow-uuid"
+
+# 2. Add validation step
+curl -X POST http://localhost:8080/api/v1/workflows/${WORKFLOW_UUID}/steps \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "wasm_module",
+    "wasm_module_id": "validation-module-uuid",
+    "config": {
+      "validation_command": "golangci-lint run ./...",
+      "corrective_workflow_id": "auto-fix-workflow-uuid",
+      "max_attempts": 3,
+      "working_directory": "/repositories/my-project"
+    }
+  }'
+
+# 3. Execute the workflow
+curl -X POST http://localhost:8080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "workflow/lint-and-fix",
+    "messages": [
+      {"role": "user", "content": "Run linting on the authentication module"}
+    ],
+    "working_directory": "/repositories/my-project"
+  }'
+```
+
+### Validation Module Error Handling
+
+The validation WASM module returns detailed error codes:
+
+| Exit Code | Hex Code | Meaning |
+|-----------|----------|---------|
+| 0 | - | Command succeeded |
+| -6 | 0xFFFFFFFA | Command execution was cancelled |
+| -16 | 0xFFFFFFF0 | Failed to read command from WASM memory |
+| -15 | 0xFFFFFFF1 | Failed to read working directory |
+| -14 | 0xFFFFFFF2 | Failed to get current working directory |
+| -13 | 0xFFFFFFF3 | Working directory does not exist |
+| -12 | 0xFFFFFFF4 | Command timed out (30 second limit) |
+| -11 | 0xFFFFFFF5 | Command execution failed |
+| N | Non-zero | Command exited with status code N |
+
+### Retry Loop
+
+The validation module implements a retry loop:
+
+1. Execute validation command
+2. If successful, return result immediately
+3. If failed and attempts remain:
+   - Trigger corrective workflow (if configured)
+   - Re-execute validation command
+4. If all attempts exhausted, return failure
+
+### Error Codes
+
+The WASM module reports detailed error codes:
+
+| Code | Meaning |
+|------|---------|
+| `0xFFFFFFFA` | Command execution was cancelled |
+| `0xFFFFFFF0` | Failed to read command from WASM memory |
+| `0xFFFFFFF1` | Failed to read working directory from WASM memory |
+| `0xFFFFFFF2` | Failed to get current working directory |
+| `0xFFFFFFF3` | Working directory does not exist |
+| `0xFFFFFFF4` | Command timed out (30 second limit) |
+| `0xFFFFFFF5` | Command execution failed |
+| Non-zero exit | Command exited with specific status code |
+
+### Corrective Workflow Context
+
+When a corrective workflow is triggered, it receives:
+
+```json
+{
+  "original_prompt": "golangci-lint run ./...",
+  "validation_output": {
+    "command": "...",
+    "exit_code": 1,
+    "stdout": "linting errors...",
+    "stderr": ""
+  },
+  "working_directory": "/path/to/project",
+  "remaining_attempts": 2,
+  "corrective_workflow_id": "workflow-uuid"
+}
+```
+
+### Example: Go Linting WASM Module
+
+A custom WASM module could:
 
 ```go
-func eslint(path string) (string, error) {
-    cmd := exec.Command("npx", "eslint", ".")
-    cmd.Dir = path
-    out, err := cmd.CombinedOutput()
-    return string(out), err
-}
-
-func jest(path string) (string, error) {
-    cmd := exec.Command("npx", "jest")
-    cmd.Dir = path
-    out, err := cmd.CombinedOutput()
-    return string(out), err
+func lintGoCode(ctx context.Context, input map[string]interface{}) (map[string]interface{}, error) {
+    workingDir, _ := input["working_directory"].(string)
+    
+    // Run golangci-lint
+    result, err := runCommand("golangci-lint run ./...", workingDir)
+    if err != nil {
+        return map[string]interface{}{
+            "success": false,
+            "errors":  result,
+        }, nil
+    }
+    
+    return map[string]interface{}{
+        "success": true,
+        "output":  result,
+    }, nil
 }
 ```
 
-### Python Example
+## Chat Completion Request Validation
+
+When using the Mule API for chat completions, requests are validated to ensure proper formatting:
 
 ```go
-func pylint(path string) (string, error) {
-    cmd := exec.Command("python", "-m", "pylint", ".")
-    cmd.Dir = path
-    out, err := cmd.CombinedOutput()
-    return string(out), err
-}
+func (v *Validator) ValidateChatCompletionRequest(model string, messages []map[string]interface{}) ValidationErrors
+```
 
-func pytest(path string) (string, error) {
-    cmd := exec.Command("python", "-m", "pytest")
-    cmd.Dir = path
-    out, err := cmd.CombinedOutput()
-    return string(out), err
+Validates:
+- **Model format**: Must start with `agent/`, `workflow/`, or `async/workflow/`
+- **Messages**: At least one message is required
+- **Message structure**: Each message must have a non-empty `role` and `content` field
+
+Example valid request:
+```json
+{
+  "model": "agent/my-agent-id",
+  "messages": [
+    {"role": "user", "content": "Hello, can you help me?"}
+  ]
 }
 ```
 
-## Handling Validation Failures
+### Model Prefixes
 
-When validation fails, Mule follows a structured approach:
+| Prefix | Purpose |
+|--------|---------|
+| `agent/` | Direct agent execution |
+| `workflow/` | Synchronous workflow execution |
+| `async/workflow/` | Asynchronous workflow execution |
 
-1. The validation error output is captured
-2. The agent is provided with:
-   - The specific validation that failed
-   - The error output from the validation
-   - The original code changes
-3. The agent is asked to fix the issues
-4. The process is repeated up to 20 times (configurable)
+## Skill ID Validation
+
+When creating agents with skills, the skill IDs must exist in the database:
+
+```go
+func (v *Validator) ValidateSkillIDs(ctx context.Context, store primitive.PrimitiveStore, skillIDs []string) ValidationErrors
+```
+
+Validates:
+- Skill ID cannot be empty
+- Skill must exist in the database
+- Returns specific error if skill not found
+
+## ID Format Validation
+
+```go
+func (v *Validator) ValidateID(id string, fieldName string) ValidationErrors
+```
+
+Validates:
+- ID is not empty
+- ID follows UUID format (8-4-4-4-12 hex pattern)
+
+## Error Handling
+
+Validation errors are collected and returned as `ValidationErrors`:
+
+```go
+type ValidationError struct {
+    Field   string `json:"field"`
+    Message string `json:"message"`
+}
+```
+
+All errors in a validation pass are returned together, allowing the caller to address multiple issues at once.
 
 ## Best Practices
 
-To get the most out of validation functions:
-
-1. **Start simple**: Begin with basic formatting and linting before adding comprehensive tests
-2. **Clear error messages**: Ensure your custom validators provide clear, actionable error messages
-3. **Fast feedback**: Optimize validation functions to run quickly for better agent iteration
-4. **Progressive validation**: Order validations from fastest to slowest for efficiency
-5. **Context-aware validation**: Include repository-specific checks that enforce your project's conventions
-
-## Debugging Validation Issues
-
-If validation consistently fails:
-
-1. Run the validation commands manually to see the output
-2. Check if validation requirements are clearly communicated in the agent's prompt
-3. Verify that validation tools are properly installed and configured
-4. Consider relaxing validation requirements for initial development phases
+1. **Validate early**: Validate data before submission to avoid runtime errors
+2. **Provide clear messages**: Include actionable error messages
+3. **Set appropriate timeouts**: Consider your workflow complexity when setting job timeouts
+4. **Handle step failures**: Design workflows to handle step failures gracefully
+5. **Use WASM for custom validation**: Implement project-specific validation as WASM modules for portability

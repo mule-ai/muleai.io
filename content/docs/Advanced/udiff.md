@@ -1,207 +1,383 @@
 ---
 weight: 5
-title: "Unified Diff (UDiff) Implementation"
-description: "How Mule handles code changes using unified diffs"
+title: "File Operations in Mule"
+description: "How Mule handles file operations using the FilesystemTool and WASM modules"
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
-lastmod: "2025-05-19T12:00:00-05:00"
+lastmod: "2026-03-21T12:00:00-05:00"
 toc: true
 ---
 
-Unified Diff (UDiff) is the mechanism Mule uses to represent and apply code changes. This approach allows AI agents to specify precise modifications to files without needing to understand or generate the entire codebase.
+> **Note:** This page was previously titled "Unified Diff (UDiff) Implementation". The UDiff approach for applying code changes has been deprecated and replaced with a more flexible filesystem-based approach. This document reflects the current implementation.
 
-## What is UDiff?
+Mule uses a combination of the **FilesystemTool** and **WASM modules** to handle file operations. This approach provides more flexibility and control compared to the deprecated unified diff format.
 
-UDiff (Unified Diff) is a standard format for representing differences between text files. It shows:
+## Overview of Current File Operations
 
-- Which files are being modified
-- Which lines are being added, removed, or changed
-- Context surrounding the changes
+The current file handling system provides:
 
-A simple UDiff looks like this:
+1. **FilesystemTool**: Direct file read/write/delete operations
+2. **WASM Modules**: Custom workflow steps for complex file operations
+3. **Agent Runtime**: Context-aware file access with working directory support
+
+## FilesystemTool
+
+The FilesystemTool provides agents with controlled access to the filesystem. It's designed with security in mind, restricting access to a configurable root directory.
+
+### Available Actions
+
+The FilesystemTool supports the following actions:
+
+| Action | Description | Parameters |
+|--------|-------------|------------|
+| `read` | Read file contents | `path` (required) |
+| `write` | Write content to a file | `path`, `content` (required) |
+| `delete` | Delete a file | `path` (required) |
+| `list` | List directory contents | `path` (optional, defaults to ".") |
+| `exists` | Check if file/directory exists | `path` (required) |
+
+### Usage Examples
+
+#### Reading a File
+
+```json
+{
+  "action": "read",
+  "path": "src/main.go"
+}
+```
+
+Response:
+```json
+{
+  "content": "package main\n\nfunc main() {\n    fmt.Println(\"Hello, World!\")\n}",
+  "path": "src/main.go",
+  "size": 64
+}
+```
+
+#### Writing a File
+
+```json
+{
+  "action": "write",
+  "path": "src/newfile.go",
+  "content": "package main\n\nfunc NewFunction() {\n    fmt.Println(\"New content\")\n}"
+}
+```
+
+Response:
+```json
+{
+  "success": true,
+  "path": "src/newfile.go",
+  "size": 72
+}
+```
+
+#### Deleting a File
+
+```json
+{
+  "action": "delete",
+  "path": "src/oldfile.go"
+}
+```
+
+Response:
+```json
+{
+  "success": true,
+  "path": "src/oldfile.go"
+}
+```
+
+#### Listing Directory Contents
+
+```json
+{
+  "action": "list",
+  "path": "src"
+}
+```
+
+Response:
+```json
+{
+  "path": "src",
+  "files": [
+    {"name": "main.go", "is_dir": false, "size": 64, "mod_time": "2026-03-21T10:00:00Z"},
+    {"name": "utils", "is_dir": true, "size": 4096, "mod_time": "2026-03-21T10:00:00Z"}
+  ],
+  "count": 2
+}
+```
+
+#### Checking File Existence
+
+```json
+{
+  "action": "exists",
+  "path": "src/main.go"
+}
+```
+
+Response:
+```json
+{
+  "exists": true,
+  "path": "src/main.go"
+}
+```
+
+## Security Features
+
+### Path Restrictions
+
+The FilesystemTool enforces strict path restrictions:
+
+- All file operations are restricted to a configurable root directory
+- Path traversal attacks (e.g., `../../etc/passwd`) are blocked
+- Absolute paths are resolved relative to the root directory
+
+### Working Directory Support
+
+The tool supports dynamic working directories that can be set per execution context:
+
+```go
+filesystemTool := NewFilesystemTool("/repositories/project")
+filesystemTool.SetWorkingDirectory("/feature-branch")
+// File operations will now be relative to /repositories/project/feature-branch
+```
+
+## WASM Modules for Complex Operations
+
+For more complex file operations, WASM modules provide additional capabilities:
+
+- **Custom workflows**: Define complex file transformation logic
+- **External integrations**: Call external APIs for file processing
+- **Git operations**: Create commits, branches, and pull requests
+- **Multi-file operations**: Atomic updates across multiple files
+
+### Example: Creating a File with WASM
+
+```go
+// Inside a WASM module
+func processFiles(ctx context.Context, m api.Module) {
+    // Read existing file
+    readResult := filesystem.Read("src/main.go")
+    
+    // Transform content
+    newContent := transform(readResult.Content)
+    
+    // Write updated file
+    filesystem.Write("src/main.go", newContent)
+}
+```
+
+## Comparison: Old vs New Approach
+
+### Deprecated UDiff Approach (Removed)
+
+The old UDiff approach required agents to generate unified diff format:
 
 ```diff
 --- a/path/to/file.go
 +++ b/path/to/file.go
 @@ -10,7 +10,7 @@ func example() {
-     // Some code here
 -    fmt.Println("Old code")
 +    fmt.Println("New code")
-     // More code
  }
 ```
 
-In this example:
-- The file being modified is `path/to/file.go`
-- Line 10 provides context
-- Line 11 shows the removed code (prefixed with `-`)
-- Line 12 shows the added code (prefixed with `+`)
-- Line 13 provides more context
+**Limitations:**
+- Required precise line number matching
+- Fragile to context line changes
+- Complex to generate correctly
+- Limited to text-based patches
 
-## How Mule Uses UDiff
+### Current FilesystemTool Approach
 
-In Mule, UDiff serves several crucial purposes:
+The current approach allows direct file manipulation:
 
-1. **Output Format**: AI agents can generate UDiffs rather than complete files
-2. **Change Application**: Mule applies these UDiffs to the actual codebase
-3. **Change Representation**: UDiffs are used to show changes in pull requests
-4. **Context for Feedback**: UDiffs provide context for PR comments and iterations
-
-## Advantages of UDiff
-
-Using UDiff offers significant benefits:
-
-- **Precision**: Changes are applied exactly where intended
-- **Context**: The surrounding code provides context for changes
-- **Efficiency**: Only the changes are transmitted, not entire files
-- **Readability**: Diffs are human-readable and easy to review
-- **Compatibility**: Standard format works with existing tools and platforms
-
-## UDiff Format in Mule
-
-Mule expects AI-generated UDiffs to follow this format:
-
-````
-```diff
---- a/path/to/file1.go
-+++ b/path/to/file1.go
-@@ -10,7 +10,7 @@ func example() {
-     // Some code
--    oldCode()
-+    newCode()
-     // More code
- }
-```
-````
-
-Key requirements:
-- The diff must be wrapped in triple backticks with `diff` language specifier
-- File paths must be correct relative to the repository root
-- Line numbers in the hunk header (`@@ -10,7 +10,7 @@`) should be accurate
-- Context lines should match the actual file content
-
-## Multiple File Changes
-
-UDiffs can represent changes to multiple files:
-
-````
-```diff
---- a/path/to/file1.go
-+++ b/path/to/file1.go
-@@ -10,7 +10,7 @@ func example() {
-     // Some code
--    oldCode()
-+    newCode()
-     // More code
- }
-
---- a/path/to/file2.go
-+++ b/path/to/file2.go
-@@ -15,6 +15,9 @@ func anotherExample() {
-     // Some code
-+    // New functionality
-+    additionalCode()
-+    
-     // More code
- }
-```
-````
-
-## Processing UDiffs
-
-When an agent returns output containing UDiffs, Mule processes them as follows:
-
-1. **Parsing**: The output is scanned for UDiff blocks
-2. **Validation**: Each UDiff is validated for correct format and paths
-3. **Application**: Changes are applied to the repository files
-4. **Verification**: Modified files are checked for expected changes
-
-## Creating New Files
-
-To create a new file with UDiff:
-
-````
-```diff
---- /dev/null
-+++ b/path/to/newfile.go
-@@ -0,0 +1,10 @@
-+package example
-+
-+import (
-+    "fmt"
-+)
-+
-+func NewFunction() {
-+    fmt.Println("This is a new file")
-+}
-+
-```
-````
-
-## Deleting Files
-
-To delete an existing file:
-
-````
-```diff
---- a/path/to/oldfile.go
-+++ /dev/null
-@@ -1,10 +0,0 @@
--package example
--
--import (
--    "fmt"
--)
--
--func OldFunction() {
--    fmt.Println("This file will be deleted")
--}
--
-```
-````
-
-## UDiff Settings
-
-Agents can be configured with specific UDiff settings:
-
-```yaml
-udiff:
-  enabled: true
-  contextLines: 3
-  createMissingFiles: true
-  allowFileRemoval: false
+```json
+{
+  "action": "write",
+  "path": "src/main.go",
+  "content": "package main\n\nfunc main() {\n    fmt.Println(\"Hello, World!\")\n}"
+}
 ```
 
-- **enabled**: Whether to process UDiffs in agent output
-- **contextLines**: Number of context lines to include around changes
-- **createMissingFiles**: Allow creation of new files
-- **allowFileRemoval**: Permit deletion of existing files
+**Advantages:**
+- Simple, clear semantics
+- No line number matching required
+- Works with any file content
+- Easier for agents to generate correctly
+
+## Migration from UDiff
+
+If you have existing workflows that relied on UDiff:
+
+1. **Update agent prompts**: Change from requesting UDiff output to requesting filesystem tool calls
+2. **Pre-read files**: Have agents read existing content before writing modifications
+3. **Use WASM modules**: For complex transformations, implement them as WASM modules
+
+### Example: Converting a UDiff Workflow
+
+**Old approach:**
+```
+Generate a UDiff that changes line 10 in main.go from "old" to "new"
+```
+
+**New approach:**
+```
+1. Read the current content of main.go
+2. Modify the content to change the relevant line
+3. Write the updated content back to main.go
+```
 
 ## Best Practices
 
-For optimal UDiff usage:
+1. **Always read before writing**: Check existing content to avoid overwrites
+2. **Use transactions where available**: Group related file changes together
+3. **Validate paths**: Ensure paths are correct before operations
+4. **Handle errors gracefully**: Check responses for error details
+5. **Keep changes atomic**: Use single operations or WASM modules for atomic updates
 
-1. **Include sufficient context**: Provide enough surrounding lines for proper placement
-2. **Use relative paths**: Ensure file paths are relative to repository root
-3. **Binary files**: Avoid UDiffs for binary files; use base64 encoding if necessary
-4. **Large changes**: Break large changes into smaller, logical UDiffs
-5. **Rename operations**: Represent renames as a deletion and creation
+## Complete File Operation Workflow Example
+
+A workflow that uses filesystem operations to update code:
+
+```json
+{
+  "name": "update-config-workflow",
+  "description": "Reads config, updates values, and writes back",
+  "steps": [
+    {
+      "step_order": 1,
+      "type": "agent",
+      "agent_id": "config-reader-uuid",
+      "config": {}
+    },
+    {
+      "step_order": 2,
+      "type": "wasm_module",
+      "wasm_module_id": "config-transform-uuid",
+      "config": {
+        "operation": "transform_json",
+        "preserve_comments": true
+      }
+    },
+    {
+      "step_order": 3,
+      "type": "agent",
+      "agent_id": "config-writer-uuid",
+      "config": {}
+    }
+  ]
+}
+```
+
+### File Operation API Usage
+
+Create tools for filesystem operations:
+
+```bash
+# Create filesystem tool
+curl -X POST http://localhost:8080/api/v1/tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "filesystem",
+    "description": "File system operations tool",
+    "metadata": {
+      "tool_type": "filesystem",
+      "root_directory": "/repositories"
+    }
+  }'
+
+# Create bash tool
+curl -X POST http://localhost:8080/api/v1/tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "bash",
+    "description": "Execute bash commands",
+    "metadata": {
+      "tool_type": "bash",
+      "timeout_seconds": 30
+    }
+  }'
+
+# Assign tools to agent
+curl -X POST http://localhost:8080/api/v1/agents/{agent-uuid}/tools \
+  -H "Content-Type: application/json" \
+  -d '{"tool_id": "filesystem-tool-uuid"}'
+
+curl -X POST http://localhost:8080/api/v1/agents/{agent-uuid}/tools \
+  -H "Content-Type: application/json" \
+  -d '{"tool_id": "bash-tool-uuid"}'
+```
+
+### Common File Operations via Agent
+
+Agents with filesystem tools can perform:
+
+#### Read Multiple Files
+```json
+{
+  "action": "read",
+  "path": "src/config.json"
+}
+```
+
+#### List Project Structure
+```json
+{
+  "action": "list",
+  "path": "src"
+}
+```
+
+Response:
+```json
+{
+  "path": "src",
+  "files": [
+    {"name": "config.json", "is_dir": false, "size": 1024, "mod_time": "2026-03-21T10:00:00Z"},
+    {"name": "handlers", "is_dir": true, "size": 4096, "mod_time": "2026-03-21T10:00:00Z"},
+    {"name": "models", "is_dir": true, "size": 4096, "mod_time": "2026-03-21T10:00:00Z"}
+  ],
+  "count": 3
+}
+```
+
+#### Write New File
+```json
+{
+  "action": "write",
+  "path": "src/new_handler.go",
+  "content": "package main\n\nfunc NewHandler() {}\n"
+}
+```
+
+#### Check File Existence
+```json
+{
+  "action": "exists",
+  "path": "src/config.json"
+}
+```
 
 ## Troubleshooting
 
-Common UDiff issues and solutions:
+**"Access denied: path outside allowed root directory"**
+- Verify the path is within the configured root directory
+- Use relative paths from the working directory
 
-**"Failed to apply patch"**
-- Verify file paths are correct
-- Ensure context lines match the actual file
-- Check if line numbers need adjustment
+**"Failed to write file"**
+- Check if the directory exists (it will be created automatically)
+- Verify write permissions
+- Ensure sufficient disk space
 
-**"Hunk failed to apply"**
-- The file may have changed since the UDiff was generated
-- Increase context lines for better matching
-- Update the UDiff based on current file state
-
-**"No valid UDiffs found"**
-- Check the formatting of your UDiff blocks
-- Ensure triple backticks and `diff` language specifier are included
-- Verify the UDiff follows standard format
+**"File not found"**
+- Verify the file exists using the `exists` action
+- Check if the working directory is set correctly

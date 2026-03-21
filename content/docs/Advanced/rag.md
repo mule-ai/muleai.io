@@ -1,162 +1,369 @@
 ---
 weight: 1
-title: "Retrieval Augmented Generation (RAG)"
-description: "Leveraging RAG for context-aware code generation"
+title: "Memory & Semantic Search"
+description: "Using the memory tool with vector embeddings for semantic search"
 icon: "article"
-date: "2025-05-19T12:00:00-05:00"
-lastmod: "2025-05-19T12:00:00-05:00"
+date: "2026-03-21"
+lastmod: "2026-03-21T00:00:00-05:00"
 toc: true
 ---
 
-Retrieval Augmented Generation (RAG) is a powerful feature in Mule that enhances AI code generation by providing contextual awareness of your codebase. By indexing and retrieving relevant code snippets, Mule can make more informed and consistent changes to your repositories.
+Mule includes a memory tool that enables agents to store and retrieve information using semantic search powered by vector embeddings. This allows agents to maintain context across conversations, recall relevant information, and build on previous knowledge.
 
-## How RAG Works in Mule
+## How Memory Works
 
-RAG in Mule follows a four-step process:
+The memory system uses vector embeddings to enable semantic search:
 
-1. **Indexing**: When a repository is added, Mule analyzes and indexes the codebase
-2. **Retrieval**: When working on an issue, Mule identifies relevant code sections
-3. **Context Enrichment**: The retrieved code context is included in the agent's prompt
-4. **Generation**: The agent creates solutions with awareness of existing patterns and structures
+1. **Storage**: When content is stored, it's converted to a vector embedding
+2. **Indexing**: Embeddings are stored in PostgreSQL with metadata
+3. **Retrieval**: Queries are converted to embeddings and compared for similarity
+4. **Ranking**: Results are returned sorted by similarity score
 
-This approach significantly improves code quality by ensuring generated code follows existing patterns, naming conventions, and architectural decisions in your codebase.
+## Memory Tool Operations
 
-## Key Features
+The memory tool supports four primary operations:
 
-Mule's RAG implementation includes these specialized features:
+### Store
 
-### Intelligent Code Chunking
+Store content with optional metadata for later retrieval:
 
-Code is automatically split into meaningful chunks based on language-specific structures:
+```json
+{
+  "operation": "store",
+  "content": "User prefers dark mode interface",
+  "metadata": {
+    "category": "preference",
+    "user_id": "user-123"
+  }
+}
+```
 
-- **Go**: Functions, structs, interfaces, methods
-- **JavaScript/TypeScript**: Functions, classes, methods
-- **HTML**: Elements, sections, components
-- **CSS**: Rule sets, at-rules, keyframes
+**Response:**
+```json
+{
+  "id": "mem-uuid-here",
+  "success": true
+}
+```
 
-This structural chunking ensures that related code stays together for better context.
+### Retrieve
 
-### Real-time Index Updates
+Search for relevant memories using natural language queries:
 
-The codebase index is automatically updated when:
+```json
+{
+  "operation": "retrieve",
+  "query": "What interface preferences does the user have?",
+  "top_k": 5
+}
+```
 
-- Files are added or modified in the repository
-- Changes are committed to the repository
-- The repository is synchronized
+**Response:**
+```json
+{
+  "results": [
+    {
+      "id": "mem-uuid-here",
+      "content": "User prefers dark mode interface",
+      "metadata": {
+        "category": "preference",
+        "user_id": "user-123"
+      },
+      "similarity": 0.92,
+      "created_at": "2026-03-21T10:30:00Z"
+    }
+  ],
+  "count": 1
+}
+```
 
-This keeps the context current without manual intervention.
+### Update
 
-### Repository Map Generation
+Update existing memory content:
 
-Mule can generate a high-level map of repository structure to help agents understand:
+```json
+{
+  "operation": "update",
+  "id": "mem-uuid-here",
+  "content": "User prefers dark mode with high contrast",
+  "metadata": {
+    "category": "preference",
+    "user_id": "user-123",
+    "updated": true
+  }
+}
+```
 
-- Key files and their purpose
-- Important types and interfaces
-- Hierarchical relationships between components
-- Overall architecture patterns
+**Response:**
+```json
+{
+  "success": true,
+  "id": "mem-uuid-here"
+}
+```
+
+### Delete
+
+Remove a memory by ID:
+
+```json
+{
+  "operation": "delete",
+  "id": "mem-uuid-here"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "id": "mem-uuid-here"
+}
+```
 
 ## Configuration
 
-{{< alert text="RAG is currently in development and will be fully available in a future release." />}}
+Memory functionality requires configuration in the Settings panel or via API:
 
-While RAG will be enabled by default in future releases, you will be able to configure its behavior:
+### Configuration Fields
 
-### Embedding Service
+| Field | Description | Default |
+|-------|-------------|---------|
+| **Database URL** | PostgreSQL connection string | `postgres://mule:mule@localhost:5432/mulev2?sslmode=disable` |
+| **Embedding Provider** | AI provider for embeddings | `openai` |
+| **Embedding Model** | Model for generating embeddings | `text-embedding-ada-002` |
+| **Embedding Dimensions** | Vector size for embeddings | `1536` |
+| **Default TTL** | Time-to-live in seconds (0 = never expires) | `0` |
+| **Default Top K** | Default number of results | `5` |
 
-Mule uses an embedding service to create vector representations of code. You'll be able to configure:
+### Supported Embedding Models
 
-```yaml
-embeddingService:
-  url: https://api.your-embedding-service.com
-  model: text-embedding-model
-  apiKey: your-api-key
+The memory tool works with OpenAI-compatible embedding models:
+
+- **OpenAI**: `text-embedding-ada-002`, `text-embedding-3-small`, `text-embedding-3-large`
+- **Ollama**: Local embedding models (e.g., `nomic-embed-text`)
+- **Other OpenAI-compatible providers**: Any provider supporting `/embeddings` endpoint
+
+## Usage in Agents
+
+Agents automatically have access to the memory tool when enabled in the agent configuration. The agent can use memory to:
+
+- **Remember user preferences** across sessions
+- **Store context** from previous conversations
+- **Recall relevant information** for current tasks
+- **Maintain state** that persists beyond individual interactions
+
+### Example Agent Prompt Integration
+
+When an agent uses memory, the retrieved content is automatically included in context:
+
+```
+User: Can you check the status of my project?
+
+[Memory Retrieved]
+- "User is working on the Mule AI project" (similarity: 0.95)
+- "Project deadline is March 25" (similarity: 0.87)
+
+Agent: Based on your project notes, you're working on Mule AI with a deadline of March 25. Let me check the current status...
 ```
 
-Supported services will include:
-- OpenAI Embeddings
-- Local embedding models
-- Custom embedding endpoints
+## Complete Memory API Usage Examples
 
-### Indexing Settings
+### Agent with Memory Tool
 
-Control how your code is indexed:
+To enable memory for an agent, create a tool with the memory type and assign it:
 
-```yaml
-indexing:
-  excludeDirs:
-    - node_modules
-    - vendor
-    - dist
-  excludeFiles:
-    - README.md
-    - LICENSE
-  maxRepoSize: 16384
+```bash
+# 1. Create memory tool configuration
+curl -X POST http://localhost:8080/api/v1/tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "memory",
+    "description": "Semantic memory storage and retrieval",
+    "metadata": {
+      "tool_type": "memory",
+      "database_url": "postgres://mule:mule@localhost:5432/mulev2?sslmode=disable",
+      "embedding_provider": "openai",
+      "embedding_model": "text-embedding-3-small",
+      "embedding_dims": 1536,
+      "default_ttl_seconds": 2592000,
+      "default_top_k": 5
+    }
+  }'
+
+# 2. Assign memory tool to agent
+curl -X POST http://localhost:8080/api/v1/agents/{agent-uuid}/tools \
+  -H "Content-Type: application/json" \
+  -d '{"tool_id": "memory-tool-uuid"}'
 ```
 
-### Query Settings
+### Direct Memory Operations
 
-Configure retrieval behavior:
+When an agent uses the memory tool, it can perform these operations:
 
-```yaml
-rag:
-  enabled: true
-  maxResults: 10
-  similarityThreshold: 0.7
-  includeRepoMap: true
+#### Store User Preferences
+```json
+{
+  "operation": "store",
+  "content": "User prefers dark mode with high contrast and larger font sizes for better readability",
+  "metadata": {
+    "category": "preferences",
+    "user_id": "user-123",
+    "source": "explicit",
+    "tags": ["ui", "accessibility"]
+  }
+}
+```
+
+#### Store Project Context
+```json
+{
+  "operation": "store",
+  "content": "Working on Mule AI project - a multi-agent orchestration system using PI RPC for agent communication. Key components: agent runtime, workflow engine, WASM executor",
+  "metadata": {
+    "category": "project",
+    "project": "mule-ai",
+    "importance": "high",
+    "tags": ["architecture", "context"]
+  }
+}
+```
+
+#### Retrieve Related Memories
+```json
+{
+  "operation": "retrieve",
+  "query": "What are the user's UI preferences and project details?",
+  "top_k": 10
+}
+```
+
+Response:
+```json
+{
+  "results": [
+    {
+      "id": "mem-uuid-1",
+      "content": "User prefers dark mode with high contrast...",
+      "metadata": {"category": "preferences", "tags": ["ui"]},
+      "similarity": 0.94,
+      "created_at": "2026-03-20T10:30:00Z"
+    },
+    {
+      "id": "mem-uuid-2",
+      "content": "Working on Mule AI project...",
+      "metadata": {"category": "project", "tags": ["architecture"]},
+      "similarity": 0.87,
+      "created_at": "2026-03-21T09:15:00Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+### Using Memory in Multi-Agent Workflows
+
+Example workflow that uses memory to share context between agents:
+
+```json
+{
+  "name": "context-aware-code-review",
+  "description": "Review code with awareness of project patterns and preferences",
+  "steps": [
+    {
+      "step_order": 1,
+      "type": "agent",
+      "agent_id": "context-gatherer-uuid",
+      "config": {
+        "input_mapping": {
+          "task": "user_message"
+        }
+      }
+    },
+    {
+      "step_order": 2,
+      "type": "agent",
+      "agent_id": "code-reviewer-uuid",
+      "config": {
+        "input_mapping": {
+          "code": "user_message",
+          "context": "step_1.output.project_context"
+        }
+      }
+    }
+  ]
+}
 ```
 
 ## Best Practices
 
-To get the most from RAG when it's released:
+### Effective Memory Usage
 
-1. **Keep repositories focused**: Smaller, more specific repositories yield better results
-2. **Use meaningful comments**: Well-commented code helps the system understand context
-3. **Consistent coding patterns**: Following consistent patterns makes it easier for RAG to understand code relationships
-4. **Clean code organization**: Well-organized code with logical file structure improves retrieval quality
+1. **Use descriptive content**: Clear, detailed content produces better embeddings
+2. **Add relevant metadata**: Include context like category, user ID, or timestamps
+3. **Set appropriate TTL**: Use TTL for time-sensitive information that should expire
+4. **Use consistent categories**: Organize memories with consistent metadata keys
 
-## Impact on Generated Code
+### Query Optimization
 
-With RAG, you can expect:
+1. **Be specific in queries**: More specific queries return better results
+2. **Use appropriate top_k**: Adjust based on how many related memories you need
+3. **Filter by metadata**: Use metadata filters to narrow results
 
-- **More consistent style**: Generated code will match existing patterns
-- **Better integration**: New code will integrate more seamlessly with existing code
-- **Fewer errors**: Reduced risk of breaking changes or inconsistencies
-- **Higher relevance**: Solutions more directly addressing the specific issue
+### Metadata Examples
 
-## Example: Before and After RAG
-
-**Without RAG**:
-```go
-// Generated function with generic naming
-func ProcessData(data []string) ([]string, error) {
-    result := make([]string, 0, len(data))
-    for _, item := range data {
-        processed := strings.ToUpper(item)
-        result = append(result, processed)
-    }
-    return result, nil
+```json
+{
+  "category": "preference",
+  "user_id": "user-123",
+  "source": "conversation",
+  "priority": "high",
+  "tags": ["ui", "theme"]
 }
 ```
 
-**With RAG**:
-```go
-// Generated function with context-aware naming and error handling
-func TransformTaskItems(items []string) ([]string, error) {
-    if items == nil {
-        return nil, ErrNilItems
-    }
-    
-    result := make([]string, 0, len(items))
-    for _, item := range items {
-        processed, err := applyTaskTransformation(item)
-        if err != nil {
-            return nil, fmt.Errorf("error transforming item %q: %w", item, err)
-        }
-        result = append(result, processed)
-    }
-    
-    return result, nil
-}
+## Technical Details
+
+### Database Schema
+
+The memory system uses PostgreSQL for storage:
+
+```sql
+CREATE TABLE memory (
+    id VARCHAR(255) PRIMARY KEY,
+    content TEXT NOT NULL,
+    embedding VECTOR(1536),
+    metadata JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    expires_at TIMESTAMPTZ
+);
+
+CREATE INDEX ON memory USING ivfflat (embedding vector_cosine_ops);
 ```
 
-The RAG-enhanced version follows existing patterns for error handling, naming conventions, and coding style from the rest of the codebase.
+### Vector Operations
+
+Embeddings are compared using cosine similarity:
+
+```sql
+SELECT id, content, metadata, 1 - (embedding <=> $query_embedding) AS similarity
+FROM memory
+ORDER BY embedding <=> $query_embedding
+LIMIT $top_k;
+```
+
+## Limitations
+
+- **Provider dependency**: Requires a configured AI provider for embeddings
+- **Embedding latency**: Storing and retrieving requires API calls to embedding provider
+- **Dimension matching**: Embedding dimensions must match the configured model
+- **Database connection**: PostgreSQL is required for memory storage
+
+## Future Enhancements
+
+Planned improvements to the memory system:
+
+- **Code-aware chunking**: Intelligent code file segmentation for repository context
+- **Repository mapping**: Automatic code structure understanding
+- **Cross-session continuity**: Persistent agent memory across restarts
+- **Hierarchical memory**: Organized memory with categories and relationships
