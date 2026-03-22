@@ -28,6 +28,6 @@ This section covers advanced features of Mule that enable more sophisticated AI-
 - **[Integration Capabilities](/docs/Advanced/integrations)**: Integrate Mule with external systems using the HTTP API, Skills system, and WebAssembly modules for custom integrations.
 - **[Validation Functions](/docs/Advanced/validation)**: Ensure code quality with automated validation before finalizing changes. Implement retry logic and custom checks.
 - **[Multi-agent Workflows](/docs/Advanced/multi-agent)**: Coordinate multiple specialized agents to solve complex problems. Design agent roles and manage data flow between them.
-- **[Unified Diff (UDiff) Implementation](/docs/Advanced/udiff)**: Understand how Mule handles precise code changes with unified diff processing.
+- **[File Operations](/docs/Advanced/udiff)**: Understand how Mule handles precise file operations with the FilesystemTool.
 
-These advanced features work together to make Mule a powerful, flexible AI development assistant. While some features are still in development, this documentation provides a preview of the full capabilities that will be available in upcoming releases.
+These advanced features work together to make Mule a powerful, flexible AI development assistant. While some features are still in development, this documentation provides a preview of the full capabilities that will be available in upcoming releases. in upcoming releases.
