@@ -55,6 +55,26 @@ Controls the maximum execution time for an entire job (workflow with all steps).
 * **Type:** Integer (seconds)
 * **Used by:** Job execution context timeout
 
+## Repository Cloning
+
+Mule supports repository cloning through WASM modules. The `git-worktree` module can clone repositories and create isolated worktrees for parallel development:
+
+```json
+{
+  "operation": "clone_and_worktree",
+  "repo_url": "https://github.com/owner/repo.git",
+  "worktree_name": "mule/issue-42",
+  "token": "{{GITHUB_TOKEN}}"
+}
+```
+
+For SSH-based cloning, ensure SSH keys are configured on the system where Mule is running. The GitHub token can also be used for HTTPS cloning with authentication.
+
 ## Future Features
 
-In the future we will have the ability to use the GitHub token to clone repositories directly. For now, repository cloning is limited to SSH authentication on the system where Mule is running.
+Additional configuration options may include:
+- Built-in repository management UI
+- Automatic repository sync scheduling
+- Enhanced webhook support
+
+See the [Mule project](https://github.com/mule-ai/mule) for the latest developments.

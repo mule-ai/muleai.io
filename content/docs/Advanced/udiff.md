@@ -284,7 +284,7 @@ Create tools for filesystem operations:
 
 ```bash
 # Create filesystem tool
-curl -X POST http://localhost:8080/api/v1/tools \
+curl -X POST http://localhost:8140/api/v1/tools \
   -H "Content-Type: application/json" \
   -d '{
     "name": "filesystem",
@@ -296,7 +296,7 @@ curl -X POST http://localhost:8080/api/v1/tools \
   }'
 
 # Create bash tool
-curl -X POST http://localhost:8080/api/v1/tools \
+curl -X POST http://localhost:8140/api/v1/tools \
   -H "Content-Type: application/json" \
   -d '{
     "name": "bash",
@@ -308,11 +308,11 @@ curl -X POST http://localhost:8080/api/v1/tools \
   }'
 
 # Assign tools to agent
-curl -X POST http://localhost:8080/api/v1/agents/{agent-uuid}/tools \
+curl -X POST http://localhost:8140/api/v1/agents/{agent-uuid}/tools \
   -H "Content-Type: application/json" \
   -d '{"tool_id": "filesystem-tool-uuid"}'
 
-curl -X POST http://localhost:8080/api/v1/agents/{agent-uuid}/tools \
+curl -X POST http://localhost:8140/api/v1/agents/{agent-uuid}/tools \
   -H "Content-Type: application/json" \
   -d '{"tool_id": "bash-tool-uuid"}'
 ```

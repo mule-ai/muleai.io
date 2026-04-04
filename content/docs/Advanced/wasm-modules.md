@@ -3,7 +3,7 @@ weight: 6
 title: "WASM Modules"
 description: "Extending Mule with WebAssembly modules for custom workflow steps"
 icon: "article"
-date: 2026-03-21
+date: "2026-03-21"
 lastmod: "2026-03-21T00:00:00-05:00"
 toc: true
 ---
@@ -137,6 +137,27 @@ func get_last_operation_status() uint32
 - Go 1.25+ or TinyGo
 - Basic understanding of Go programming
 
+### Installing TinyGo (Optional)
+
+For smaller WASM binaries, install TinyGo:
+
+```bash
+# macOS
+brew install tinygo
+
+# Linux (from binary release)
+curl -sfL https://github.com/tinygo-org/tinygo/releases/download/v0.35.0/tinygo_0.35.0_amd64.deb -o /tmp/tinygo.deb
+sudo dpkg -i /tmp/tinygo.deb
+
+# Windows (from binary release)
+# Download from https://github.com/tinygo-org/tinygo/releases
+```
+
+Verify installation:
+```bash
+tinygo version
+```
+
 ### Using Standard Go
 
 ```bash
@@ -223,6 +244,8 @@ Mule includes several example WASM modules in `examples/wasm/`:
 |--------|-------------|
 | `http-request` | Make basic HTTP GET/POST requests |
 | `http-request-with-headers` | HTTP requests with custom headers |
+| `templated-http-request` | HTTP requests with template variable substitution |
+| `post-to-mdserve` | Post content to mdserve for markdown rendering |
 
 ### GitHub Integration
 
@@ -246,6 +269,9 @@ Mule includes several example WASM modules in `examples/wasm/`:
 | `spawn-multi-workflow` | Spawn multiple workflows in parallel |
 | `workflow-aggregator` | Aggregate results from multiple workflows |
 | `workflow_agent_demo` | Trigger workflows or agents from WASM |
+| `working-dir-demo` | Demonstrate working directory management |
+| `worktree-name-generator` | Generate unique worktree names |
+| `prompt-sender` | Send prompts to agents and retrieve responses |
 
 ### Validation
 
@@ -271,7 +297,7 @@ Encode the binary and upload via API:
 BASE64_WASM=$(base64 -w 0 text-processor.wasm)
 
 # Upload via API
-curl -X POST http://localhost:8080/api/v1/wasm-modules \
+curl -X POST http://localhost:8140/api/v1/wasm-modules \
   -H "Content-Type: application/json" \
   -d "{
     \"name\": \"text-processor\",
@@ -290,7 +316,7 @@ curl -X POST http://localhost:8080/api/v1/wasm-modules \
 
 ```bash
 # Create workflow with WASM step
-curl -X POST http://localhost:8080/api/v1/workflows \
+curl -X POST http://localhost:8140/api/v1/workflows \
   -H "Content-Type: application/json" \
   -d '{
     "name": "text-processing-pipeline",
@@ -300,7 +326,7 @@ curl -X POST http://localhost:8080/api/v1/workflows \
 WORKFLOW_ID="workflow-uuid"
 
 # Add WASM module step
-curl -X POST http://localhost:8080/api/v1/workflows/${WORKFLOW_ID}/steps \
+curl -X POST http://localhost:8140/api/v1/workflows/${WORKFLOW_ID}/steps \
   -H "Content-Type: application/json" \
   -d '{
     "type": "wasm_module",
@@ -314,7 +340,7 @@ curl -X POST http://localhost:8080/api/v1/workflows/${WORKFLOW_ID}/steps \
 ### 4. Execute the Workflow
 
 ```bash
-curl -X POST http://localhost:8080/v1/chat/completions \
+curl -X POST http://localhost:8140/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
     "model": "workflow/text-processing-pipeline",
@@ -433,6 +459,119 @@ tinygo build -o module.wasm -target wasi main.go
 ## Hot Reload
 
 Mule supports hot reloading of WASM modules. After uploading a new version, workflows will automatically use the updated module without restart. This is useful for development and iterative improvements.
+
+## Module Configuration
+
+WASM modules can have associated configuration data that is automatically merged with input data when the module executes. This allows you to store static configuration values directly with the module.
+
+### How Configuration Works
+
+When a WASM module with configuration is executed, the configuration data is merged with the input data before being passed to the module via stdin as JSON.
+
+For example, if your module has this configuration stored in the database:
+```json
+{
+  "api_key": "secret123",
+  "endpoint": "https://api.example.com",
+  "timeout": 30
+}
+```
+
+And the workflow passes this input data:
+```json
+{
+  "prompt": "Process this text"
+}
+```
+
+Your WASM module will receive the combined data via stdin:
+```json
+{
+  "prompt": "Process this text",
+  "api_key": "secret123",
+  "endpoint": "https://api.example.com",
+  "timeout": 30
+}
+```
+
+### Setting Configuration via API
+
+When uploading a WASM module, you can include configuration in the `config` field:
+
+```bash
+# Upload via API with configuration
+curl -X POST http://localhost:8140/api/v1/wasm-modules \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "api-processor",
+    "description": "Process data using an external API",
+    "module_data": "'"$(base64 -w 0 module.wasm)"'",
+    "config": {
+      "api_key": "your-api-key-here",
+      "base_url": "https://api.example.com/v1",
+      "timeout_seconds": 30,
+      "retries": 3
+    }
+  }'
+```
+
+### Configuration Best Practices
+
+1. **Use for Static Values**: Configuration is best for static values that don't change between executions, such as:
+   - API keys and secrets
+   - Service endpoints
+   - Timeout values
+   - Feature flags
+
+2. **Keep It Secure**: Remember that configuration is stored in the database. Don't store highly sensitive information unless your Mule instance is properly secured.
+
+3. **Test with Configuration**: When testing modules in development, manually provide the configuration values that would normally come from the stored config.
+
+4. **Update Anytime**: You can update the configuration for an existing module at any time - changes take effect immediately for new executions.
+
+### Example: API Integration Module
+
+Here's an example module that uses configuration for API settings:
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+    "os"
+)
+
+type InputData struct {
+    Prompt    string                 `json:"prompt"`
+    APIKey    string                 `json:"api_key"`
+    BaseURL   string                 `json:"base_url"`
+    Timeout   int                    `json:"timeout_seconds"`
+}
+
+type OutputData struct {
+    Result  string `json:"result"`
+    Success bool   `json:"success"`
+}
+
+func main() {
+    var input InputData
+    json.NewDecoder(os.Stdin).Decode(&input)
+    
+    // Use configuration values for API call
+    result := callAPI(input.Prompt, input.APIKey, input.BaseURL, input.Timeout)
+    
+    json.NewEncoder(os.Stdout).Encode(OutputData{
+        Result:  result,
+        Success: true,
+    })
+}
+
+func callAPI(prompt, apiKey, baseURL string, timeout int) string {
+    // Your API integration logic here
+    return fmt.Sprintf("Processed '%s' using API at %s", prompt, baseURL)
+}
+```
 
 ## Limitations
 

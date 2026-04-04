@@ -4,7 +4,7 @@ title: "Integration Capabilities"
 description: "Extending Mule with tools, skills, and WASM modules"
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
-lastmod: "2026-03-21T00:00:00-05:00"
+lastmod: "2026-03-31T00:00:00-05:00"
 toc: true
 ---
 
@@ -26,6 +26,34 @@ REST API endpoints for:
 
 The HTTP API is the primary integration mechanism for external applications. See the [API documentation](/docs/getting-started) for details on available endpoints.
 
+#### API Middleware
+
+Mule's HTTP API includes middleware for request handling:
+
+**Logging Middleware**
+All HTTP requests are logged with method, path, status code, and duration:
+```
+GET /api/v1/agents 200 1.5ms
+POST /v1/chat/completions 200 2.3s
+```
+
+**CORS Middleware**
+Cross-Origin Resource Sharing is enabled for all endpoints:
+- `Access-Control-Allow-Origin: *`
+- `Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS`
+- `Access-Control-Allow-Headers: Content-Type, Authorization`
+
+**Timeout Middleware**
+Non-chat requests have configurable timeouts (default: 5 minutes). Chat completions and WebSocket connections are excluded from timeout handling as they have their own timeout management.
+
+To configure API timeout:
+```bash
+# Set timeout to 10 minutes (600 seconds)
+curl -X PUT http://localhost:8140/api/v1/settings/api_timeout \
+  -H "Content-Type: application/json" \
+  -d '{"value": "600"}'
+```
+
 ### Skills System
 
 Skills extend agent capabilities using the pi agent framework:
@@ -33,6 +61,8 @@ Skills extend agent capabilities using the pi agent framework:
 - Skills can provide custom tools, prompts, and execution context
 - Available at `/root/.pi/agent/skills/`
 - Skills are loaded from skill directories containing SKILL.md files
+
+For detailed information on managing skills, see the [Skills documentation](/docs/Settings/skills).
 
 Example skill configuration:
 ```yaml
@@ -94,7 +124,7 @@ func main() {
 
 ### Built-in Tools
 
-Mule provides built-in tools for workflow steps:
+Mule provides built-in tools for workflow steps. For complete documentation on tool configuration and the Tools API, see the [Tools documentation](/docs/Settings/tools).
 
 #### Bash Tool
 Execute shell commands:
@@ -155,7 +185,7 @@ wasm_module_id: "wasm-module-uuid"
 Execute a built-in tool:
 ```yaml
 step_type: tool
-tool_type: "bash"  # bash, filesystem, http, database
+tool_type: "bash"  # bash, filesystem, http, database, memory
 config:
   command: "ls -la"
   timeout: 30
@@ -186,7 +216,7 @@ Integrate Mule with external systems using the HTTP API:
 Receive external events by configuring webhooks:
 ```bash
 # Configure a workflow to trigger on external events
-curl -X POST http://localhost:8080/api/v1/jobs \
+curl -X POST http://localhost:8140/api/v1/jobs \
   -H "Content-Type: application/json" \
   -d '{
     "workflow_id": "workflow-uuid",
@@ -203,7 +233,7 @@ All API requests require authentication:
 ```bash
 # Using API key in header
 curl -H "X-API-Key: your-api-key" \
-  http://localhost:8080/api/v1/agents
+  http://localhost:8140/api/v1/agents
 ```
 
 ## Complete API Integration Examples
@@ -213,7 +243,7 @@ curl -H "X-API-Key: your-api-key" \
 First, configure an AI provider:
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/providers \
+curl -X POST http://localhost:8140/api/v1/providers \
   -H "Content-Type: application/json" \
   -d '{
     "name": "anthropic",
@@ -240,7 +270,7 @@ Create an agent and assign skills to it:
 
 ```bash
 # Create agent with skills
-curl -X POST http://localhost:8080/api/v1/agents \
+curl -X POST http://localhost:8140/api/v1/agents \
   -H "Content-Type: application/json" \
   -d '{
     "name": "code-reviewer",
@@ -260,7 +290,7 @@ curl -X POST http://localhost:8080/api/v1/agents \
 Query available models from a provider:
 
 ```bash
-curl http://localhost:8080/api/v1/providers/{provider-uuid}/models
+curl http://localhost:8140/api/v1/providers/{provider-uuid}/models
 ```
 
 Response:
@@ -280,7 +310,7 @@ Create a multi-step workflow:
 
 ```bash
 # First create the workflow
-curl -X POST http://localhost:8080/api/v1/workflows \
+curl -X POST http://localhost:8140/api/v1/workflows \
   -H "Content-Type: application/json" \
   -d '{
     "name": "bug-fix-workflow",
@@ -293,7 +323,7 @@ Then add steps to the workflow:
 
 ```bash
 # Add agent step (step 1)
-curl -X POST http://localhost:8080/api/v1/workflows/{workflow-uuid}/steps \
+curl -X POST http://localhost:8140/api/v1/workflows/{workflow-uuid}/steps \
   -H "Content-Type: application/json" \
   -d '{
     "type": "agent",
@@ -306,7 +336,7 @@ curl -X POST http://localhost:8080/api/v1/workflows/{workflow-uuid}/steps \
   }'
 
 # Add WASM module step (step 2)
-curl -X POST http://localhost:8080/api/v1/workflows/{workflow-uuid}/steps \
+curl -X POST http://localhost:8140/api/v1/workflows/{workflow-uuid}/steps \
   -H "Content-Type: application/json" \
   -d '{
     "type": "wasm_module",
@@ -314,7 +344,7 @@ curl -X POST http://localhost:8080/api/v1/workflows/{workflow-uuid}/steps \
   }'
 
 # Add another agent step (step 3)
-curl -X POST http://localhost:8080/api/v1/workflows/{workflow-uuid}/steps \
+curl -X POST http://localhost:8140/api/v1/workflows/{workflow-uuid}/steps \
   -H "Content-Type: application/json" \
   -d '{
     "type": "agent",
@@ -332,7 +362,7 @@ curl -X POST http://localhost:8080/api/v1/workflows/{workflow-uuid}/steps \
 Execute the workflow using OpenAI-compatible API:
 
 ```bash
-curl -X POST http://localhost:8080/v1/chat/completions \
+curl -X POST http://localhost:8140/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
     "model": "workflow/bug-fix-workflow",
@@ -373,7 +403,7 @@ Response:
 For long-running workflows, use async execution:
 
 ```bash
-curl -X POST http://localhost:8080/v1/chat/completions \
+curl -X POST http://localhost:8140/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
     "model": "async/workflow/long-build-workflow",
@@ -396,20 +426,20 @@ Response (immediately returns job info):
 Then poll for job status:
 
 ```bash
-curl http://localhost:8080/api/v1/jobs/{job-uuid}
+curl http://localhost:8140/api/v1/jobs/{job-uuid}
 ```
 
 ### 7. List and Monitor Jobs
 
 ```bash
 # List recent jobs with pagination
-curl "http://localhost:8080/api/v1/jobs?page=1&page_size=20"
+curl "http://localhost:8140/api/v1/jobs?page=1&page_size=20"
 
 # Filter by status
-curl "http://localhost:8080/api/v1/jobs?status=failed"
+curl "http://localhost:8140/api/v1/jobs?status=failed"
 
 # Search jobs by workflow name
-curl "http://localhost:8080/api/v1/jobs?workflow_name=bug-fix"
+curl "http://localhost:8140/api/v1/jobs?workflow_name=bug-fix"
 ```
 
 ## Best Practices

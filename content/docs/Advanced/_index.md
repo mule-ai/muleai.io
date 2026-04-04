@@ -4,7 +4,7 @@ title: "Advanced Features"
 description: "Advanced features and capabilities of Mule for sophisticated AI-driven development workflows"
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
-lastmod: "2026-03-21T00:00:00-05:00"
+lastmod: "2026-03-27T00:00:00-05:00"
 toc: true
 ---
 
@@ -18,7 +18,7 @@ This section covers advanced features of Mule that enable more sophisticated AI-
 | **[Retrieval Augmented Generation (RAG)](/docs/Advanced/rag)** | Context-aware code generation using your codebase |
 | **[Multi-agent Workflows](/docs/Advanced/multi-agent)** | Coordinating specialized agents for complex tasks |
 | **[Integration Capabilities](/docs/Advanced/integrations)** | HTTP API, Skills system, and WASM modules for custom integrations |
-| **[Unified Diff (UDiff) Implementation](/docs/Advanced/udiff)** | How Mule handles precise code changes |
+| **[File Operations](/docs/Advanced/udiff)** | How Mule handles precise code changes with FilesystemTool |
 | **[Validation Functions](/docs/Advanced/validation)** | Ensuring code quality with automated validation |
 
 ## Feature Overview
@@ -30,4 +30,4 @@ This section covers advanced features of Mule that enable more sophisticated AI-
 - **[Multi-agent Workflows](/docs/Advanced/multi-agent)**: Coordinate multiple specialized agents to solve complex problems. Design agent roles and manage data flow between them.
 - **[File Operations](/docs/Advanced/udiff)**: Understand how Mule handles precise file operations with the FilesystemTool.
 
-These advanced features work together to make Mule a powerful, flexible AI development assistant. While some features are still in development, this documentation provides a preview of the full capabilities that will be available in upcoming releases. in upcoming releases.
+These advanced features work together to make Mule a powerful, flexible AI development assistant. While some features are still in development, this documentation provides a preview of the full capabilities that will be available in upcoming releases.

@@ -3,8 +3,8 @@ weight: 1
 title: "Creating Your First Agent Workflow"
 description: "Step-by-step guide to creating and executing your first Mule workflow"
 icon: "article"
-date: 2026-03-21
-lastmod: "2026-03-21T00:00:00-05:00"
+date: "2026-03-21"
+lastmod: "2026-03-27T00:00:00-05:00"
 toc: true
 ---
 
@@ -33,9 +33,8 @@ curl -X POST http://localhost:8140/api/v1/providers \
   -H "Content-Type: application/json" \
   -d '{
     "name": "openai",
-    "type": "openai",
-    "api_key": "'"$OPENAI_API_KEY"'",
-    "default_model": "gpt-4"
+    "api_base_url": "https://api.openai.com/v1",
+    "api_key_encrypted": "'"$OPENAI_API_KEY"'"
   }'
 ```
 
@@ -80,7 +79,7 @@ curl -X POST http://localhost:8140/api/v1/workflows/<workflow-id>/steps \
   -H "Content-Type: application/json" \
   -d '{
     "step_order": 1,
-    "step_type": "agent",
+    "type": "agent",
     "agent_id": "<your-agent-id>",
     "config": {
       "task_prompt": "Analyze the repository at {{.input.repository_path}} and provide a summary of the codebase structure."
@@ -90,33 +89,40 @@ curl -X POST http://localhost:8140/api/v1/workflows/<workflow-id>/steps \
 
 ## Step 4: Execute the Workflow
 
-Now execute the workflow with an input:
+Now execute the workflow with an input using the chat completions API:
 
 ```bash
-curl -X POST http://localhost:8140/api/v1/workflows/<workflow-id>/execute \
+curl -X POST http://localhost:8140/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
-    "input": {
-      "repository_path": "/path/to/your/repo"
-    }
+    "model": "workflow/code-analysis-workflow",
+    "messages": [
+      {"role": "user", "content": "Analyze the repository at /path/to/your/repo and provide a summary"}
+    ],
+    "working_directory": "/path/to/your/repo"
   }'
 ```
 
-The response includes a job ID for tracking:
+For synchronous workflows, the response is returned directly. For async workflows, the response includes a job ID for tracking:
 
 ```json
 {
-  "job_id": "abc123",
-  "status": "queued"
+  "id": "job-uuid",
+  "object": "async.job",
+  "status": "queued",
+  "message": "The workflow has been started"
 }
 ```
 
 ## Step 5: Monitor Execution
 
-Check the job status and retrieve results:
+For async workflows, check the job status and retrieve results:
 
 ```bash
-# Get job status
+# List recent jobs
+curl http://localhost:8140/api/v1/jobs?page=1&page_size=20
+
+# Get specific job status
 curl http://localhost:8140/api/v1/jobs/<job-id>
 
 # Get job steps
@@ -130,11 +136,11 @@ A completed job response looks like:
   "id": "abc123",
   "workflow_id": "def456",
   "status": "completed",
-  "input": {
+  "input_data": {
     "repository_path": "/path/to/your/repo"
   },
-  "output": {
-    "summary": "This codebase is a Go-based API server with REST endpoints..."
+  "output_data": {
+    "prompt": "This codebase is a Go-based API server with REST endpoints..."
   },
   "created_at": "2026-03-21T10:00:00Z",
   "completed_at": "2026-03-21T10:01:30Z"
@@ -170,7 +176,7 @@ curl -X POST http://localhost:8140/api/v1/workflows/<workflow-id>/steps \
   -H "Content-Type: application/json" \
   -d '{
     "step_order": 2,
-    "step_type": "wasm_module",
+    "type": "wasm_module",
     "wasm_module_id": "<your-validation-module-id>",
     "config": {
       "validation_type": "check_summary_length",

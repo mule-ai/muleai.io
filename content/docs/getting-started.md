@@ -4,7 +4,7 @@ title: "Getting Started"
 description: "Getting started with Mule"
 icon: "article"
 date: "2025-02-20T20:46:32-05:00"
-lastmod: "2026-03-21T00:00:00-05:00"
+lastmod: "2026-04-04T00:00:00-05:00"
 toc: true
 ---
 
@@ -106,6 +106,19 @@ Before installing Mule, ensure you have:
 - **AI provider access**: API keys for your chosen AI provider (OpenAI, Anthropic, Gemini, Ollama)
 - **GitHub token**: If you plan to use GitHub repositories (optional)
 - **Docker & Docker Compose v2+**: For containerized deployment (recommended)
+- **pi CLI**: Mule uses pi as its agent runtime. Install from [pi.dev](https://pi.dev) for agent execution. This provides the AI agent execution capabilities that power Mule's agents.
+
+### Installing pi CLI
+
+```bash
+# Install pi CLI (see https://pi.dev for platform-specific instructions)
+curl -fsSL https://pi.dev/install.sh | sh
+
+# Verify installation
+pi --version
+```
+
+> **Note**: The pi CLI is required for agent execution. Without it, agents will not be able to generate responses. When running Mule via Docker, the pi CLI is included in the container image.
 
 ## Installation
 
@@ -210,7 +223,7 @@ Follow these steps to get Mule working with your first repository:
 3. Go to **Settings → AI Providers** and add your API credentials
    - For OpenAI: Enter your API key from [platform.openai.com](https://platform.openai.com)
    - For Anthropic: Enter your API key from [console.anthropic.com](https://console.anthropic.com)
-   - For Ollama: Enter `http://localhost:11434` as the endpoint
+   - For Ollama: Enter `http://localhost:11434` as the endpoint (see note below about Docker networking)
 
 **Step 2: Create Your First Agent** (3 minutes)
 1. Go to **Settings → Agents**
@@ -219,25 +232,45 @@ Follow these steps to get Mule working with your first repository:
    - **Name**: "Code Assistant" (or your preference)
    - **Model**: Select your configured provider (e.g., gpt-4o, claude-3-5-sonnet)
    - **System Prompt**: "You are a helpful coding assistant that reviews code and suggests improvements."
-   - **Tools**: Enable "File Editing" and "Command Execution"
+   - **Tools**: Assign tools like `bash`, `filesystem`, `http`, or `database` as needed
+     - `bash`: Execute shell commands
+     - `filesystem`: Read, write, and manage files
+     - `http`: Make HTTP requests to external APIs
+     - `database`: Query PostgreSQL databases
+     - `memory`: Semantic storage and retrieval with vector embeddings
 4. Save the agent configuration
 
-**Step 3: Connect a Repository** (5 minutes)
-1. Go to **Repositories → Add Repository**
-2. Enter your GitHub repository URL (e.g., `https://github.com/username/my-project`)
-3. Configure sync settings:
-   - **Sync Interval**: Every hour (or your preference)
-   - **Label Filter**: `mule` (Mule will only process issues with this label)
-4. Save and trigger an initial sync
+**Step 3: Create a Workflow with GitHub Integration** (10 minutes)
+Mule uses WASM modules for GitHub integration. To automate GitHub operations:
 
-**Step 4: Create Your First Issue** (2 minutes)
-1. In your GitHub repository, create an issue with the title "mule" label
-2. Describe the task you want Mule to help with
-3. Mule will automatically:
-   - Detect the new issue on its next sync
-   - Analyze the request using your configured agent
-   - Generate code changes and create a pull request
-   - Respond to your feedback on the PR
+1. Go to **Settings → WASM Modules** (or create a workflow via API)
+2. Upload or reference GitHub WASM modules for your desired operations
+3. Create a workflow that chains:
+   - **Agent Step**: An AI agent to process issues or generate code
+   - **WASM Module Steps**: GitHub operations (create PR, post comments, etc.)
+4. Execute the workflow via API or Jobs UI
+
+Example workflow creation via API:
+```bash
+# Create a workflow
+curl -X POST http://localhost:8140/api/v1/workflows \
+  -H "Content-Type: application/json" \
+  -d '{"name": "github-automation", "description": "Process GitHub issues"}'
+
+# Add an agent step
+curl -X POST http://localhost:8140/api/v1/workflows/{workflow_id}/steps \
+  -H "Content-Type: application/json" \
+  -d '{"type": "agent", "agent_id": "{agent_id}", "step_order": 1}'
+```
+
+See [GitHub Integration](/docs/Repositories/adding-a-repository) for detailed examples.
+
+**Step 4: Execute Your First Job** (2 minutes)
+1. Navigate to **Jobs** in the web UI
+2. Select your workflow or agent
+3. Provide input parameters (e.g., issue URL, repository info)
+4. Execute and monitor progress via WebSocket streaming
+5. Review results and artifacts when complete
 
 ### First-Run Experience
 
@@ -247,9 +280,15 @@ Welcome to Mule! This guide will help you get the most out of your first experie
 
 On first startup, Mule automatically creates default configurations to help you get started quickly:
 
-- **Default Provider**: A local Ollama provider pre-configured (`http://localhost:11434`)
-- **Default Agent**: A general-purpose agent ready to use
-- **Default Workflow**: A basic workflow template you can customize
+- **Default Provider**: An OpenRouter provider configured with endpoint `https://openrouter.ai/api/v1` and no API key. OpenRouter offers free credits for new users - sign up at [openrouter.ai](https://openrouter.ai) to get an API key for full functionality.
+- **Default Agent**: A general-purpose agent configured with:
+  - Model: `anthropic/claude-sonnet-4.5`
+  - System Prompt: "You are a helpful assistant"
+  - Provider: Connected to the Default provider
+- **WASM Editor Agent**: A specialized agent for creating and debugging WASM modules, configured with the same provider and model
+- **Default Workflow**: A basic workflow template with a single agent step, ready for customization
+
+> **Note**: The default provider is pre-configured with OpenRouter's endpoint (`https://openrouter.ai/api/v1`). To use it, simply add your OpenRouter API key in **Settings → AI Providers** and select it for your agent. Without an API key, the agent won't be able to generate responses. You can also replace the OpenRouter provider with OpenAI, Anthropic, or another supported provider.
 
 You can modify or delete these defaults once you're familiar with the system.
 
@@ -260,10 +299,14 @@ Before diving in, ensure you've completed these setup steps:
 - [ ] **Docker/PostgreSQL running**: Verify `docker-compose ps` shows services as "Up"
 - [ ] **Web UI accessible**: Confirm [http://localhost:8140](http://localhost:8140) loads
 - [ ] **Health check passing**: [http://localhost:8140/health](http://localhost:8140/health) returns `OK`
-- [ ] **GitHub token configured**: Settings → General → GitHub Token saved
-- [ ] **AI provider configured**: Settings → AI Providers → At least one provider added
-- [ ] **Test agent created**: Settings → Agents → At least one agent configured (or use the default)
-- [ ] **Test repository added**: Repositories → Add Repository → Repository connected
+- [ ] **Default primitives created**: On first startup, Mule creates:
+  - **Default** provider (OpenRouter, no API key by default)
+  - **Default** agent (general purpose)
+  - **WASM Editor** agent (for WASM module development)
+  - **Default** workflow (basic template)
+- [ ] **GitHub token configured**: Settings → General → GitHub Token saved (for GitHub WASM modules)
+- [ ] **AI provider configured**: Settings → AI Providers → Add your API key to the Default provider (or create a new provider)
+- [ ] **Workflow created**: Created a workflow with agents and GitHub WASM modules (see [GitHub Integration](/docs/Repositories/adding-a-repository))
 
 #### Best Practices for New Users
 
@@ -273,17 +316,17 @@ Before diving in, ensure you've completed these setup steps:
   - Any specific files or functions involved
   - Expected behavior or changes
   - Relevant context or background
-- **Use the `mule` Label**: Ensure your issues have the `mule` label (or your configured label). Mule ignores issues without this label.
+- **Filter Issues with WASM**: When using GitHub WASM modules, configure filters to select specific issues (e.g., by label, state, or assignee). This allows Mule to focus on relevant tasks.
 - **Iterate**: Review the generated PRs and refine your agent prompts based on results. Small adjustments to system prompts can significantly improve output quality.
 - **Check Logs**: If something doesn't work, check the Logs page in the web UI for detailed error messages and API responses.
-- **Test with Read-Only Tasks First**: Before requesting code changes, try asking Mule to review code or explain functionality to understand its capabilities.
+- **Test with Read-Only Tasks First**: Before requesting code changes or GitHub modifications, try asking Mule to review code or explain functionality to understand its capabilities.
 
 #### What to Expect During First Run
 
-1. **Initial Sync**: When you first connect a repository, Mule performs a full sync which may take 30-60 seconds
-2. **Issue Detection**: Mule scans for issues with your configured label on each sync interval
-3. **Processing Time**: After detecting an issue, processing typically takes 1-5 minutes depending on task complexity and AI provider latency
-4. **PR Creation**: Mule creates a draft PR with its proposed changes, allowing you to review before merging
+1. **Job Execution**: When you submit a job, Mule processes it based on your workflow configuration
+2. **Processing Time**: Workflow execution typically takes 1-5 minutes depending on task complexity and AI provider latency
+3. **Streaming Output**: Watch the job execute in real-time via WebSocket streaming
+4. **Artifact Creation**: Workflows can produce artifacts (code files, reports, etc.) stored with the job
 
 #### Understanding the Port Mapping
 
@@ -317,16 +360,15 @@ The web UI automatically uses WebSocket for real-time updates in the Jobs page.
 
 #### Common First-Run Mistakes to Avoid
 
-- ❌ **Don't**: Create vague issues like "fix the bug" — be specific about what needs to change
+- ❌ **Don't**: Create vague inputs like "fix the bug" — be specific about what needs to change
 - ❌ **Don't**: Expect instant results — AI processing takes time (1-5 minutes per task)
-- ❌ **Don't**: Use complex monorepos initially — start with single-package repositories
-- ❌ **Don't**: Skip the label configuration — without the correct label, Mule ignores your issues
+- ❌ **Don't**: Use complex workflows initially — start with simple agent-only workflows
 - ❌ **Don't**: Use `localhost` for provider endpoints in Docker — use actual IP addresses for host services
-- ❌ **Don't**: Forget to add the `mule` label to your issues
+- ❌ **Don't**: Skip GitHub token configuration — WASM modules need authentication
 - ✅ **Do**: Start with incremental improvements rather than large refactors
-- ✅ **Do**: Review Mule's reasoning in the PR description before merging
+- ✅ **Do**: Review Mule's output before taking action (e.g., before merging PRs)
 - ✅ **Do**: Start with the default agent configuration before customizing
-- ✅ **Do**: Test with a simple, personal repository first
+- ✅ **Do**: Test with a simple, well-understood project first
 
 #### Getting Help
 
@@ -484,46 +526,51 @@ hostname -I | awk '{print $1}'
 # e.g., http://192.168.1.100:11434
 ```
 
-**Rate limiting errors**
-- Check your AI provider's rate limits
-- Reduce sync frequency in repository settings
-- Consider upgrading your provider plan
-
-### Repository Issues
-
-**Repository sync fails**
+Alternatively, configure Ollama to listen on all interfaces:
 ```bash
-# Test SSH access to GitHub
-ssh -T git@github.com
+# Set Ollama to listen on all network interfaces
+export OLLAMA_HOST=0.0.0.0:11434
 
-# Verify repository path and permissions
-ls -la /path/to/repo
-
-# Check available disk space
-df -h
+# Or on Linux, create a systemd override:
+sudo systemctl edit ollama
+# Add:
+# [Service]
+# Environment="OLLAMA_HOST=0.0.0.0:11434"
 ```
 
-**Issues not being detected**
-- Confirm the issue has the correct label (default: `mule`)
-- Verify sync interval hasn't just started—wait for next sync
-- Check Logs page for sync errors
+**Rate limiting errors**
+- Check your AI provider's rate limits
+- Reduce job frequency in workflow settings
+- Consider upgrading your provider plan
 
-**PRs not being created**
+### GitHub Integration Issues
+
+**GitHub WASM module fails**
+- Verify your GitHub token has the `repo` scope required
+- Check the job logs for specific error messages from the WASM module
+- Ensure GitHub API rate limits aren't exceeded
+
+**WASM module not found**
+- Verify the module is uploaded and available in your workflow
+- Check the workflow step configuration for correct module IDs
+
+**Jobs not being created**
 - Review agent configuration has necessary tools enabled
 - Check agent's system prompt isn't too restrictive
 - Verify model has code generation capabilities
 
 **No changes generated**
-- Ensure issue description is clear and actionable
+- Ensure input parameters are clear and actionable
 - Check Logs page for AI provider errors
 - Verify model context window isn't being exceeded
 - Review agent prompt template for clarity
+- Verify WASM modules received correct input data
 
 ### Runtime Issues
 
 **Slow response times**
 - Check AI provider latency in provider settings
-- Reduce repository sync frequency
+- Reduce job frequency in workflow settings
 - Limit concurrent agent tasks
 
 **Memory or resource issues**

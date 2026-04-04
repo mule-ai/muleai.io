@@ -4,7 +4,7 @@ title: "Settings"
 description: "Configure Mule's behavior including AI providers, agents, workflows, and system preferences"
 icon: "article"
 date: "2025-02-20T21:01:12-05:00"
-lastmod: "2026-03-21T00:00:00-05:00"
+lastmod: "2026-03-29T00:00:00-05:00"
 toc: true
 ---
 
@@ -17,8 +17,11 @@ The Settings section allows you to configure all aspects of Mule's behavior. Fro
 | **[General](/docs/Settings/general)** | GitHub tokens, base URL configuration, and general preferences |
 | **[AI Providers](/docs/Settings/ai-providers)** | Configure OpenAI, Anthropic, Gemini, Ollama, and other AI providers |
 | **[Agents](/docs/Settings/agents)** | Create and configure AI agents for code generation and tasks |
+| **[Skills](/docs/Settings/skills)** | Assign pi agent skills to extend agent capabilities |
+| **[Tools](/docs/Settings/tools)** | Built-in and custom tools for agent interactions |
 | **[System Agent](/docs/Settings/system-agent)** | Configure the agent used for system tasks like commit messages |
 | **[Workflows](/docs/Settings/workflows)** | Define multi-step workflows with validation and branching logic |
+| **[Memory](/docs/Settings/memory)** | Configure vector embedding storage for semantic search |
 
 ## Getting Started with Settings
 
@@ -27,7 +30,10 @@ Settings are organized from general configuration to specific agent behaviors:
 1. **[General Settings](/docs/Settings/general)** - Start here to configure your GitHub token
 2. **[AI Providers](/docs/Settings/ai-providers)** - Add your AI provider credentials
 3. **[Agents](/docs/Settings/agents)** - Create agents that will process tasks
-4. **[Workflows](/docs/Settings/workflows)** - Define how agents execute tasks
+4. **[Skills](/docs/Settings/skills)** - Assign skills to extend agent capabilities
+5. **[Tools](/docs/Settings/tools)** - Configure built-in and custom tools for agents
+6. **[Memory Configuration](/docs/Settings/memory)** - Configure semantic search and context retention
+7. **[Workflows](/docs/Settings/workflows)** - Define how agents execute tasks
 
 ## Quick Reference
 

@@ -4,11 +4,50 @@ title: "Multi-Agent Workflows"
 description: "Coordinating specialized AI agents for complex tasks"
 icon: "article"
 date: "2026-03-21"
-lastmod: "2026-03-21T00:00:00-05:00"
+lastmod: "2026-03-22T00:00:00-05:00"
 toc: true
 ---
 
 Multi-agent workflows enable Mule to tackle complex tasks by coordinating specialized AI agents. This advanced feature allows you to decompose tasks into smaller pieces, with each handled by an agent with specific expertise.
+
+## Workflow Execution Model
+
+The following diagram shows how multiple agents collaborate within a workflow:
+
+```mermaid
+flowchart TB
+    subgraph Input["Workflow Input"]
+        UserMsg[User Message]
+        Context[Working Directory<br/>Repository Context]
+    end
+
+    subgraph Pipeline["Multi-Agent Pipeline"]
+        A1[Analysis Agent<br/>Understand Task]
+        A2[Design Agent<br/>Plan Solution]
+        A3[Implementation Agent<br/>Generate Code]
+        A4[Review Agent<br/>Validate & Improve]
+    end
+
+    subgraph Validation["Quality Assurance"]
+        WASM[WASM Module<br/>Linting & Tests]
+        Fix[Correction Loop<br/>Re-attempt if Failed]
+    end
+
+    subgraph Output["Final Output"]
+        Result[Code Changes]
+        Report[Status Report]
+    end
+
+    UserMsg --> A1
+    Context --> A1
+    A1 -->|Analysis Output| A2
+    A2 -->|Design Plan| A3
+    A3 -->|Generated Code| A4
+    A4 -->|Reviewed Code| WASM
+    WASM -->|Pass| Result
+    WASM -->|Fail| Fix
+    Fix --> A3
+    Result --> Report
 
 ## How Multi-Agent Workflows Work
 
@@ -206,7 +245,7 @@ Create and execute a multi-agent workflow programmatically:
 
 ```bash
 # 1. Create the workflow
-curl -X POST http://localhost:8080/api/v1/workflows \
+curl -X POST http://localhost:8140/api/v1/workflows \
   -H "Content-Type: application/json" \
   -d '{
     "name": "code-analysis-pipeline",
@@ -218,7 +257,7 @@ curl -X POST http://localhost:8080/api/v1/workflows \
 WORKFLOW_UUID="workflow-uuid"
 
 # 3. Add step 1: Analysis agent
-curl -X POST http://localhost:8080/api/v1/workflows/${WORKFLOW_UUID}/steps \
+curl -X POST http://localhost:8140/api/v1/workflows/${WORKFLOW_UUID}/steps \
   -H "Content-Type: application/json" \
   -d '{
     "type": "agent",
@@ -230,7 +269,7 @@ curl -X POST http://localhost:8080/api/v1/workflows/${WORKFLOW_UUID}/steps \
   }'
 
 # 4. Add step 2: Test generation WASM module
-curl -X POST http://localhost:8080/api/v1/workflows/${WORKFLOW_UUID}/steps \
+curl -X POST http://localhost:8140/api/v1/workflows/${WORKFLOW_UUID}/steps \
   -H "Content-Type: application/json" \
   -d '{
     "type": "wasm_module",
@@ -239,14 +278,14 @@ curl -X POST http://localhost:8080/api/v1/workflows/${WORKFLOW_UUID}/steps \
   }'
 
 # 5. Reorder steps if needed
-curl -X POST http://localhost:8080/api/v1/workflows/${WORKFLOW_UUID}/reorder \
+curl -X POST http://localhost:8140/api/v1/workflows/${WORKFLOW_UUID}/reorder \
   -H "Content-Type: application/json" \
   -d '{
     "step_ids": ["step-1-uuid", "step-2-uuid", "step-3-uuid", "step-4-uuid"]
   }'
 
 # 6. Execute the workflow
-curl -X POST http://localhost:8080/v1/chat/completions \
+curl -X POST http://localhost:8140/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
     "model": "workflow/code-analysis-pipeline",
@@ -288,6 +327,123 @@ For more complex workflows, you can map specific output fields to input fields:
   ]
 }
 ```
+
+## Data Flow Between Agents
+
+Understanding how data flows between agents is critical for building effective multi-agent workflows:
+
+### Sequential Data Flow
+
+By default, each agent receives output from the previous agent:
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant A1 as Agent 1
+    participant A2 as Agent 2
+    participant A3 as Agent 3
+
+    User->>A1: Input Task
+    A1-->>A2: Step 1 Output
+    A2-->>A3: Step 2 Output
+    A3-->>User: Final Result
+```
+
+### Parallel Data Flow
+
+For more complex workflows, agents can process different aspects in parallel:
+
+```json
+{
+  "name": "parallel-analysis-workflow",
+  "steps": [
+    {
+      "step_order": 1,
+      "type": "agent",
+      "agent_id": "code-analyzer-uuid",
+      "config": {
+        "input_mapping": {
+          "code": "user_message.code"
+        }
+      }
+    },
+    {
+      "step_order": 1,
+      "type": "agent",
+      "agent_id": "test-analyzer-uuid",
+      "config": {
+        "input_mapping": {
+          "tests": "user_message.tests"
+        }
+      }
+    },
+    {
+      "step_order": 2,
+      "type": "agent",
+      "agent_id": "fixer-agent-uuid",
+      "config": {
+        "input_mapping": {
+          "code_issues": "step_1.output.issues",
+          "test_issues": "step_2.output.issues"
+        }
+      }
+    }
+  ]
+}
+```
+
+Note: While step_order can be the same, agents execute sequentially within the same order tier.
+
+## Error Handling Patterns
+
+Multi-agent workflows should handle errors gracefully:
+
+### Retry Pattern
+
+Configure agents to retry on failure:
+
+```json
+{
+  "steps": [
+    {
+      "step_order": 1,
+      "type": "agent",
+      "agent_id": "unreliable-agent-uuid",
+      "config": {
+        "max_retries": 3,
+        "retry_delay_seconds": 5
+      }
+    }
+  ]
+}
+```
+
+### Fallback Pattern
+
+Use a more reliable agent as fallback:
+
+```json
+{
+  "steps": [
+    {
+      "step_order": 1,
+      "type": "agent",
+      "agent_id": "premium-agent-uuid",
+      "config": {
+        "fallback_on_failure": "standard-agent-uuid"
+      }
+    }
+  ]
+}
+```
+
+### Circuit Breaker Pattern
+
+For workflows with external dependencies:
+
+1. Add health check step
+2. Skip dependent steps if health check fails
+3. Use cached results when appropriate
 
 ## Tool-Using Agents
 
@@ -331,3 +487,39 @@ When planning multi-agent workflows, consider:
 - **Error propagation**: Mistakes in early steps can amplify through the chain
 - **Complexity management**: Balance the benefits of specialization against increased system complexity
 - **Timeout handling**: Long-running workflows may hit job timeout limits (configurable in settings)
+
+### Timeout Configuration
+
+Multi-agent workflows have several timeout settings:
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `timeout_workflow_seconds` | 300s | Maximum time for each step |
+| `timeout_request_seconds` | 360s | Maximum time for API requests |
+| `timeout_job_seconds` | 3600s | Maximum time for entire job |
+
+For complex multi-agent workflows:
+
+```bash
+# Increase job timeout for complex pipelines
+# In Settings → General or via API
+timeout_job_seconds: 7200  # 2 hours
+```
+
+### Cost Optimization
+
+To manage token costs in multi-agent workflows:
+
+1. **Use smaller models** for simple analysis steps
+2. **Limit context** by filtering unnecessary data between steps
+3. **Cache results** where possible using memory tool
+4. **Parallel execution** reduces wall-clock time but not token usage
+
+### Debugging Multi-Agent Workflows
+
+When troubleshooting multi-agent issues:
+
+1. **Check job logs**: Each step's output is logged
+2. **Verify agent configuration**: Ensure agents have correct provider/model
+3. **Test agents individually**: Run each agent in isolation first
+4. **Review tool permissions**: Ensure tools are assigned to agents

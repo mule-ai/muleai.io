@@ -3,8 +3,8 @@ weight: 2
 title: "Building a Custom WASM Module"
 description: "Create your own WebAssembly validation module for Mule workflows"
 icon: "article"
-date: 2026-03-21
-lastmod: "2026-03-21T00:00:00-05:00"
+date: "2026-03-21"
+lastmod: "2026-03-27T00:00:00-05:00"
 toc: true
 ---
 
@@ -226,8 +226,8 @@ curl -X POST http://localhost:8140/api/v1/wasm-modules \
   -H "Content-Type: multipart/form-data" \
   -F "name=code-changes-validator" \
   -F "description=Validates code changes against PR best practices" \
-  -F "language=go" \
-  -F "file=@validator.wasm"
+  -F "config={}" \
+  -F "module_data=@validator.wasm"
 ```
 
 Or use the web UI at `http://localhost:8140` → WASM Modules tab.
@@ -257,7 +257,7 @@ curl -X POST http://localhost:8140/api/v1/workflows/<workflow-id>/steps \
   -H "Content-Type: application/json" \
   -d '{
     "step_order": 1,
-    "step_type": "agent",
+    "type": "agent",
     "agent_id": "<your-agent-id>",
     "config": {
       "task_prompt": "Generate code changes for the issue. Output JSON with changes array."
@@ -269,7 +269,7 @@ curl -X POST http://localhost:8140/api/v1/workflows/<workflow-id>/steps \
   -H "Content-Type: application/json" \
   -d '{
     "step_order": 2,
-    "step_type": "wasm_module",
+    "type": "wasm_module",
     "wasm_module_id": "<your-module-id>",
     "config": {
       "rules": {
@@ -284,19 +284,20 @@ curl -X POST http://localhost:8140/api/v1/workflows/<workflow-id>/steps \
 
 ## Step 6: Test Your Module
 
-Execute the workflow with test data:
+Execute the workflow with test data using the chat completions API:
 
 ```bash
-curl -X POST http://localhost:8140/api/v1/workflows/<workflow-id>/execute \
+curl -X POST http://localhost:8140/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
-    "input": {
-      "issue_description": "Fix authentication bug"
-    }
+    "model": "workflow/validated-pr-workflow",
+    "messages": [
+      {"role": "user", "content": "Fix authentication bug"}
+    ]
   }'
 ```
 
-Check the job result:
+For async workflows, check the job result:
 
 ```bash
 curl http://localhost:8140/api/v1/jobs/<job-id>
@@ -398,7 +399,7 @@ See the [WASM Modules documentation](/docs/Advanced/wasm-modules) for the full l
 
 - [WASM Modules](/docs/Advanced/wasm-modules) - Full reference documentation
 - [Validation Functions](/docs/Advanced/validation) - Built-in validation patterns
-- [Example Modules](https://github.com/jbutlerdev/mule/tree/main/examples/wasm) - Reference implementations
+- [Example Modules](https://github.com/mule-ai/mule/tree/main/examples/wasm) - Reference implementations
 
 ## Common Issues
 

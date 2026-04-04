@@ -4,7 +4,7 @@ title: "Workflows"
 description: "Understanding and configuring Mule workflows"
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
-lastmod: "2026-03-21T12:00:00-05:00"
+lastmod: "2026-04-01T00:00:00-05:00"
 toc: true
 ---
 
@@ -31,6 +31,36 @@ Mule comes with a default workflow that follows this sequence:
 4. **PR Body Agent**: Writes a comprehensive pull request description
 
 This default workflow is suitable for most use cases and requires minimal configuration.
+
+## Workflow Execution Flow
+
+```mermaid
+flowchart LR
+    subgraph Submit["Job Submission"]
+        Req[API Request]
+        Validate[Validate Request]
+    end
+
+    subgraph Execute["Execution"]
+        Queue[Queue Job]
+        Step1[Step 1: Agent]
+        Step2[Step 2: WASM]
+        Step3[Step 3: Agent]
+    end
+
+    subgraph Complete["Completion"]
+        Store[Store Artifacts]
+        Response[Return Result]
+    end
+
+    Req --> Validate
+    Validate --> Queue
+    Queue --> Step1
+    Step1 --> Step2
+    Step2 --> Step3
+    Step3 --> Store
+    Store --> Response
+```
 
 ## Workflow Steps
 
@@ -115,6 +145,74 @@ This enables workflows to:
 ## Job Management
 
 When a workflow is executed, it creates a **Job** that tracks the entire execution:
+
+### Listing and Filtering Jobs
+
+The Jobs API supports rich filtering and pagination:
+
+```bash
+# List recent jobs with pagination
+curl "http://localhost:8140/api/v1/jobs?page=1&page_size=20"
+
+# Filter by status
+curl "http://localhost:8140/api/v1/jobs?status=failed"
+
+# Search jobs by workflow name or working directory
+curl "http://localhost:8140/api/v1/jobs?search=code-review"
+
+# Combined filtering
+curl "http://localhost:8140/api/v1/jobs?page=1&page_size=10&status=running"
+```
+
+**Query Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `page` | integer | 1 | Page number for pagination |
+| `page_size` | integer | 20 | Number of jobs per page (max: 100) |
+| `status` | string | - | Filter by job status (queued, running, completed, failed, cancelled) |
+| `search` | string | - | Search in workflow ID or working directory |
+| `workflow_name` | string | - | Filter by workflow name |
+
+**Response:**
+```json
+{
+  "jobs": [
+    {
+      "id": "job-uuid",
+      "workflow_id": "workflow-uuid",
+      "status": "completed",
+      "working_directory": "/path/to/repo",
+      "created_at": "2026-03-21T10:00:00Z",
+      "completed_at": "2026-03-21T10:05:00Z"
+    }
+  ],
+  "total_count": 50,
+  "page": 1,
+  "page_size": 20,
+  "total_pages": 3
+}
+```
+
+### Real-Time Monitoring
+
+Monitor workflow execution in real-time using WebSocket:
+
+```bash
+# Connect to WebSocket for live updates
+ws://localhost:8140/ws
+
+# Or via the web UI at http://localhost:8140
+# Navigate to Jobs page for real-time monitoring
+```
+
+WebSocket events include:
+- `job_started` - Workflow execution began
+- `job_step_started` - Individual step began
+- `job_step_completed` - Step finished (with output)
+- `job_step_failed` - Step encountered an error
+- `job_completed` - Entire workflow finished
+- `job_failed` - Workflow failed
 
 ### Job Statuses
 

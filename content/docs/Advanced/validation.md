@@ -70,6 +70,8 @@ Validates:
 - Metadata is required
 - Tool type must be one of: `http`, `database`, `memory`, `filesystem`
 
+> **Note:** The `bash` tool is a built-in tool that doesn't require metadata validation. It's automatically available to agents and doesn't need to be created as a database record.
+
 ### Skill Validation
 
 ```go
@@ -154,7 +156,7 @@ Create a validation workflow with retry logic:
 
 ```bash
 # 1. Create the validation workflow
-curl -X POST http://localhost:8080/api/v1/workflows \
+curl -X POST http://localhost:8140/api/v1/workflows \
   -H "Content-Type: application/json" \
   -d '{
     "name": "lint-and-fix",
@@ -165,7 +167,7 @@ curl -X POST http://localhost:8080/api/v1/workflows \
 WORKFLOW_UUID="workflow-uuid"
 
 # 2. Add validation step
-curl -X POST http://localhost:8080/api/v1/workflows/${WORKFLOW_UUID}/steps \
+curl -X POST http://localhost:8140/api/v1/workflows/${WORKFLOW_UUID}/steps \
   -H "Content-Type: application/json" \
   -d '{
     "type": "wasm_module",
@@ -179,7 +181,7 @@ curl -X POST http://localhost:8080/api/v1/workflows/${WORKFLOW_UUID}/steps \
   }'
 
 # 3. Execute the workflow
-curl -X POST http://localhost:8080/v1/chat/completions \
+curl -X POST http://localhost:8140/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
     "model": "workflow/lint-and-fix",

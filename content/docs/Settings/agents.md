@@ -4,7 +4,7 @@ title: "Agents"
 description: "Configure AI agents with providers, models, skills, and tools"
 icon: "article"
 date: "2025-02-20T20:54:52-05:00"
-lastmod: "2026-03-21T00:00:00-05:00"
+lastmod: "2026-04-04T00:00:00-05:00"
 toc: true
 ---
 
@@ -31,7 +31,11 @@ The PI Config allows you to fine-tune how the agent processes tasks. This is pas
 
 ```json
 {
-  "thinking_level": "medium"
+  "thinking_level": "medium",
+  "skills": ["skill-id-1", "skill-id-2"],
+  "tools": ["read", "write", "edit", "bash", "grep", "find"],
+  "extensions": ["extension-name"],
+  "working_dir": "/path/to/default/directory"
 }
 ```
 
@@ -50,18 +54,57 @@ The `thinking_level` setting controls how much reasoning the agent applies befor
 
 Higher thinking levels result in more thoughtful responses but take longer to generate. Adjust based on task complexity.
 
+### Additional Configuration Options
+
+The PI Config supports several additional options:
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `skills` | array | List of skill IDs to enable for this agent |
+| `tools` | array | List of tool names the agent can use (e.g., `read`, `write`, `edit`, `bash`, `grep`, `find`) |
+| `extensions` | array | List of pi extensions to enable |
+| `working_dir` | string | Default working directory for agent operations |
+
+### Available Tools
+
+When configuring `tools` in PI Config, you can specify any of these available tools:
+
+| Tool | Description |
+|------|-------------|
+| `read` | Read file contents |
+| `write` | Write content to files |
+| `edit` | Make surgical edits to files |
+| `bash` | Execute shell commands |
+| `grep` | Search for patterns in files |
+| `find` | Find files by name or pattern |
+
 ## System Prompt
 
-The system prompt defines how the agent behaves. You can use dynamic variables in the prompt that get filled in at runtime:
+The system prompt defines how the agent behaves. The system prompt is sent as-is to the AI model, so you can include any instructions you want the agent to follow.
 
-- `{{.Issue.Title}}` - The GitHub issue title
-- `{{.Issue.Body}}` - The GitHub issue description
-- `{{.Diff}}` - The current code diff (if available)
-- `{{.PRComments}}` - Pull request comments (if available)
+For best results with code-related tasks, include:
+- Clear instructions on what the agent should do
+- Examples of expected input and output
+- Any constraints or requirements
+- References to relevant files or patterns
+
+Example system prompt:
+```
+You are a code review assistant. Your task is to:
+1. Read the provided code changes
+2. Identify potential bugs, security issues, or style problems
+3. Suggest improvements in a clear, actionable format
+
+When reviewing, consider:
+- Code clarity and maintainability
+- Error handling
+- Performance implications
+- Security best practices
+```
 
 ## Tools
 
-Agents can be assigned tools to interact with external systems:
+Agents can be assigned tools to interact with external systems. For complete documentation on available tools and configuration, see the [Tools documentation](/docs/Settings/tools).
 
 - **filesystem**: Read and write files on the system
 - **bash**: Execute shell commands

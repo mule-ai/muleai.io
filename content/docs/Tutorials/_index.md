@@ -4,13 +4,23 @@ title: "Tutorials"
 description: "Step-by-step tutorials for common Mule workflows"
 icon: "article"
 date: "2026-03-21T00:00:00-05:00"
-lastmod: "2026-03-21T00:00:00-05:00"
+lastmod: "2026-03-31T00:00:00-05:00"
 toc: true
 ---
 
 # Tutorials
 
 Welcome to the Mule tutorials section. These step-by-step guides will help you accomplish real-world tasks with Mule.
+
+## Quick Navigation
+
+| Difficulty | Tutorial | Description | Time |
+|------------|----------|-------------|------|
+| Beginner | [First Workflow](/docs/Tutorials/first-workflow) | Create your first agent workflow | 10 min |
+| Intermediate | [Working Directory](/docs/Tutorials/working-directory) | Manage isolated execution environments | 15 min |
+| Intermediate | [Batch Processing](/docs/Tutorials/batch-processing) | Execute workflows in parallel | 15 min |
+| Intermediate | [Async Workflows](/docs/Tutorials/async-workflows) | Run long-running workflows in background | 15 min |
+| Advanced | [Building WASM Modules](/docs/Tutorials/building-wasm-module) | Create custom WebAssembly modules | 20 min |
 
 ## Available Tutorials
 
@@ -26,6 +36,27 @@ Extend Mule's capabilities by building your own WebAssembly validation module. T
 - Implementing the required input/output interface
 - Using host functions for HTTP requests, git operations, and more
 - Integrating your module into a workflow
+
+### [Working Directory Management](/docs/Tutorials/working-directory)
+Learn how to use working directories to isolate and manage workflow executions. This tutorial covers:
+- Setting up working directories for jobs
+- WASM module integration with working directories
+- Git worktree workflows and parallel execution
+- Best practices for directory isolation
+
+### [Parallel Workflow Execution](/docs/Tutorials/batch-processing)
+Learn how to launch multiple workflows in parallel and process data batches efficiently. This tutorial covers:
+- Spawning multiple workflows simultaneously
+- Processing data arrays with parallel execution
+- Using jq-filter for data transformation
+- Error handling in parallel workflows
+
+### [Async Workflow Execution](/docs/Tutorials/async-workflows)
+Learn how to run long-running workflows asynchronously with job polling and WebSocket updates. This tutorial covers:
+- Creating and executing async workflows
+- Monitoring job status with polling or WebSocket
+- Handling workflow output and errors
+- Best practices for background processing
 
 ---
 
@@ -43,3 +74,4 @@ After completing these tutorials, explore the advanced documentation:
 - [WASM Modules](/docs/Advanced/wasm-modules) - Deep dive into WASM capabilities
 - [Multi-agent Workflows](/docs/Advanced/multi-agent) - Advanced orchestration patterns
 - [Validation](/docs/Advanced/validation) - Ensuring code quality
+- [GitHub Integration](/docs/Repositories/interacting-with-a-repository) - Repository automation patterns

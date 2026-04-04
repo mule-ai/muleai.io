@@ -4,7 +4,7 @@ title: "Interacting With a Repository"
 description: "Repository interaction in Mule via WASM modules"
 icon: "article"
 date: "2025-02-20T21:04:46-05:00"
-lastmod: "2026-03-21T18:00:00-05:00"
+lastmod: "2026-03-27T18:00:00-05:00"
 toc: true
 ---
 
@@ -19,7 +19,10 @@ Mule includes the following WASM modules for repository interaction:
 | **GitHub Issues** | Fetch issues from GitHub repositories | `examples/wasm/github-issues/` |
 | **GitHub Comment** | Post comments on GitHub issues | `examples/wasm/github-comment/` |
 | **Git Branch Push** | Push git branches to remote origin | `examples/wasm/git-branch-push/` |
+| **Git Worktree** | Create isolated git worktrees for parallel development | `examples/wasm/git-worktree/` |
 | **Create Pull Request** | Create pull requests on GitHub | `examples/wasm/create-pull-request/` |
+| **Issue State Tracker** | Track and update issue labels through workflow states | `examples/wasm/issue-state-tracker/` |
+| **Issues to Markdown** | Convert GitHub issues to readable markdown | `examples/wasm/issues-to-markdown/` |
 
 ## Git Worktree
 
