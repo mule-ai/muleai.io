@@ -1,26 +1,26 @@
 ---
 weight: 2
-title: "Adding a Repository"
-description: "Repository management in Mule - using WASM modules for GitHub integration"
+title: "GitHub Integration"
+description: "Using WASM modules for GitHub automation in Mule workflows"
 icon: "article"
 date: "2025-02-20T21:04:16-05:00"
-lastmod: "2026-03-27T00:00:00-05:00"
+lastmod: "2026-04-02T00:00:00-05:00"
 toc: true
 ---
 
-![add-repository](https://storage.googleapis.com/mule-storage/add-repository.png)
+![github-integration](https://storage.googleapis.com/mule-storage/github-integration.png)
 
-> **Note:** Mule uses WASM modules for repository integration rather than a dedicated UI-based repository management system. This provides more flexibility and allows you to build custom GitHub automation workflows.
+> **Note:** Mule uses WASM modules for GitHub integration rather than a built-in repository management system. This provides flexible, customizable GitHub automation that you can incorporate into your workflows.
 
 ## GitHub Integration via WASM Modules
 
-Mule provides WASM modules for GitHub operations that can be integrated into your workflows:
+Mule provides pre-built WASM modules for GitHub operations that can be integrated into your workflows:
 
 ### Available GitHub WASM Modules
 
 | Module | Description |
 |--------|-------------|
-| **create-pull-request** | Create GitHub pull requests from workflows |
+| **create-pull-request** | Create GitHub pull requests from workflow outputs |
 | **github-comment** | Post comments on issues and pull requests |
 | **github-issues** | Query and process GitHub issues |
 | **git-branch-push** | Create branches and push commits |
@@ -28,15 +28,16 @@ Mule provides WASM modules for GitHub operations that can be integrated into you
 | **issue-state-tracker** | Track and update issue states |
 | **issues-to-markdown** | Convert GitHub issues to markdown format |
 
+See the [examples/wasm](https://github.com/mule-ai/mule/tree/main/examples/wasm) directory for implementation details.
+
 ## Using GitHub Integration in Workflows
 
-### Example: Create a Pull Request
+### Creating a Pull Request
 
 To create a GitHub pull request from a workflow:
 
-1. **Create a WASM Workflow Step** with the following input:
-
-```json
+```bash
+# Example WASM module input for creating a PR
 {
   "token": "your-github-token",
   "owner": "your-username",
@@ -47,14 +48,9 @@ To create a GitHub pull request from a workflow:
 }
 ```
 
-2. **Execute the workflow** - Mule will:
-   - Detect the current branch automatically (or use the `head` parameter)
-   - Create the pull request via GitHub API
-   - Return the PR URL in the response
+### Posting Comments
 
-### Example: Comment on Issues
-
-Post comments on GitHub issues using the `github-comment` module:
+Post comments on GitHub issues or pull requests:
 
 ```json
 {
@@ -66,7 +62,7 @@ Post comments on GitHub issues using the `github-comment` module:
 }
 ```
 
-### Example: Git Worktree for Parallel Development
+### Creating Git Worktrees
 
 Create isolated git worktrees for working on multiple issues simultaneously:
 
@@ -80,43 +76,56 @@ Create isolated git worktrees for working on multiple issues simultaneously:
 }
 ```
 
-## Current Mule Features
+## Workflow Example: Issue to PR Pipeline
 
-Mule is an AI workflow automation platform with these features:
+Here's how to build an automated GitHub workflow:
 
-### Providers
+```json
+{
+  "name": "github-automation",
+  "description": "Automatically process GitHub issues and create PRs",
+  "steps": [
+    {
+      "step_order": 1,
+      "type": "agent",
+      "agent_id": "analysis-agent-uuid",
+      "config": {
+        "system_prompt": "Analyze the GitHub issue and propose code changes"
+      }
+    },
+    {
+      "step_order": 2,
+      "type": "wasm_module",
+      "wasm_module_id": "git-branch-push-uuid",
+      "config": {
+        "token": "${GITHUB_TOKEN}",
+        "owner": "your-org",
+        "repo": "your-repo"
+      }
+    },
+    {
+      "step_order": 3,
+      "type": "wasm_module",
+      "wasm_module_id": "create-pull-request-uuid",
+      "config": {
+        "token": "${GITHUB_TOKEN}",
+        "owner": "your-org",
+        "repo": "your-repo",
+        "base": "main"
+      }
+    }
+  ]
+}
+```
 
-Configure AI provider connections (OpenAI, Anthropic, local LLMs, etc.). See [AI Providers](/docs/Settings/ai-providers).
+## Getting Your GitHub Token
 
-### Agents
-
-Create AI agents with specific skills and system prompts. Agents can be configured with:
-- **Provider**: Which AI provider to use
-- **Model**: Specific model ID
-- **Skills**: Specialized capabilities (coding, research, etc.)
-- **System Prompt**: Custom instructions for the agent
-
-See [Agents](/docs/Settings/agents).
-
-### Workflows
-
-Build multi-step automation workflows combining:
-- **Agent Steps**: Execute an AI agent
-- **WASM Modules**: Run custom WebAssembly code (including GitHub operations)
-
-See [Workflows](/docs/Settings/workflows).
-
-### WASM Modules
-
-Write custom code in WebAssembly that integrates with Mule's workflow engine. GitHub integration is available through pre-built modules. See [Advanced: Validation Functions](/docs/Advanced/validation) for WASM-based validation.
-
-### Jobs
-
-Execute workflows and agents, track results, and manage artifacts. Access from the main Dashboard or Jobs page.
+1. Go to [GitHub Settings → Developer Settings → Personal Access Tokens](https://github.com/settings/tokens)
+2. Generate a new token (classic) or fine-grained token
+3. Grant the `repo` scope for full repository access
+4. Store the token securely and pass it to your WASM modules
 
 ## Architecture Overview
-
-Mule's architecture with GitHub integration:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -124,53 +133,38 @@ Mule's architecture with GitHub integration:
 ├─────────────────────────────────────────────────────────┤
 │  REST API  │  WebSocket  │  Workflow Engine             │
 ├─────────────────────────────────────────────────────────┤
-│  Agents  │  Skills  │  Providers  │  WASM Modules       │
+│  Agents  │  Skills  │  Providers  │  WASM Modules      │
 ├─────────────────────────────────────────────────────────┤
 │  PostgreSQL Database                                    │
 └─────────────────────────────────────────────────────────┘
          │
          ▼
-┌─────────────────┐
-│  PI Coding      │  ← Used for AI execution
-│  Agent          │
-└─────────────────┘
+┌─────────────────────────┐
+│  PI Coding Agent        │  ← AI execution
+└─────────────────────────┘
          │
          ▼
 ┌─────────────────────────────────────────────────────────┐
 │  GitHub WASM Modules                                     │
-│  (create-pull-request, github-comment, git-worktree)    │
+│  create-pull-request, github-comment, git-worktree, etc. │
 └─────────────────────────────────────────────────────────┘
 ```
 
-## Getting Started
-
-To use GitHub integration with Mule today:
-
-1. **Configure a Provider**: Add your AI provider credentials in Settings → Providers
-2. **Create an Agent**: Build an agent with your preferred model and skills
-3. **Create a Workflow**: Add agent steps and GitHub WASM modules
-4. **Execute Jobs**: Run workflows and monitor results
-
-See the [Getting Started](/docs/getting-started) guide for detailed instructions.
-
 ## Building Custom GitHub Automation
 
-You can create custom GitHub automation workflows by combining:
+Create custom GitHub automation workflows by combining:
 
-1. **Agent Step**: Use an AI agent to analyze issues or requirements
+1. **Agent Step**: Use an AI agent to analyze issues or generate code
 2. **WASM Module Step**: Execute GitHub operations (create PR, comment, etc.)
 3. **Validation**: Add WASM modules for code validation or testing
 
-This allows for powerful automation like:
+This enables automation like:
 - Autonomous bug fixing from issue descriptions
 - Automated code review responses
 - Continuous integration with AI assistance
 
-## Future Plans
+## Related Documentation
 
-Additional repository automation features may include:
-- Native repository management UI
-- Built-in issue → PR automation
-- Label-based workflow triggers
-
-Subscribe to the [Mule project](https://github.com/mule-ai/mule) for updates on new features.
+- [Workflows](/docs/Settings/workflows) - Building multi-step automation
+- [WASM Modules](/docs/Advanced/wasm-modules) - Custom WebAssembly integration
+- [Agents](/docs/Settings/agents) - AI agent configuration

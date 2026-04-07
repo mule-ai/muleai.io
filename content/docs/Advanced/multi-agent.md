@@ -456,6 +456,94 @@ Agents have access to various tools that enhance their capabilities:
 
 These tools enable agents to interact with the real world and perform meaningful work.
 
+## Extension UI Integration
+
+Multi-agent workflows can leverage Extension UI requests for human-in-the-loop interactions. When an agent needs user input (confirmations, selections, or text input), it sends an `extension_ui_request` event.
+
+### When to Use UI Requests
+
+UI requests are useful for:
+- **Approval workflows**: Require human approval before critical actions
+- **Selection decisions**: Choose between multiple options
+- **Context clarification**: Get additional input when ambiguous
+- **Confirmation gates**: Confirm destructive or irreversible actions
+
+### Workflow Example with UI Approval
+
+```json
+{
+  "name": "code-review-with-approval",
+  "description": "Review code and require approval for changes",
+  "steps": [
+    {
+      "step_order": 1,
+      "type": "agent",
+      "agent_id": "reviewer-agent-uuid",
+      "config": {
+        "input_mapping": {"task": "user_message"}
+      }
+    },
+    {
+      "step_order": 2,
+      "type": "agent",
+      "agent_id": "implementer-agent-uuid",
+      "config": {
+        "input_mapping": {
+          "changes": "step_1.output.changes",
+          "review_notes": "step_1.output.notes"
+        },
+        "ui_request": {
+          "type": "confirm",
+          "message": "Apply the suggested changes?",
+          "timeout": 300
+        }
+      }
+    },
+    {
+      "step_order": 3,
+      "type": "agent",
+      "agent_id": "verifier-agent-uuid",
+      "config": {
+        "input_mapping": {
+          "results": "step_2.output"
+        }
+      }
+    }
+  ]
+}
+```
+
+### Handling UI Requests in Workflows
+
+When a workflow step triggers a UI request:
+
+1. The workflow pauses at that step
+2. The request is sent to the frontend/client
+3. User response is captured and sent back
+4. Workflow resumes with the response as step output
+
+```bash
+# Poll for workflow status when waiting for UI input
+curl http://localhost:8140/api/v1/jobs/{job-uuid}
+
+# Response when waiting for UI input:
+{
+  "id": "job-uuid",
+  "status": "awaiting_input",
+  "current_step": 2,
+  "ui_request": {
+    "type": "confirm",
+    "id": "request-uuid",
+    "message": "Apply the suggested changes?"
+  }
+}
+
+# Send user response to continue workflow
+curl -X POST http://localhost:8140/api/v1/jobs/{job-uuid}/respond \
+  -H "Content-Type: application/json" \
+  -d '{"request_id": "request-uuid", "confirmed": true}'
+```
+
 ## Best Practices
 
 For effective multi-agent workflows:

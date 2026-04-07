@@ -4,7 +4,7 @@ title: "Tutorials"
 description: "Step-by-step tutorials for common Mule workflows"
 icon: "article"
 date: "2026-03-21T00:00:00-05:00"
-lastmod: "2026-03-31T00:00:00-05:00"
+lastmod: "2026-04-04T00:00:00-05:00"
 toc: true
 ---
 
@@ -21,6 +21,7 @@ Welcome to the Mule tutorials section. These step-by-step guides will help you a
 | Intermediate | [Batch Processing](/docs/Tutorials/batch-processing) | Execute workflows in parallel | 15 min |
 | Intermediate | [Async Workflows](/docs/Tutorials/async-workflows) | Run long-running workflows in background | 15 min |
 | Advanced | [Building WASM Modules](/docs/Tutorials/building-wasm-module) | Create custom WebAssembly modules | 20 min |
+| Advanced | [Git Integration](/docs/Tutorials/git-integration) | Automate Git operations with WASM modules | 15 min |
 
 ## Available Tutorials
 
@@ -57,6 +58,13 @@ Learn how to run long-running workflows asynchronously with job polling and WebS
 - Monitoring job status with polling or WebSocket
 - Handling workflow output and errors
 - Best practices for background processing
+
+### [Git Integration](/docs/Tutorials/git-integration)
+Automate Git operations using WASM modules and workflows. This tutorial covers:
+- Creating and managing Git worktrees for parallel development
+- Automated branch creation and pushing
+- GitHub issue and PR automation
+- Batch processing multiple repositories
 
 ---
 

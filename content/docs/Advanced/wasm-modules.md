@@ -266,7 +266,7 @@ Mule includes several example WASM modules in `examples/wasm/`:
 | `execute-target` | Execute named targets in workflows |
 | `run-default-workflow` | Trigger the default workflow |
 | `array-workflow-launcher` | Launch multiple workflows from array data |
-| `spawn-multi-workflow` | Spawn multiple workflows in parallel |
+| `spawn-multi-workflow` | Spawn multiple workflows in parallel (see [tutorial](/docs/Tutorials/batch-processing)) |
 | `workflow-aggregator` | Aggregate results from multiple workflows |
 | `workflow_agent_demo` | Trigger workflows or agents from WASM |
 | `working-dir-demo` | Demonstrate working directory management |

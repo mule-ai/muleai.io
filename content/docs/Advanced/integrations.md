@@ -4,7 +4,7 @@ title: "Integration Capabilities"
 description: "Extending Mule with tools, skills, and WASM modules"
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
-lastmod: "2026-03-31T00:00:00-05:00"
+lastmod: "2026-04-04T01:00:00-05:00"
 toc: true
 ---
 
@@ -64,6 +64,151 @@ Skills extend agent capabilities using the pi agent framework:
 
 For detailed information on managing skills, see the [Skills documentation](/docs/Settings/skills).
 
+### Extensions System
+
+The extensions system allows you to extend agent capabilities with custom extensions:
+
+```yaml
+extensions:
+  - name: "custom-extension"
+    enabled: true
+```
+
+Extensions are loaded by the pi runtime and can provide:
+- Additional tools and capabilities
+- Custom UI interactions
+- External service integrations
+
+**Note:** Extensions must be installed and available to the pi runtime. Contact your system administrator for available extensions.
+
+### Extension UI Request/Response Pattern
+
+When agents need interactive user input (confirmations, selections, or text input), they use the Extension UI Request/Response pattern. This enables sophisticated human-in-the-loop workflows.
+
+#### How It Works
+
+1. **Agent requests input**: The agent sends an `extension_ui_request` event through the PI RPC bridge
+2. **Frontend receives request**: The client application receives the request and displays a modal or input dialog
+3. **User responds**: The user provides input (confirms, selects an option, or enters text)
+4. **Response sent back**: The response is sent back to the agent via `extension_ui_response`
+
+#### Request Types
+
+| Type | Description | Parameters |
+|------|-------------|------------|
+| `select` | Present options for user selection | `options` (array), `message` |
+| `confirm` | Request yes/no confirmation | `message` |
+| `input` | Request text input from user | `message`, `timeout` |
+| `custom` | Custom UI request | `method`, `title`, `message` |
+
+#### Request Format
+
+```json
+{
+  "type": "extension_ui_request",
+  "id": "request-uuid",
+  "method": "select",
+  "title": "Choose an action",
+  "message": "What would you like to do?",
+  "options": ["Fix the bug", "Create tests", "Skip"],
+  "timeout": 300
+}
+```
+
+#### Response Format
+
+```json
+{
+  "type": "extension_ui_response",
+  "id": "request-uuid",
+  "value": "Fix the bug",
+  "confirmed": true,
+  "cancelled": false
+}
+```
+
+#### Cancellation Format
+
+```json
+{
+  "type": "extension_ui_response",
+  "id": "request-uuid",
+  "cancelled": true
+}
+```
+
+#### WebSocket Integration Example
+
+When using WebSocket for streaming responses, handle UI requests like this:
+
+```javascript
+// In your WebSocket handler
+websocket.on('message', (data) => {
+  const event = JSON.parse(data);
+  
+  if (event.type === 'extension_ui_request') {
+    // Display modal to user
+    showModal({
+      title: event.title,
+      message: event.message,
+      options: event.options,
+      timeout: event.timeout
+    }).then(response => {
+      // Send response back
+      ws.send(JSON.stringify({
+        type: 'extension_ui_response',
+        id: event.id,
+        value: response.value,
+        confirmed: response.confirmed
+      }));
+    }).catch(() => {
+      // User cancelled or timed out
+      ws.send(JSON.stringify({
+        type: 'extension_ui_response',
+        id: event.id,
+        cancelled: true
+      }));
+    });
+  }
+});
+```
+
+#### REST API Integration Example
+
+For non-streaming requests, handle UI requests by returning a `200` status with the request details, then poll for a response:
+
+```bash
+# Initial request returns the UI request
+curl -X POST http://localhost:8140/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model": "agent/my-agent", "messages": [...]}'
+
+# Response indicates UI request pending
+{
+  "status": "awaiting_input",
+  "request": {
+    "type": "extension_ui_request",
+    "id": "request-uuid",
+    "method": "select",
+    "title": "Choose an action",
+    "message": "Multiple options found. Which should I use?",
+    "options": ["Option A", "Option B"]
+  }
+}
+
+# Submit UI response
+curl -X POST http://localhost:8140/api/v1/chat/respond \
+  -H "Content-Type: application/json" \
+  -d '{"request_id": "request-uuid", "value": "Option A", "confirmed": true}'
+```
+
+#### Best Practices
+
+- **Always handle timeouts**: Set appropriate timeouts and provide user feedback
+- **Cancel gracefully**: Allow users to cancel requests and propagate cancellation to the agent
+- **Queue requests**: If multiple requests arrive, queue them and handle sequentially
+- **Log interactions**: Track UI interactions for debugging and auditing
+
 Example skill configuration:
 ```yaml
 skills:
@@ -121,6 +266,116 @@ func main() {
     encoder.Encode(output)
 }
 ```
+
+### WASM HTTP Requests
+
+WASM modules can make HTTP requests to external services using host-imported functions. This enables WASM modules to interact with APIs, fetch data, and integrate with external systems.
+
+#### Standard HTTP Request (`http_request`)
+
+The standard interface supports basic HTTP methods (GET, POST, PUT, DELETE, etc.):
+
+```go
+//go:wasmimport env http_request
+func http_request(methodPtr, methodSize, urlPtr, urlSize, bodyPtr, bodySize uintptr) uintptr
+```
+
+**Parameters:**
+- `methodPtr/size` - HTTP method (GET, POST, PUT, DELETE)
+- `urlPtr/size` - Target URL
+- `bodyPtr/size` - Request body (can be 0/empty for GET)
+
+**Example:**
+```go
+//go:build ignore
+
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+    "os"
+    "unsafe"
+)
+
+type Output struct {
+    Success    bool        `json:"success"`
+    Data       interface{} `json:"data,omitempty"`
+    StatusCode int         `json:"status_code,omitempty"`
+    Error      string      `json:"error,omitempty"`
+}
+
+//go:wasmimport env http_request
+func http_request(methodPtr, methodSize, urlPtr, urlSize, bodyPtr, bodySize uintptr) uintptr
+
+func getStringFromMemory(ptr uintptr, length uintptr) string {
+    byteSlice := (*[1 << 30]byte)(unsafe.Pointer(ptr))[:length:length]
+    return string(byteSlice)
+}
+
+func main() {
+    method := "GET"
+    url := "https://api.github.com/repos/mule-ai/mule"
+    
+    result := http_request(
+        uintptr(unsafe.Pointer(&[]byte(method)[0])), uintptr(len(method)),
+        uintptr(unsafe.Pointer(&[]byte(url)[0])), uintptr(len(url)),
+        0, 0,
+    )
+    
+    output := Output{Success: result != 0}
+    json.NewEncoder(os.Stdout).Encode(output)
+}
+```
+
+#### Enhanced HTTP Request with Headers (`http_request_with_headers`)
+
+For requests requiring custom headers (authentication, content-type, etc.):
+
+```go
+//go:wasmimport env http_request_with_headers
+func http_request_with_headers(methodPtr, methodSize, urlPtr, urlSize, bodyPtr, bodySize, headersPtr, headersSize uintptr) uintptr
+```
+
+**Parameters:**
+- Same as standard, plus:
+- `headersPtr/size` - JSON string of headers (e.g., `{"Authorization": "Bearer token"}`)
+
+**Example:**
+```go
+//go:wasmimport env http_request_with_headers
+func http_request_with_headers(methodPtr, methodSize, urlPtr, urlSize, bodyPtr, bodySize, headersPtr, headersSize uintptr) uintptr
+
+func main() {
+    method := "POST"
+    url := "https://api.github.com/repos/mule-ai/mule/issues"
+    body := `{"title": "Bug found", "body": "Description"}`
+    headers := `{"Authorization": "Bearer ghp_xxxx", "Accept": "application/json"}`
+    
+    result := http_request_with_headers(
+        uintptr(unsafe.Pointer(&[]byte(method)[0])), uintptr(len(method)),
+        uintptr(unsafe.Pointer(&[]byte(url)[0])), uintptr(len(url)),
+        uintptr(unsafe.Pointer(&[]byte(body)[0])), uintptr(len(body)),
+        uintptr(unsafe.Pointer(&[]byte(headers)[0])), uintptr(len(headers)),
+    )
+}
+```
+
+#### Response Functions
+
+After making a request, retrieve the response:
+
+```go
+//go:wasmimport env get_last_response_body
+func get_last_response_body(bufferPtr, bufferSize uintptr) uint32
+
+//go:wasmimport env get_last_response_status
+func get_last_response_status() uint32
+```
+
+#### Network Demo Example
+
+See `examples/wasm/http-request/` in the Mule source for a complete working example with JSON response parsing.
 
 ### Built-in Tools
 

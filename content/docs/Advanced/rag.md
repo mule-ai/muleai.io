@@ -4,7 +4,7 @@ title: "Retrieval-Augmented Generation (RAG)"
 description: "Using RAG patterns to enhance agent responses with external knowledge"
 icon: "article"
 date: "2026-03-21"
-lastmod: "2026-03-30T00:00:00-05:00"
+lastmod: "2026-04-04T00:00:00-05:00"
 toc: true
 ---
 
@@ -73,6 +73,35 @@ Use semantic search to retrieve relevant context:
   "operation": "retrieve",
   "query": "How does authentication work in this codebase?",
   "top_k": 5
+}
+```
+
+> **Note:** The `retrieve` operation uses the `filters` parameter for metadata filtering, not `metadata`. The `metadata` parameter is only used when storing new content.
+
+### Update Existing Content
+
+Update stored content by ID:
+
+```json
+{
+  "operation": "update",
+  "id": "memory-uuid-here",
+  "content": "Updated information about authentication",
+  "metadata": {
+    "category": "security",
+    "reviewed": true
+  }
+}
+```
+
+### Delete Content
+
+Remove specific content by ID:
+
+```json
+{
+  "operation": "delete",
+  "id": "memory-uuid-here"
 }
 ```
 
@@ -204,7 +233,7 @@ How you chunk your documents affects retrieval quality:
 
 ## Metadata Filtering
 
-Use metadata to filter and refine retrieval:
+Use `filters` to filter and refine retrieval (note: `filters` is used for querying, not `metadata`):
 
 ### Filter by Category
 
@@ -213,7 +242,7 @@ Use metadata to filter and refine retrieval:
   "operation": "retrieve",
   "query": "API endpoints for user management",
   "top_k": 10,
-  "metadata": {
+  "filters": {
     "type": "api-documentation"
   }
 }
@@ -226,7 +255,7 @@ Use metadata to filter and refine retrieval:
   "operation": "retrieve",
   "query": "Recent security updates",
   "top_k": 5,
-  "metadata": {
+  "filters": {
     "date_after": "2026-01-01"
   }
 }
@@ -239,7 +268,7 @@ Use metadata to filter and refine retrieval:
   "operation": "retrieve",
   "query": "Performance optimizations",
   "top_k": 5,
-  "metadata": {
+  "filters": {
     "tags": ["performance", "optimization"]
   }
 }

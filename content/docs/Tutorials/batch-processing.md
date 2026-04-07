@@ -1,14 +1,14 @@
 ---
 weight: 40
-title: "Parallel Workflow Execution"
+title: "Batch Processing and Parallel Execution"
 description: "Learn how to launch multiple workflows in parallel and process data batches"
 icon: "article"
 date: "2026-03-30"
-lastmod: "2026-03-30"
+lastmod: "2026-04-07T00:00:00-05:00"
 toc: true
 ---
 
-# Parallel Workflow Execution
+# Batch Processing and Parallel Execution
 
 Mule supports parallel workflow execution through WASM modules, allowing you to launch multiple workflows simultaneously and process data batches efficiently.
 

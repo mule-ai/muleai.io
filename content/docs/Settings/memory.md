@@ -172,13 +172,13 @@ Store information for later retrieval:
 }
 ```
 
-### Semantic Search
+### Semantic Search (Retrieve)
 
-Query stored content using natural language:
+Query stored content using natural language with semantic similarity:
 
 ```json
 {
-  "operation": "search",
+  "operation": "retrieve",
   "query": "What programming language does the project use?",
   "top_k": 5
 }

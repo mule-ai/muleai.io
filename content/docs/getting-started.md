@@ -230,15 +230,39 @@ Follow these steps to get Mule working with your first repository:
 2. Click **Add Agent**
 3. Configure:
    - **Name**: "Code Assistant" (or your preference)
-   - **Model**: Select your configured provider (e.g., gpt-4o, claude-3-5-sonnet)
+   - **Model**: Select your configured provider (e.g., gpt-4o, claude-sonnet-4.5)
    - **System Prompt**: "You are a helpful coding assistant that reviews code and suggests improvements."
-   - **Tools**: Assign tools like `bash`, `filesystem`, `http`, or `database` as needed
-     - `bash`: Execute shell commands
-     - `filesystem`: Read, write, and manage files
-     - `http`: Make HTTP requests to external APIs
-     - `database`: Query PostgreSQL databases
-     - `memory`: Semantic storage and retrieval with vector embeddings
+   - **PI Config**: Configure agent tools via JSON (see below)
 4. Save the agent configuration
+
+**PI Runtime Tools Configuration:**
+
+Agents use pi runtime tools configured via the PI Config JSON field:
+
+```json
+{
+  "thinking_level": "medium",
+  "tools": ["read", "write", "edit", "bash", "grep", "find"]
+}
+```
+
+Available pi tools:
+- `read`: Read file contents
+- `write`: Write content to files
+- `edit`: Make surgical edits to files
+- `bash`: Execute shell commands
+- `grep`: Search for patterns in files
+- `find`: Find files by name or pattern
+
+**Database-Stored Tools:**
+
+Mule also supports custom tools stored in the database for extended functionality:
+- `memory`: Semantic storage and retrieval with vector embeddings
+- `filesystem`: Secure file system operations (read, write, delete, list, exists)
+- `http`: Make HTTP requests to external APIs
+- `database`: Execute SQL queries (SELECT only for security)
+
+See [Tools documentation](/docs/Settings/tools) for more details.
 
 **Step 3: Create a Workflow with GitHub Integration** (10 minutes)
 Mule uses WASM modules for GitHub integration. To automate GitHub operations:

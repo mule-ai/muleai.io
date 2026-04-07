@@ -4,7 +4,7 @@ title: "System Agent"
 description: "Configure agents for system tasks like commit messages and PR descriptions"
 icon: "article"
 date: "2025-02-20T20:54:59-05:00"
-lastmod: "2026-03-21T00:00:00-05:00"
+lastmod: "2026-04-04T00:00:00-05:00"
 toc: true
 ---
 
@@ -60,11 +60,13 @@ System task agents are typically used as workflow steps:
   "type": "agent",
   "agent_id": "commit-message-generator-id",
   "config": {
-    "input_variable": "diff",
-    "output_variable": "commit_message"
+    "outputField": "generatedText",
+    "agentName": "Commit Message Generator"
   }
 }
 ```
+
+> **Note:** The workflow step `config` object supports `outputField` (to extract `generatedText`, `generatedTextWithReasoning`, or raw output) and `agentName` (for logging/debugging purposes).
 
 ## Available Variables
 

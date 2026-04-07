@@ -23,14 +23,36 @@ Workflows enable you to chain together multiple agents, each with specific respo
 
 ## Default Workflow
 
-Mule comes with a default workflow that follows this sequence:
+Mule comes with a default workflow that serves as a starting point for customization. The default workflow:
 
-1. **Starting Agent**: Analyzes the issue and generates initial code changes
-2. **Commit Agent**: Generates appropriate commit messages for changes
-3. **PR Title Agent**: Creates a descriptive pull request title
-4. **PR Body Agent**: Writes a comprehensive pull request description
+- **Name**: "Default"
+- **Description**: "Default workflow with a single agent step"
+- **Async**: No (synchronous execution)
+- **Steps**: Empty by default - you add steps based on your needs
 
-This default workflow is suitable for most use cases and requires minimal configuration.
+The default workflow is designed as a template that you customize with your own agents and WASM modules. Unlike the default agent and provider, the workflow starts empty so you can build exactly what you need.
+
+### Getting Started with the Default Workflow
+
+1. Create your agents (or use the default agent)
+2. Add agent or WASM module steps to the workflow
+3. Execute the workflow via API or UI
+
+```bash
+# Get the default workflow
+curl http://localhost:8140/api/v1/workflows
+
+# Add an agent step to the default workflow
+curl -X POST http://localhost:8140/api/v1/workflows/{workflow-id}/steps \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "agent",
+    "agent_id": "{agent-id}",
+    "config": {
+      "outputField": "generatedText"
+    }
+  }'
+```
 
 ## Workflow Execution Flow
 
@@ -118,6 +140,26 @@ The `config` JSON object contains step-specific settings:
 - **agent_id**: UUID of the agent to execute (for agent steps)
 - **wasm_module_id**: UUID of the WASM module to execute (for WASM steps)
 - **config**: JSON object with step-specific configuration
+
+### Reordering Workflow Steps
+
+You can reorder workflow steps to change their execution sequence. Use the reorder endpoint to specify a new order:
+
+```bash
+# Reorder workflow steps
+curl -X POST http://localhost:8140/api/v1/workflows/{workflow_id}/reorder \
+  -H "Content-Type: application/json" \
+  -d '{
+    "step_ids": ["step-uuid-1", "step-uuid-3", "step-uuid-2"]
+  }'
+```
+
+This example moves the third step to the second position. The `step_ids` array specifies the new execution order.
+
+**Notes:**
+- All step IDs must belong to the same workflow
+- Steps not included in the array will be removed
+- Use `GET /api/v1/workflows/{id}/steps` to get the current list of step IDs
 
 ## Output Fields
 

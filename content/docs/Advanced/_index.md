@@ -4,7 +4,7 @@ title: "Advanced Features"
 description: "Advanced features and capabilities of Mule for sophisticated AI-driven development workflows"
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
-lastmod: "2026-03-27T00:00:00-05:00"
+lastmod: "2026-04-04T00:00:00-05:00"
 toc: true
 ---
 
@@ -31,3 +31,23 @@ This section covers advanced features of Mule that enable more sophisticated AI-
 - **[File Operations](/docs/Advanced/udiff)**: Understand how Mule handles precise file operations with the FilesystemTool.
 
 These advanced features work together to make Mule a powerful, flexible AI development assistant. While some features are still in development, this documentation provides a preview of the full capabilities that will be available in upcoming releases.
+
+---
+
+## Next Steps
+
+Ready to apply what you've learned? Here's how to continue:
+
+### Hands-On Tutorials
+- [Creating Your First Workflow](/docs/Tutorials/first-workflow) - Start with the basics
+- [Building WASM Modules](/docs/Tutorials/building-wasm-module) - Create custom modules
+- [Parallel Workflow Execution](/docs/Tutorials/batch-processing) - Scale your workflows
+
+### Configuration & Settings
+- [Agents Configuration](/docs/Settings/agents) - Configure AI agents
+- [AI Providers](/docs/Settings/ai-providers) - Set up your AI provider
+- [Workflows](/docs/Settings/workflows) - Define multi-step workflows
+
+### GitHub Integration
+- [Adding a Repository](/docs/Repositories/adding-a-repository) - Connect your repositories
+- [Interacting with GitHub](/docs/Repositories/interacting-with-a-repository) - Automate GitHub workflows

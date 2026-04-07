@@ -70,7 +70,22 @@ Validates:
 - Metadata is required
 - Tool type must be one of: `http`, `database`, `memory`, `filesystem`
 
-> **Note:** The `bash` tool is a built-in tool that doesn't require metadata validation. It's automatically available to agents and doesn't need to be created as a database record.
+> **Note:** The `bash` tool is a built-in tool that doesn't require metadata validation. It's automatically available to agents and doesn't need to be created as a database record. However, when assigning tools to agents in the database, only `http`, `database`, `memory`, and `filesystem` tool types are valid stored tools.
+
+#### Database-Stored Tools vs Built-in Tools
+
+Mule has two categories of tools:
+
+**Database-Stored Tools** (created via API, stored in database):
+- `http` - Make HTTP requests to external APIs
+- `database` - Query databases directly (PostgreSQL)
+- `memory` - Store and retrieve semantic memories using vector embeddings
+- `filesystem` - Read, write, and manage files
+
+**Built-in Tools** (automatically available, no database record needed):
+- `bash` - Execute shell commands (always available to agents)
+
+When you assign tools to an agent via the database, you reference database-stored tools by their UUID. The `bash` tool is always available and doesn't need to be explicitly assigned.
 
 ### Skill Validation
 

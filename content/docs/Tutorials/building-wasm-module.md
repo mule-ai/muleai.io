@@ -21,7 +21,7 @@ A WASM module that:
 
 ## Prerequisites
 
-- Go 1.21+ installed
+- Go 1.25.4+ installed (Mule uses Go 1.25.4)
 - TinyGo or standard Go for compilation
 - Basic understanding of JSON processing
 
