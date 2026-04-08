@@ -147,7 +147,7 @@ You can reorder workflow steps to change their execution sequence. Use the reord
 
 ```bash
 # Reorder workflow steps
-curl -X POST http://localhost:8140/api/v1/workflows/{workflow_id}/reorder \
+curl -X POST http://localhost:8140/api/v1/workflows/{workflow_id}/steps/reorder \
   -H "Content-Type: application/json" \
   -d '{
     "step_ids": ["step-uuid-1", "step-uuid-3", "step-uuid-2"]

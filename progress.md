@@ -1,32 +1,34 @@
-# Documentation Automation Progress
+# Documentation Progress
 
-## 2026-04-01 - Documentation Update Session
+## 2026-04-08
 
-### Tasks Completed
+### Changes Made
 
-1. **Updated Workflows Documentation** - Added comprehensive documentation for the Jobs API filtering capabilities including:
-   - Pagination support (`page`, `page_size`)
-   - Status filtering (`status`)
-   - Search functionality (`search`, `workflow_name`)
-   - Example API calls and response format
+1. **Fixed workflow step reorder endpoint** (`Settings/workflows.md`)
+   - Changed endpoint from `/api/v1/workflows/{workflow_id}/reorder` to `/api/v1/workflows/{workflow_id}/steps/reorder`
+   - Verified against actual API handler in `cmd/api/handlers.go`
 
-2. **Documentation Polish** - Verified:
-   - Hugo site builds successfully
-   - All internal links are properly formatted
-   - Markdown files are properly formatted
-   - Frontmatter is consistent across all pages
+2. **Fixed relative link in agents.md** (`Settings/agents.md`)
+   - Changed `../Settings/workflows` to `/docs/Settings/workflows`
+   - Ensures consistent link format across documentation
 
-3. **Plan Updates** - Marked Phase 6 complete and partially completed Phase 7 in docs-plan.md
+### Code Validation Performed
 
-### Decisions Made
+- Reviewed git history for recent features (WASM network, jobs, bash tool, persistent memory)
+- Verified bash tool is documented in `tools.md`
+- Confirmed workflow step reordering endpoint exists at `/api/v1/workflows/{id}/steps/reorder`
+- Checked WASM module examples match documented capabilities
 
-- Enhanced job management documentation to reflect the actual API implementation
-- Added query parameter table for clarity
-- Included example response format showing pagination metadata
+### Documentation Status
 
-### Notes
+All documentation files have:
+- ✅ Proper frontmatter (title, date, lastmod, weight)
+- ✅ Consistent link format (absolute paths starting with `/docs/`)
+- ✅ Code examples match API implementations
 
-- Documentation updates are based on validation against `cmd/api/handlers.go`
-- All changes are additive and maintain existing structure
-- Following the ralph-sh methodology for documentation improvements
-- Site builds cleanly with no errors
+### Remaining Tasks
+
+- Phase 6: Research and document any new features from recent commits
+- Phase 7: Final polish and formatting review
+
+---

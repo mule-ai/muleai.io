@@ -176,7 +176,7 @@ Multiple agents can be used together in workflows, with each agent handling diff
 - **Review Agent**: Validates and improves generated code
 - **Commit Agent**: Creates appropriate commit messages
 
-See the [Workflows documentation](../Settings/workflows) for details on chaining agents together in pipelines.
+See the [Workflows documentation](/docs/Settings/workflows) for details on chaining agents together in pipelines.
 
 ## Workflow Integration
 
