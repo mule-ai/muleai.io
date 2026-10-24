@@ -8,7 +8,6 @@ lastmod: "2026-04-02T00:00:00-05:00"
 toc: true
 ---
 
-![github-integration](https://storage.googleapis.com/mule-storage/github-integration.png)
 
 > **Note:** Mule uses WASM modules for GitHub integration rather than a built-in repository management system. This provides flexible, customizable GitHub automation that you can incorporate into your workflows.
 
@@ -165,6 +164,6 @@ This enables automation like:
 
 ## Related Documentation
 
-- [Workflows](/docs/Settings/workflows) - Building multi-step automation
-- [WASM Modules](/docs/Advanced/wasm-modules) - Custom WebAssembly integration
-- [Agents](/docs/Settings/agents) - AI agent configuration
+- [Workflows](/docs/settings/workflows - Building multi-step automation
+- [WASM Modules](/docs/advanced/wasm-modules - Custom WebAssembly integration
+- [Agents](/docs/settings/agents - AI agent configuration

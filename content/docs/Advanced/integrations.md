@@ -62,7 +62,7 @@ Skills extend agent capabilities using the pi agent framework:
 - Available at `/root/.pi/agent/skills/`
 - Skills are loaded from skill directories containing SKILL.md files
 
-For detailed information on managing skills, see the [Skills documentation](/docs/Settings/skills).
+For detailed information on managing skills, see the [Skills documentation](/docs/settings/skills).
 
 ### Extensions System
 
@@ -363,7 +363,7 @@ See `examples/wasm/http-request/` in the Mule source for a complete working exam
 
 ### Built-in Tools
 
-Mule provides built-in tools for workflow steps. For complete documentation on tool configuration and the Tools API, see the [Tools documentation](/docs/Settings/tools).
+Mule provides built-in tools for workflow steps. For complete documentation on tool configuration and the Tools API, see the [Tools documentation](/docs/settings/tools).
 
 #### Bash Tool
 Execute shell commands:

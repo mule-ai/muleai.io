@@ -199,9 +199,9 @@ You can also manage workflows through the web UI at `http://localhost:8140`:
 
 Congratulations! You've created your first Mule workflow. Continue learning:
 
-- [Multi-Agent Workflows](/docs/Advanced/multi-agent) - Coordinate multiple agents
-- [WASM Modules](/docs/Advanced/wasm-modules) - Add custom validation logic
-- [Building a Custom WASM Module](/docs/Tutorials/building-wasm-module) - Create your own modules
+- [Multi-Agent Workflows](/docs/advanced/multi-agent - Coordinate multiple agents
+- [WASM Modules](/docs/advanced/wasm-modules - Add custom validation logic
+- [Building a Custom WASM Module](/docs/tutorials/building-wasm-module - Create your own modules
 
 ## Troubleshooting
 

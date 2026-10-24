@@ -23,7 +23,7 @@ This is huge for a few reasons:
 
 ### Agent Runtime Migration to pi
 
-As noted in [Issue #101](https://github.com/mule-ai/mule/issues/101), the agent runtime is being migrated to use [pi](https://github.com/jbcodeforce/pi). This isn't just a technical detail - it fundamentally changes how Mule operates:
+As noted in [Issue #101](https://github.com/mule-ai/mule/issues/101), the agent runtime is being migrated to use [pi](https://github.com/earendil-works/pi). This isn't just a technical detail - it fundamentally changes how Mule operates:
 
 - **Configurable Skills**: Agents can now load different skill sets depending on the task
 - **Thinking Level Control**: You can adjust how much "thought" the agent puts into decisions

@@ -239,6 +239,6 @@ volumes:
 ## Related Documentation
 
 - [Getting Started](/docs/getting-started) - Initial setup guide
-- [Agents](/docs/Settings/agents) - Agent configuration
-- [AI Providers](/docs/Settings/ai-providers) - Provider setup
-- [Workflows](/docs/Settings/workflows) - Workflow configuration
+- [Agents](/docs/settings/agents - Agent configuration
+- [AI Providers](/docs/settings/ai-providers - Provider setup
+- [Workflows](/docs/settings/workflows - Workflow configuration

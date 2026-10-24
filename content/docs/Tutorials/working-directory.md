@@ -223,6 +223,6 @@ Error: working directory reset between steps
 
 ## Related Documentation
 
-- [Git Worktree Operations](/docs/Repositories/interacting-with-a-repository#git-worktree)
-- [WASM Module Development](/docs/Tutorials/building-wasm-module)
-- [Workflow Configuration](/docs/Settings/workflows)
+- [Git Worktree Operations](/docs/repositories/interacting-with-a-repository#git-worktree
+- [WASM Module Development](/docs/tutorials/building-wasm-module
+- [Workflow Configuration](/docs/settings/workflows

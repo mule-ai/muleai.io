@@ -8,7 +8,6 @@ lastmod: "2026-03-28T00:00:00-05:00"
 toc: true
 ---
 
-![memory-config](https://storage.googleapis.com/mule-storage/memory-config.png)
 
 Mule's memory system enables agents to store and retrieve information using semantic search powered by vector embeddings. This allows agents to maintain context across conversations, recall relevant information, and build on previous knowledge.
 

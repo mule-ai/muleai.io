@@ -8,7 +8,6 @@ lastmod: "2026-03-29T00:00:00-05:00"
 toc: true
 ---
 
-![tools](https://storage.googleapis.com/mule-storage/tools.png)
 
 Tools extend Mule agents with capabilities to interact with external systems, execute commands, and manipulate data. Each tool provides specific functionality that agents can invoke during task execution.
 
@@ -393,7 +392,7 @@ For HTTP tool errors:
 
 ## Related Documentation
 
-- [Agents](/docs/Settings/agents) - Configure agents with tools
-- [Memory Configuration](/docs/Settings/memory) - Configure vector embeddings
-- [Workflows](/docs/Settings/workflows) - Chain tools in workflows
-- [Integrations](/docs/Advanced/integrations) - External integrations
+- [Agents](/docs/settings/agents - Configure agents with tools
+- [Memory Configuration](/docs/settings/memory - Configure vector embeddings
+- [Workflows](/docs/settings/workflows - Chain tools in workflows
+- [Integrations](/docs/advanced/integrations - External integrations

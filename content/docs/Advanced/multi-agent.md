@@ -392,9 +392,9 @@ UI requests are useful for:
 }
 ```
 
-For details on how agents send UI requests through the pi runtime, see the [Integrations documentation](/docs/Advanced/integrations#extension-ui-requestresponse-pattern).
+For details on how agents send UI requests through the pi runtime, see the [Integrations documentation](/docs/advanced/integrations#extension-ui-requestresponse-pattern).
 
-For details on the UI request/response pattern used by pi, see the [Integrations documentation](/docs/Advanced/integrations#extension-ui-requestresponse-pattern).
+For details on the UI request/response pattern used by pi, see the [Integrations documentation](/docs/advanced/integrations#extension-ui-requestresponse-pattern).
 
 ## Best Practices
 

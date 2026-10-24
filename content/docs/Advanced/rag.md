@@ -62,7 +62,7 @@ The memory tool in Mule provides the foundation for RAG functionality:
 }
 ```
 
-For detailed API documentation, see the [Memory documentation](/docs/Settings/memory).
+For detailed API documentation, see the [Memory documentation](/docs/settings/memory).
 
 ### Semantic Search Queries
 
@@ -394,6 +394,6 @@ Planned RAG improvements:
 
 ## Related Documentation
 
-- [Memory Configuration](/docs/Settings/memory) - Complete memory tool API reference
-- [Agents](/docs/Settings/agents) - Configure agents with memory access
-- [Workflows](/docs/Settings/workflows) - Chain RAG operations in workflows
+- [Memory Configuration](/docs/settings/memory - Complete memory tool API reference
+- [Agents](/docs/settings/agents - Configure agents with memory access
+- [Workflows](/docs/settings/workflows - Chain RAG operations in workflows

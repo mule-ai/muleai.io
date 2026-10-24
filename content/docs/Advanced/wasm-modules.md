@@ -271,7 +271,7 @@ Mule includes several example WASM modules in `examples/wasm/`:
 | `execute-target` | Execute named targets in workflows |
 | `run-default-workflow` | Trigger the default workflow |
 | `array-workflow-launcher` | Launch multiple workflows from array data |
-| `spawn-multi-workflow` | Spawn multiple workflows in parallel (see [tutorial](/docs/Tutorials/batch-processing)) |
+| `spawn-multi-workflow` | Spawn multiple workflows in parallel (see [tutorial](/docs/tutorials/batch-processing) |
 | `workflow-aggregator` | Aggregate results from multiple workflows |
 | `workflow_agent_demo` | Trigger workflows or agents from WASM |
 | `working-dir-demo` | Demonstrate working directory management |
@@ -584,5 +584,5 @@ func callAPI(prompt, apiKey, baseURL string, timeout int) string {
 ## Next Steps
 
 - Explore the [WASM examples](https://github.com/mule-ai/mule/tree/main/examples/wasm) in the repository
-- Learn about [workflows](/docs/Settings/workflows/) to integrate WASM modules
-- Check out [validation modules](/docs/Advanced/validation) for testing workflows
+- Learn about [workflows](/docs/settings/workflows/ to integrate WASM modules
+- Check out [validation modules](/docs/advanced/validation for testing workflows

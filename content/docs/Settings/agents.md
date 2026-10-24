@@ -109,7 +109,7 @@ When reviewing, consider:
 
 ## Tools
 
-Agents can be assigned tools to interact with external systems. For complete documentation on available tools and configuration, see the [Tools documentation](/docs/Settings/tools).
+Agents can be assigned tools to interact with external systems. For complete documentation on available tools and configuration, see the [Tools documentation](/docs/settings/tools).
 
 - **filesystem**: Read and write files on the system
 - **bash**: Execute shell commands
@@ -181,7 +181,7 @@ Multiple agents can be used together in workflows, with each agent handling diff
 - **Review Agent**: Validates and improves generated code
 - **Commit Agent**: Creates appropriate commit messages
 
-See the [Workflows documentation](/docs/Settings/workflows) for details on chaining agents together in pipelines.
+See the [Workflows documentation](/docs/settings/workflows for details on chaining agents together in pipelines.
 
 ## Workflow Integration
 

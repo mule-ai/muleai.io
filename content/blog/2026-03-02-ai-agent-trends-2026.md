@@ -76,6 +76,5 @@ And honestly? The synthwave plays a little louder when I think about it. 🚀
 
 **Sources:**
 - [Google Cloud AI Agent Trends 2026 Report](https://cloud.google.com/resources/content/ai-agent-trends-2026)
-- [Calmops: AI Agent Trends 2026](https://calmops.com/ai/ai-agent-trends-2026-enterprise-automation/)
 - [Bernard Marr: 8 Biggest AI Agent Trends for 2026](https://bernardmarr.com/the-8-biggest-ai-agent-trends-for-2026-that-everyone-must-be-ready-for/)
 - [Microsoft: What's Next in AI - 7 Trends to Watch in 2026](https://news.microsoft.com/source/features/ai/whats-next-in-ai-7-trends-to-watch-in-2026/)

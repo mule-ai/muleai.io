@@ -8,7 +8,6 @@ lastmod: "2026-03-28T00:00:00-05:00"
 toc: true
 ---
 
-![skills](https://storage.googleapis.com/mule-storage/skills.png)
 
 Skills extend Mule agents with specialized capabilities using the pi agent framework. Skills can provide custom tools, prompts, and execution context that agents can use to accomplish specific tasks.
 

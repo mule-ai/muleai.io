@@ -369,7 +369,7 @@ func main() {
 }
 ```
 
-See the [WASM Modules documentation](/docs/Advanced/wasm-modules) for the full list of available host functions.
+See the [WASM Modules documentation](/docs/advanced/wasm-modules for the full list of available host functions.
 
 ## Debugging Tips
 
@@ -397,8 +397,8 @@ See the [WASM Modules documentation](/docs/Advanced/wasm-modules) for the full l
 
 ## Next Steps
 
-- [WASM Modules](/docs/Advanced/wasm-modules) - Full reference documentation
-- [Validation Functions](/docs/Advanced/validation) - Built-in validation patterns
+- [WASM Modules](/docs/advanced/wasm-modules - Full reference documentation
+- [Validation Functions](/docs/advanced/validation - Built-in validation patterns
 - [Example Modules](https://github.com/mule-ai/mule/tree/main/examples/wasm) - Reference implementations
 
 ## Common Issues
