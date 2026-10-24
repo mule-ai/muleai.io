@@ -164,6 +164,6 @@ This enables automation like:
 
 ## Related Documentation
 
-- [Workflows](/docs/settings/workflows - Building multi-step automation
-- [WASM Modules](/docs/advanced/wasm-modules - Custom WebAssembly integration
-- [Agents](/docs/settings/agents - AI agent configuration
+- [Workflows](/docs/settings/workflows) - Building multi-step automation
+- [WASM Modules](/docs/advanced/wasm-modules) - Custom WebAssembly integration
+- [Agents](/docs/settings/agents) - AI agent configuration

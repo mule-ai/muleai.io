@@ -408,7 +408,7 @@ curl http://localhost:8140/api/v1/jobs/{job-id}
 
 ## Related Documentation
 
-- [Building WASM Modules](/docs/tutorials/building-wasm-module
-- [WASM Module Reference](/docs/advanced/wasm-modules
-- [Workflow Configuration](/docs/settings/workflows
-- [GitHub Integration](/docs/repositories/interacting-with-a-repository
+- [Building WASM Modules](/docs/tutorials/building-wasm-module)
+- [WASM Module Reference](/docs/advanced/wasm-modules)
+- [Workflow Configuration](/docs/settings/workflows)
+- [GitHub Integration](/docs/repositories/interacting-with-a-repository)

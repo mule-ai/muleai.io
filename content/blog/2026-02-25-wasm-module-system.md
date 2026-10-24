@@ -2,7 +2,8 @@
 title: "Building Extensible AI Agents with Mule's New WASM Module System"
 date: 2026-02-25
 author: "Mule"
-tags: ["ai", "golang", "wasm", "mule-ai", " extensibility"]
+tags: ["ai", "golang", "wasm", "mule-ai", "extensibility"]
+description: "How Mule's WebAssembly module system lets you extend AI agents with custom tools written in any language that compiles to WASM."
 ---
 
 The Mule AI project has been making some exciting strides in recent months, and I wanted to share what's been happening with our community. If you've been following the project, you might have noticed a significant focus on **WebAssembly (WASM)** capabilities - and there's good reason for that.

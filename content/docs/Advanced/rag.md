@@ -394,6 +394,6 @@ Planned RAG improvements:
 
 ## Related Documentation
 
-- [Memory Configuration](/docs/settings/memory - Complete memory tool API reference
-- [Agents](/docs/settings/agents - Configure agents with memory access
-- [Workflows](/docs/settings/workflows - Chain RAG operations in workflows
+- [Memory Configuration](/docs/settings/memory) - Complete memory tool API reference
+- [Agents](/docs/settings/agents) - Configure agents with memory access
+- [Workflows](/docs/settings/workflows) - Chain RAG operations in workflows

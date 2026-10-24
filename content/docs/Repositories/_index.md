@@ -80,14 +80,14 @@ Here's a simple workflow that fetches GitHub issues and creates a pull request:
 Ready to automate your GitHub workflows? Here's how to continue:
 
 ### Hands-On Tutorials
-- [Working Directory Management](/docs/tutorials/working-directory - Use git worktrees for parallel processing
-- [Building WASM Modules](/docs/tutorials/building-wasm-module - Create custom GitHub automation
+- [Working Directory Management](/docs/tutorials/working-directory) - Use git worktrees for parallel processing
+- [Building WASM Modules](/docs/tutorials/building-wasm-module) - Create custom GitHub automation
 
 ### Advanced Features
-- [Multi-agent Workflows](/docs/advanced/multi-agent - Coordinate agents for complex automation
-- [Validation Functions](/docs/advanced/validation - Add quality gates to your workflows
+- [Multi-agent Workflows](/docs/advanced/multi-agent) - Coordinate agents for complex automation
+- [Validation Functions](/docs/advanced/validation) - Add quality gates to your workflows
 
 ### Configuration
-- [Configuration](/docs/settings/configuration - CLI flags and startup settings
-- [Agents Configuration](/docs/settings/agents - Set up agents for GitHub operations
-- [Workflows](/docs/settings/workflows - Define complete GitHub automation pipelines
+- [Configuration](/docs/settings/configuration) - CLI flags and startup settings
+- [Agents Configuration](/docs/settings/agents) - Set up agents for GitHub operations
+- [Workflows](/docs/settings/workflows) - Define complete GitHub automation pipelines

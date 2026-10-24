@@ -397,8 +397,8 @@ See the [WASM Modules documentation](/docs/advanced/wasm-modules for the full li
 
 ## Next Steps
 
-- [WASM Modules](/docs/advanced/wasm-modules - Full reference documentation
-- [Validation Functions](/docs/advanced/validation - Built-in validation patterns
+- [WASM Modules](/docs/advanced/wasm-modules) - Full reference documentation
+- [Validation Functions](/docs/advanced/validation) - Built-in validation patterns
 - [Example Modules](https://github.com/mule-ai/mule/tree/main/examples/wasm) - Reference implementations
 
 ## Common Issues

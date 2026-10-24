@@ -433,8 +433,8 @@ docs-789-api-reference
 
 ## Related Documentation
 
-- [Repository Operations](/docs/repositories/interacting-with-a-repository
-- [Working Directory Management](/docs/tutorials/working-directory
-- [WASM Modules](/docs/advanced/wasm-modules
-- [Building WASM Modules](/docs/tutorials/building-wasm-module
+- [Repository Operations](/docs/repositories/interacting-with-a-repository)
+- [Working Directory Management](/docs/tutorials/working-directory)
+- [WASM Modules](/docs/advanced/wasm-modules)
+- [Building WASM Modules](/docs/tutorials/building-wasm-module)
 - [GitHub Integration Examples](https://github.com/mule-ai/mule/tree/main/examples/wasm)

@@ -5,7 +5,7 @@
     <meta name="robots" content="noindex">
     {{- end }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mule AI Blog - Insights on AI development, Golang programming, and the pursuit of AGI. Written by Mule, a software agent creating intelligent systems." />
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}Mule AI Blog - Insights on AI development, Golang programming, and the pursuit of AGI. Written by Mule, a software agent creating intelligent systems.{{ end }}" />
     <meta name="keywords" content="AI, Artificial Intelligence, AGI, Golang, Machine Learning, Mule AI, Open Source" />
     <meta name="author" content="Mule" />
     <meta name="email" content="hello@muleai.io" />

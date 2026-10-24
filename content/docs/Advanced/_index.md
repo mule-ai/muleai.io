@@ -20,6 +20,8 @@ This section covers advanced features of Mule that enable more sophisticated AI-
 | **[Integration Capabilities](/docs/advanced/integrations)** | HTTP API, Skills system, and WASM modules for custom integrations |
 | **[File Operations](/docs/advanced/udiff)** | How Mule handles precise code changes with FilesystemTool |
 | **[Validation Functions](/docs/advanced/validation)** | Ensuring code quality with automated validation |
+| **[Policy Engine](/docs/advanced/policy-engine)** | Deterministic allow/deny/ask gates on agent tool calls |
+| **[Wakes](/docs/advanced/wakes)** | Cron, webhook, and event-triggered agent proactivity |
 
 ## Feature Overview
 
@@ -29,6 +31,8 @@ This section covers advanced features of Mule that enable more sophisticated AI-
 - **[Validation Functions](/docs/advanced/validation)**: Ensure code quality with automated validation before finalizing changes. Implement retry logic and custom checks.
 - **[Multi-agent Workflows](/docs/advanced/multi-agent)**: Coordinate multiple specialized agents to solve complex problems. Design agent roles and manage data flow between them.
 - **[File Operations](/docs/advanced/udiff)**: Understand how Mule handles precise file operations with the FilesystemTool.
+- **[Policy Engine](/docs/advanced/policy-engine)**: Gate every forge tool call with versioned, owner-scoped rules; deterministic allow/deny/ask verdicts, memo cache, and an agent-proposes/human-approves loop.
+- **[Wakes](/docs/advanced/wakes)**: Schedule agents and workflows to act on cron, webhooks, events, and job outcomes.
 
 These advanced features work together to make Mule a powerful, flexible AI development assistant. While some features are still in development, this documentation provides a preview of the full capabilities that will be available in upcoming releases.
 
@@ -39,16 +43,16 @@ These advanced features work together to make Mule a powerful, flexible AI devel
 Ready to apply what you've learned? Here's how to continue:
 
 ### Hands-On Tutorials
-- [Creating Your First Workflow](/docs/tutorials/first-workflow - Start with the basics
-- [Building WASM Modules](/docs/tutorials/building-wasm-module - Create custom modules
-- [Parallel Workflow Execution](/docs/tutorials/batch-processing - Scale your workflows
+- [Creating Your First Workflow](/docs/tutorials/first-workflow) - Start with the basics
+- [Building WASM Modules](/docs/tutorials/building-wasm-module) - Create custom modules
+- [Parallel Workflow Execution](/docs/tutorials/batch-processing) - Scale your workflows
 
 ### Configuration & Settings
-- [Configuration](/docs/settings/configuration - CLI flags and startup settings
-- [Agents Configuration](/docs/settings/agents - Configure AI agents
-- [AI Providers](/docs/settings/ai-providers - Set up your AI provider
-- [Workflows](/docs/settings/workflows - Define multi-step workflows
+- [Configuration](/docs/settings/configuration) - CLI flags and startup settings
+- [Agents Configuration](/docs/settings/agents) - Configure AI agents
+- [AI Providers](/docs/settings/ai-providers) - Set up your AI provider
+- [Workflows](/docs/settings/workflows) - Define multi-step workflows
 
 ### GitHub Integration
-- [Adding a Repository](/docs/repositories/adding-a-repository - Connect your repositories
-- [Interacting with GitHub](/docs/repositories/interacting-with-a-repository - Automate GitHub workflows
+- [Adding a Repository](/docs/repositories/adding-a-repository) - Connect your repositories
+- [Interacting with GitHub](/docs/repositories/interacting-with-a-repository) - Automate GitHub workflows

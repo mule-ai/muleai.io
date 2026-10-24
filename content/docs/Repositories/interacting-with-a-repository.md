@@ -611,9 +611,9 @@ User Request → API Handler → Workflow Engine
 For Mule features:
 
 - [Getting Started](/docs/getting-started) - Quick start guide
-- [Agents](/docs/settings/agents - Create AI agents
-- [Workflows](/docs/settings/workflows - Build automation
-- [Settings](/docs/settings/general - Configure Mule
+- [Agents](/docs/settings/agents) - Create AI agents
+- [Workflows](/docs/settings/workflows) - Build automation
+- [Settings](/docs/settings/general) - Configure Mule
 
 For WASM module development:
 

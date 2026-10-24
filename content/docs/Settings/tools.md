@@ -392,7 +392,7 @@ For HTTP tool errors:
 
 ## Related Documentation
 
-- [Agents](/docs/settings/agents - Configure agents with tools
-- [Memory Configuration](/docs/settings/memory - Configure vector embeddings
-- [Workflows](/docs/settings/workflows - Chain tools in workflows
-- [Integrations](/docs/advanced/integrations - External integrations
+- [Agents](/docs/settings/agents) - Configure agents with tools
+- [Memory Configuration](/docs/settings/memory) - Configure vector embeddings
+- [Workflows](/docs/settings/workflows) - Chain tools in workflows
+- [Integrations](/docs/advanced/integrations) - External integrations
