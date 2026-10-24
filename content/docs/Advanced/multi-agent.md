@@ -4,7 +4,7 @@ title: "Multi-Agent Workflows"
 description: "Coordinating specialized AI agents for complex tasks"
 icon: "article"
 date: "2026-03-21"
-lastmod: "2026-03-22T00:00:00-05:00"
+lastmod: "2026-04-11T00:00:00-05:00"
 toc: true
 ---
 
@@ -181,7 +181,7 @@ Here's an example workflow for implementing a complex feature:
 
 ### Complete Multi-Agent Workflow Example
 
-A fully configured multi-agent workflow with input/output mapping:
+A multi-agent workflow where output flows sequentially from step to step:
 
 ```json
 {
@@ -193,15 +193,7 @@ A fully configured multi-agent workflow with input/output mapping:
       "step_order": 1,
       "type": "agent",
       "agent_id": "analyzer-agent-uuid",
-      "config": {
-        "input_mapping": {
-          "task": "user_message"
-        },
-        "output_mapping": {
-          "analysis": "result.analysis",
-          "issues": "result.issues"
-        }
-      }
+      "config": {}
     },
     {
       "step_order": 2,
@@ -216,28 +208,21 @@ A fully configured multi-agent workflow with input/output mapping:
       "step_order": 3,
       "type": "agent",
       "agent_id": "fixer-agent-uuid",
-      "config": {
-        "input_mapping": {
-          "issues_to_fix": "step_1.issues",
-          "test_results": "step_2.output"
-        },
-        "output_mapping": {
-          "changes": "result.patches"
-        }
-      }
+      "config": {}
     },
     {
       "step_order": 4,
       "type": "wasm_module",
       "wasm_module_id": "validation-module-uuid",
       "config": {
-        "validation_command": "golangci-lint run ./...",
-        "max_attempts": 2
+        "validation_command": "golangci-lint run ./..."
       }
     }
   ]
 }
 ```
+
+**Note:** In the current implementation, each step receives the output from the previous step. The agent step output is provided as the `prompt` field to the next step. WASM modules receive the full output data and should extract what they need.
 
 ### Workflow Execution via API
 
@@ -263,8 +248,7 @@ curl -X POST http://localhost:8140/api/v1/workflows/${WORKFLOW_UUID}/steps \
     "type": "agent",
     "agent_id": "analyzer-agent-uuid",
     "config": {
-      "input_mapping": {"task": "user_message"},
-      "output_mapping": {"analysis": "result.analysis", "issues": "result.issues"}
+      "config": {}
     }
   }'
 
@@ -278,7 +262,7 @@ curl -X POST http://localhost:8140/api/v1/workflows/${WORKFLOW_UUID}/steps \
   }'
 
 # 5. Reorder steps if needed
-curl -X POST http://localhost:8140/api/v1/workflows/${WORKFLOW_UUID}/reorder \
+curl -X POST http://localhost:8140/api/v1/workflows/${WORKFLOW_UUID}/steps/reorder \
   -H "Content-Type: application/json" \
   -d '{
     "step_ids": ["step-1-uuid", "step-2-uuid", "step-3-uuid", "step-4-uuid"]
@@ -296,45 +280,13 @@ curl -X POST http://localhost:8140/v1/chat/completions \
   }'
 ```
 
-## Input and Output Mapping
-
-One of the key aspects of multi-agent workflows is controlling how information flows between agents:
-
-### Standard Mapping
-
-By default, each agent receives the complete output from the previous agent. This works well for sequential reasoning tasks where each agent builds on the previous work.
-
-### Custom Field Mapping
-
-For more complex workflows, you can map specific output fields to input fields:
-
-```json
-{
-  "steps": [
-    {
-      "step_order": 1,
-      "type": "agent",
-      "agent_id": "agent-uuid",
-      "config": {
-        "input_mapping": {
-          "code_analysis": "previous_step.prompt"
-        },
-        "output_mapping": {
-          "implementation": "next_step.prompt"
-        }
-      }
-    }
-  ]
-}
-```
-
 ## Data Flow Between Agents
 
-Understanding how data flows between agents is critical for building effective multi-agent workflows:
+Understanding how data flows between agents is critical for building effective multi-agent workflows.
 
 ### Sequential Data Flow
 
-By default, each agent receives output from the previous agent:
+Each step executes in order (by `step_order`), and the output from each step becomes the input for the next step:
 
 ```mermaid
 sequenceDiagram
@@ -344,106 +296,49 @@ sequenceDiagram
     participant A3 as Agent 3
 
     User->>A1: Input Task
-    A1-->>A2: Step 1 Output
-    A2-->>A3: Step 2 Output
+    A1-->>A2: Step 1 Output (prompt field)
+    A2-->>A3: Step 2 Output (prompt field)
     A3-->>User: Final Result
 ```
 
-### Parallel Data Flow
+### How Output Flows Between Steps
 
-For more complex workflows, agents can process different aspects in parallel:
+- **Agent steps**: Output a `prompt` field containing the agent's response
+- **WASM modules**: Output JSON data via stdout, which becomes input for the next step
+- **Step ordering**: Steps execute in ascending `step_order` order
 
+### Step Output Format
+
+Agent step returns:
 ```json
 {
-  "name": "parallel-analysis-workflow",
-  "steps": [
-    {
-      "step_order": 1,
-      "type": "agent",
-      "agent_id": "code-analyzer-uuid",
-      "config": {
-        "input_mapping": {
-          "code": "user_message.code"
-        }
-      }
-    },
-    {
-      "step_order": 1,
-      "type": "agent",
-      "agent_id": "test-analyzer-uuid",
-      "config": {
-        "input_mapping": {
-          "tests": "user_message.tests"
-        }
-      }
-    },
-    {
-      "step_order": 2,
-      "type": "agent",
-      "agent_id": "fixer-agent-uuid",
-      "config": {
-        "input_mapping": {
-          "code_issues": "step_1.output.issues",
-          "test_issues": "step_2.output.issues"
-        }
-      }
-    }
-  ]
+  "prompt": "The agent's response text"
 }
 ```
 
-Note: While step_order can be the same, agents execute sequentially within the same order tier.
+WASM modules return whatever JSON they output, which the next step can use.
 
-## Error Handling Patterns
+## Error Handling
 
-Multi-agent workflows should handle errors gracefully:
+When a step fails, the entire workflow fails. Currently:
 
-### Retry Pattern
+- If any step fails, the job is marked as failed
+- No automatic retry mechanism exists
+- Jobs can be cancelled manually via the API
 
-Configure agents to retry on failure:
+### Job Statuses
 
-```json
-{
-  "steps": [
-    {
-      "step_order": 1,
-      "type": "agent",
-      "agent_id": "unreliable-agent-uuid",
-      "config": {
-        "max_retries": 3,
-        "retry_delay_seconds": 5
-      }
-    }
-  ]
-}
-```
+| Status | Description |
+|--------|-------------|
+| `queued` | Job waiting to be processed |
+| `running` | Job currently executing |
+| `completed` | All steps completed successfully |
+| `failed` | A step failed or job timed out |
+| `cancelled` | Job was manually cancelled |
 
-### Fallback Pattern
+### Timeout Configuration
 
-Use a more reliable agent as fallback:
-
-```json
-{
-  "steps": [
-    {
-      "step_order": 1,
-      "type": "agent",
-      "agent_id": "premium-agent-uuid",
-      "config": {
-        "fallback_on_failure": "standard-agent-uuid"
-      }
-    }
-  ]
-}
-```
-
-### Circuit Breaker Pattern
-
-For workflows with external dependencies:
-
-1. Add health check step
-2. Skip dependent steps if health check fails
-3. Use cached results when appropriate
+Jobs have a configurable timeout (default: 1 hour). Set via `timeout_job_seconds` in settings.
 
 ## Tool-Using Agents
 
@@ -468,81 +363,38 @@ UI requests are useful for:
 - **Context clarification**: Get additional input when ambiguous
 - **Confirmation gates**: Confirm destructive or irreversible actions
 
-### Workflow Example with UI Approval
+### Workflow Example
 
 ```json
 {
-  "name": "code-review-with-approval",
-  "description": "Review code and require approval for changes",
+  "name": "code-review-workflow",
+  "description": "Review code with multiple specialized agents",
   "steps": [
     {
       "step_order": 1,
       "type": "agent",
       "agent_id": "reviewer-agent-uuid",
-      "config": {
-        "input_mapping": {"task": "user_message"}
-      }
+      "config": {}
     },
     {
       "step_order": 2,
       "type": "agent",
       "agent_id": "implementer-agent-uuid",
-      "config": {
-        "input_mapping": {
-          "changes": "step_1.output.changes",
-          "review_notes": "step_1.output.notes"
-        },
-        "ui_request": {
-          "type": "confirm",
-          "message": "Apply the suggested changes?",
-          "timeout": 300
-        }
-      }
+      "config": {}
     },
     {
       "step_order": 3,
       "type": "agent",
       "agent_id": "verifier-agent-uuid",
-      "config": {
-        "input_mapping": {
-          "results": "step_2.output"
-        }
-      }
+      "config": {}
     }
   ]
 }
 ```
 
-### Handling UI Requests in Workflows
+For details on how agents send UI requests through the pi runtime, see the [Integrations documentation](/docs/Advanced/integrations#extension-ui-requestresponse-pattern).
 
-When a workflow step triggers a UI request:
-
-1. The workflow pauses at that step
-2. The request is sent to the frontend/client
-3. User response is captured and sent back
-4. Workflow resumes with the response as step output
-
-```bash
-# Poll for workflow status when waiting for UI input
-curl http://localhost:8140/api/v1/jobs/{job-uuid}
-
-# Response when waiting for UI input:
-{
-  "id": "job-uuid",
-  "status": "awaiting_input",
-  "current_step": 2,
-  "ui_request": {
-    "type": "confirm",
-    "id": "request-uuid",
-    "message": "Apply the suggested changes?"
-  }
-}
-
-# Send user response to continue workflow
-curl -X POST http://localhost:8140/api/v1/jobs/{job-uuid}/respond \
-  -H "Content-Type: application/json" \
-  -d '{"request_id": "request-uuid", "confirmed": true}'
-```
+For details on the UI request/response pattern used by pi, see the [Integrations documentation](/docs/Advanced/integrations#extension-ui-requestresponse-pattern).
 
 ## Best Practices
 
@@ -578,20 +430,19 @@ When planning multi-agent workflows, consider:
 
 ### Timeout Configuration
 
-Multi-agent workflows have several timeout settings:
+Jobs have a configurable timeout controlled by `timeout_job_seconds`:
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `timeout_workflow_seconds` | 300s | Maximum time for each step |
-| `timeout_request_seconds` | 360s | Maximum time for API requests |
-| `timeout_job_seconds` | 3600s | Maximum time for entire job |
+| `timeout_job_seconds` | 3600s (1 hour) | Maximum time for entire job |
 
 For complex multi-agent workflows:
 
 ```bash
-# Increase job timeout for complex pipelines
-# In Settings → General or via API
-timeout_job_seconds: 7200  # 2 hours
+# Increase job timeout via API
+curl -X PUT http://localhost:8140/api/v1/settings/timeout_job_seconds \
+  -H "Content-Type: application/json" \
+  -d '{"value": "7200"}'
 ```
 
 ### Cost Optimization

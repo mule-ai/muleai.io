@@ -9,3 +9,16 @@ spec.md
 plan.md
 progress.md
 SUMMARY.md
+
+# Automation metadata files (copied in and cleaned up per run)
+blog-spec.md
+blog-plan.md
+docs-spec.md
+docs-plan.md
+docs-progress.md
+docs-summary.md
+site-improvement-spec.md
+site-improvement-plan.md
+site-progress.md
+site-summary.md
+research*.md

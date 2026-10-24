@@ -88,5 +88,6 @@ Ready to automate your GitHub workflows? Here's how to continue:
 - [Validation Functions](/docs/Advanced/validation) - Add quality gates to your workflows
 
 ### Configuration
+- [Configuration](/docs/Settings/configuration) - CLI flags and startup settings
 - [Agents Configuration](/docs/Settings/agents) - Set up agents for GitHub operations
 - [Workflows](/docs/Settings/workflows) - Define complete GitHub automation pipelines

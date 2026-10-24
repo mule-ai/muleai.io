@@ -4,7 +4,7 @@ title: "Workflows"
 description: "Understanding and configuring Mule workflows"
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
-lastmod: "2026-04-01T00:00:00-05:00"
+lastmod: "2026-04-11T00:00:00-05:00"
 toc: true
 ---
 
@@ -48,9 +48,7 @@ curl -X POST http://localhost:8140/api/v1/workflows/{workflow-id}/steps \
   -d '{
     "type": "agent",
     "agent_id": "{agent-id}",
-    "config": {
-      "outputField": "generatedText"
-    }
+    "config": {}
   }'
 ```
 
@@ -90,7 +88,7 @@ Each workflow consists of ordered steps. Steps can be of two types:
 
 ### Agent Steps
 
-Execute an AI agent to process input and generate output.
+Execute an AI agent to process input and generate output. Agent steps output their response as a `prompt` field.
 
 ```json
 {
@@ -99,16 +97,13 @@ Execute an AI agent to process input and generate output.
   "step_order": 1,
   "type": "agent",
   "agent_id": "agent-uuid",
-  "config": {
-    "outputField": "generatedText",
-    "agentName": "My Agent"
-  }
+  "config": {}
 }
 ```
 
 ### WASM Module Steps
 
-Execute a WebAssembly module for custom processing, validation, or tooling.
+Execute a WebAssembly module for custom processing, validation, or tooling. WASM modules receive input via stdin and output JSON via stdout.
 
 ```json
 {
@@ -123,13 +118,11 @@ Execute a WebAssembly module for custom processing, validation, or tooling.
 
 ### Step Configuration (Config Field)
 
-The `config` JSON object contains step-specific settings:
+The `config` JSON object is stored with the step and passed to WASM modules. For agent steps, the config is currently unused but reserved for future features.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `outputField` | string | How to extract output from the step result. Options: `generatedText` (final content only), `generatedTextWithReasoning` (includes reasoning), or leave empty for raw output |
-| `agentName` | string | Optional human-readable name for logging and debugging |
-| Any custom key | any | Additional configuration can be added as needed |
+| Any custom key | any | Configuration values passed to WASM modules |
 
 ### Step Properties
 
@@ -161,15 +154,14 @@ This example moves the third step to the second position. The `step_ids` array s
 - Steps not included in the array will be removed
 - Use `GET /api/v1/workflows/{id}/steps` to get the current list of step IDs
 
-## Output Fields
+## Step Output
 
-Output fields define how to process the raw output from a step:
+Each step produces output that becomes the input for the next step:
 
-- **generatedText**: Extracts only the final generated content (code, text, etc.)
-- **generatedTextWithReasoning**: Includes the agent's reasoning along with the final output
-- **(empty)**: Passes the raw output from the step to the next step
+- **Agent steps**: Output a JSON object with a `prompt` field containing the agent's response
+- **WASM modules**: Output JSON data via stdout, which becomes the input for the next step
 
-When a step completes its work, its output is processed according to the outputField setting and then passed to the next step in the workflow.
+The output is passed sequentially from step to step in `step_order` ascending order.
 
 ## Working Directory Management
 
@@ -419,13 +411,13 @@ More complex tasks can benefit from specialized multi-agent workflows:
       "type": "agent",
       "agent_id": "agent-uuid-1",
       "step_order": 1,
-      "config": { "outputField": "generatedText" }
+      "config": {}
     },
     {
       "type": "agent",
       "agent_id": "agent-uuid-2",
       "step_order": 2,
-      "config": { "outputField": "generatedText" }
+      "config": {}
     },
     {
       "type": "wasm_module",

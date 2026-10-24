@@ -44,6 +44,7 @@ Ready to apply what you've learned? Here's how to continue:
 - [Parallel Workflow Execution](/docs/Tutorials/batch-processing) - Scale your workflows
 
 ### Configuration & Settings
+- [Configuration](/docs/Settings/configuration) - CLI flags and startup settings
 - [Agents Configuration](/docs/Settings/agents) - Configure AI agents
 - [AI Providers](/docs/Settings/ai-providers) - Set up your AI provider
 - [Workflows](/docs/Settings/workflows) - Define multi-step workflows

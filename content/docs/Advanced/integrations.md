@@ -4,7 +4,7 @@ title: "Integration Capabilities"
 description: "Extending Mule with tools, skills, and WASM modules"
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
-lastmod: "2026-04-04T01:00:00-05:00"
+lastmod: "2026-04-11T00:00:00-05:00"
 toc: true
 ---
 
@@ -583,11 +583,7 @@ curl -X POST http://localhost:8140/api/v1/workflows/{workflow-uuid}/steps \
   -d '{
     "type": "agent",
     "agent_id": "agent-uuid-1",
-    "config": {
-      "input_mapping": {
-        "bug_description": "previous_step.output"
-      }
-    }
+    "config": {}
   }'
 
 # Add WASM module step (step 2)
@@ -595,7 +591,8 @@ curl -X POST http://localhost:8140/api/v1/workflows/{workflow-uuid}/steps \
   -H "Content-Type: application/json" \
   -d '{
     "type": "wasm_module",
-    "wasm_module_id": "wasm-module-uuid"
+    "wasm_module_id": "wasm-module-uuid",
+    "config": {}
   }'
 
 # Add another agent step (step 3)
@@ -604,11 +601,7 @@ curl -X POST http://localhost:8140/api/v1/workflows/{workflow-uuid}/steps \
   -d '{
     "type": "agent",
     "agent_id": "agent-uuid-2",
-    "config": {
-      "input_mapping": {
-        "analysis": "step_2.output"
-      }
-    }
+    "config": {}
   }'
 ```
 

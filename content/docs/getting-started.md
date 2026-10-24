@@ -480,6 +480,7 @@ See Mule in action with this demonstration using the Local Provider:
 
 After getting Mule running, you might want to:
 
+- Review [Configuration](/docs/Settings/configuration) for CLI flags and startup settings
 - Learn about [interacting with repositories](/docs/Repositories/interacting-with-a-repository)
 - Understand [agent configuration](/docs/Settings/agents) in more detail
 - Explore [advanced features](/docs/Advanced) like RAG and integrations
