@@ -347,7 +347,14 @@ a.group.block.relative.bg-gradient-to-br:hover {
     
     <div class="max-w-5xl mx-auto">
         <!-- Featured Posts Section -->
-        {{ $featuredPosts := where (where .Site.RegularPages "Section" "blog") "Params.featured" true }}
+        {{/* Featured is derived from recency: the 3 newest posts, but never older than 30 days. */}}
+        {{ $featuredCutoff := now.AddDate 0 0 -30 }}
+        {{ $featuredPosts := slice }}
+        {{ range where .Site.RegularPages "Section" "blog" }}
+            {{ if and (.Date.After $featuredCutoff) (lt (len $featuredPosts) 3) }}
+                {{ $featuredPosts = $featuredPosts | append . }}
+            {{ end }}
+        {{ end }}
         {{ if $featuredPosts }}
         <div class="mb-12">
             <h2 class="text-xl font-semibold text-gray-300 mb-6 flex items-center gap-2">
@@ -515,7 +522,6 @@ a.group.block.relative.bg-gradient-to-br:hover {
 
         <!-- Blog Posts -->
         <div class="space-y-8" id="blog-posts">
-            {{ $featuredPosts := where (where .Site.RegularPages "Section" "blog") "Params.featured" true }}
             {{ $featuredTitles := slice }}
             {{ range $featuredPosts }}{{ $featuredTitles = $featuredTitles | append .Title }}{{ end }}
             {{ range (where .Site.RegularPages "Section" "blog").ByDate.Reverse }}
