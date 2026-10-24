@@ -2105,3 +2105,112 @@ textarea:focus-visible {
     border: 1px solid #e2e8f0;
   }
 }
+
+// ============================================================
+// Light mode overrides (data-theme="light") for blog pages.
+// The dark-first styles above are mirrored here so light theme
+// never renders light-on-white. Ported from the inline CSS that
+// used to live in layouts/blog/list.html.
+// ============================================================
+:root[data-theme="light"] {
+  body {
+    background-color: #f8fafc !important;
+    color: #1e293b;
+  }
+  main {
+    background-color: #f8fafc;
+  }
+
+  // Surfaces / cards (blog list)
+  .blog-post-card,
+  .bg-gray-800\/50,
+  .bg-gray-800\/60,
+  .bg-gray-800\/30 {
+    background-color: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  }
+  .bg-gray-800 {
+    background-color: #ffffff !important;
+  }
+  .bg-gray-700,
+  .bg-gray-700\/60,
+  .bg-gray-700\/50 {
+    background-color: #f1f5f9 !important;
+  }
+  .bg-gray-900,
+  .bg-gray-900\/50 {
+    background-color: #f8fafc !important;
+  }
+
+  // Text contrast
+  .text-gray-100,
+  .text-gray-200,
+  .text-gray-300 {
+    color: #1e293b !important;
+  }
+  .text-gray-400 {
+    color: #475569 !important;
+  }
+  .text-gray-500 {
+    color: #64748b !important;
+  }
+  .placeholder-gray-500::placeholder {
+    color: #94a3b8 !important;
+  }
+
+  // Borders
+  .border-gray-700,
+  .border-gray-600,
+  .border-gray-800 {
+    border-color: #e2e8f0 !important;
+  }
+
+  // Tag chips & filter buttons
+  .tag-chip {
+    color: #334155 !important;
+  }
+  .tag-filter-btn {
+    color: #334155 !important;
+    border-color: #cbd5e1 !important;
+  }
+  .tag-filter-btn.active {
+    background-color: #1d4ed8 !important;
+    color: #ffffff !important;
+    border-color: #1d4ed8 !important;
+  }
+
+  // Featured badge / links remain readable on light backgrounds
+  .text-yellow-400 {
+    color: #b45309 !important;
+  }
+  .text-orange-400 {
+    color: #c2410c !important;
+  }
+  .text-blue-400 {
+    color: #1d4ed8 !important;
+  }
+
+  // Prose (single blog post body)
+  .prose {
+    color: #334155;
+    h1, h2, h3, h4, h5, h6 {
+      color: #0f172a;
+    }
+    h3 {
+      color: #1d4ed8;
+    }
+    a {
+      color: #1d4ed8;
+    }
+    code {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    pre {
+      background: #f8fafc;
+    }
+  }
+  .code-block {
+    background: #f8fafc !important;
+  }
+}
