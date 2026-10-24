@@ -173,34 +173,18 @@ websocket.on('message', (data) => {
 });
 ```
 
-#### REST API Integration Example
+#### Delivery Notes
 
-For non-streaming requests, handle UI requests by returning a `200` status with the request details, then poll for a response:
+UI requests are delivered **only over the WebSocket stream** (`/ws`), where the
+PI RPC bridge broadcasts `extension_ui_request` events alongside agent deltas.
+There is no REST endpoint for submitting UI responses — `POST /v1/chat/completions`
+does not return an `awaiting_input` status and does not support interactive
+round-trips. Responses are written back to the pi process stdin by the server-side
+bridge (`SendExtensionUIResponse` / `SendExtensionUICancel`).
 
-```bash
-# Initial request returns the UI request
-curl -X POST http://localhost:8140/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{"model": "agent/my-agent", "messages": [...]}'
-
-# Response indicates UI request pending
-{
-  "status": "awaiting_input",
-  "request": {
-    "type": "extension_ui_request",
-    "id": "request-uuid",
-    "method": "select",
-    "title": "Choose an action",
-    "message": "Multiple options found. Which should I use?",
-    "options": ["Option A", "Option B"]
-  }
-}
-
-# Submit UI response
-curl -X POST http://localhost:8140/api/v1/chat/respond \
-  -H "Content-Type: application/json" \
-  -d '{"request_id": "request-uuid", "value": "Option A", "confirmed": true}'
-```
+The WebSocket control channel currently accepts only `subscribe` and `unsubscribe`
+operations (per-job subscriptions); interactive response routing from clients is
+handled by the mule frontend.
 
 #### Best Practices
 

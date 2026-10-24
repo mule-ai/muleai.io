@@ -173,7 +173,7 @@ export GOOGLE_CLOUD_LOCATION=us-central1
 
 ## Custom Providers
 
-For custom providers with specific API requirements, you can create a pi extension to register custom provider implementations. See the [pi custom provider documentation](https://pi.dev/docs/providers#custom-providers) for details.
+For custom providers with specific API requirements, you can create a pi extension to register custom provider implementations. See the [pi custom provider documentation](https://pi.dev/docs/latest/custom-provider) for details.
 
 All providers support model switching, tool assignment, and dynamic configuration.
 
