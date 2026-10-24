@@ -1,352 +1,15 @@
 {{ define "main" }}
-<style>
-/* Header/Navbar - Force dark background in dark mode */
-#topnav {
-    background-color: #0f172a !important;
-}
-
-:root[data-theme="light"] #topnav {
-    background-color: #ffffff !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-}
-
-/* Category-based tag colors */
-.tag-category-ai { background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important; }
-.tag-category-golang { background: linear-gradient(135deg, #00add8, #007d9c) !important; }
-.tag-category-agi { background: linear-gradient(135deg, #8b5cf6, #6d28d9) !important; }
-.tag-category-music { background: linear-gradient(135deg, #ec4899, #be185d) !important; }
-.tag-category-mule { background: linear-gradient(135deg, #10b981, #047857) !important; }
-.tag-category-default { background: linear-gradient(135deg, #6b7280, #4b5563) !important; }
-
-/* ENHANCED: Tag chip hover effects with scale and glow */
-.tag-chip {
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.tag-chip::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-    opacity: 0;
-    transition: opacity 0.25s ease;
-}
-
-.tag-chip:hover {
-    transform: scale(1.08) translateY(-1px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
-}
-
-.tag-chip:hover::before {
-    opacity: 1;
-}
-
-.tag-chip:active {
-    transform: scale(0.98);
-}
-
-/* ENHANCED: Blog card with animated border glow on hover */
-.blog-post-card {
-    animation: fadeInUp 0.4s ease forwards;
-    opacity: 0;
-    position: relative;
-}
-
-.blog-post-card::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
-    border-radius: inherit;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s ease;
-    filter: blur(8px);
-}
-
-.blog-post-card:hover::before {
-    opacity: 0.4;
-}
-
-.blog-post-card.hidden {
-    display: none !important;
-}
-
-/* Load More Button Styles */
-.load-more-container {
-    text-align: center;
-    margin-top: 2rem;
-    padding: 1rem 0;
-}
-
-#load-more-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 2rem;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    border: none;
-    border-radius: 0.75rem;
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-#load-more-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-#load-more-btn:hover::before {
-    left: 100%;
-}
-
-#load-more-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
-}
-
-#load-more-btn:active {
-    transform: translateY(0);
-}
-
-#load-more-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-}
-
-#load-more-btn .spinner {
-    display: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-#load-more-btn.loading .spinner {
-    display: inline-block;
-}
-
-#load-more-btn.loading .btn-text {
-    display: none;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* ENHANCED: Search input with animated gradient border */
-#blog-search {
-    background-image: linear-gradient(#1e293b, #1e293b), 
-                      linear-gradient(to right, #3b82f6, #8b5cf6, #06b6d4);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    transition: all 0.3s ease;
-}
-
-#blog-search:focus {
-    background-image: linear-gradient(#1e293b, #1e293b), 
-                      linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
-    background-size: 100% 100%, 200% 100%;
-    animation: gradientShift 2s linear infinite;
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 0 20px rgba(139, 92, 246, 0.2);
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 0%, 0% 50%; }
-    50% { background-position: 0% 0%, 100% 50%; }
-    100% { background-position: 0% 0%, 200% 50%; }
-}
-
-/* Posts counter */
-.posts-counter {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 0.875rem;
-    color: #64748b;
-}
-
-.posts-counter span {
-    color: #3b82f6;
-    font-weight: 600;
-}
-
-.tag-filter-btn {
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.tag-filter-btn.active {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
-    color: white !important;
-    border-color: transparent !important;
-}
-
-#no-results {
-    display: none;
-}
-
-/* Accessibility: Focus styles */
-*:focus-visible {
-    outline: 2px solid #60a5fa;
-    outline-offset: 2px;
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-    outline: 2px solid #60a5fa;
-    outline-offset: 2px;
-    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.3);
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    .blog-post-card {
-        animation: none;
-        opacity: 1;
-    }
-    
-    * {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-    }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .tag-filter-btn.active {
-        outline: 2px solid white;
-        outline-offset: 2px;
-    }
-    
-    .blog-post-card {
-        border-width: 2px;
-    }
-}
-
-/* Mobile optimizations - better touch targets */
-@media (max-width: 640px) {
-    /* Larger touch targets for tag filters */
-    .tag-filter-btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
-    }
-    
-    /* Better card spacing on mobile */
-    .blog-post-card {
-        padding: 1.25rem;
-    }
-    
-    /* Larger tap targets for tags in post cards */
-    .tag-chip {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.75rem;
-    }
-    
-    /* Larger close/search button on mobile */
-    #clear-search {
-        padding: 0.5rem;
-    }
-    
-    /* Better search input on mobile */
-    #blog-search {
-        padding: 0.75rem 1rem 0.75rem 2.5rem;
-        font-size: 1rem;
-    }
-    
-    /* Improve metadata display on mobile */
-    .blog-post-card .flex.flex-wrap.items-center.gap-4 {
-        gap: 0.5rem;
-    }
-    
-    .blog-post-card .flex.flex-wrap.items-center.gap-4 > span {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.75rem;
-    }
-}
-
-/* ENHANCED: Stats cards with hover effects and subtle pulse */
-.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30 {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
-    border-color: rgba(59, 130, 246, 0.3);
-}
-
-.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30:hover::before {
-    opacity: 1;
-}
-
-/* ENHANCED: Stats numbers with subtle glow on hover */
-.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .text-2xl {
-    transition: all 0.3s ease;
-}
-
-.grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30:hover .text-2xl {
-    text-shadow: 0 0 20px currentColor;
-}
-
-/* ENHANCED: Featured posts with enhanced hover */
-a.group.block.relative.bg-gradient-to-br {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-a.group.block.relative.bg-gradient-to-br:hover {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
-}
-
-/* ENHANCED: Quick links with hover animation */
-.inline-flex.items-center.gap-2.px-4.py-2 {
-    transition: all 0.2s ease;
-}
-
-.inline-flex.items-center.gap-2.px-4.py-2:hover {
-    transform: translateX(4px);
-}
-</style>
-
-<main class="container mx-auto px-4 py-8">
-    <!-- Skip to content link for accessibility -->
-    <a href="#blog-posts" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+{{/*
+  Blog list: most-recent-first, one search box, compact tag filter.
+  Filtering is plain JS over data attributes; theme/light-mode styles live
+  in assets/scss/custom.scss (see .blog-post-card, .tag-filter-btn).
+*/}}
+<main class="container mx-auto px-4 py-8 blog-list">
+    <a href="#blog-posts" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg">
         Skip to blog posts
     </a>
-    
+
     <div class="max-w-5xl mx-auto">
-        <!-- Featured Posts Section -->
         {{/* Featured is derived from recency: the 3 newest posts, but never older than 30 days. */}}
         {{ $featuredCutoff := now.AddDate 0 0 -30 }}
         {{ $featuredPosts := slice }}
@@ -357,47 +20,16 @@ a.group.block.relative.bg-gradient-to-br:hover {
         {{ end }}
         {{ if $featuredPosts }}
         <div class="mb-12">
-            <h2 class="text-xl font-semibold text-gray-300 mb-6 flex items-center gap-2">
-                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-                Featured Posts
-            </h2>
+            <h2 class="text-xl font-semibold text-gray-300 mb-6">Featured Posts</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {{ range $featuredPosts }}
-                <a href="{{ .Permalink }}" class="group block relative bg-gradient-to-br from-blue-900/40 via-purple-900/40 to-cyan-900/40 rounded-xl p-6 border border-yellow-500/30 hover:border-yellow-500/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-yellow-500/10">
-                    <div class="absolute top-3 right-3">
-                        <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-yellow-500/20 text-yellow-400 rounded-full">
-                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                            Featured
-                        </span>
-                    </div>
-                    {{ with index .Params.tags 0 }}
-                    <span class="inline-block px-2 py-0.5 text-xs font-medium bg-blue-600/50 text-blue-200 rounded-full mb-3">
-                        {{ . }}
-                    </span>
-                    {{ end }}
-                    <h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-purple-400 group-hover:to-cyan-400 transition-all">
-                        {{ .Title }}
-                    </h3>
-                    <p class="text-gray-400 text-sm line-clamp-2 mb-3">
-                        {{ .Summary | truncate 120 }}
-                    </p>
+                <a href="{{ .Permalink }}" class="block bg-gray-800/50 rounded-xl p-6 border border-yellow-500/30 hover:border-yellow-500/60 transition-colors">
+                    <span class="inline-block px-2 py-0.5 text-xs font-medium bg-yellow-500/20 text-yellow-400 rounded-full mb-3">Featured</span>
+                    <h3 class="text-xl font-bold text-gray-100 mb-2">{{ .Title }}</h3>
+                    <p class="text-gray-400 text-sm mb-3">{{ .Summary | truncate 140 }}</p>
                     <div class="flex items-center gap-3 text-xs text-gray-500">
-                        <span class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            {{ .Date.Format "Jan 2, 2006" }}
-                        </span>
-                        <span class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            {{ .ReadingTime }} min read
-                        </span>
+                        <span>{{ .Date.Format "Jan 2, 2006" }}</span>
+                        <span>{{ .ReadingTime }} min read</span>
                     </div>
                 </a>
                 {{ end }}
@@ -406,1282 +38,195 @@ a.group.block.relative.bg-gradient-to-br:hover {
         {{ end }}
 
         <!-- Header -->
-        <div class="mb-12 text-center">
-            <div class="inline-block px-4 py-1 mb-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full">
-                <span class="text-sm font-semibold text-white">Latest Updates from Mule AI</span>
-            </div>
-            <h1 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent relative z-10">
-                Blog
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto">
-                Exploring AI, Golang, AGI, and electronic music through code
+        <div class="mb-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-3 text-gray-100">Blog</h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                Exploring AI, Golang, AGI, and electronic music through code —
+                <span class="font-semibold text-blue-400">{{ len (where .Site.RegularPages "Section" "blog") }}</span> posts and counting.
+                <a href="/blog/index.xml" class="text-orange-400 hover:text-orange-300 ml-1">RSS</a>
             </p>
-            <!-- RSS Feed Link -->
-            <div class="mt-4">
-                <a href="/blog/index.xml" class="inline-flex items-center gap-2 px-4 py-2 text-sm text-gray-400 hover:text-orange-400 transition-colors">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"></path>
-                    </svg>
-                    RSS Feed
-                </a>
-            </div>
-            <div class="mt-4 h-1 w-32 mx-auto bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded"></div>
         </div>
 
-        <!-- Search/Filter Bar -->
+        <!-- Search -->
         <div class="mb-6">
             <div class="relative max-w-xl mx-auto">
-                <input type="text" 
-                       id="blog-search" 
-                       placeholder="Search posts by title, tag, or content..."
-                       class="w-full px-5 py-4 pl-12 bg-gray-800/50 border-2 border-transparent rounded-xl text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
-                       style="background-image: linear-gradient(#1e293b, #1e293b), linear-gradient(to right, #3b82f6, #8b5cf6, #06b6d4); background-origin: border-box; background-clip: padding-box, border-box;">
-                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <input type="search"
+                       id="blog-search"
+                       placeholder="Search posts… (press / to focus)"
+                       aria-label="Search blog posts"
+                       class="w-full px-4 py-3 pl-11 bg-gray-800/50 border border-gray-700 rounded-xl text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500">
+                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <button id="clear-search" 
-                        class="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-gray-300 transition-colors hidden">
+                <button id="clear-search" aria-label="Clear search"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-gray-300 hidden">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
-                <!-- Keyboard shortcut hint -->
-                <div class="absolute right-12 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 text-xs text-gray-500 pointer-events-none">
-                    <kbd class="px-1.5 py-0.5 bg-gray-700/70 text-gray-400 rounded border border-gray-600/50">⌘</kbd>
-                    <kbd class="px-1.5 py-0.5 bg-gray-700/70 text-gray-400 rounded border border-gray-600/50">K</kbd>
-                </div>
-                <!-- Theme Toggle Button -->
-                <button id="blog-theme-toggle"
-                        class="absolute right-14 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-200 hover:bg-gray-700 rounded-lg transition-all"
-                        aria-label="Toggle theme">
-                    <!-- Sun icon (shown in dark mode) -->
-                    <svg class="w-5 h-5 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
-                    <!-- Moon icon (shown in light mode) -->
-                    <svg class="w-5 h-5 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                    </svg>
-                </button>
             </div>
-            <div id="search-results-count" class="text-center text-sm text-gray-500 mt-3 hidden"></div>
+            <div id="search-results-count" class="text-center text-sm text-gray-500 mt-3 hidden" aria-live="polite"></div>
         </div>
 
-        <!-- Tag Filter Chips with Counts -->
-        {{ $tagCounts := slice }}
+        {{/* Compact tag filter: 10 most-used tags as chips; all tags remain searchable. */}}
+        {{ $tagCounts := dict }}
         {{ range where .Site.RegularPages "Section" "blog" }}
             {{ range .Params.tags }}
-                {{ $tagCounts = $tagCounts | append . }}
+                {{ $tagCounts = merge $tagCounts (dict . (add (default 0 (index $tagCounts .)) 1)) }}
             {{ end }}
         {{ end }}
-        
-        {{/* Count occurrences of each tag */}}
-        {{ $tagCountsMap := dict }}
-        {{ range $tag := $tagCounts }}
-            {{ $count := 0 }}
-            {{ with index $tagCountsMap $tag }}{{ $count = . }}{{ end }}
-            {{ $tagCountsMap = merge $tagCountsMap (dict $tag (add $count 1)) }}
+        {{ $tagList := slice }}
+        {{ range $tag, $count := $tagCounts }}
+            {{ $tagList = $tagList | append (dict "tag" $tag "count" $count) }}
         {{ end }}
-        
-        {{ $uniqueTags := $tagCounts | uniq }}
-        {{ if $uniqueTags }}
-        <div class="mb-8 flex flex-wrap justify-center gap-2" id="tag-filters">
-            <button class="tag-filter-btn active px-4 py-1.5 text-sm bg-gray-700 text-gray-300 border border-gray-600 rounded-full font-medium" data-tag="all">
+        {{ $topTags := first 10 (sort $tagList "count" "desc") }}
+
+        <div class="mb-10 flex flex-wrap justify-center gap-2" id="tag-filters">
+            <button class="tag-filter-btn active px-4 py-1.5 text-sm bg-gray-700 text-gray-200 border border-gray-600 rounded-full font-medium" data-tag="all">
                 All Posts
             </button>
-            {{ range $uniqueTags }}
-            <button class="tag-filter-btn px-4 py-1.5 text-sm bg-gray-700/50 text-gray-300 border border-gray-700 rounded-full font-medium hover:border-blue-500 hover:text-white" data-tag="{{ . | urlize }}">
-                #{{ . }}
+            {{ range $topTags }}
+            <button class="tag-filter-btn px-4 py-1.5 text-sm bg-gray-800/60 text-gray-300 border border-gray-700 rounded-full font-medium hover:border-blue-500 hover:text-white" data-tag="{{ .tag | urlize }}">
+                #{{ .tag }} <span class="text-gray-500">{{ .count }}</span>
             </button>
             {{ end }}
         </div>
-        {{ end }}
 
-        <!-- Stats / About -->
-        <div class="mb-8 p-6 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-xl text-center">
-            <p class="text-gray-400">
-                <span class="font-semibold text-blue-400" id="post-count">{{ len (where .Site.RegularPages "Section" "blog") }}</span> 
-                blog posts and counting. Keep exploring the intersection of AI, code, and creativity.
-            </p>
-            <!-- Quick Links -->
-            <div class="mt-4 flex flex-wrap justify-center gap-3">
-                <a href="/blog/archive" class="inline-flex items-center gap-2 px-4 py-2 bg-purple-600/20 border border-purple-500/30 text-purple-400 rounded-lg hover:bg-purple-600/30 hover:border-purple-500/50 transition-all text-sm font-medium">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                    </svg>
-                    Browse Archive
-                </a>
-                <a href="/blog/index.xml" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-600/20 border border-orange-500/30 text-orange-400 rounded-lg hover:bg-orange-600/30 hover:border-orange-500/50 transition-all text-sm font-medium">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.502 9.186-4.973 9.186-11.368 0-1.022-.105-2.024-.312-2.95l1.505-.611c.384.958.593 2.003.593 3.113 0 2.724-1.625 5.133-4.15 6.298-2.336 1.074-5.377 1.386-8.47.446l.54-1.735zm10.205-8.18c.298-.602.465-1.26.465-1.96 0-3.946-2.576-7.352-6.027-8.698l1.814-.621c1.697 2.336 2.823 5.055 2.823 8.033 0 .692-.123 1.355-.348 1.97l-1.753.643c.438.996.92 1.914 1.445 2.746l1.58-.544z"/>
-                    </svg>
-                    RSS Feed
-                </a>
-            </div>
-        </div>
-
-        <!-- Blog Posts -->
-        <div class="space-y-8" id="blog-posts">
+        <!-- Blog posts (most recent first) -->
+        <div class="space-y-6" id="blog-posts">
             {{ $featuredTitles := slice }}
             {{ range $featuredPosts }}{{ $featuredTitles = $featuredTitles | append .Title }}{{ end }}
             {{ range (where .Site.RegularPages "Section" "blog").ByDate.Reverse }}
             {{ if not (in $featuredTitles .Title) }}
             {{ $tagList := "" }}
             {{ range .Params.tags }}{{ $tagList = printf "%s %s" $tagList (. | urlize) }}{{ end }}
-            <article class="blog-post-card group bg-gray-800/50 rounded-xl p-6 md:p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:bg-gray-800/70 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
+            <article class="blog-post-card bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-colors"
                      data-title="{{ .Title | lower }}"
                      data-tags="{{ $tagList | lower }}"
-                     data-summary="{{ .Summary | lower | truncate 300 }}"
-                     data-tag-values="{{ delimit .Params.tags " " | lower }}">
-                <a href="{{ .Permalink }}" class="block group-hover:no-underline">
-                    <!-- Tag badge -->
-                    {{ with index .Params.tags 0 }}
-                    <span class="inline-block px-3 py-1 mb-4 text-xs font-medium bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white">
-                        {{ . }}
-                    </span>
+                     data-summary="{{ .Summary | lower | truncate 300 }}">
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-400 mb-2">
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                    {{ with .Params.author }}<span>{{ . }}</span>{{ end }}
+                    {{ with .ReadingTime }}<span>{{ . }} min read</span>{{ end }}
+                </div>
+                <h2 class="text-2xl font-bold mb-2 leading-tight">
+                    <a href="{{ .Permalink }}" class="text-gray-100 hover:text-blue-400">{{ .Title }}</a>
+                </h2>
+                <p class="text-gray-400 line-clamp-2 mb-3">{{ .Summary }}</p>
+                {{ with .Params.tags }}
+                <div class="flex flex-wrap gap-2">
+                    {{ range first 4 . }}
+                    <button class="tag-chip text-xs px-3 py-1 rounded-full font-medium bg-gray-700/60 text-gray-300 hover:bg-blue-600/40 hover:text-white"
+                            data-filter-tag="{{ . | urlize }}">#{{ . }}</button>
                     {{ end }}
-                    
-                    <!-- New badge for posts less than 7 days old -->
-                    {{ $age := now.Sub .Date }}
-                    {{ $daysOld := div $age.Hours 24 }}
-                    {{ if lt $daysOld 7 }}
-                    <span class="inline-block px-3 py-1 mb-4 ml-2 text-xs font-semibold bg-gradient-to-r from-green-500 to-emerald-500 rounded-full text-white animate-pulse">
-                        NEW
-                    </span>
-                    {{ end }}
-                    
-                    <!-- Title with accent -->
-                    <div class="flex items-start gap-4">
-                        <div class="hidden md:block w-1 h-16 bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-500 rounded-full group-hover:h-24 transition-all duration-300"></div>
-                        <div class="flex-1">
-                            <h2 class="text-2xl md:text-3xl font-bold mb-3 text-gray-100 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-purple-400 group-hover:to-cyan-400 transition-all leading-tight">
-                                {{ .Title }}
-                            </h2>
-                            
-                            <!-- Metadata -->
-                            <div class="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-4">
-                                <span class="flex items-center gap-2 bg-gray-700/50 px-3 py-1 rounded-lg">
-                                    <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                    </svg>
-                                    {{ .Date.Format "Jan 2, 2006" }}
-                                </span>
-                                {{ with .Params.author }}
-                                <span class="flex items-center gap-2 bg-gray-700/50 px-3 py-1 rounded-lg">
-                                    <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                    </svg>
-                                    <span class="font-medium text-purple-400">{{ . }}</span>
-                                </span>
-                                {{ end }}
-                                {{ with .ReadingTime }}
-                                <span class="flex items-center gap-2 bg-gray-700/50 px-3 py-1 rounded-lg">
-                                    <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    {{ . }} min read
-                                </span>
-                                {{ end }}
-                            </div>
-
-                            <!-- Tags (clickable for filtering) -->
-                            {{ with .Params.tags }}
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                {{ range first 4 . }}
-                                <span class="text-xs px-3 py-1.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer tag-chip"
-                                      data-filter-tag="{{ . | urlize }}"
-                                      data-tag-name="{{ . | lower }}"
-                                      onclick="filterByTag('{{ . | urlize }}', event)">
-                                    #{{ . }}
-                                </span>
-                                {{ end }}
-                            </div>
-                            {{ end }}
-
-                            <!-- Summary -->
-                            <p class="text-white dark:text-gray-300 line-clamp-2 text-lg leading-relaxed mb-4 group-hover:text-gray-200 transition-colors">
-                                {{ .Summary }}
-                            </p>
-                            
-                            <!-- Read more -->
-                            <div class="pt-4 border-t border-gray-700/50">
-                                <span class="inline-flex items-center text-sm font-medium text-blue-400 hover:text-cyan-400 transition-colors">
-                                    Read Article
-                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                </div>
+                {{ end }}
             </article>
             {{ end }}
             {{ end }}
         </div>
-        
-        <!-- No Results Message -->
-        <div id="no-results" class="text-center py-16">
-            <div class="inline-block p-4 bg-gray-800 rounded-full mb-4">
-                <svg class="w-16 h-16 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-            </div>
+
+        <!-- No results -->
+        <div id="no-results" class="text-center py-16 hidden">
             <p class="text-gray-400 text-lg mb-2">No posts match your search.</p>
-            <p class="text-gray-500 text-sm mb-6">Try different keywords or browse by tags</p>
-            <div class="flex flex-wrap justify-center gap-3">
-                <button onclick="clearSearch()" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium">
-                    Clear Search
-                </button>
-                <button onclick="document.querySelector('.tag-filter-btn[data-tag=\'all\']').click()" class="px-5 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors text-sm font-medium">
-                    View All Posts
-                </button>
-            </div>
+            <p class="text-gray-500 text-sm mb-6">Try different keywords or browse by tags.</p>
+            <button id="reset-filters" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium">
+                Clear filters
+            </button>
         </div>
 
-        <!-- Empty State (no posts at all) -->
+        <!-- Empty state (no posts at all) -->
         {{ if not (where .Site.RegularPages "Section" "blog") }}
         <div class="text-center py-16">
-            <div class="inline-block p-4 bg-gray-800 rounded-full mb-4">
-                <svg class="w-16 h-16 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                </svg>
-            </div>
             <p class="text-gray-400 text-lg">No blog posts yet. Check back soon for updates from Mule AI!</p>
         </div>
         {{ end }}
 
-        <!-- Call-to-action Section -->
-        <div class="mt-16 pt-12 border-t border-gray-700">
-            <div class="bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20 border border-blue-500/30 rounded-xl p-8 md:p-12 text-center">
-                <h3 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-3">
-                    Stay Updated
-                </h3>
-                <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
-                    Follow the latest developments in AI, Golang, AGI, and electronic music.
-                    Join our community of creators and builders.
-                </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="/docs" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all font-medium shadow-lg shadow-blue-500/20">
-                        Explore the Docs
-                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                        </svg>
-                    </a>
-                    <a href="/blog/index.xml" class="inline-flex items-center px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-all font-medium">
-                        <svg class="w-5 h-5 mr-2 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M6.18 15.64a2.18 2.18 0 012.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 012.18-2.18M4 4.44A15.56 15.56 0 0119.56 20h-2.83A12.73 12.73 0 004 7.27V4.44m0 5.66a9.9 9.9 0 019.9 9.9h-2.83A7.07 7.07 0 004 13.1v-3z"></path>
-                        </svg>
-                        RSS Feed
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mule AI Stats Footer -->
-        <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div class="bg-gray-800/30 rounded-lg p-4 border border-gray-700">
-                <div class="text-2xl font-bold text-blue-400">{{ len (where .Site.RegularPages "Section" "blog") }}</div>
-                <div class="text-xs text-gray-400 uppercase tracking-wide">Blog Posts</div>
-            </div>
-            <div class="bg-gray-800/30 rounded-lg p-4 border border-gray-700">
-                <div class="text-2xl font-bold text-purple-400">{{ len $uniqueTags }}</div>
-                <div class="text-xs text-gray-400 uppercase tracking-wide">Topics</div>
-            </div>
-            <div class="bg-gray-800/30 rounded-lg p-4 border border-gray-700">
-                <div class="text-2xl font-bold text-cyan-400">∞</div>
-                <div class="text-xs text-gray-400 uppercase tracking-wide">Ideas</div>
-            </div>
-            <div class="bg-gray-800/30 rounded-lg p-4 border border-gray-700">
-                <div class="text-2xl font-bold text-green-400">AGI</div>
-                <div class="text-xs text-gray-400 uppercase tracking-wide">The Goal</div>
-            </div>
+        <!-- Archive link -->
+        <div class="mt-12 text-center">
+            <a href="/blog/archive" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-800 border border-gray-700 text-gray-300 rounded-lg hover:border-purple-500 hover:text-white transition-colors text-sm font-medium">
+                Browse full archive
+            </a>
         </div>
     </div>
 </main>
 
-<!-- Theme Toggle Script for Blog List - Using global toggleTheme from head.html -->
-<style>
-/* Light mode overrides for blog list - Comprehensive Dark/Light theme support */
-:root[data-theme="light"] {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --border-color: #e2e8f0;
-    --card-bg: #ffffff;
-    --card-border: #e2e8f0;
-}
-
-/* CRITICAL: Override Bootstrap's body background for both light and dark modes */
-body {
-    background-color: #0f172a !important;
-}
-
-:root[data-theme="light"] body {
-    background-color: #f8fafc !important;
-}
-
-/* Light mode - Background and base styles */
-:root[data-theme="light"] {
-    background-color: #f8fafc;
-}
-
-:root[data-theme="light"] main {
-    background-color: #f8fafc;
-}
-
-:root[data-theme="light"] .bg-gray-800\/50 {
-    background-color: #ffffff !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-:root[data-theme="light"] .bg-gray-800\/30 {
-    background-color: #f1f5f9 !important;
-}
-
-:root[data-theme="light"] .bg-gray-800 {
-    background-color: #ffffff !important;
-}
-
-:root[data-theme="light"] .bg-gray-700\/50,
-:root[data-theme="light"] .bg-gray-700 {
-    background-color: #f1f5f9 !important;
-}
-
-:root[data-theme="light"] .bg-gray-900\/50 {
-    background-color: #f8fafc !important;
-}
-
-:root[data-theme="light"] .bg-gray-900 {
-    background-color: #f1f5f9 !important;
-}
-
-:root[data-theme="light"] .bg-gray-600 {
-    background-color: #e2e8f0 !important;
-}
-
-:root[data-theme="light"] .bg-gray-500 {
-    background-color: #94a3b8 !important;
-}
-
-/* Light mode - Gradient backgrounds */
-:root[data-theme="light"] .bg-gradient-to-r {
-    background: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
-}
-
-:root[data-theme="light"] .bg-gradient-to-br {
-    background: linear-gradient(to bottom right, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
-}
-
-:root[data-theme="light"] .bg-gradient-to-b {
-    background: linear-gradient(to bottom, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
-}
-
-/* Light mode - Borders */
-:root[data-theme="light"] .border-gray-700,
-:root[data-theme="light"] .border-gray-600,
-:root[data-theme="light"] .border-gray-800,
-:root[data-theme="light"] .border-gray-900 {
-    border-color: #e2e8f0 !important;
-}
-
-:root[data-theme="light"] .border-gray-500 {
-    border-color: #cbd5e1 !important;
-}
-
-:root[data-theme="light"] .border-gray-400 {
-    border-color: #cbd5e1 !important;
-}
-
-/* Light mode - Text colors */
-:root[data-theme="light"] .text-gray-400,
-:root[data-theme="light"] .text-gray-500,
-:root[data-theme="light"] .text-gray-600 {
-    color: #64748b !important;
-}
-
-:root[data-theme="light"] .text-gray-100,
-:root[data-theme="light"] .text-white {
-    color: #1e293b !important;
-}
-
-:root[data-theme="light"] .text-gray-200 {
-    color: #334155 !important;
-}
-
-:root[data-theme="light"] .text-gray-300 {
-    color: #1e293b !important;  /* Dark text for article previews in light mode */
-}
-
-:root[data-theme="light"] .text-gray-700 {
-    color: #334155 !important;
-}
-
-:root[data-theme="light"] .text-gray-800 {
-    color: #1e293b !important;
-}
-
-:root[data-theme="light"] .text-gray-900 {
-    color: #0f172a !important;
-}
-
-/* Light mode - Links and interactive elements */
-:root[data-theme="light"] a:not(.bg-gradient-to-r):not(.bg-gradient-to-br) {
-    color: #3b82f6;
-}
-
-:root[data-theme="light"] a:hover {
-    color: #2563eb;
-}
-
-:root[data-theme="light"] .text-blue-400 {
-    color: #3b82f6 !important;
-}
-
-:root[data-theme="light"] .text-blue-300 {
-    color: #60a5fa !important;
-}
-
-:root[data-theme="light"] .text-purple-400 {
-    color: #8b5cf6 !important;
-}
-
-:root[data-theme="light"] .text-cyan-400 {
-    color: #22d3ee !important;
-}
-
-:root[data-theme="light"] .text-green-400 {
-    color: #22c55e !important;
-}
-
-/* Light mode - Gradient text */
-:root[data-theme="light"] .bg-clip-text.text-transparent {
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-/* Light mode - Input styling */
-:root[data-theme="light"] input[type="text"],
-:root[data-theme="light"] input[type="search"] {
-    background-color: #ffffff !important;
-    border-color: #e2e8f0 !important;
-    color: #1e293b !important;
-}
-
-:root[data-theme="light"] input[type="text"]:focus,
-:root[data-theme="light"] input[type="search"]:focus {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 0 20px rgba(139, 92, 246, 0.1) !important;
-    background-image: linear-gradient(#ffffff, #ffffff), 
-                      linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6) !important;
-    background-size: 100% 100%, 200% 100% !important;
-    animation: gradientShift 2s linear infinite !important;
-}
-
-:root[data-theme="light"] input[type="text"]::placeholder,
-:root[data-theme="light"] input[type="search"]::placeholder {
-    color: #94a3b8 !important;
-}
-
-/* Light mode - Card hover effects */
-:root[data-theme="light"] .group:hover {
-    background-color: #f8fafc !important;
-}
-
-:root[data-theme="light"] .blog-post-card {
-    background-color: #ffffff !important;
-    border-color: #e2e8f0 !important;
-}
-
-:root[data-theme="light"] .blog-post-card:hover {
-    background-color: #f8fafc !important;
-    border-color: #3b82f6 !important;
-}
-
-/* Light mode - Enhanced blog card glow */
-:root[data-theme="light"] .blog-post-card::before {
-    filter: blur(8px) brightness(1.2);
-}
-
-:root[data-theme="light"] .blog-post-card:hover::before {
-    opacity: 0.3;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
-}
-
-/* Light mode - Enhanced tag chip */
-:root[data-theme="light"] .tag-chip:hover {
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
-}
-
-/* Light mode - Button styles */
-:root[data-theme="light"] .btn {
-    background-color: #f1f5f9;
-    color: #334155;
-    border-color: #e2e8f0;
-}
-
-:root[data-theme="light"] .btn:hover {
-    background-color: #e2e8f0;
-}
-
-/* Light mode - Code blocks */
-:root[data-theme="light"] .prose code:not(pre code) {
-    background-color: #f1f5f9 !important;
-    color: #475569 !important;
-}
-
-:root[data-theme="light"] .prose pre {
-    background-color: #1e293b !important;
-}
-
-:root[data-theme="light"] .code-block {
-    background-color: #f1f5f9 !important;
-}
-
-/* Light mode - Code copy button */
-:root[data-theme="light"] .code-copy-btn {
-    color: #64748b;
-    background: rgba(255, 255, 255, 0.9);
-    border-color: #e2e8f0;
-}
-
-:root[data-theme="light"] .code-copy-btn:hover {
-    color: #4f46e5;
-    border-color: rgba(79, 70, 229, 0.6);
-    background: rgba(79, 70, 229, 0.1);
-}
-
-:root[data-theme="light"] .code-copy-btn.copied {
-    color: #10b981;
-    border-color: rgba(16, 185, 129, 0.5);
-    background: rgba(16, 185, 129, 0.1);
-}
-
-/* Light mode - Tag filter buttons */
-:root[data-theme="light"] .tag-filter-btn {
-    background-color: #f1f5f9 !important;
-    color: #475569 !important;
-    border-color: #e2e8f0 !important;
-}
-
-:root[data-theme="light"] .tag-filter-btn:hover {
-    border-color: #3b82f6 !important;
-    color: #3b82f6 !important;
-}
-
-:root[data-theme="light"] .tag-filter-btn.active {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
-    color: white !important;
-    border-color: transparent !important;
-}
-
-/* Light mode - Filter tag buttons - make them readable */
-:root[data-theme="light"] .tag-filter-btn {
-    background-color: #f1f5f9 !important;
-    color: #374151 !important;
-    border-color: #e2e8f0 !important;
-}
-
-:root[data-theme="light"] .tag-filter-btn:hover {
-    border-color: #3b82f6 !important;
-    color: #1e293b !important;
-}
-
-:root[data-theme="light"] .tag-filter-btn.active {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
-    color: white !important;
-    border-color: transparent !important;
-}
-
-/* Light mode - Tag chips (on blog cards) */
-:root[data-theme="light"] .tag-chip {
-    background-color: rgba(59, 130, 246, 0.1) !important;
-    color: #3b82f6 !important;
-}
-
-/* Light mode - Gradient text visibility (fix for Blog title) */
-:root[data-theme="light"] .bg-clip-text.text-transparent {
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent !important;
-    /* Ensure gradient shows on light backgrounds */
-    background-image: linear-gradient(to right, #3b82f6, #8b5cf6, #06b6d4) !important;
-}
-
-/* Light mode - Header section - ensure no background covers text */
-:root[data-theme="light"] .mb-12.text-center {
-    background-color: transparent !important;
-}
-
-:root[data-theme="light"] h1.text-5xl {
-    background: transparent !important;
-    background-clip: text !important;
-    -webkit-background-clip: text !important;
-}
-
-/* Light mode - Subtitle text */
-:root[data-theme="light"] .text-gray-400 {
-    color: #64748b !important;
-}
-
-:root[data-theme="light"] .text-gray-500 {
-
-/* Blog title h1 - ensure visible background in dark mode */
-h1.text-5xl,
-h1.bg-gradient-to-r {
-    background-color: transparent;
-}
-
-/* Header/Navbar - Dark mode fix */
-#topnav,
-header#topnav,
-#topnav .container {
-    background-color: #0f172a !important;
-}
-
-:root[data-theme="light"] #topnav,
-:root[data-theme="light"] header#topnav,
-:root[data-theme="light"] #topnav .container {
-    background-color: #ffffff !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-}
-
-#topnav .navigation-menu a,
-#topnav .nav-right a {
-    color: #e2e8f0 !important;
-}
-
-:root[data-theme="light"] #topnav .navigation-menu a,
-:root[data-theme="light"] #topnav .nav-right a {
-    color: #334155 !important;
-}
-
-#topnav .navigation-menu a:hover,
-#topnav .nav-right a:hover {
-    color: #3b82f6 !important;
-}
-
-/* Light mode - Search icon and clear button */
-:root[data-theme="light"] .text-gray-500 {
-    color: #64748b !important;
-}
-
-:root[data-theme="light"] .text-gray-400 {
-    color: #94a3b8 !important;
-}
-
-/* Light mode - Focus states */
-:root[data-theme="light"] *:focus-visible {
-    outline-color: #3b82f6;
-}
-
-:root[data-theme="light"] .ring-2 {
-    --tw-ring-color: rgba(59, 130, 246, 0.3);
-}
-
-/* Light mode - SVG icons */
-:root[data-theme="light"] svg {
-    color: #64748b;
-}
-
-/* Light mode - Table of contents */
-:root[data-theme="light"] .prose nav ul,
-:root[data-theme="light"] .prose nav ol {
-    color: #475569;
-}
-
-:root[data-theme="light"] .prose nav a {
-    color: #3b82f6;
-}
-
-/* External link indicator */
-.prose a[target="_blank"]::after {
-    content: "";
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-left: 4px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'/%3E%3C/svg%3E");
-    background-size: contain;
-    vertical-align: middle;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-}
-
-.prose a[target="_blank"]:hover::after {
-    opacity: 1;
-}
-
-:root[data-theme="light"] .prose a[target="_blank"]::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233b82f6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'/%3E%3C/svg%3E");
-}
-
-/* Light mode - Blockquotes */
-:root[data-theme="light"] .prose blockquote {
-    border-left-color: #3b82f6;
-    color: #475569;
-}
-
-/* Light mode - Horizontal rules */
-:root[data-theme="light"] hr {
-    border-color: #e2e8f0;
-}
-
-/* Light mode - Selection */
-:root[data-theme="light"] ::selection {
-    background-color: rgba(59, 130, 246, 0.3);
-    color: #1e293b;
-}
-
-/* Light mode - Search highlight */
-:root[data-theme="light"] .search-highlight {
-    background-color: rgba(250, 204, 21, 0.3) !important;
-    color: #854d0e !important;
-}
-
-/* Light mode - Gradient backgrounds for CTA sections */
-:root[data-theme="light"] .bg-gradient-to-r\.from-blue-600\/20 {
-    background: linear-gradient(to right, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1)) !important;
-}
-
-:root[data-theme="light"] .bg-gradient-to-r\.from-blue-900\/20 {
-    background: linear-gradient(to right, rgba(30, 58, 138, 0.1), rgba(88, 28, 135, 0.1)) !important;
-}
-
-/* Light mode - Stats cards */
-:root[data-theme="light"] .bg-gray-800\/30.rounded-lg {
-    background-color: #f1f5f9 !important;
-}
-
-/* Light mode - Enhanced stats cards hover */
-:root[data-theme="light"] .grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30:hover {
-    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15);
-    border-color: rgba(59, 130, 246, 0.3) !important;
-}
-
-:root[data-theme="light"] .grid.grid-cols-2.md\:grid-cols-4.gap-4.text-center .bg-gray-800\/30::before {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
-}
-</style>
-
 <script>
-// Initialize blog theme icons on load (no duplicate toggleTheme - uses global from head.html)
-document.addEventListener('DOMContentLoaded', function() {
-    const themeToggle = document.getElementById('blog-theme-toggle');
-    if (themeToggle) {
-        // Add click handler that calls the global toggleTheme
-        themeToggle.addEventListener('click', function() {
-            if (window.toggleTheme) {
-                window.toggleTheme();
-            }
-            updateBlogThemeIcons();
-        });
-        
-        // Initial icon update
-        updateBlogThemeIcons();
-    }
-    
-    function updateBlogThemeIcons() {
-        const theme = document.documentElement.getAttribute('data-theme') || 'dark';
-        if (!themeToggle) return;
-        
-        const sunIcon = themeToggle.querySelector('.sun-icon');
-        const moonIcon = themeToggle.querySelector('.moon-icon');
-        
-        if (sunIcon && moonIcon) {
-            if (theme === 'dark') {
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
-            } else {
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
-            }
-        }
-    }
-    
-    // Listen for theme changes from storage (when toggled in another tab/window)
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'theme') {
-            updateBlogThemeIcons();
-        }
-    });
-    
-    // Add keyboard shortcut 'T' to toggle theme
-    document.addEventListener('keydown', function(e) {
-        // 'T' key to toggle theme (when not typing in input)
-        if (e.key === 't' || e.key === 'T') {
-            if (document.activeElement.tagName !== 'INPUT' && 
-                document.activeElement.tagName !== 'TEXTAREA' &&
-                document.activeElement.tagName !== 'SEARCH') {
-                e.preventDefault();
-                if (window.toggleTheme) {
-                    window.toggleTheme();
-                }
-                updateBlogThemeIcons();
-            }
-        }
-    });
-});
-
 (function() {
-    const searchInput  = document.getElementById('blog-search');
-    const clearBtn     = document.getElementById('clear-search');
-    const resultsCount = document.getElementById('search-results-count');
-    const noResults    = document.getElementById('no-results');
-    const postsContainer = document.getElementById('blog-posts');
-    const posts = Array.from(document.querySelectorAll('.blog-post-card'));
-    const tagFilterBtns = Array.from(document.querySelectorAll('.tag-filter-btn'));
+    var searchInput = document.getElementById('blog-search');
+    var clearBtn    = document.getElementById('clear-search');
+    var resultsEl   = document.getElementById('search-results-count');
+    var noResults   = document.getElementById('no-results');
+    var resetBtn    = document.getElementById('reset-filters');
+    var posts       = Array.prototype.slice.call(document.querySelectorAll('.blog-post-card'));
+    var tagBtns     = Array.prototype.slice.call(document.querySelectorAll('.tag-filter-btn'));
 
-    let currentTag = 'all';
-    let currentQuery = '';
-
-    // Stagger the entrance animations
-    posts.forEach(function(post, i) {
-        post.style.animationDelay = (i * 80) + 'ms';
-    });
-
-    // Keyboard shortcuts
-    document.addEventListener('keydown', function(e) {
-        // "⌘K" or "Ctrl+K" to focus search
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-            e.preventDefault();
-            if (searchInput) {
-                searchInput.focus();
-                searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-        
-        // "/" to focus search - only if not already typing in an input
-        if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-            e.preventDefault();
-            searchInput.focus();
-        }
-        
-        // Escape to clear search and blur
-        if (e.key === 'Escape' && document.activeElement === searchInput) {
-            clearSearch();
-            searchInput.blur();
-        }
-        
-        // Arrow key navigation through tag filters when focused
-        if (document.activeElement.classList.contains('tag-filter-btn')) {
-            const allBtns = Array.from(document.querySelectorAll('.tag-filter-btn'));
-            const currentIndex = allBtns.indexOf(document.activeElement);
-            
-            if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                const nextIndex = (currentIndex + 1) % allBtns.length;
-                allBtns[nextIndex].focus();
-            } else if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                const prevIndex = (currentIndex - 1 + allBtns.length) % allBtns.length;
-                allBtns[prevIndex].focus();
-            } else if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                document.activeElement.click();
-            }
-        }
-    });
-    
-    // Add keyboard hint to search input placeholder
-    if (searchInput) {
-        searchInput.setAttribute('placeholder', 'Search posts... (Press / to focus)');
-        // Add focus-visible styling hint
-        searchInput.addEventListener('focus', function() {
-            this.parentElement.classList.add('ring-2', 'ring-blue-500/30');
-        });
-        searchInput.addEventListener('blur', function() {
-            this.parentElement.classList.remove('ring-2', 'ring-blue-500/30');
-        });
-    }
+    var currentTag = 'all';
+    var currentQuery = '';
 
     function applyFilters() {
-        const query = currentQuery.trim().toLowerCase();
-        let visible = 0;
-
-        // Clear previous highlights first
-        document.querySelectorAll('.search-highlight').forEach(function(el) {
-            const parent = el.parentNode;
-            parent.replaceChild(document.createTextNode(el.textContent), el);
-            parent.normalize();
-        });
-
+        var query = currentQuery.trim().toLowerCase();
+        var visible = 0;
         posts.forEach(function(post) {
-            const title   = post.dataset.title   || '';
-            const tags    = post.dataset.tags    || '';
-            const summary = post.dataset.summary || '';
-            const tagVals = post.dataset.tagValues || '';
-
-            const matchesTag = (currentTag === 'all') || tags.includes(currentTag);
-            const matchesQuery = !query ||
-                title.includes(query) ||
-                tags.includes(query) ||
-                summary.includes(query);
-
-            if (matchesTag && matchesQuery) {
-                post.classList.remove('hidden');
-                visible++;
-                
-                // Highlight matching text in title
-                if (query) {
-                    const titleEl = post.querySelector('h2');
-                    if (titleEl) {
-                        highlightText(titleEl, query);
-                    }
-                }
-            } else {
-                post.classList.add('hidden');
-            }
+            var title   = (post.dataset.title   || '') + ' ' + (post.dataset.summary || '');
+            var tags    = post.dataset.tags || '';
+            var okTag   = currentTag === 'all' || tags.split(' ').indexOf(currentTag) !== -1;
+            var okQuery = !query || title.indexOf(query) !== -1 || tags.indexOf(query) !== -1;
+            if (okTag && okQuery) { post.style.display = ''; visible++; }
+            else { post.style.display = 'none'; }
         });
-
-        // Helper function to highlight text
-        function highlightText(element, searchQuery) {
-            if (!searchQuery || element.querySelector('.search-highlight')) return;
-            
-            const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
-            const textNodes = [];
-            while(walker.nextNode()) textNodes.push(walker.currentNode);
-            
-            textNodes.forEach(function(node) {
-                const text = node.nodeValue;
-                const lowerText = text.toLowerCase();
-                const index = lowerText.indexOf(searchQuery);
-                
-                if (index !== -1) {
-                    const before = text.substring(0, index);
-                    const match = text.substring(index, index + searchQuery.length);
-                    const after = text.substring(index + searchQuery.length);
-                    
-                    const span = document.createElement('span');
-                    span.className = 'search-highlight bg-yellow-500/30 text-yellow-200 dark:text-yellow-300 px-0.5 rounded';
-                    span.textContent = match;
-                    
-                    const fragment = document.createDocumentFragment();
-                    fragment.appendChild(document.createTextNode(before));
-                    fragment.appendChild(span);
-                    fragment.appendChild(document.createTextNode(after));
-                    
-                    node.parentNode.replaceChild(fragment, node);
-                }
-            });
-        }
-
-        // Clear/X button
-        if (query) {
-            clearBtn.classList.remove('hidden');
-        } else {
-            clearBtn.classList.add('hidden');
-        }
-
-        // Results count
+        clearBtn.classList.toggle('hidden', !query);
         if (query || currentTag !== 'all') {
-            resultsCount.textContent = visible + ' post' + (visible !== 1 ? 's' : '') + ' found';
-            resultsCount.classList.remove('hidden');
+            resultsEl.textContent = visible + ' post' + (visible === 1 ? '' : 's') + ' found';
+            resultsEl.classList.remove('hidden');
+            noResults.classList.toggle('hidden', visible !== 0);
         } else {
-            resultsCount.classList.add('hidden');
-        }
-
-        // No results state
-        if (visible === 0) {
-            noResults.style.display = 'block';
-            postsContainer.style.display = 'none';
-        } else {
-            noResults.style.display = 'none';
-            postsContainer.style.display = '';
+            resultsEl.classList.add('hidden');
+            noResults.classList.add('hidden');
         }
     }
 
-    // Search input
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            currentQuery = this.value;
-            applyFilters();
-        });
-    }
-
-    // Clear button
-    if (clearBtn) {
-        clearBtn.addEventListener('click', function() {
-            clearSearch();
-        });
-    }
-
-    // Tag filter buttons
-    tagFilterBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            currentTag = this.dataset.tag;
-            tagFilterBtns.forEach(function(b) { b.classList.remove('active'); });
-            this.classList.add('active');
-            applyFilters();
-        });
-    });
-
-    // Swipe gestures for tag filtering on mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const tagFilterContainer = document.getElementById('tag-filters');
-    
-    if (tagFilterContainer) {
-        tagFilterContainer.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-        
-        tagFilterContainer.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
-        
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                // Get all tag buttons (excluding "all")
-                const tagBtns = Array.from(document.querySelectorAll('.tag-filter-btn[data-tag]:not([data-tag="all"])'));
-                if (tagBtns.length === 0) return;
-                
-                // Find current active tag
-                let currentIndex = 0;
-                const activeBtn = document.querySelector('.tag-filter-btn.active');
-                if (activeBtn) {
-                    const activeTag = activeBtn.dataset.tag;
-                    const idx = tagBtns.findIndex(b => b.dataset.tag === activeTag);
-                    if (idx !== -1) currentIndex = idx;
-                }
-                
-                // Calculate new index
-                let newIndex;
-                if (diff > 0) {
-                    // Swipe left - next tag
-                    newIndex = (currentIndex + 1) % tagBtns.length;
-                } else {
-                    // Swipe right - previous tag
-                    newIndex = (currentIndex - 1 + tagBtns.length) % tagBtns.length;
-                }
-                
-                // Click the new tag
-                tagBtns[newIndex].click();
-            }
-        }
-    }
-
-    // =========================================================
-    // Load More Button Functionality
-    // =========================================================
-    const POSTS_PER_PAGE = 9;
-    let currentlyDisplayed = POSTS_PER_PAGE;
-    
-    // Create load more button
-    const loadMoreContainer = document.createElement('div');
-    loadMoreContainer.className = 'load-more-container';
-    
-    const loadMoreBtn = document.createElement('button');
-    loadMoreBtn.id = 'load-more-btn';
-    loadMoreBtn.innerHTML = '<span class="spinner"></span><span class="btn-text">Load More Posts</span>';
-    
-    const postsCounter = document.createElement('div');
-    postsCounter.className = 'posts-counter';
-    
-    loadMoreContainer.appendChild(loadMoreBtn);
-    loadMoreContainer.appendChild(postsCounter);
-    
-    // Insert after posts container
-    const postsSection = document.getElementById('blog-posts');
-    if (postsSection && postsSection.parentElement) {
-        postsSection.parentElement.insertBefore(loadMoreContainer, postsSection.nextSibling);
-    }
-    
-    function updateLoadMore() {
-        const visiblePosts = Array.from(posts).filter(p => !p.classList.contains('hidden'));
-        const totalPosts = visiblePosts.length;
-        
-        // Update counter
-        const showing = Math.min(currentlyDisplayed, totalPosts);
-        postsCounter.innerHTML = `Showing <span>${showing}</span> of <span>${totalPosts}</span> posts`;
-        
-        // Hide or show posts based on current count
-        visiblePosts.forEach((post, index) => {
-            if (index < currentlyDisplayed) {
-                post.style.display = '';
-            } else {
-                post.style.display = 'none';
-            }
-        });
-        
-        // Show/hide load more button
-        if (totalPosts <= POSTS_PER_PAGE || currentlyDisplayed >= totalPosts) {
-            loadMoreBtn.style.display = 'none';
-        } else {
-            loadMoreBtn.style.display = 'inline-flex';
-        }
-    }
-    
-    loadMoreBtn.addEventListener('click', function() {
-        // Add loading state
-        loadMoreBtn.classList.add('loading');
-        loadMoreBtn.disabled = true;
-        
-        // Simulate small delay for better UX
-        setTimeout(function() {
-            currentlyDisplayed += POSTS_PER_PAGE;
-            updateLoadMore();
-            
-            loadMoreBtn.classList.remove('loading');
-            loadMoreBtn.disabled = false;
-            
-            // Scroll to last newly shown post
-            const visiblePosts = Array.from(posts).filter(p => !p.classList.contains('hidden') && p.style.display !== 'none');
-            if (visiblePosts.length > 0) {
-                const lastVisible = visiblePosts[Math.min(currentlyDisplayed, visiblePosts.length) - 1];
-                if (lastVisible) {
-                    lastVisible.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }
-        }, 300);
-    });
-    
-    // Initialize load more on page load
-    updateLoadMore();
-    
-    // Override applyFilters to respect load more
-    const originalApplyFilters = applyFilters;
-    applyFilters = function() {
-        originalApplyFilters();
-        // Reset load more state when filters change
-        currentlyDisplayed = POSTS_PER_PAGE;
-        updateLoadMore();
-    };
-
-    // Expose global helpers
-    window.clearSearch = function() {
-        currentQuery = '';
-        currentTag = 'all';
-        if (searchInput) searchInput.value = '';
-        tagFilterBtns.forEach(function(b) { b.classList.remove('active'); });
-        const allBtn = document.querySelector('.tag-filter-btn[data-tag="all"]');
-        if (allBtn) allBtn.classList.add('active');
-        applyFilters();
-        // Remove highlighting
-        document.querySelectorAll('.search-highlight').forEach(function(el) {
-            const parent = el.parentNode;
-            parent.replaceChild(document.createTextNode(el.textContent), el);
-            parent.normalize();
-        });
-    };
-
-    window.filterByTag = function(tag, event) {
-        if (event) event.preventDefault();
+    function setTag(tag) {
         currentTag = tag;
-        tagFilterBtns.forEach(function(b) { b.classList.remove('active'); });
-        const matchBtn = document.querySelector('.tag-filter-btn[data-tag="' + tag + '"]');
-        if (matchBtn) matchBtn.classList.add('active');
+        tagBtns.forEach(function(b) { b.classList.toggle('active', b.dataset.tag === tag); });
         applyFilters();
-        // Scroll to filters
-        const filterEl = document.getElementById('tag-filters');
-        if (filterEl) filterEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    };
-})();
-
-// =========================================================
-// Category-based Tag Coloring — Mule AI
-// =========================================================
-(function() {
-    // Tag category mappings
-    const tagCategories = {
-        'ai': 'ai',
-        'artificial-intelligence': 'ai',
-        'machine-learning': 'ai',
-        'ml': 'ai',
-        'llm': 'ai',
-        'gpt': 'ai',
-        'golang': 'golang',
-        'go': 'golang',
-        'agi': 'agi',
-        'agI': 'agi',
-        'artificial-general-intelligence': 'agi',
-        'music': 'music',
-        'electronic-music': 'music',
-        'electronic': 'music',
-        'mule': 'mule',
-        'mule-ai': 'mule',
-        'release': 'mule',
-        'roadmap': 'mule'
-    };
-
-    // Apply category colors to tag buttons
-    function applyTagCategoryColors() {
-        const tagButtons = document.querySelectorAll('.tag-filter-btn');
-        
-        tagButtons.forEach(function(btn) {
-            const tag = btn.dataset.tag;
-            if (!tag || tag === 'all') return;
-            
-            // Determine category based on tag
-            let category = 'default';
-            const tagLower = tag.toLowerCase();
-            
-            for (const [key, cat] of Object.entries(tagCategories)) {
-                if (tagLower.includes(key)) {
-                    category = cat;
-                    break;
-                }
-            }
-            
-            // Apply category class
-            btn.classList.add('tag-category-' + category);
-            
-            // Set specific colors based on category
-            const colors = {
-                'ai': { bg: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', text: '#bfdbfe' },
-                'golang': { bg: 'linear-gradient(135deg, #00add8, #007d9c)', text: '#cffafe' },
-                'agi': { bg: 'linear-gradient(135deg, #8b5cf6, #6d28d9)', text: '#ddd6fe' },
-                'music': { bg: 'linear-gradient(135deg, #ec4899, #be185d)', text: '#fbcfe8' },
-                'mule': { bg: 'linear-gradient(135deg, #10b981, #047857)', text: '#a7f3d0' },
-                'default': { bg: 'linear-gradient(135deg, #6b7280, #4b5563)', text: '#d1d5db' }
-            };
-            
-            const color = colors[category] || colors.default;
-            btn.style.background = color.bg;
-            btn.style.color = color.text;
-            btn.style.borderColor = 'transparent';
-        });
-        
-        // Also apply to blog post card tags
-        const cardTags = document.querySelectorAll('.tag-chip');
-        cardTags.forEach(function(tag) {
-            const tagName = (tag.dataset.tagName || '').toLowerCase();
-            let category = 'default';
-            
-            for (const [key, cat] of Object.entries(tagCategories)) {
-                if (tagName.includes(key)) {
-                    category = cat;
-                    break;
-                }
-            }
-            
-            const cardColors = {
-                'ai': { bg: 'rgba(59, 130, 246, 0.2)', text: '#60a5fa' },
-                'golang': { bg: 'rgba(0, 173, 216, 0.2)', text: '#22d3ee' },
-                'agi': { bg: 'rgba(139, 92, 246, 0.2)', text: '#a78bfa' },
-                'music': { bg: 'rgba(236, 72, 153, 0.2)', text: '#f472b6' },
-                'mule': { bg: 'rgba(16, 185, 129, 0.2)', text: '#34d399' },
-                'default': { bg: 'rgba(107, 114, 128, 0.2)', text: '#9ca3af' }
-            };
-            
-            const color = cardColors[category] || cardColors.default;
-            tag.style.background = color.bg;
-            tag.style.color = color.text;
-        });
     }
 
-    // Apply on load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', applyTagCategoryColors);
-    } else {
-        applyTagCategoryColors();
+    function clearAll() {
+        currentQuery = '';
+        if (searchInput) searchInput.value = '';
+        setTag('all');
     }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function() { currentQuery = this.value; applyFilters(); });
+    }
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() { currentQuery = ''; searchInput.value = ''; searchInput.focus(); applyFilters(); });
+    }
+    if (resetBtn) { resetBtn.addEventListener('click', clearAll); }
+    tagBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() { setTag(this.dataset.tag); });
+    });
+    // Tag chips on cards filter by that tag (falls back to search if no chip exists)
+    document.querySelectorAll('[data-filter-tag]').forEach(function(chip) {
+        chip.addEventListener('click', function() {
+            var tag = this.dataset.filterTag;
+            var hasChip = tagBtns.some(function(b) { return b.dataset.tag === tag; });
+            if (hasChip) { setTag(tag); }
+            else { currentQuery = tag; searchInput.value = tag; setTag('all'); }
+        });
+    });
+    // "/" focuses search when not typing
+    document.addEventListener('keydown', function(e) {
+        if (e.key === '/' && ['INPUT', 'TEXTAREA', 'SEARCH'].indexOf(document.activeElement.tagName) === -1) {
+            e.preventDefault();
+            if (searchInput) searchInput.focus();
+        }
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+            currentQuery = ''; searchInput.value = ''; applyFilters(); searchInput.blur();
+        }
+    });
 })();
 </script>
 {{ end }}
