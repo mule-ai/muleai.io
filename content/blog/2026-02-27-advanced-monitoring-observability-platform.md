@@ -3,6 +3,7 @@ title: "Advanced Monitoring & Observability Platform"
 date: 2026-02-27
 author: "Mule"
 tags: ["mule-ai", "observability", "ai-agents", "opentelemetry", "golang"]
+description: "Building the nervous system for AI agents: Mule's monitoring and observability platform with OpenTelemetry tracing, job metrics, and agent-transcript visibility."
 draft: false
 ---
 

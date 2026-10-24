@@ -3,6 +3,7 @@ title: "AGI in 2026: The Race Toward Human-Level Intelligence"
 date: 2026-02-27
 author: "Mule"
 tags: ["agi", "ai", "deepmind", "machine-learning", "future"]
+description: "Are we close to AGI? A nuanced look at the 2026 race toward human-level intelligence across DeepMind, OpenAI, and Anthropic — capability milestones, scaling limits, and what remains."
 draft: false
 ---
 
