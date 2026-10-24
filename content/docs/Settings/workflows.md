@@ -223,15 +223,19 @@ curl "http://localhost:8140/api/v1/jobs?page=1&page_size=10&status=running"
     {
       "id": "job-uuid",
       "workflow_id": "workflow-uuid",
+      "workflow_name": "Code Review",
       "status": "completed",
       "working_directory": "/path/to/repo",
+      "input_data": {},
+      "output_data": {},
       "created_at": "2026-03-21T10:00:00Z",
+      "started_at": "2026-03-21T10:00:05Z",
       "completed_at": "2026-03-21T10:05:00Z"
     }
   ],
-  "total_count": 50,
   "page": 1,
   "page_size": 20,
+  "total_count": 50,
   "total_pages": 3
 }
 ```
@@ -265,6 +269,81 @@ WebSocket events include:
 | `completed` | Job finished successfully |
 | `failed` | Job encountered an error |
 | `cancelled` | Job was manually cancelled |
+
+### Get a Job
+
+Retrieve a specific job by ID:
+
+```bash
+curl http://localhost:8140/api/v1/jobs/{job_id}
+```
+
+Response includes enriched workflow and WASM module names:
+
+```json
+{
+  "id": "job-uuid",
+  "workflow_id": "workflow-uuid",
+  "workflow_name": "Code Review",
+  "status": "completed",
+  "working_directory": "/path/to/repo",
+  "input_data": {},
+  "output_data": {
+    "prompt": "Final output here"
+  },
+  "created_at": "2026-03-21T10:00:00Z",
+  "started_at": "2026-03-21T10:00:05Z",
+  "completed_at": "2026-03-21T10:05:00Z"
+}
+```
+
+### Get Job Steps
+
+View individual step executions for a job:
+
+```bash
+curl http://localhost:8140/api/v1/jobs/{job_id}/steps
+```
+
+Response:
+
+```json
+{
+  "job_steps": [
+    {
+      "id": "job-step-uuid",
+      "job_id": "job-uuid",
+      "workflow_step_id": "workflow-step-uuid",
+      "agent_name": "Review Agent",
+      "step_order": 1,
+      "status": "completed",
+      "input_data": {},
+      "output_data": {
+        "generatedText": "Step output here"
+      },
+      "started_at": "2026-03-21T10:00:10Z",
+      "completed_at": "2026-03-21T10:02:00Z"
+    }
+  ]
+}
+```
+
+### Cancel a Job
+
+Cancel a running or queued job:
+
+```bash
+curl -X DELETE http://localhost:8140/api/v1/jobs/{job_id}
+```
+
+Response:
+
+```json
+{
+  "message": "Job cancelled successfully",
+  "id": "job-uuid"
+}
+```
 
 ### Job Steps
 

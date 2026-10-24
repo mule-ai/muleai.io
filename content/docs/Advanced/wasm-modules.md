@@ -44,14 +44,14 @@ func main() {
     decoder := json.NewDecoder(os.Stdin)
     var input Input
     decoder.Decode(&input)
-    
+
     // Process input...
-    
+
     output := Output{
         Result:  "processed: " + input.Prompt,
         Success: true,
     }
-    
+
     encoder := json.NewEncoder(os.Stdout)
     encoder.Encode(output)
 }
@@ -198,7 +198,7 @@ type Output struct {
 func main() {
     var input Input
     json.NewDecoder(os.Stdin).Decode(&input)
-    
+
     var result string
     switch input.Transform {
     case "uppercase":
@@ -210,7 +210,7 @@ func main() {
     default:
         result = input.Text
     }
-    
+
     json.NewEncoder(os.Stdout).Encode(Output{
         Result:  result,
         Success: true,
@@ -238,13 +238,19 @@ Mule includes several example WASM modules in `examples/wasm/`:
 | `pirate-transform` | Transform text to pirate speak |
 | `jq-filter` | Apply jq filters to JSON data |
 
+### Validation & HTTP
+
+| Module | Description |
+|--------|-------------|
+| `validation-module` | Run validation commands with retry logic |
+| `templated-http-request` | HTTP requests with template variable substitution |
+
 ### HTTP Operations
 
 | Module | Description |
 |--------|-------------|
 | `http-request` | Make basic HTTP GET/POST requests |
 | `http-request-with-headers` | HTTP requests with custom headers |
-| `templated-http-request` | HTTP requests with template variable substitution |
 | `post-to-mdserve` | Post content to mdserve for markdown rendering |
 
 ### GitHub Integration
@@ -254,7 +260,6 @@ Mule includes several example WASM modules in `examples/wasm/`:
 | `github-issues` | Fetch and filter GitHub issues |
 | `issues-to-markdown` | Convert issues to formatted Markdown |
 | `github-comment` | Post comments to GitHub issues |
-| `create-pull-request` | Create GitHub pull requests |
 | `git-branch-push` | Push git branches to remote |
 | `git-worktree` | Manage git worktrees for parallel development |
 | `issue-state-tracker` | Track and update issue states |
@@ -272,12 +277,7 @@ Mule includes several example WASM modules in `examples/wasm/`:
 | `working-dir-demo` | Demonstrate working directory management |
 | `worktree-name-generator` | Generate unique worktree names |
 | `prompt-sender` | Send prompts to agents and retrieve responses |
-
-### Validation
-
-| Module | Description |
-|--------|-------------|
-| `validation-module` | Run validation commands with retry logic |
+| `create-pull-request` | Create GitHub pull requests (for workflow automation) |
 
 ## Using WASM Modules in Workflows
 
@@ -403,7 +403,7 @@ func main() {
         outputError(fmt.Errorf("failed to decode input: %w", err))
         return
     }
-    
+
     if input.Text == "" {
         outputError(fmt.Errorf("text field is required"))
         return
@@ -557,10 +557,10 @@ type OutputData struct {
 func main() {
     var input InputData
     json.NewDecoder(os.Stdin).Decode(&input)
-    
+
     // Use configuration values for API call
     result := callAPI(input.Prompt, input.APIKey, input.BaseURL, input.Timeout)
-    
+
     json.NewEncoder(os.Stdout).Encode(OutputData{
         Result:  result,
         Success: true,
@@ -585,4 +585,4 @@ func callAPI(prompt, apiKey, baseURL string, timeout int) string {
 
 - Explore the [WASM examples](https://github.com/mule-ai/mule/tree/main/examples/wasm) in the repository
 - Learn about [workflows](/docs/Settings/workflows/) to integrate WASM modules
-- Check out [validation modules](/docs/Advanced/validation/) for testing workflows
+- Check out [validation modules](/docs/Advanced/validation) for testing workflows

@@ -117,10 +117,14 @@ Response:
 {
   "id": "job-uuid",
   "workflow_id": "workflow-uuid",
-  "status": "in_progress",
+  "workflow_name": "build-and-deploy",
+  "status": "running",
   "working_directory": "/tmp/mule-jobs/build-and-deploy-abc123",
+  "input_data": {
+    "prompt": "Your input data here"
+  },
   "created_at": "2026-03-31T10:00:00Z",
-  "updated_at": "2026-03-31T10:01:30Z"
+  "started_at": "2026-03-31T10:00:05Z"
 }
 ```
 
@@ -129,7 +133,7 @@ Response:
 | Status | Description |
 |--------|-------------|
 | `queued` | Job is waiting to be processed |
-| `in_progress` | Job is currently executing |
+| `running` | Job is currently executing |
 | `completed` | Job finished successfully |
 | `failed` | Job failed with an error |
 | `cancelled` | Job was cancelled |
@@ -157,7 +161,7 @@ const ws = new WebSocket('ws://localhost:8140/ws');
 
 ws.onopen = () => {
   console.log('Connected to Mule WebSocket');
-  
+
   // Subscribe to job updates
   ws.send(JSON.stringify({
     type: 'subscribe',
@@ -167,7 +171,7 @@ ws.onopen = () => {
 
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);
-  
+
   switch (data.type) {
     case 'job_started':
       console.log('Job started:', data.job_id);
@@ -202,15 +206,17 @@ Response with output:
 ```json
 {
   "id": "job-uuid",
+  "workflow_id": "workflow-uuid",
+  "workflow_name": "build-and-deploy",
   "status": "completed",
-  "output": {
-    "result": "Deployment successful!",
-    "artifacts": [
-      "/builds/app-2.0.tar.gz",
-      "/builds/test-report.html"
-    ],
-    "logs": "Build completed in 45s\nDeploy completed in 12s"
+  "output_data": {
+    "prompt": "Your final output here",
+    "usage": {
+      "total_tokens": 1234
+    }
   },
+  "created_at": "2026-03-31T10:00:00Z",
+  "started_at": "2026-03-31T10:00:05Z",
   "completed_at": "2026-03-31T10:02:00Z"
 }
 ```
@@ -245,23 +251,45 @@ Response:
 ```json
 {
   "id": "job-uuid",
+  "workflow_id": "workflow-uuid",
   "status": "failed",
-  "error_message": "Build step failed: test suite had 3 failures",
-  "step_error": "step_2",
-  "retry_count": 0
+  "output_data": {
+    "error": "Build step failed: test suite had 3 failures"
+  },
+  "created_at": "2026-03-31T10:00:00Z",
+  "started_at": "2026-03-31T10:00:05Z",
+  "completed_at": "2026-03-31T10:01:00Z"
 }
 ```
 
-### Retry Failed Jobs
+### View Job Steps
 
-Retry a failed job:
+View individual step execution details:
 
 ```bash
-curl -X POST http://localhost:8140/api/v1/jobs/job-uuid/retry \
-  -H "Content-Type: application/json" \
-  -d '{
-    "resume_from_step": "step_2"
-  }'
+curl http://localhost:8140/api/v1/jobs/job-uuid/steps
+```
+
+Response:
+```json
+{
+  "job_steps": [
+    {
+      "id": "step-uuid",
+      "job_id": "job-uuid",
+      "workflow_step_id": "workflow-step-uuid",
+      "agent_name": "Build Agent",
+      "step_order": 1,
+      "status": "completed",
+      "input_data": {},
+      "output_data": {
+        "generatedText": "Build completed successfully"
+      },
+      "started_at": "2026-03-31T10:00:10Z",
+      "completed_at": "2026-03-31T10:00:45Z"
+    }
+  ]
+}
 ```
 
 ## Timeout Configuration
@@ -347,7 +375,7 @@ Implement cleanup steps for long-running workflows:
 func cleanup() {
     // Remove temporary files
     os.RemoveAll("/tmp/mule-workflow-*")
-    
+
     // Close database connections
     db.Close()
 }

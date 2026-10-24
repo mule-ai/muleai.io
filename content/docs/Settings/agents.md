@@ -19,7 +19,7 @@ When creating an agent, you configure:
 - **Name**: A descriptive identifier for the agent
 - **Description**: What this agent does (optional)
 - **AI Provider**: The configured AI provider to use
-- **Model**: The specific model from that provider
+- **Model**: The specific model from that provider (format: `provider/model-id`, e.g., `anthropic/claude-sonnet-4.5`)
 - **System Prompt**: Instructions that define the agent's behavior and capabilities
 - **Tools**: External capabilities the agent can use (filesystem, bash, HTTP, database, memory)
 - **Skills**: pi agent skills that extend the agent's capabilities
@@ -60,10 +60,15 @@ The PI Config supports several additional options:
 
 | Option | Type | Description |
 |--------|------|-------------|
-| `skills` | array | List of skill IDs to enable for this agent |
+| `skills` | array | List of pi skill identifiers to enable (e.g., `search-cli`, `actual-budget`) |
 | `tools` | array | List of tool names the agent can use (e.g., `read`, `write`, `edit`, `bash`, `grep`, `find`) |
 | `extensions` | array | List of pi extensions to enable |
 | `working_dir` | string | Default working directory for agent operations |
+
+> **Note**: There are two ways to configure skills for agents:
+> 1. **PI Config `skills` array**: Lists pi skill identifiers (e.g., `search-cli`, `actual-budget`) that the pi runtime will use
+> 2. **Database skill assignment**: Assigns Mule-managed skills stored in the database via `/api/v1/agents/{id}/skills`
+> Both can be used together - PI Config skills are used by the pi runtime, while database skills are managed by Mule.
 
 ### Available Tools
 

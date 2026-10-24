@@ -166,10 +166,10 @@ For more complex file operations, WASM modules provide additional capabilities:
 func processFiles(ctx context.Context, m api.Module) {
     // Read existing file
     readResult := filesystem.Read("src/main.go")
-    
+
     // Transform content
     newContent := transform(readResult.Content)
-    
+
     // Write updated file
     filesystem.Write("src/main.go", newContent)
 }

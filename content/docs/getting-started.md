@@ -230,7 +230,7 @@ Follow these steps to get Mule working with your first repository:
 2. Click **Add Agent**
 3. Configure:
    - **Name**: "Code Assistant" (or your preference)
-   - **Model**: Select your configured provider (e.g., gpt-4o, claude-sonnet-4.5)
+   - **Model**: Select your configured provider model (e.g., `anthropic/claude-sonnet-4.5`, `openai/gpt-4o`)
    - **System Prompt**: "You are a helpful coding assistant that reviews code and suggests improvements."
    - **PI Config**: Configure agent tools via JSON (see below)
 4. Save the agent configuration
@@ -306,7 +306,7 @@ On first startup, Mule automatically creates default configurations to help you 
 
 - **Default Provider**: An OpenRouter provider configured with endpoint `https://openrouter.ai/api/v1` and no API key. OpenRouter offers free credits for new users - sign up at [openrouter.ai](https://openrouter.ai) to get an API key for full functionality.
 - **Default Agent**: A general-purpose agent configured with:
-  - Model: `anthropic/claude-sonnet-4.5`
+  - Model: `anthropic/claude-sonnet-4.5` (provider/model format)
   - System Prompt: "You are a helpful assistant"
   - Provider: Connected to the Default provider
 - **WASM Editor Agent**: A specialized agent for creating and debugging WASM modules, configured with the same provider and model

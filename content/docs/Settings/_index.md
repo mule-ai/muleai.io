@@ -14,6 +14,7 @@ The Settings section allows you to configure all aspects of Mule's behavior. Fro
 
 | Category | Description |
 |----------|-------------|
+| **[Configuration](/docs/Settings/configuration)** | CLI flags, environment variables, and runtime configuration |
 | **[General](/docs/Settings/general)** | GitHub tokens, base URL configuration, and general preferences |
 | **[AI Providers](/docs/Settings/ai-providers)** | Configure OpenAI, Anthropic, Gemini, Ollama, and other AI providers |
 | **[Agents](/docs/Settings/agents)** | Create and configure AI agents for code generation and tasks |
@@ -27,15 +28,20 @@ The Settings section allows you to configure all aspects of Mule's behavior. Fro
 
 Settings are organized from general configuration to specific agent behaviors:
 
-1. **[General Settings](/docs/Settings/general)** - Start here to configure your GitHub token
-2. **[AI Providers](/docs/Settings/ai-providers)** - Add your AI provider credentials
-3. **[Agents](/docs/Settings/agents)** - Create agents that will process tasks
-4. **[Skills](/docs/Settings/skills)** - Assign skills to extend agent capabilities
-5. **[Tools](/docs/Settings/tools)** - Configure built-in and custom tools for agents
-6. **[Memory Configuration](/docs/Settings/memory)** - Configure semantic search and context retention
-7. **[Workflows](/docs/Settings/workflows)** - Define how agents execute tasks
+1. **[Configuration](/docs/Settings/configuration)** - CLI flags and startup configuration
+2. **[General Settings](/docs/Settings/general)** - Configure your GitHub token and base URL
+3. **[AI Providers](/docs/Settings/ai-providers)** - Add your AI provider credentials
+4. **[Agents](/docs/Settings/agents)** - Create agents that will process tasks
+5. **[Skills](/docs/Settings/skills)** - Assign skills to extend agent capabilities
+6. **[Tools](/docs/Settings/tools)** - Configure built-in and custom tools for agents
+7. **[Memory Configuration](/docs/Settings/memory)** - Configure semantic search and context retention
+8. **[Workflows](/docs/Settings/workflows)** - Define how agents execute tasks
 
 ## Quick Reference
+
+### Startup Configuration
+- **CLI Flags**: Use `-db` for database and `-listen` for HTTP port
+- See [Configuration](/docs/Settings/configuration) for all startup options
 
 ### Required Settings
 - **GitHub Token**: Required for repository operations

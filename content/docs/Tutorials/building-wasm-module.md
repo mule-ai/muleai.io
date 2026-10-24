@@ -142,8 +142,8 @@ func validate(input ValidationInput) ValidationResult {
 	// Check number of changes
 	if len(input.Changes) > rules.MaxChangesPerPR {
 		result.Valid = false
-		result.Errors = append(result.Errors, 
-			fmt.Sprintf("Too many changes: %d (max: %d)", 
+		result.Errors = append(result.Errors,
+			fmt.Sprintf("Too many changes: %d (max: %d)",
 				len(input.Changes), rules.MaxChangesPerPR))
 	}
 
@@ -167,7 +167,7 @@ func validate(input ValidationInput) ValidationResult {
 		}
 
 		// Check for test files
-		if strings.HasSuffix(change.Path, "_test.go") || 
+		if strings.HasSuffix(change.Path, "_test.go") ||
 		   strings.Contains(change.Path, "test/") {
 			hasTests = true
 		}
@@ -181,7 +181,7 @@ func validate(input ValidationInput) ValidationResult {
 
 	// Add warnings
 	if len(input.Changes) > rules.MaxChangesPerPR/2 {
-		result.Warnings = append(result.Warnings, 
+		result.Warnings = append(result.Warnings,
 			"Consider splitting large PRs for easier review")
 	}
 

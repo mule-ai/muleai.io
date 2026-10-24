@@ -242,7 +242,7 @@ metadata:
 #### Store Content
 ```yaml
 operation: "store"
-content: "The project uses Go 1.25 and PostgreSQL 15"
+content: "The project uses Go 1.25.4 and PostgreSQL 16"
 metadata:
   project: "mule"
   category: "configuration"
@@ -304,7 +304,7 @@ func (t *MyTool) Execute(ctx context.Context, params map[string]interface{}) (in
     if !ok {
         return nil, fmt.Errorf("input parameter is required")
     }
-    
+
     // Process and return result
     return map[string]interface{}{
         "result":  fmt.Sprintf("processed: %s", input),

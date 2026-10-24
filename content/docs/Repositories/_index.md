@@ -65,7 +65,7 @@ Here's a simple workflow that fetches GitHub issues and creates a pull request:
       "input": "Generate code based on the issues"
     },
     {
-      "type": "wasm_module", 
+      "type": "wasm_module",
       "wasm_module_id": "create-pull-request",
       "config": { "owner": "owner", "repo": "repo" }
     }

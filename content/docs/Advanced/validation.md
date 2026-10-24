@@ -275,7 +275,7 @@ A custom WASM module could:
 ```go
 func lintGoCode(ctx context.Context, input map[string]interface{}) (map[string]interface{}, error) {
     workingDir, _ := input["working_directory"].(string)
-    
+
     // Run golangci-lint
     result, err := runCommand("golangci-lint run ./...", workingDir)
     if err != nil {
@@ -284,7 +284,7 @@ func lintGoCode(ctx context.Context, input map[string]interface{}) (map[string]i
             "errors":  result,
         }, nil
     }
-    
+
     return map[string]interface{}{
         "success": true,
         "output":  result,

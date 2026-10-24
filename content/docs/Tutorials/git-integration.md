@@ -420,7 +420,7 @@ docs-789-api-reference
 
 **Error**: Git operations fail due to authentication issues.
 
-**Solution**: 
+**Solution**:
 1. Verify the token is valid and has appropriate permissions
 2. Ensure the token is correctly passed to the WASM module
 3. Check that the token has repo scope for private repositories

@@ -72,7 +72,7 @@ func changeDirectory(path string) error {
     pathBytes := []byte(path)
     pathPtr := uint32(uintptr(unsafe.Pointer(&pathBytes[0])))
     pathSize := uint32(len(pathBytes))
-    
+
     result := set_working_directory(pathPtr, pathSize)
     if result != 0 {
         return fmt.Errorf("failed to change directory: error code %d", result)

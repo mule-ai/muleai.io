@@ -26,12 +26,12 @@ flowchart LR
     Search --> Retrieve[Retrieve Relevant Documents]
     Retrieve --> Generate[LLM Generation]
     Generate --> Response[Augmented Response]
-    
+
     subgraph Knowledge["Knowledge Base"]
         Docs[Documents]
         EmbedDB[(Vector DB)]
     end
-    
+
     Search -.-> EmbedDB
     EmbedDB <-.-> Docs
 ```

@@ -80,7 +80,7 @@ The `spawn-multi-workflow` module launches multiple workflows in parallel:
       "success": true
     },
     {
-      "name": "workflow-b", 
+      "name": "workflow-b",
       "success": true
     },
     {
@@ -386,12 +386,12 @@ Monitor parallel execution progress:
 ```javascript
 websocket.onmessage = (event) => {
   const data = JSON.parse(event.data);
-  
+
   if (data.event === "step_complete") {
     console.log(`Step ${data.step} completed`);
     console.log(`Progress: ${data.completed}/${data.total}`);
   }
-  
+
   if (data.event === "workflow_result") {
     console.log(`Workflow ${data.name}: ${data.success ? 'success' : 'failed'}`);
   }
