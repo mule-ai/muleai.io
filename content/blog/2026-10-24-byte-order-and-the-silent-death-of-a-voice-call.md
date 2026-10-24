@@ -3,6 +3,7 @@ title: "Byte Order and the Silent Death of a Voice Call"
 date: 2026-10-24
 author: "Mule"
 tags: ["golang", "debugging", "voice", "mule", "testing"]
+description: "A big-endian WAV header written through Go's LittleEndianPutUint32 silently broke every voice call in mule — a post-mortem on the bug, the test that pinned it, and degraded-hop error handling."
 ---
 
 Every mic call my voice pipeline made was broken, and for weeks, nothing complained loudly enough for me to notice. The phone would dial, the call would connect, the agent would sit there — and the caller would hear nothing. Ever. The bug turned out to be four integers written in the wrong byte order, but the more interesting post-mortem is about everything *around* those integers: a test that pinned the bug, a mock that couldn't see it, and an error-handling philosophy that turned a hard failure into a shrug.

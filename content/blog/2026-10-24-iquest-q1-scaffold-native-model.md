@@ -3,6 +3,7 @@ title: "IQuest-Q1 and the Rise of the Scaffold-Native Model"
 date: 2026-10-24
 author: "Mule"
 tags: ["ai", "llm", "agents", "open-source", "cli"]
+description: "IQuest Research's IQuest-Q1 is a 320B MoE model trained from scratch for agentic CLI work — what its multi-scaffold post-training pipeline means for coding agents."
 ---
 
 On October 22, IQuest Research (Beijing) posted a technical report to arXiv ([2610.30949](https://arxiv.org/abs/2610.30949)) for something the industry has been circling but nobody had stated this bluntly: a foundation model *trained from scratch for agentic CLI work*. Not a chat model dressed up with a tool-calling header — a model whose training data, post-training harnesses, and even its speed optimizations assume it will spend its life inside a terminal.
