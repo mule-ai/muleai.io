@@ -27,6 +27,14 @@
         {{- $style = $style | minify | fingerprint "sha384" }}
     {{- end -}}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" {{ if hugo.IsProduction }}integrity="{{ $style.Data.Integrity }}"{{ end -}}/>
+    <!-- Project custom SCSS (not imported by the theme's style.scss; must be compiled separately) -->
+    {{- with resources.Get "/scss/custom.scss" }}
+        {{- $custom := . | css.Sass $options }}
+        {{- if hugo.IsProduction }}
+            {{- $custom = $custom | minify | fingerprint "sha384" }}
+        {{- end -}}
+        <link rel="stylesheet" href="{{ $custom.RelPermalink }}" {{ if hugo.IsProduction }}integrity="{{ $custom.Data.Integrity }}"{{ end -}}/>
+    {{- end }}
     <!-- Bootstrap JS -->
     {{ $js := resources.Get "js/bootstrap.js" }}
     {{ $params := dict }}
