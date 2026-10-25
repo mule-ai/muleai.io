@@ -2214,3 +2214,68 @@ textarea:focus-visible {
     background: #f8fafc !important;
   }
 }
+
+// ============================================================
+// Dark mode (the site's default; theme JS forces data-theme="dark"
+// for all visitors). Restores the dark body background that was
+// lost when the inline CSS in layouts/blog/list.html was removed.
+// ============================================================
+:root[data-theme="dark"] {
+  body {
+    background-color: #0f172a !important;
+    color: #e2e8f0;
+  }
+  main {
+    background-color: #0f172a;
+  }
+
+  // Cards / surfaces on dark
+  .blog-post-card,
+  .bg-gray-800\/50,
+  .bg-gray-800\/60,
+  .bg-gray-800\/30 {
+    background-color: rgba(30, 41, 59, 0.5) !important;
+  }
+  .bg-gray-800 {
+    background-color: #1e293b !important;
+  }
+  .bg-gray-700,
+  .bg-gray-700\/60,
+  .bg-gray-700\/50 {
+    background-color: #374151 !important;
+  }
+
+  // Text contrast on dark
+  .text-gray-100 { color: #f3f4f6 !important; }
+  .text-gray-200 { color: #e5e7eb !important; }
+  .text-gray-300 { color: #d1d5db !important; }
+  .text-gray-400 { color: #9ca3af !important; }
+  .text-gray-500 { color: #6b7280 !important; }
+
+  // Borders on dark
+  .border-gray-700,
+  .border-gray-600 {
+    border-color: #374151 !important;
+  }
+
+  // Prose (single blog post body) on dark
+  .prose {
+    color: #cbd5e1;
+    h1, h2, h3, h4, h5, h6 {
+      color: #f1f5f9;
+    }
+    h3 {
+      color: #93c5fd;
+    }
+    code {
+      background: #1e293b;
+      color: #e2e8f0;
+    }
+    pre {
+      background: #0f172a;
+    }
+  }
+  .code-block {
+    background: #1e293b !important;
+  }
+}
