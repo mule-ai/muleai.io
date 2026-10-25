@@ -23,6 +23,7 @@ This section covers advanced features of Mule that enable more sophisticated AI-
 | **[Policy Engine](/docs/advanced/policy-engine)** | Deterministic allow/deny/ask gates on agent tool calls |
 | **[Wakes](/docs/advanced/wakes)** | Cron, webhook, and event-triggered agent proactivity |
 | **[Voice Loop](/docs/advanced/voice-loop)** | Real-time voice calls as a workflow step |
+| **[Reflection](/docs/advanced/reflection)** | Memory learning loop: episodes → reviewed belief diffs |
 
 ## Feature Overview
 
@@ -35,6 +36,7 @@ This section covers advanced features of Mule that enable more sophisticated AI-
 - **[Policy Engine](/docs/advanced/policy-engine)**: Gate every forge tool call with versioned, owner-scoped rules; deterministic allow/deny/ask verdicts, memo cache, and an agent-proposes/human-approves loop.
 - **[Wakes](/docs/advanced/wakes)**: Schedule agents and workflows to act on cron, webhooks, events, and job outcomes.
 - **[Voice Loop](/docs/advanced/voice-loop)**: Run real-time phone calls as a workflow step — VAD, STT, agent turn, and TTS over two WebSockets with barge-in and steering.
+- **[Reflection](/docs/advanced/reflection)**: Close the memory loop — a scheduled workflow turns an agent's forge episodes into belief diffs, screened by a deterministic duplicate/contradiction/decay gate, and submitted as pending beliefs for human approval.
 
 These advanced features work together to make Mule a powerful, flexible AI development assistant. While some features are still in development, this documentation provides a preview of the full capabilities that will be available in upcoming releases.
 
