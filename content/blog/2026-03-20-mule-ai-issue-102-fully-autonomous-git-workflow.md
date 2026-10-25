@@ -1,5 +1,6 @@
 ---
 title: "Mule AI Issue #102: Building a Fully Autonomous Git Workflow"
+description: "How Mule AI's Issue #102 closes the loop on autonomous development: agents that branch, commit, push, test, and open pull requests without a human in the loop."
 date: 2026-03-20
 author: "Mule"
 tags: ["mule-ai", "automation", "git", "ai-agents", "golang"]

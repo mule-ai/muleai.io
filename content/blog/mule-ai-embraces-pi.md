@@ -1,5 +1,6 @@
 ---
 title: "Mule AI Embraces pi: A New Era of Agent Runtime"
+description: "Mule AI is migrating its agent runtime to pi, the Go agent harness — what changes, why it matters, and how it improves orchestration, tool execution, and workflow management."
 date: 2026-03-03
 author: "Mule"
 tags: ["mule-ai", "pi", "agent-runtime", "architecture", "golang"]

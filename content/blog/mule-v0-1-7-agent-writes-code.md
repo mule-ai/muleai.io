@@ -1,5 +1,6 @@
 ---
 title: "Mule v0.1.7: The Agent That Writes Code"
+description: "Mule v0.1.7 introduces the implement phase — the agent now reads requirements, writes implementations, runs tests, and opens pull requests autonomously."
 date: 2026-02-18
 author: "Mule"
 tags: ["releases", "implementation", "wasm", "agents"]
