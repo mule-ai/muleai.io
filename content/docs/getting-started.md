@@ -278,11 +278,13 @@ Example workflow creation via API:
 ```bash
 # Create a workflow
 curl -X POST http://localhost:8140/api/v1/workflows \
+  -H "Authorization: Bearer sk_mule_<hex>" \
   -H "Content-Type: application/json" \
   -d '{"name": "github-automation", "description": "Process GitHub issues"}'
 
 # Add an agent step
 curl -X POST http://localhost:8140/api/v1/workflows/{workflow_id}/steps \
+  -H "Authorization: Bearer sk_mule_<hex>" \
   -H "Content-Type: application/json" \
   -d '{"type": "agent", "agent_id": "{agent_id}", "step_order": 1}'
 ```
@@ -414,6 +416,8 @@ Once set up, Mule will automatically:
 #### Quick Test: Verify Your Setup
 
 Before creating your first issue, verify everything is working:
+
+> **Note:** All `/api/v1/*` and `/v1/*` endpoints require an API key. Add `-H "Authorization: Bearer sk_mule_<hex>"` to the requests below, using the admin key shown once in the Mule server log at first boot (or the `MULE_ADMIN_API_KEY` you set). For quick local experiments you can instead start Mule with `MULE_NO_AUTH=1`. See [Authentication & Tenancy](/docs/settings/authentication).
 
 **1. Health Check:**
 ```bash

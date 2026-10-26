@@ -15,6 +15,7 @@ The Settings section allows you to configure all aspects of Mule's behavior. Fro
 | Category | Description |
 |----------|-------------|
 | **[Configuration](/docs/settings/configuration)** | CLI flags, environment variables, and runtime configuration |
+| **[Authentication](/docs/settings/authentication)** | API keys, admin bootstrap, dev mode, and per-user data isolation |
 | **[General](/docs/settings/general)** | GitHub tokens, base URL configuration, and general preferences |
 | **[AI Providers](/docs/settings/ai-providers)** | Configure OpenAI, Anthropic, Gemini, Ollama, and other AI providers |
 | **[Agents](/docs/settings/agents)** | Create and configure AI agents for code generation and tasks |

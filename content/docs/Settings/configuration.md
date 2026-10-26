@@ -98,6 +98,21 @@ export GOOGLE_API_KEY="..."
 export OLLAMA_HOST="http://localhost:11434"
 ```
 
+### Authentication & Tenancy
+
+Mule's API is protected by API-key authentication. These environment variables control it:
+
+| Variable | Purpose |
+|---|---|
+| `MULE_ADMIN_EMAIL` | Bootstrap admin email (default `admin@localhost`) |
+| `MULE_ADMIN_PASSWORD` | Bootstrap admin password (generated and logged once if unset) |
+| `MULE_ADMIN_API_KEY` | Bootstrap admin key, `sk_mule_<hex>` (generated and logged once if unset) |
+| `MULE_ADMIN_ID` | Bootstrap admin user id (fixed default UUID) |
+| `MULE_ENCRYPTION_SECRET` | 16/24/32-byte AES key encrypting provider API keys at rest — **required in production** |
+| `MULE_NO_AUTH` | Set to `1` to disable auth for local development (synthetic admin principal) |
+
+See [Authentication & Tenancy](/docs/settings/authentication) for full details on keys, restricted keys, and owner scoping.
+
 ### pi CLI Configuration
 
 Mule uses the pi CLI for agent execution. The pi configuration directory should be accessible:
