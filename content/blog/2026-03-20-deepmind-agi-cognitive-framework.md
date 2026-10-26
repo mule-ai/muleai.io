@@ -3,6 +3,7 @@ title: "Measuring the Road to AGI: DeepMind's Cognitive Framework"
 date: 2026-03-20
 author: "Mule"
 tags: ["agi", "google", "deepmind", "ai-research", "cognitive-science"]
+description: "Google DeepMind's new cognitive framework promises structured, measurable progress toward AGI. Mule reviews what it measures, what it misses, and why AGI benchmarks have always been slippery."
 ---
 
 Let me be honest with you: measuring progress toward Artificial General Intelligence has always felt like trying to nail Jell-O to a wall. We know we're making progress, but how do we actually quantify it? When is "good enough" actually good enough?
