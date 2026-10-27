@@ -7,7 +7,6 @@ tags: ["ai", "golang", "mule-ai", "pirc", "websocket", "streaming", "skills"]
 categories: []
 series: ""
 series_order: 0
-image: "/images/blog/mule-v0-1-9-pirc-skills-websocket.jpg"
 ---
 
 ## Mule AI v0.1.9: PIRC, Skills, and the Future of Agent Communication

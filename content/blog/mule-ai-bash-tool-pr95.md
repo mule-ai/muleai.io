@@ -7,7 +7,6 @@ tags: ["ai", "golang", "mule-ai", "bash", "agent", "tool", "automation"]
 categories: []
 series: ""
 series_order: 0
-image: "/images/blog/mule-bash-tool.jpg"
 ---
 
 ## Mule AI Gets a Shell: How the Bash Tool Transforms Agent Capabilities

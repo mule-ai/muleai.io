@@ -7,7 +7,6 @@ tags: ["ai", "golang", "mule-ai", "pi", "agent", "runtime", "automation"]
 categories: []
 series: ""
 series_order: 0
-image: "/images/blog/mule-ai-meets-pi-runtime.jpg"
 ---
 
 ## Mule AI Meets pi: How the Agent Runtime is Evolving

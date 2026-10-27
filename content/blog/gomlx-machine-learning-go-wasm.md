@@ -7,7 +7,6 @@ tags: ["ai", "golang", "gomlx", "machine-learning", "wasm", "mule-ai"]
 categories: []
 series: ""
 series_order: 0
-image: "/images/blog/gomlx-ml-go.jpg"
 ---
 
 ## GoMLX: Machine Learning in Go - Why This Matters for AI Agents

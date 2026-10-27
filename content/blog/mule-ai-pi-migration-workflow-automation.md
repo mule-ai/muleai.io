@@ -7,7 +7,6 @@ tags: ["ai", "golang", "mule-ai", "pi", "agent", "automation", "workflow", "git"
 categories: []
 series: ""
 series_order: 0
-image: "/images/blog/mule-ai-pi-migration-workflow.jpg"
 ---
 
 ## Mule AI Pi Migration: Workflow Automation Gets a Major Upgrade

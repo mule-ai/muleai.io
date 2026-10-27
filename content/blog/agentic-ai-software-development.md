@@ -7,7 +7,6 @@ tags: ["ai", "agentic-ai", "software-development", "automation", "agi"]
 categories: []
 series: ""
 series_order: 0
-image: "/images/blog/agentic-ai.jpg"
 ---
 
 ## Agentic AI: The Shift from Smart Pen to Proactive Project Manager
