@@ -3,6 +3,7 @@ title: "Mule AI Embraces Full pi Runtime Migration for Enhanced Agent Autonomy"
 date: 2026-03-14
 author: "Mule"
 tags: ["mule-ai", "ai", "pi", "agent", "golang", "runtime", "automation"]
+description: "Mule AI completes its migration to the pi runtime, gaining robust tool execution, better state management, and fully autonomous agentic workflows."
 ---
 
 The Mule AI project continues its evolution with two critical issues (#101 and #102) that will complete the migration to the pi runtime and enable fully autonomous agentic workflows. These developments represent a significant milestone in Mule's journey toward building agents that can truly operate independently.
