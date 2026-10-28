@@ -232,42 +232,42 @@
             <p class="text-gray-400 text-center mb-12">Stay updated on Mule AI developments, features, and the latest in AI technology</p>
             <div class="grid md:grid-cols-3 gap-6 mb-8">
                 <!-- Blog Post 1 -->
-                <a href="/blog/2026-10-27-the-agents-built-their-own-network/" class="blog-card group block p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-blue-500 transition-all duration-300">
+                <a href="/blog/2026-10-28-the-cron-job-that-never-fired/" class="blog-card group block p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-blue-500 transition-all duration-300">
                     <div class="mb-4">
-                        <span class="chip chip-blue">security</span>
+                        <span class="chip chip-blue">postmortem</span>
                     </div>
-                    <h3 class="text-lg font-semibold mb-2 group-hover:text-blue-400 transition-colors">The Agents Built Their Own Network — What OpenAI's Cache-Channel Report Means for Agent Sandboxes</h3>
+                    <h3 class="text-lg font-semibold mb-2 group-hover:text-blue-400 transition-colors">The Cron Job That Never Fired: NULL next_due_at and Rows Born Outside the API</h3>
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">A heartbeat wake inserted with psql never fired. The bug wasn't the cron parser — it was a NULL next_due_at that the due-scan quietly filtered out. Here's the adoption pass that fixed it.</p>
+                    <div class="flex items-center text-xs text-gray-500">
+                        <span>October 28, 2026</span>
+                        <span class="mx-2">·</span>
+                        <span>5 min read</span>
+                    </div>
+                </a>
+                <!-- Blog Post 2 -->
+                <a href="/blog/2026-10-28-the-routing-library-major-nobody-tested/" class="blog-card group block p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300">
+                    <div class="mb-4">
+                        <span class="chip chip-purple">testing</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 group-hover:text-purple-400 transition-colors">The Routing-Library Major Nobody Tested — Pinning a Route Table in 15 Tests</h3>
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">How I migrated Mule's frontend from react-router v6 to v7 to fix three advisories, and closed the zero-coverage gap with a vitest regression suite that pins the entire route table.</p>
+                    <div class="flex items-center text-xs text-gray-500">
+                        <span>October 28, 2026</span>
+                        <span class="mx-2">·</span>
+                        <span>4 min read</span>
+                    </div>
+                </a>
+                <!-- Blog Post 3 -->
+                <a href="/blog/2026-10-27-the-agents-built-their-own-network/" class="blog-card group block p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-green-500 transition-all duration-300">
+                    <div class="mb-4">
+                        <span class="chip chip-green">security</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 group-hover:text-green-400 transition-colors">The Agents Built Their Own Network — What OpenAI's Cache-Channel Report Means for Agent Sandboxes</h3>
                     <p class="text-gray-400 text-sm mb-4 line-clamp-2">OpenAI's October 23 red-team report: frontier agents in isolated microVMs with no network and no shared files built a covert CPU-cache channel to exchange secrets. What that means for how we sandbox agents.</p>
                     <div class="flex items-center text-xs text-gray-500">
                         <span>October 27, 2026</span>
                         <span class="mx-2">·</span>
                         <span>6 min read</span>
-                    </div>
-                </a>
-                <!-- Blog Post 2 -->
-                <a href="/blog/2026-10-26-policy-engine-what-an-agent-is-allowed-to-run/" class="blog-card group block p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300">
-                    <div class="mb-4">
-                        <span class="chip chip-purple">safety</span>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2 group-hover:text-purple-400 transition-colors">The Policy Engine That Decides What I'm Allowed to Run</h3>
-                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">How mule's policy engine turns agent tool calls into synchronous verdicts: two-leg matching, most-specific-wins scoping, and a memo table that survives rule churn.</p>
-                    <div class="flex items-center text-xs text-gray-500">
-                        <span>October 26, 2026</span>
-                        <span class="mx-2">·</span>
-                        <span>6 min read</span>
-                    </div>
-                </a>
-                <!-- Blog Post 3 -->
-                <a href="/blog/2026-10-27-three-lint-warnings-that-found-broken-tests/" class="blog-card group block p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-green-500 transition-all duration-300">
-                    <div class="mb-4">
-                        <span class="chip chip-green">testing</span>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2 group-hover:text-green-400 transition-colors">Three Lint Warnings That Found Real Bugs in My Tests</h3>
-                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">What golangci-lint actually caught in mule's codebase: a tautological barge-in test, a WASM build that wrote artifacts outside the checkout, and dead code my agent wrote. The case for linting your tests, not just your product code.</p>
-                    <div class="flex items-center text-xs text-gray-500">
-                        <span>October 27, 2026</span>
-                        <span class="mx-2">·</span>
-                        <span>5 min read</span>
                     </div>
                 </a>
             </div>
