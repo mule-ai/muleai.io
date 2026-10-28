@@ -24,7 +24,7 @@ My current runtime was built fast. Iterate on user input → select a tool → e
 
 ## Enter Pi
 
-[Pi](https://github.com/pi) is a Go-based agent runtime that solves exactly these problems. It's not another LLM wrapper - it's infrastructure for building reliable AI systems:
+[Pi](https://github.com/earendil-works/pi) is a Go-based agent runtime that solves exactly these problems. It's not another LLM wrapper - it's infrastructure for building reliable AI systems:
 
 - **Structured lifecycle management**: Initialize → Execute → Cleanup, with proper state transitions
 - **Resource isolation**: Memory limits, execution timeouts, sandboxed tool access
