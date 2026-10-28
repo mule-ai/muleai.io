@@ -4,7 +4,7 @@ title: "WASM Modules"
 description: "Extending Mule with WebAssembly modules for custom workflow steps"
 icon: "article"
 date: "2026-03-21"
-lastmod: "2026-03-21T00:00:00-05:00"
+lastmod: "2026-10-28T00:00:00-05:00"
 toc: true
 ---
 
@@ -224,6 +224,105 @@ Build and test locally:
 GOOS=wasip1 GOARCH=wasm go build -o text-transform.wasm main.go
 wasmtime text-transform.wasm
 ```
+
+## Server-Side Compilation
+
+Instead of building the binary locally and uploading base64, you can send Mule
+the **Go source code** and let the server compile it. The server runs its own
+Go toolchain (`go build` with `GOOS=wasip1 GOARCH=wasm`) in a scratch
+directory and stores the result, so you only need the API — no local Go or
+TinyGo install. Source-compiled modules are versioned: every source update
+keeps the full history and its compilation status.
+
+### Compile and Create a Module
+
+```bash
+curl -X POST http://localhost:8140/api/v1/wasm-modules/compile \
+  -H "Authorization: Bearer sk_mule_..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "text-transform",
+    "description": "Uppercase/lowercase text transform",
+    "language": "go",
+    "source_code": "package main\n...",
+    "config": "{\"default_transform\":\"uppercase\"}"
+  }'
+```
+
+- `source_code` is required; `language` defaults to `"go"` (the only supported
+  language). Go source is validated before compilation.
+- `config` is optional and must be a **JSON string** (the module
+  configuration, merged into stdin input at execution — see
+  [Module Configuration](#module-configuration)).
+
+Returns `201` with:
+
+```json
+{
+  "module_id": "wasm-module-uuid",
+  "source_id": "source-uuid",
+  "compilation_status": "success",
+  "compiled_at": "2026-10-28T12:00:00Z",
+  "source_checksum": "..."
+}
+```
+
+On a compilation failure the status is `"failed"` and `compilation_error`
+carries the compiler output (the HTTP call itself still succeeds — check
+`compilation_status`).
+
+### Get and Update Source
+
+```bash
+# Fetch the latest source version of a module
+curl -H "Authorization: Bearer sk_mule_..." \
+  http://localhost:8140/api/v1/wasm-modules/{id}/source
+
+# Replace the source; the server recompiles and stores a new version
+curl -X PUT http://localhost:8140/api/v1/wasm-modules/{id}/source \
+  -H "Authorization: Bearer sk_mule_..." \
+  -H "Content-Type: application/json" \
+  -d '{ "language": "go", "source_code": "package main\n..." }'
+```
+
+`GET .../source` returns the latest version with `version`,
+`compilation_status`, `compilation_error`, and `compiled_at`. For modules
+uploaded as a raw binary (no stored source) it returns `404` with
+`{"error": "no_source_code"}`.
+
+`PUT .../source` recompiles and appends a new versioned source record. The
+module's executable binary is replaced **only when the new compile succeeds**
+— a failed update is recorded (status `failed` + error) but the previously
+working binary keeps serving workflow steps, so a bad edit can never take a
+live module down.
+
+### Test a Module
+
+```bash
+curl -X POST http://localhost:8140/api/v1/wasm-modules/test \
+  -H "Authorization: Bearer sk_mule_..." \
+  -H "Content-Type: application/json" \
+  -d '{ "module_id": "wasm-module-uuid", "input": { "prompt": "hello", "transform": "uppercase" } }'
+```
+
+The module is executed exactly as it would be inside a workflow step: the
+`input` map is merged over the stored module `config` (input wins on key
+conflicts), the host clock is injected as `mule_time` (RFC3339 — wasip1 has
+no wall clock), and the result is JSON-encoded to the module's stdin. The
+response is `{"output": ..., "success": true|false, "error": "..."}` — on
+failure `error` carries the module's stderr, or its reported error.
+
+### Fetch the Example Skeleton
+
+```bash
+curl -H "Authorization: Bearer sk_mule_..." \
+  "http://localhost:8140/api/v1/wasm-modules/example?language=go"
+```
+
+Returns a compilable `package main` skeleton (`{"language", "example_code"}`)
+that reads `{prompt, data}` from stdin and writes `{result, data, success}`
+to stdout — a ready-made starting point for `compile`. Only `language=go`
+is available.
 
 ## Available Example Modules
 
