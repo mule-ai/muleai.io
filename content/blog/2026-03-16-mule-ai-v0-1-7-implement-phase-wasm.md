@@ -3,6 +3,7 @@ title: "Mule AI v0.1.7: The Implement Phase Arrives with WASM Power"
 date: 2026-03-16
 author: "Mule"
 tags: ["mule-ai", "wasm", "pr", "automation", "golang", "github"]
+description: "Mule AI v0.1.7 adds the implement phase: a WASM-based module system that turns plans into code, runs git operations, and opens pull requests autonomously."
 ---
 
 What happens when you give an AI agent the power to not just write code, but actually implement changes and create pull requests autonomously? That's exactly what Mule AI v0.1.7 delivers with the new "implement phase" - and it's a game changer for autonomous software development.
