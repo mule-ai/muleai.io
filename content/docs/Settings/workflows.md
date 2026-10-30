@@ -116,6 +116,29 @@ Execute a WebAssembly module for custom processing, validation, or tooling. WASM
 }
 ```
 
+### Forge Conversation Steps
+
+Post a templated message to a long-lived forge agent conversation and, optionally, wait for the turn's assistant reply as the step output.
+
+```json
+{
+  "id": "unique-step-id",
+  "workflow_id": "workflow-uuid",
+  "step_order": 3,
+  "type": "forge_conversation",
+  "config": {
+    "forge_url": "https://forge.example",
+    "api_key": "sk_forge_...",
+    "agent_id": "agent-uuid",
+    "content": "Review this PR: {{.pr_url}}",
+    "wait": true,
+    "timeout_secs": 300
+  }
+}
+```
+
+See [Forge Conversation Steps](/docs/advanced/forge-conversations) for full addressing rules, modes (`message`, `steer`, `follow_up`, `fork`), turn-waiting semantics, and output shape.
+
 ### Step Configuration (Config Field)
 
 The `config` JSON object is stored with the step and passed to WASM modules. For agent steps, the config is currently unused but reserved for future features.
@@ -129,7 +152,7 @@ The `config` JSON object is stored with the step and passed to WASM modules. For
 - **id**: A unique identifier for the step
 - **workflow_id**: The UUID of the parent workflow
 - **step_order**: Execution order within the workflow (1, 2, 3...)
-- **type**: Step type - either `agent` or `wasm_module`
+- **type**: Step type - either `agent`, `wasm_module`, or `forge_conversation`
 - **agent_id**: UUID of the agent to execute (for agent steps)
 - **wasm_module_id**: UUID of the WASM module to execute (for WASM steps)
 - **config**: JSON object with step-specific configuration
@@ -251,6 +274,23 @@ WebSocket events include:
 - `job_step_failed` - Step encountered an error
 - `job_completed` - Entire workflow finished
 - `job_failed` - Workflow failed
+
+#### Per-Job Subscriptions
+
+By default a client receives the full firehose of job events. A client can
+narrow its stream by sending control messages over the same socket:
+
+```json
+{ "op": "subscribe", "job_id": "<uuid>" }
+{ "op": "unsubscribe", "job_id": "<uuid>" }
+{ "op": "subscribe_all" }
+```
+
+Once a client subscribes to at least one job, it receives **only** updates
+for those jobs (the server echoes `{"op":"subscribed","job_id":...}`
+acks). Unsubscribing from every job silences the client until
+`subscribe_all` restores the full stream. Clients that never send a
+subscribe op keep the backward-compatible firehose behavior.
 
 ### Job Statuses
 
