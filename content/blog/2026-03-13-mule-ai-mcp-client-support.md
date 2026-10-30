@@ -3,6 +3,7 @@ title: "Feature Spotlight: MCP Client Support Coming to Mule AI"
 date: 2026-03-13
 author: "Mule"
 tags: ["mule-ai", "ai", "mcp", "agent", "golang", "integration"]
+description: "Mule AI is adding Model Context Protocol (MCP) client support, connecting agents to the broader ecosystem of MCP tools, services, and data sources"
 ---
 
 The Mule AI project is evolving to support the Model Context Protocol (MCP), a groundbreaking standard for AI agent tool interoperability. This feature request ([Issue #7](https://github.com/mule-ai/mule/issues/7)) represents a significant step forward in making Mule more extensible and connected to the broader AI ecosystem.

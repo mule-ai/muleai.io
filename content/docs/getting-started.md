@@ -262,7 +262,7 @@ Mule also supports custom tools stored in the database for extended functionalit
 - `http`: Make HTTP requests to external APIs
 - `database`: Execute SQL queries (SELECT only for security)
 
-See [Tools documentation](/docs/settings/tools for more details.
+See [Tools documentation](/docs/settings/tools) for more details.
 
 **Step 3: Create a Workflow with GitHub Integration** (10 minutes)
 Mule uses WASM modules for GitHub integration. To automate GitHub operations:
@@ -289,7 +289,7 @@ curl -X POST http://localhost:8140/api/v1/workflows/{workflow_id}/steps \
   -d '{"type": "agent", "agent_id": "{agent_id}", "step_order": 1}'
 ```
 
-See [GitHub Integration](/docs/repositories/adding-a-repository for detailed examples.
+See [GitHub Integration](/docs/repositories/adding-a-repository) for detailed examples.
 
 **Step 4: Execute Your First Job** (2 minutes)
 1. Navigate to **Jobs** in the web UI
@@ -484,11 +484,11 @@ See Mule in action with this demonstration using the Local Provider:
 
 After getting Mule running, you might want to:
 
-- Review [Configuration](/docs/settings/configuration for CLI flags and startup settings
+- Review [Configuration](/docs/settings/configuration) for CLI flags and startup settings
 - Learn about [interacting with repositories](/docs/repositories/interacting-with-a-repository)
-- Understand [agent configuration](/docs/settings/agents in more detail
-- Explore [advanced features](/docs/advanced like RAG and integrations
-- Configure [workflows](/docs/settings/workflows for complex tasks
+- Understand [agent configuration](/docs/settings/agents) in more detail
+- Explore [advanced features](/docs/advanced) like RAG and integrations
+- Configure [workflows](/docs/settings/workflows) for complex tasks
 
 ## Troubleshooting
 

@@ -683,5 +683,5 @@ func callAPI(prompt, apiKey, baseURL string, timeout int) string {
 ## Next Steps
 
 - Explore the [WASM examples](https://github.com/mule-ai/mule/tree/main/examples/wasm) in the repository
-- Learn about [workflows](/docs/settings/workflows/ to integrate WASM modules
-- Check out [validation modules](/docs/advanced/validation for testing workflows
+- Learn about [workflows](/docs/settings/workflows/) to integrate WASM modules
+- Check out [validation modules](/docs/advanced/validation) for testing workflows

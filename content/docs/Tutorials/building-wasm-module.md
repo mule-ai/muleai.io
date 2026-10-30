@@ -369,7 +369,7 @@ func main() {
 }
 ```
 
-See the [WASM Modules documentation](/docs/advanced/wasm-modules for the full list of available host functions.
+See the [WASM Modules documentation](/docs/advanced/wasm-modules) for the full list of available host functions.
 
 ## Debugging Tips
 

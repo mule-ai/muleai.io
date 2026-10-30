@@ -462,6 +462,6 @@ curl -X POST http://localhost:8140/v1/chat/completions \
 
 ## Next Steps
 
-- Learn about [batch processing](/docs/tutorials/batch-processing for parallel execution
-- Explore [WASM modules](/docs/advanced/wasm-modules for custom step logic
-- Understand [validation](/docs/advanced/validation for quality gates
+- Learn about [batch processing](/docs/tutorials/batch-processing) for parallel execution
+- Explore [WASM modules](/docs/advanced/wasm-modules) for custom step logic
+- Understand [validation](/docs/advanced/validation) for quality gates

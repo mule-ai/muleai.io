@@ -42,7 +42,7 @@ Settings are organized from general configuration to specific agent behaviors:
 
 ### Startup Configuration
 - **CLI Flags**: Use `-db` for database and `-listen` for HTTP port
-- See [Configuration](/docs/settings/configuration for all startup options
+- See [Configuration](/docs/settings/configuration) for all startup options
 
 ### Required Settings
 - **GitHub Token**: Required for repository operations
