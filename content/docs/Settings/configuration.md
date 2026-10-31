@@ -4,7 +4,7 @@ title: "Configuration"
 description: "Configuration options for Mule including CLI flags, environment variables, and runtime settings"
 icon: "article"
 date: "2026-04-10"
-lastmod: "2026-04-10T00:00:00-05:00"
+lastmod: "2026-10-31T00:00:00-05:00"
 toc: true
 ---
 
@@ -148,47 +148,76 @@ curl http://localhost:8140/health
 
 ## Application Settings
 
-After Mule is running, configure application settings via the API:
+Application settings are stored in the database and managed through the Settings API. Settings are seeded by database migrations; the API can read and update them (there is no create endpoint — see [Available Settings](#available-settings) for the seeded keys).
 
-### General Settings
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/api/v1/settings` | List all settings |
+| `GET` | `/api/v1/settings/{key}` | Get one setting (404 if the key does not exist) |
+| `PUT` | `/api/v1/settings/{key}` | Update a setting's `value`, `description`, and `category` |
 
-```bash
-# Set GitHub token
-curl -X POST http://localhost:8140/api/v1/settings \
-  -H "Content-Type: application/json" \
-  -d '{
-    "key": "github_token",
-    "value": "ghp_..."
-  }'
+A setting object looks like:
 
-# Set base URL
-curl -X POST http://localhost:8140/api/v1/settings \
-  -H "Content-Type: application/json" \
-  -d '{
-    "key": "base_url",
-    "value": "https://muleai.io"
-  }'
+```json
+{
+  "id": "max_tool_calls",
+  "key": "max_tool_calls",
+  "value": "10",
+  "description": "Maximum number of tool calls allowed per agent execution",
+  "category": "agent"
+}
 ```
 
-### Job Settings
+### Reading Settings
 
 ```bash
-# Set job timeout (in seconds)
-curl -X POST http://localhost:8140/api/v1/settings \
+# List all settings
+curl http://localhost:8140/api/v1/settings
+
+# Get a single setting
+curl http://localhost:8140/api/v1/settings/max_tool_calls
+```
+
+### Updating Settings
+
+`PUT /api/v1/settings/{key}` requires the `key` field in the JSON body to match the URL key (a mismatch returns `400`), and the setting must already exist (unknown keys return `404`). `description` and `category` are overwritten from the body, so include them when updating:
+
+```bash
+# Set job timeout to 1 hour
+curl -X PUT http://localhost:8140/api/v1/settings/timeout_job_seconds \
   -H "Content-Type: application/json" \
   -d '{
     "key": "timeout_job_seconds",
-    "value": 3600
+    "value": "3600",
+    "description": "Maximum execution time for an entire job",
+    "category": "engine"
   }'
 
-# Set max tool calls
-curl -X POST http://localhost:8140/api/v1/settings \
+# Raise the per-execution tool call limit
+curl -X PUT http://localhost:8140/api/v1/settings/max_tool_calls \
   -H "Content-Type: application/json" \
   -d '{
     "key": "max_tool_calls",
-    "value": 100
+    "value": "100",
+    "description": "Maximum number of tool calls allowed per agent execution",
+    "category": "agent"
   }'
 ```
+
+### Available Settings
+
+Seeded by migrations:
+
+| Key | Default | Category | Description |
+|-----|---------|----------|-------------|
+| `timeout_workflow_seconds` | `300` | `engine` | Maximum execution time for a single workflow step |
+| `timeout_request_seconds` | `360` | `api` | Maximum time for HTTP requests to the API server |
+| `timeout_job_seconds` | `3600` | `engine` | Maximum execution time for an entire job |
+| `max_tool_calls` | `10` | `agent` | Maximum number of tool calls per agent execution |
+
+Values are always strings. See [General Settings](../general/) for details on the timeout keys.
+
+> **Note:** The GitHub token is **not** a database setting — repository features read it from the `GITHUB_TOKEN` environment variable. AI provider credentials are managed via the [Providers API](../ai-providers/), not settings.
 
 ## Configuration Checklist
 

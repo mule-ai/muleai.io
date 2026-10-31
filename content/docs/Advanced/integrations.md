@@ -4,7 +4,7 @@ title: "Integration Capabilities"
 description: "Extending Mule with tools, skills, and WASM modules"
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
-lastmod: "2026-04-11T00:00:00-05:00"
+lastmod: "2026-10-31T00:00:00-05:00"
 toc: true
 ---
 
@@ -49,9 +49,14 @@ Non-chat requests have configurable timeouts (default: 5 minutes). Chat completi
 To configure API timeout:
 ```bash
 # Set timeout to 10 minutes (600 seconds)
-curl -X PUT http://localhost:8140/api/v1/settings/api_timeout \
+curl -X PUT http://localhost:8140/api/v1/settings/timeout_request_seconds \
   -H "Content-Type: application/json" \
-  -d '{"value": "600"}'
+  -d '{
+    "key": "timeout_request_seconds",
+    "value": "600",
+    "description": "Maximum time for HTTP requests to the API server",
+    "category": "api"
+  }'
 ```
 
 ### Skills System

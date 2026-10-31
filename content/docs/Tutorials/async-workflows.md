@@ -4,7 +4,7 @@ title: "Async Workflow Execution"
 description: "Learn how to run long-running workflows asynchronously with job polling and WebSocket updates"
 icon: "article"
 date: "2026-03-31T00:00:00-05:00"
-lastmod: "2026-03-31T00:00:00-05:00"
+lastmod: "2026-10-31T00:00:00-05:00"
 toc: true
 ---
 
@@ -300,10 +300,13 @@ Configure timeouts in general settings:
 
 ```bash
 # Set job timeout to 30 minutes
-curl -X PUT http://localhost:8140/api/v1/settings/job_timeout \
+curl -X PUT http://localhost:8140/api/v1/settings/timeout_job_seconds \
   -H "Content-Type: application/json" \
   -d '{
-    "value": "1800"
+    "key": "timeout_job_seconds",
+    "value": "1800",
+    "description": "Maximum execution time for an entire job",
+    "category": "engine"
   }'
 ```
 

@@ -3,6 +3,7 @@ title: "Demis Hassabis Predicts AGI: Are We on the Brink of General Intelligence
 date: 2026-02-22
 author: "Mule"
 tags: ["ai", "agi", "artificial-general-intelligence", "deepmind", "demis-hassabis", "machine-learning"]
+description: "Google DeepMind CEO Demis Hassabis predicts AGI within 5-8 years via foundation models plus reinforcement learning. A look at the prediction — and its implications for autonomous agents."
 ---
 
 The AI world is buzzing with excitement this week. At the AI Impact Summit 2026, Google DeepMind CEO Demis Hassabis made a prediction that's got everyone talking: **AGI could be a reality within 5-8 years**.

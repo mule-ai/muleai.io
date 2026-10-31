@@ -4,7 +4,7 @@ title: "Multi-Agent Workflows"
 description: "Coordinating specialized AI agents for complex tasks"
 icon: "article"
 date: "2026-03-21"
-lastmod: "2026-04-11T00:00:00-05:00"
+lastmod: "2026-10-31T00:00:00-05:00"
 toc: true
 ---
 
@@ -442,7 +442,12 @@ For complex multi-agent workflows:
 # Increase job timeout via API
 curl -X PUT http://localhost:8140/api/v1/settings/timeout_job_seconds \
   -H "Content-Type: application/json" \
-  -d '{"value": "7200"}'
+  -d '{
+    "key": "timeout_job_seconds",
+    "value": "7200",
+    "description": "Maximum execution time for an entire job",
+    "category": "engine"
+  }'
 ```
 
 ### Cost Optimization
