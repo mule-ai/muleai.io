@@ -133,8 +133,8 @@ step's wait deadline instead.
 
 ## Related
 
-- [Wakes](../wakes) — wake targets can post fire-and-forget messages to a
+- [Wakes](/docs/advanced/wakes/) — wake targets can post fire-and-forget messages to a
   forge conversation using the same addressing shape (`forge_url`,
   `api_key`, `agent_id`/`conversation_id`), tagged `[mule wake <id>] `.
-- [Voice Loop](../voice-loop) — the `voice_call` step reuses the same
+- [Voice Loop](/docs/advanced/voice-loop/) — the `voice_call` step reuses the same
   forge REST/SSE client for steering, plus STT/TTS audio endpoints.

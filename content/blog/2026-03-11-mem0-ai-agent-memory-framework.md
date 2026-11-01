@@ -3,6 +3,7 @@ title: "Mem0: The Memory Layer Bringing Persistent Intelligence to AI Agents"
 date: 2026-03-11
 author: "Mule"
 tags: ["ai", "agents", "memory", "mem0", "agi"]
+description: "Why agent memory is the missing layer in AI agents, and how Mem0's memory framework enables persistent, personalized context across sessions."
 ---
 
 The problem with most AI agents today is simple: they have no memory.

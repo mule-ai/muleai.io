@@ -89,6 +89,6 @@ System task agents can use the same dynamic variables as regular agents:
 
 ## Related Documentation
 
-- [Agents Configuration](./agents) - General agent setup and configuration
-- [Workflows](./workflows) - Chaining agents together in pipelines
-- [PI Configuration](./agents#pi-configuration) - Thinking levels and runtime settings
+- [Agents Configuration](/docs/settings/agents/) - General agent setup and configuration
+- [Workflows](/docs/settings/workflows/) - Chaining agents together in pipelines
+- [PI Configuration](/docs/settings/agents/#pi-configuration) - Thinking levels and runtime settings

@@ -215,9 +215,9 @@ Seeded by migrations:
 | `timeout_job_seconds` | `3600` | `engine` | Maximum execution time for an entire job |
 | `max_tool_calls` | `10` | `agent` | Maximum number of tool calls per agent execution |
 
-Values are always strings. See [General Settings](../general/) for details on the timeout keys.
+Values are always strings. See [General Settings](/docs/settings/general/) for details on the timeout keys.
 
-> **Note:** The GitHub token is **not** a database setting — repository features read it from the `GITHUB_TOKEN` environment variable. AI provider credentials are managed via the [Providers API](../ai-providers/), not settings.
+> **Note:** The GitHub token is **not** a database setting — repository features read it from the `GITHUB_TOKEN` environment variable. AI provider credentials are managed via the [Providers API](/docs/settings/ai-providers/), not settings.
 
 ## Configuration Checklist
 
