@@ -2,6 +2,7 @@
 weight: 7
 title: "Wakes"
 description: "The wake engine: cron, webhook, event, and job-triggered proactivity for agents and workflows"
+tags: ["wakes", "scheduler", "automation", "api"]
 icon: "article"
 date: "2026-10-24"
 lastmod: "2026-10-24T00:00:00-05:00"

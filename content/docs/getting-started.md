@@ -2,6 +2,7 @@
 weight: 1
 title: "Getting Started"
 description: "Getting started with Mule"
+tags: ["getting-started", "installation", "quickstart"]
 icon: "article"
 date: "2025-02-20T20:46:32-05:00"
 lastmod: "2026-04-04T00:00:00-05:00"

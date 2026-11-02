@@ -2,6 +2,7 @@
 weight: 6
 title: "Workflows"
 description: "Understanding and configuring Mule workflows"
+tags: ["workflows", "steps", "jobs", "api"]
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
 lastmod: "2026-04-11T00:00:00-05:00"
@@ -156,6 +157,34 @@ The `config` JSON object is stored with the step and passed to WASM modules. For
 - **agent_id**: UUID of the agent to execute (for agent steps)
 - **wasm_module_id**: UUID of the WASM module to execute (for WASM steps)
 - **config**: JSON object with step-specific configuration
+
+### Updating a Step
+
+Update an existing step with `PUT /api/v1/workflows/{workflow_id}/steps/{step_id}`. The request body is the full step object; `step_order`, `type`, `agent_id`, `wasm_module_id`, and `config` are all applied. Returns the updated step as JSON.
+
+```bash
+curl -X PUT http://localhost:8140/api/v1/workflows/{workflow_id}/steps/{step_id} \
+  -H "Content-Type: application/json" \
+  -d '{
+    "step_order": 2,
+    "type": "agent",
+    "agent_id": "agent-uuid",
+    "config": {"model": "gpt-4o"}
+  }'
+```
+
+The step must belong to the workflow in the path, otherwise the API responds `404 Not Found`.
+
+### Deleting a Step
+
+Remove a step with `DELETE /api/v1/workflows/{workflow_id}/steps/{step_id}`. A successful delete returns `204 No Content` with no response body; an unknown or mismatched step ID returns `404 Not Found`.
+
+```bash
+curl -X DELETE http://localhost:8140/api/v1/workflows/{workflow_id}/steps/{step_id}
+```
+
+> **Note:** Deleting a step does not renumber the remaining steps. Use the reorder
+> endpoint below to set a clean `1..n` order after deletions.
 
 ### Reordering Workflow Steps
 
