@@ -2,6 +2,7 @@
 weight: 2
 title: "Integration Capabilities"
 description: "Extending Mule with tools, skills, and WASM modules"
+tags: ["integrations", "skills", "tools", "websocket", "api"]
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
 lastmod: "2026-10-31T00:00:00-05:00"

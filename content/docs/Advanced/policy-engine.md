@@ -2,6 +2,7 @@
 weight: 8
 title: "Policy Engine"
 description: "Versioned, owner-scoped policy rules that gate every forge tool call with a deterministic allow/deny/ask verdict, a memo cache, and an agent-proposes/human-approves loop"
+tags: ["policy", "security", "agents", "api"]
 icon: "article"
 date: "2026-10-24"
 lastmod: "2026-10-24T00:00:00-05:00"

@@ -2,6 +2,7 @@
 weight: 6
 title: "WASM Modules"
 description: "Extending Mule with WebAssembly modules for custom workflow steps"
+tags: ["wasm", "workflows", "extensions"]
 icon: "article"
 date: "2026-03-21"
 lastmod: "2026-10-28T00:00:00-05:00"
