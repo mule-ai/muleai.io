@@ -2,6 +2,7 @@
 weight: 9
 title: "Voice Loop"
 description: "The full-duplex voice_call workflow step: VAD, STT, agent turn, and TTS over two WebSockets, with barge-in, steering, and graceful degradation"
+tags: ["voice", "voip", "realtime", "workflow", "stt", "tts"]
 icon: "article"
 date: "2026-10-24"
 lastmod: "2026-10-24T00:00:00-05:00"

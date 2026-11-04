@@ -2,6 +2,7 @@
 weight: 10
 title: "Reflection"
 description: "The memory reflection loop: episodes from forge become reviewed belief diffs through a mule workflow with a deterministic gate"
+tags: ["memory", "reflection", "beliefs", "episodes", "learning", "workflow"]
 icon: "article"
 date: "2026-10-25"
 lastmod: "2026-10-25T00:00:00-05:00"

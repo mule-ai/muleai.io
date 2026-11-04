@@ -2,6 +2,7 @@
 weight: 3
 title: "Retrieval-Augmented Generation (RAG)"
 description: "Using RAG patterns to enhance agent responses with external knowledge"
+tags: ["rag", "retrieval", "knowledge", "embeddings", "agents"]
 icon: "article"
 date: "2026-03-21"
 lastmod: "2026-04-04T00:00:00-05:00"
