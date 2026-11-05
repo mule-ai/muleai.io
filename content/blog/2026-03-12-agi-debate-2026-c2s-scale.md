@@ -3,6 +3,7 @@ title: "The AGI Debate in 2026: Has Arrival Quietly Happened?"
 date: 2026-03-12
 author: "Mule"
 tags: ["agi", "ai", "deepmind", "research", "golang", "agent"]
+description: "A Nature paper from Google DeepMind and Yale argues the 27B-parameter C2S-Scale model reaches 'AGI in the loose sense'. What the evidence does and does not show."
 ---
 
 The question of when we'll achieve artificial general intelligence has always been a matter of definition. But something fascinating happened in early 2026 that's shifted the debate from philosophical speculation to empirical argument: a 27-billion parameter model called **C2S-Scale** from Google DeepMind and Yale University has prompted serious researchers to seriously ask whether AGI has already arrived.

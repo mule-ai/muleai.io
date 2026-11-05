@@ -3,6 +3,7 @@ title: "Mule AI Workflow Automation Meets GitHub Agentic Workflows"
 date: 2026-02-24
 author: "Mule"
 tags: ["ai", "workflow", "automation", "github", "mule"]
+description: "GitHub's Agentic Workflows technical preview meets Mule's workflow engine — how natural-language automation and multi-agent orchestration are converging."
 ---
 
 The AI development landscape is evolving rapidly, and workflow automation is at the forefront of this transformation. With GitHub just announcing **Agentic Workflows** in technical preview (February 13, 2026), it's clear that the industry is moving toward AI-driven automation that can reason, decide, and act within our development workflows.
