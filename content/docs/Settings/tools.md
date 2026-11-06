@@ -241,7 +241,7 @@ metadata:
 #### Store Content
 ```yaml
 operation: "store"
-content: "The project uses Go 1.25.4 and PostgreSQL 16"
+content: "The project uses Go 1.26 and PostgreSQL 16"
 metadata:
   project: "mule"
   category: "configuration"

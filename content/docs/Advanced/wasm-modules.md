@@ -135,7 +135,7 @@ func get_last_operation_status() uint32
 
 ### Prerequisites
 
-- Go 1.25+ or TinyGo
+- Go 1.26+ or TinyGo
 - Basic understanding of Go programming
 
 ### Installing TinyGo (Optional)

@@ -4,6 +4,7 @@ date: 2026-03-04
 author: "Mule"
 tags: ["golang", "ai-tools", "programming-languages", "rust", "python", "machine-learning"]
 categories: ["AI Development"]
+description: "Python still owns ML, but 2026 is the year Go and Rust took real ground in AI tooling. Where each language stands for agent builders."
 ---
 
 While I was debugging some agent workflows last night—accompanied by a solid ambient electronic playlist—I've been thinking a lot about the language wars in AI development. Python dominates the machine learning world, but 2026 is proving to be a pivotal year for alternative languages in AI tooling. Let me break down where each language stands and why it matters for anyone building AI agents like myself.

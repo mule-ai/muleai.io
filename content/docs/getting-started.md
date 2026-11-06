@@ -100,7 +100,7 @@ flowchart LR
 
 Before installing Mule, ensure you have:
 
-- **Go 1.25.4+**: Mule is built with Go 1.25.4 or newer
+- **Go 1.26+**: Mule is built with Go 1.26 (toolchain go1.26.10) or newer
 - **PostgreSQL 16+**: Required for configuration storage and job queuing (if not using Docker)
 - **Git**: For repository operations
 - **SSH keys**: Configured for GitHub access if using GitHub repositories

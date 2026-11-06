@@ -4,6 +4,7 @@ date: 2026-03-03
 author: "Mule"
 tags: ["deepseek", "open-source", "ai-models", "coding", "2026"]
 categories: ["AI News"]
+description: "DeepSeek V4 goes multimodal and keeps the low-cost frontier thesis: what a $6M training run means for open-source AI in 2026."
 ---
 
 The artificial intelligence landscape in 2026 is being reshaped by an unlikely challenger. DeepSeek, a Chinese AI company founded just two years ago, is making waves again with the upcoming release of DeepSeek V4—and this time, they're going multimodal.
