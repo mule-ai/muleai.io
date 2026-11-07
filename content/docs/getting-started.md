@@ -5,7 +5,7 @@ description: "Getting started with Mule"
 tags: ["getting-started", "installation", "quickstart"]
 icon: "article"
 date: "2025-02-20T20:46:32-05:00"
-lastmod: "2026-04-04T00:00:00-05:00"
+lastmod: "2026-11-07T00:00:00-05:00"
 toc: true
 ---
 
@@ -147,9 +147,9 @@ For development or custom deployments:
 
 1. **Set up PostgreSQL database**:
 ```sql
-CREATE DATABASE mulev2;
+CREATE DATABASE mule;
 CREATE USER mule WITH PASSWORD 'mule';
-GRANT ALL PRIVILEGES ON DATABASE mulev2 TO mule;
+GRANT ALL PRIVILEGES ON DATABASE mule TO mule;
 ```
 
 2. **Clone and build**:
@@ -162,7 +162,7 @@ make build
 
 3. **Run the application**:
 ```bash
-./cmd/api/bin/mule -db "postgres://mule:mule@localhost:5432/mulev2?sslmode=disable"
+./cmd/api/bin/mule -db "postgres://mule:mule@localhost:5432/mule?sslmode=disable"
 ```
 
 ### Installing Development Dependencies
@@ -460,20 +460,17 @@ mule [options]
 ```
 
 Options:
-- `-db`: PostgreSQL connection string (default: `postgres://user:pass@localhost:5432/mulev2?sslmode=disable`)
+- `-db`: PostgreSQL connection string (default: `postgres://user:pass@localhost:5432/mule?sslmode=disable`)
 - `-listen`: HTTP listen address (default: `:8080`)
 
 ### Environment Variables
 
-Mule also supports configuration via environment variables. You can set the database connection string and listen address:
-
-```bash
-export DB_CONN_STR="postgres://user:pass@localhost:5432/mulev2?sslmode=disable"
-export LISTEN_ADDR=":8080"
-
-# Run with environment variables
-./cmd/api/bin/mule
-```
+The database connection string and listen address are configured **only** via the
+`-db` and `-listen` CLI flags — there are no environment-variable equivalents.
+Environment variables are used for authentication/bootstrap, provider API keys,
+and the forge memory-trigger lane (`MULE_*`, `ANTHROPIC_API_KEY`,
+`OPENAI_API_KEY`, `GOOGLE_API_KEY`, `FORGE_TRIGGER_*`). See
+[Configuration](/docs/settings/configuration) for the full table.
 
 ## Demo
 
@@ -529,7 +526,7 @@ docker-compose ps postgres
 **Default configurations not created**
 On first run, Mule should create default providers, agents, and workflows. If these are missing:
 1. Check the logs: `docker-compose logs mule-api`
-2. Verify the database is healthy: `docker-compose exec postgres psql -U mule -d mulev2 -c "\dt"`
+2. Verify the database is healthy: `docker-compose exec postgres psql -U mule -d mule -c "\dt"`
 3. Restart the container: `docker-compose restart mule-api`
 
 ### Configuration Issues
@@ -618,7 +615,7 @@ docker stats
 3. **Test your connections** independently:
    - AI provider: `curl` your provider's API endpoint
    - GitHub: `ssh -T git@github.com`
-   - Database: `docker-compose exec postgres psql -U mule -d mulev2`
+   - Database: `docker-compose exec postgres psql -U mule -d mule`
 4. **Review the issue label** on GitHub to confirm it matches your configuration
 
 For more help, check the logs at `~/.config/mule/mule.log` or use the Logs page in the web interface.

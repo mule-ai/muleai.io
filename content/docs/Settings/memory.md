@@ -4,7 +4,7 @@ title: "Memory Configuration"
 description: "Configure vector embedding storage for semantic search and context retention"
 icon: "article"
 date: "2026-03-28T00:00:00-05:00"
-lastmod: "2026-03-28T00:00:00-05:00"
+lastmod: "2026-11-07T00:00:00-05:00"
 toc: true
 ---
 
@@ -62,7 +62,7 @@ curl http://localhost:8140/api/v1/memory-config
 ```json
 {
   "id": "default",
-  "database_url": "postgres://mule:mule@localhost:5432/mulev2?sslmode=disable",
+  "database_url": "postgres://mule:mule@localhost:5432/mule?sslmode=disable",
   "embedding_provider": "openai",
   "embedding_model": "text-embedding-3-small",
   "embedding_dims": 1536,

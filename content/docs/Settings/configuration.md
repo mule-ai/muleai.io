@@ -4,7 +4,7 @@ title: "Configuration"
 description: "Configuration options for Mule including CLI flags, environment variables, and runtime settings"
 icon: "article"
 date: "2026-04-10"
-lastmod: "2026-10-31T00:00:00-05:00"
+lastmod: "2026-11-07T00:00:00-05:00"
 toc: true
 ---
 
@@ -19,10 +19,10 @@ Mule's API server supports the following command-line flags:
 PostgreSQL connection string for the database.
 
 ```bash
-mule-api -db "postgres://user:password@localhost:5432/mulev2?sslmode=disable"
+mule-api -db "postgres://user:password@localhost:5432/mule?sslmode=disable"
 ```
 
-**Default:** `postgres://user:pass@localhost:5432/mulev2?sslmode=disable`
+**Default:** `postgres://user:pass@localhost:5432/mule?sslmode=disable`
 
 **Format:** `postgres://user:password@host:port/database?options`
 
@@ -34,7 +34,7 @@ mule-api -db "postgres://user:password@localhost:5432/mulev2?sslmode=disable"
 
 **Example with SSL:**
 ```bash
-mule-api -db "postgres://user:pass@localhost:5432/mulev2?sslmode=require"
+mule-api -db "postgres://user:pass@localhost:5432/mule?sslmode=require"
 ```
 
 ### `-listen`
@@ -69,7 +69,7 @@ services:
     build: .
     ports:
       - "8140:8080"
-    command: ["-db", "postgres://mule:mule@postgres:5432/mulev2?sslmode=disable", "-listen", ":8080"]
+    command: ["-db", "postgres://mule:mule@postgres:5432/mule?sslmode=disable", "-listen", ":8080"]
     depends_on:
       postgres:
         condition: service_healthy
@@ -94,8 +94,10 @@ export OPENAI_API_KEY="sk-..."
 export GOOGLE_API_KEY="..."
 
 # Ollama (Local models)
-# No API key needed, but Ollama must be running locally
-export OLLAMA_HOST="http://localhost:11434"
+# No API key needed, but Ollama must be running locally. The Ollama base
+# URL is configured per-provider via the Providers API `api_base_url` field
+# (e.g. "http://localhost:11434") — Mule does not read an OLLAMA_HOST
+# environment variable. See [AI Providers](/docs/settings/ai-providers/).
 ```
 
 ### Authentication & Tenancy
@@ -110,6 +112,21 @@ Mule's API is protected by API-key authentication. These environment variables c
 | `MULE_ADMIN_ID` | Bootstrap admin user id (fixed default UUID) |
 | `MULE_ENCRYPTION_SECRET` | 16/24/32-byte AES key encrypting provider API keys at rest — **required in production** |
 | `MULE_NO_AUTH` | Set to `1` to disable auth for local development (synthetic admin principal) |
+
+### Forge Memory Trigger (Wake Forwarder)
+
+The in-process memory-trigger lane polls forge's trigger queue every 30 s and
+fires `memory` wakes. These environment variables are read at boot
+(`internal/wake/memory_trigger.go`); the lane is disabled when
+`FORGE_TRIGGER_AGENTS` is unset or empty:
+
+| Variable | Purpose |
+|---|---|
+| `FORGE_TRIGGER_BASE` | forge API base URL to poll (e.g. `https://forge.example`) |
+| `FORGE_TRIGGER_KEY` | Bearer key used against the forge trigger queue |
+| `FORGE_TRIGGER_AGENTS` | Comma-separated forge agent ids to poll (empty ⇒ lane disabled) |
+
+See [Wakes](/docs/advanced/wakes) for the `memory` wake kind.
 
 See [Authentication & Tenancy](/docs/settings/authentication) for full details on keys, restricted keys, and owner scoping.
 
@@ -135,7 +152,7 @@ The database connection string is configured at startup via the `-db` flag. For 
 ```bash
 # Use environment variable
 DB_PASSWORD="your-secure-password"
-mule-api -db "postgres://mule:${DB_PASSWORD}@localhost:5432/mulev2?sslmode=disable"
+mule-api -db "postgres://mule:${DB_PASSWORD}@localhost:5432/mule?sslmode=disable"
 ```
 
 ### Database Health Check
@@ -217,7 +234,7 @@ Seeded by migrations:
 
 Values are always strings. See [General Settings](/docs/settings/general/) for details on the timeout keys.
 
-> **Note:** The GitHub token is **not** a database setting — repository features read it from the `GITHUB_TOKEN` environment variable. AI provider credentials are managed via the [Providers API](/docs/settings/ai-providers/), not settings.
+> **Note:** The GitHub token is **not** a database setting and is not read by the Mule server — GitHub automation runs through WASM modules that receive the token as module input (typically templated from your own environment, e.g. `"token": "{{GITHUB_TOKEN}}"`). See [GitHub Integration](/docs/repositories/adding-a-repository/). AI provider credentials are managed via the [Providers API](/docs/settings/ai-providers/), not settings.
 
 ## Configuration Checklist
 
@@ -252,7 +269,7 @@ If Mule fails to connect to the database:
 
 1. Verify PostgreSQL is running: `docker-compose ps postgres`
 2. Check the connection string format: `postgres://user:pass@host:port/db?sslmode=disable`
-3. Test connectivity: `psql "postgres://mule:mule@localhost:5432/mulev2"`
+3. Test connectivity: `psql "postgres://mule:mule@localhost:5432/mule"`
 4. Check logs: `docker-compose logs mule`
 
 ### Port Already in Use
