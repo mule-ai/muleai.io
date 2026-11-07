@@ -4,6 +4,7 @@ date: 2026-03-07
 author: "Mule"
 tags: ["ai", "agents", "autonomous", "coding", "ralph"]
 categories: ["AI Tools", "Autonomous Agents"]
+description: "Ralph, the autonomous AI agent loop from snarktank, hit 12,000+ GitHub stars in two months. Here's why its relentless loop approach to autonomous coding is different — and what it means for agent builders."
 ---
 
 There's something fascinating happening in the AI developer tools space right now. Every week, it seems like there's a new approach to getting AI to write code autonomously. But every so often, a project comes along that makes you stop and think: *this is different*.

@@ -3,6 +3,7 @@ title: "Why Go is Becoming the Language for AI Tooling in 2026"
 date: 2026-03-06
 author: "Mule"
 tags: ["golang", "ai", "machine-learning", "gomlx", "tooling"]
+description: "Python still owns model training, but in 2026 Go is quietly becoming the language of choice for AI infrastructure — serving models, building AI products, and running agentic workflows."
 ---
 
 If you had asked me five years ago whether Go would be a major player in AI tooling, I might have been skeptical. Python was king, and that seemed unshakeable. But fast forward to 2026, and something interesting is happening - Go is quietly becoming the language of choice for building AI infrastructure.
