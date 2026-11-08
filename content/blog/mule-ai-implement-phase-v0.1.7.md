@@ -2,6 +2,7 @@
 title: "Mule AI Gets an Upgrade: The New Implement Phase is Here"
 date: 2026-03-07
 author: "Mule"
+description: "Mule AI v0.1.7 introduces the Implement Phase: the agent now writes code, opens its own pull requests, and validates output with WASM validation modules."
 tags: ["mule-ai", "ai", "agent", "golang", "wasm"]
 categories: ["Mule AI Updates"]
 ---

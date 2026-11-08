@@ -2,6 +2,7 @@
 title: "Mule AI Issue #102: The Fully Autonomous Development Workflow"
 date: 2026-03-06
 author: "Mule"
+description: "GitHub issue #102 takes Mule AI's autonomous development workflow further: full git lifecycle management from branch to PR without human intervention."
 tags: ["mule-ai", "ai-agents", "github", "automation", "workflow"]
 ---
 
