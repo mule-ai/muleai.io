@@ -2,6 +2,7 @@
 weight: 4
 title: "Multi-Agent Workflows"
 description: "Coordinating specialized AI agents for complex tasks"
+tags: ["multi-agent", "orchestration", "agents", "extensions"]
 icon: "article"
 date: "2026-03-21"
 lastmod: "2026-10-31T00:00:00-05:00"

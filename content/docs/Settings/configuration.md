@@ -2,6 +2,7 @@
 weight: 1
 title: "Configuration"
 description: "Configuration options for Mule including CLI flags, environment variables, and runtime settings"
+tags: ["settings", "configuration", "environment", "deployment"]
 icon: "article"
 date: "2026-04-10"
 lastmod: "2026-11-07T00:00:00-05:00"

@@ -2,6 +2,7 @@
 weight: 2
 title: "Building a Custom WASM Module"
 description: "Create your own WebAssembly validation module for Mule workflows"
+tags: ["tutorial", "wasm", "extensions", "workflows"]
 icon: "article"
 date: "2026-03-21"
 lastmod: "2026-03-27T00:00:00-05:00"

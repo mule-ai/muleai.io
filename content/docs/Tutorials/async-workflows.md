@@ -2,6 +2,7 @@
 weight: 15
 title: "Async Workflow Execution"
 description: "Learn how to run long-running workflows asynchronously with job polling and WebSocket updates"
+tags: ["tutorial", "workflows", "jobs", "async"]
 icon: "article"
 date: "2026-03-31T00:00:00-05:00"
 lastmod: "2026-10-31T00:00:00-05:00"

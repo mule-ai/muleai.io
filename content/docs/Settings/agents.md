@@ -2,6 +2,7 @@
 weight: 5
 title: "Agents"
 description: "Configure AI agents with providers, models, skills, and tools"
+tags: ["settings", "agents", "pi", "tools"]
 icon: "article"
 date: "2025-02-20T20:54:52-05:00"
 lastmod: "2026-04-04T00:00:00-05:00"

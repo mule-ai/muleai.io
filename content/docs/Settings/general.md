@@ -2,6 +2,7 @@
 weight: 1
 title: "General"
 description: "Configure general Mule settings including GitHub integration and timeout values."
+tags: ["settings", "general", "configuration"]
 icon: "article"
 date: "2025-02-20T20:53:59-05:00"
 lastmod: "2026-03-21T00:00:00-05:00"

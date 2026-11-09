@@ -2,6 +2,7 @@
 weight: 3
 title: "Advanced Features"
 description: "Advanced features and capabilities of Mule for sophisticated AI-driven development workflows"
+tags: ["advanced", "architecture", "api"]
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
 lastmod: "2026-04-04T00:00:00-05:00"

@@ -2,6 +2,7 @@
 weight: 3
 title: "GitHub WASM Modules"
 description: "Using GitHub WASM modules for repository automation in workflows"
+tags: ["repositories", "github", "issues", "pull-requests"]
 icon: "article"
 date: "2025-02-20T21:04:46-05:00"
 lastmod: "2026-04-02T00:00:00-05:00"

@@ -2,6 +2,7 @@
 weight: 500
 title: "Settings"
 description: "Configure Mule's behavior including AI providers, agents, workflows, and system preferences"
+tags: ["settings", "configuration", "agents"]
 icon: "article"
 date: "2025-02-20T21:01:12-05:00"
 lastmod: "2026-04-04T00:00:00-05:00"

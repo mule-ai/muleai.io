@@ -2,6 +2,7 @@
 weight: 10
 title: "Tutorials"
 description: "Step-by-step tutorials for common Mule workflows"
+tags: ["tutorials", "workflows", "getting-started"]
 icon: "article"
 date: "2026-03-21T00:00:00-05:00"
 lastmod: "2026-04-04T00:00:00-05:00"

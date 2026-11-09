@@ -2,6 +2,7 @@
 weight: 3
 title: "Skills"
 description: "Configure and manage pi agent skills to extend agent capabilities"
+tags: ["settings", "skills", "tools", "agents"]
 icon: "article"
 date: "2026-03-28T00:00:00-05:00"
 lastmod: "2026-03-28T00:00:00-05:00"

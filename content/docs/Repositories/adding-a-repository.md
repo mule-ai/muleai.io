@@ -2,6 +2,7 @@
 weight: 2
 title: "GitHub Integration"
 description: "Using WASM modules for GitHub automation in Mule workflows"
+tags: ["repositories", "github", "getting-started"]
 icon: "article"
 date: "2025-02-20T21:04:16-05:00"
 lastmod: "2026-04-02T00:00:00-05:00"

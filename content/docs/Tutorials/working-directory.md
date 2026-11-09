@@ -2,6 +2,7 @@
 weight: 30
 title: "Working Directory Management"
 description: "Learn how to use working directories to isolate and manage workflow executions"
+tags: ["tutorial", "workflows", "bash", "filesystem"]
 icon: "article"
 date: "2026-03-30"
 lastmod: "2026-03-30"

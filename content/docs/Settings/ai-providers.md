@@ -2,6 +2,7 @@
 weight: 2
 title: "AI Providers"
 description: "Configure AI providers including OpenAI, Anthropic, Gemini, Ollama, and custom providers"
+tags: ["settings", "providers", "openai", "anthropic", "ollama"]
 icon: "article"
 date: "2025-02-20T20:54:21-05:00"
 lastmod: "2026-03-29T00:00:00-05:00"

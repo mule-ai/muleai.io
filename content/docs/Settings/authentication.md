@@ -2,6 +2,7 @@
 weight: 2
 title: "Authentication & Tenancy"
 description: "API keys, admin bootstrap, MULE_NO_AUTH dev mode, restricted keys, and per-user data isolation in Mule"
+tags: ["settings", "authentication", "tenancy", "security", "api"]
 icon: "article"
 date: "2026-10-26T00:00:00-05:00"
 lastmod: "2026-10-26T00:00:00-05:00"

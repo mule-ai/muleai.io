@@ -2,6 +2,7 @@
 weight: 8
 title: "Tools"
 description: "Built-in and custom tools for agent interactions"
+tags: ["settings", "tools", "bash", "filesystem", "http"]
 icon: "article"
 date: "2026-03-29T00:00:00-05:00"
 lastmod: "2026-03-29T00:00:00-05:00"

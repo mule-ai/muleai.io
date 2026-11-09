@@ -2,6 +2,7 @@
 weight: 25
 title: "Git Integration"
 description: "Automate Git operations using WASM modules and workflows"
+tags: ["tutorial", "git", "github", "automation"]
 icon: "article"
 date: "2026-04-04"
 lastmod: "2026-04-04T00:00:00-05:00"

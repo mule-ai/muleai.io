@@ -2,6 +2,7 @@
 weight: 11
 title: "Forge Conversation Steps"
 description: "The forge_conversation workflow step type: addressing a long-lived forge agent conversation, posting templated messages, and waiting for the turn's assistant output"
+tags: ["forge", "conversations", "workflow", "api"]
 icon: "article"
 date: "2026-10-30"
 lastmod: "2026-10-30T00:00:00-05:00"

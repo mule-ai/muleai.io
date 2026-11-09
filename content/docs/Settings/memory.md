@@ -2,6 +2,7 @@
 weight: 7
 title: "Memory Configuration"
 description: "Configure vector embedding storage for semantic search and context retention"
+tags: ["settings", "memory", "rag", "embeddings"]
 icon: "article"
 date: "2026-03-28T00:00:00-05:00"
 lastmod: "2026-11-07T00:00:00-05:00"

@@ -2,6 +2,7 @@
 weight: 5
 title: "File Operations in Mule"
 description: "How Mule handles file operations using the FilesystemTool and WASM modules"
+tags: ["udiff", "diff", "code-generation", "tools"]
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"
 lastmod: "2026-03-21T12:00:00-05:00"

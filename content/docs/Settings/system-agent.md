@@ -2,6 +2,7 @@
 weight: 6
 title: "System Agent"
 description: "Configure agents for system tasks like commit messages and PR descriptions"
+tags: ["settings", "agents", "pi", "system-prompt"]
 icon: "article"
 date: "2025-02-20T20:54:59-05:00"
 lastmod: "2026-04-04T00:00:00-05:00"

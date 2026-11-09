@@ -2,6 +2,7 @@
 weight: 1
 title: "Creating Your First Agent Workflow"
 description: "Step-by-step guide to creating and executing your first Mule workflow"
+tags: ["tutorial", "workflows", "agents", "getting-started"]
 icon: "article"
 date: "2026-03-21"
 lastmod: "2026-03-27T00:00:00-05:00"
