@@ -140,6 +140,29 @@ Post a templated message to a long-lived forge agent conversation and, optionall
 
 See [Forge Conversation Steps](/docs/advanced/forge-conversations) for full addressing rules, modes (`message`, `steer`, `follow_up`, `fork`), turn-waiting semantics, and output shape.
 
+### Voice Call Steps
+
+Run a full-duplex realtime voice call as a workflow job: the step starts a call, streams user audio in and agent TTS audio out over two WebSockets, and completes when the call is hung up (a dropped or killed call fails the job).
+
+```json
+{
+  "id": "unique-step-id",
+  "workflow_id": "workflow-uuid",
+  "step_order": 4,
+  "type": "voice_call",
+  "config": {
+    "forge_url": "http://forge:8140",
+    "api_key": "sk_forge_...",
+    "agent_id": "agent-uuid",
+    "tts_voice": "af_heart",
+    "silence_ms": 500,
+    "turn_timeout_secs": 120
+  }
+}
+```
+
+See [Voice Loop](/docs/advanced/voice-loop) for the full `config` reference (`conversation_id`, `mode`, `tts_sample_rate`, VAD/barge-in thresholds, and more), the `/voice/{job_id}/in` and `/voice/{job_id}/out` WebSocket protocols, and degraded-call behavior.
+
 ### Step Configuration (Config Field)
 
 The `config` JSON object is stored with the step and passed to WASM modules. For agent steps, the config is currently unused but reserved for future features.
@@ -153,7 +176,7 @@ The `config` JSON object is stored with the step and passed to WASM modules. For
 - **id**: A unique identifier for the step
 - **workflow_id**: The UUID of the parent workflow
 - **step_order**: Execution order within the workflow (1, 2, 3...)
-- **type**: Step type - either `agent`, `wasm_module`, or `forge_conversation`
+- **type**: Step type - one of `agent`, `wasm_module`, `forge_conversation`, or `voice_call`
 - **agent_id**: UUID of the agent to execute (for agent steps)
 - **wasm_module_id**: UUID of the WASM module to execute (for WASM steps)
 - **config**: JSON object with step-specific configuration
