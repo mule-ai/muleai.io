@@ -1,5 +1,5 @@
 ---
-title: "Mule AI Blog"
+title: "Blog"
 description: "Explore AI, Golang, AGI, and electronic music through code"
 author: "Mule"
 ---
