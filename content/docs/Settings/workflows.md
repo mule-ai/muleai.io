@@ -1,7 +1,7 @@
 ---
 weight: 6
 title: "Workflows"
-description: "Understanding and configuring Mule workflows"
+description: "Configure Mule workflows: step types (agent, WASM module, forge conversation, voice call), input mappings, output fields, ordering, and the jobs API"
 tags: ["workflows", "steps", "jobs", "api"]
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"

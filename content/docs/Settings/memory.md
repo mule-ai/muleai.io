@@ -5,7 +5,7 @@ description: "Configure vector embedding storage for semantic search and context
 tags: ["settings", "memory", "rag", "embeddings"]
 icon: "article"
 date: "2026-03-28T00:00:00-05:00"
-lastmod: "2026-11-07T00:00:00-05:00"
+lastmod: "2026-11-11T00:00:00-05:00"
 toc: true
 ---
 
@@ -20,6 +20,8 @@ The memory configuration controls how Mule stores and retrieves embeddings for s
 - Query stored content using semantic similarity
 - Maintain persistent context across sessions
 - Build knowledge bases for specialized agents
+
+The memory tool runs in **vector mode** only when a valid memory configuration exists and an embedding provider can be initialized. If no `memory_config` row exists at startup, the `memory` tool is not registered at all; saving a configuration via the API registers it without a restart. If the embedding provider itself fails to initialize, the agent runtime falls back to a legacy in-process key-value `memory` tool (`get`/`set`/`delete`/`list`, no embeddings, contents lost on restart) until the next restart. See [Tools → Memory Tool](/docs/settings/tools/#memory-tool) for both modes.
 
 ## Memory Configuration Structure
 
@@ -37,7 +39,7 @@ The memory configuration controls how Mule stores and retrieves embeddings for s
 }
 ```
 
-> **Note**: The `database_url` field is read-only and cannot be modified via the API. The database connection is configured through the server's database connection string.
+> **Note**: `database_url` points at the PostgreSQL database where the embedding vectors are stored (it defaults to the server's own database via the initial migration). `PUT /api/v1/memory-config` writes this field along with the others, so keep it pointed at a pgvector-capable database when updating the configuration.
 
 ## Configuration Fields
 
@@ -45,7 +47,7 @@ The memory configuration controls how Mule stores and retrieves embeddings for s
 |-------|------|-------------|
 | `id` | string | Unique identifier (currently always "default") |
 | `database_url` | string | PostgreSQL connection string for storing embeddings |
-| `embedding_provider` | string | AI provider for generating embeddings (openai, anthropic, etc.) |
+| `embedding_provider` | string | Embedding provider: a configured provider's ID, or a provider name to match (`openai`, `gemini`, `ollama`). Embedding calls currently go through an OpenAI-compatible endpoint |
 | `embedding_model` | string | Specific embedding model to use |
 | `embedding_dims` | int | Dimensionality of the embedding vectors |
 | `default_ttl_seconds` | int | Default time-to-live for stored embeddings (in seconds) |

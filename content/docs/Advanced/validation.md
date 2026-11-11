@@ -1,7 +1,7 @@
 ---
 weight: 2
 title: "Validation Functions"
-description: "Understanding validation in Mule"
+description: "Mule's two validation layers: data-structure checks on API resources and workflow execution validation with retry policies and quality gates"
 tags: ["validation", "retry", "quality", "workflows"]
 icon: "article"
 date: "2025-05-19T12:00:00-05:00"

@@ -1,11 +1,11 @@
 ---
 weight: 1
 title: "Getting Started"
-description: "Getting started with Mule"
+description: "Install and run Mule: Docker or Go setup, the web UI and API, and your first multi-agent workflow with providers, agents, and tools"
 tags: ["getting-started", "installation", "quickstart"]
 icon: "article"
 date: "2025-02-20T20:46:32-05:00"
-lastmod: "2026-11-07T00:00:00-05:00"
+lastmod: "2026-11-11T00:00:00-05:00"
 toc: true
 ---
 
@@ -14,7 +14,7 @@ toc: true
 Mule is an advanced multi-agent AI development platform that orchestrates sophisticated workflows and integrations. It serves as your autonomous development infrastructure, capable of:
 
 - **Multi-Agent Workflows**: Orchestrate complex tasks with sequential steps, WASM modules, and validation
-- **Multi-Provider Support**: OpenAI, Anthropic, Gemini, and Ollama with dynamic model switching
+- **Multi-Provider Support**: Agents run on the pi runtime with any provider/model it supports (e.g. `anthropic/claude-sonnet-4.5`); the providers table stores OpenAI-compatible base URLs and keys
 - **Skills System**: Extend agents with specialized capabilities using pi agent skills
 - **WebAssembly Modules**: Custom workflow steps compiled to WASM for sandboxed execution
 - **Built-in Tools**: Filesystem, bash, HTTP, and database tools for agent interactions
@@ -429,7 +429,8 @@ curl http://localhost:8140/health
 **2. List Available Models:**
 ```bash
 curl http://localhost:8140/v1/models
-# Should return a list of available models from your configured providers
+# Returns your agents and workflows as OpenAI-style model entries
+# (agent/<name>, workflow/<name>, async/workflow/<name>)
 ```
 
 **3. Check Agents:**

@@ -5,7 +5,7 @@ description: "Complete reference for Mule's REST surface: the OpenAI-compatible 
 tags: ["api", "endpoints", "reference", "rest"]
 icon: "article"
 date: "2026-11-04"
-lastmod: "2026-11-04T00:00:00-05:00"
+lastmod: "2026-11-11T00:00:00-05:00"
 toc: true
 ---
 
@@ -29,7 +29,7 @@ defined in `cmd/api/server.go`; the auth middleware lives in
 
 | Method | Path | Description |
 |---|---|---|
-| `GET` | `/v1/models` | List models across configured providers |
+| `GET` | `/v1/models` | List agents and workflows as OpenAI-style model entries (`agent/<name>`, `workflow/<name>`, plus `async/workflow/<name>` for async workflows) |
 | `POST` | `/v1/chat/completions` | Chat completion (OpenAI request/response shape) |
 
 These endpoints let any OpenAI-compatible client talk to Mule. A restricted
