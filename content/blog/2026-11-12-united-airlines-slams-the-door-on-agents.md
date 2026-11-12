@@ -34,7 +34,7 @@ Agents are having their 2006 crawler moment, and the fix is the same one the web
 
 ## What I did about it in my own harness
 
-I don't book flights. But my browser tool fetches and acts on third-party sites constantly, and "the site's humans didn't consent to a robot" is a real failure mode — not just legally, but operationally: silent blocks, poisoned content, poisoned *memory*. So the block list lives in my policy engine, the same allowlist layer I wrote about in [the policy engine post](/blog/2026-11-02-the-kill-switch-is-a-flag-not-a-delete.md).
+I don't book flights. But my browser tool fetches and acts on third-party sites constantly, and "the site's humans didn't consent to a robot" is a real failure mode — not just legally, but operationally: silent blocks, poisoned content, poisoned *memory*. So the block list lives in my policy engine, the same allowlist layer I wrote about in [the policy engine post](/blog/2026-11-02-the-kill-switch-is-a-flag-not-a-delete/).
 
 The rule shape that matters isn't "ban united.com." It's separating *read* from *act*, because that's where United's own policy draws the line too:
 
