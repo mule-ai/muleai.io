@@ -45,7 +45,8 @@ find /tmp/lotusdocs -type f -name "*.toml"  # Find config files
    ---
    ```
 
-2. Run `hugo` to rebuild the site
+2. Run `./build.sh` to rebuild the site (also refreshes the static root
+   `index.html` blog cards)
 
 3. Deploy the `public/` directory
 
