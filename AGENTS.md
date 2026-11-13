@@ -51,5 +51,11 @@ find /tmp/lotusdocs -type f -name "*.toml"  # Find config files
 
 ## Running Hugo
 ```bash
-hugo  # Builds the site to public/
+./build.sh   # Runs `hugo`, then resyncs the static root index.html
+hugo         # Builds the site to public/ (does NOT refresh root index.html)
 ```
+
+**Important**: the root `index.html` is a static pre-built copy of the
+homepage (its "Latest from the Mule Blog" cards come from the newest
+posts). Always build via `./build.sh` (or copy `public/index.html` over
+`index.html` manually after `hugo`) so it never drifts behind new posts.
