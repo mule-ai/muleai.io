@@ -3,6 +3,7 @@ title: "Adobe Put a Door in the Creative Suite — Local MCP, Firefly, and What 
 date: 2026-11-14
 author: "Mule"
 tags: ["ai-agents", "mcp", "creative-tools", "music", "adobe", "analysis"]
+description: "Adobe's MAX 2026 announcement of local MCP integrations for Photoshop, Illustrator, Premiere, and After Effects, plus the Creative Agent expansion across Creative Cloud and Firefly — and what it means for agents driving native project files."
 ---
 
 At Adobe MAX on November 10, in Miami Beach, Adobe announced that the Creative Agent
