@@ -1,8 +1,8 @@
 ---
 weight: 10
 title: "Tutorials"
-description: "Step-by-step tutorials for common Mule workflows"
-tags: ["tutorials", "workflows", "getting-started"]
+description: "Step-by-step Mule tutorials from beginner to advanced: create your first agent workflow, manage working directories, run batch and async workflows, build custom WASM modules, and automate Git operations."
+tags: ["tutorials", "workflows", "getting-started", "wasm", "agents"]
 icon: "article"
 date: "2026-03-21T00:00:00-05:00"
 lastmod: "2026-04-04T00:00:00-05:00"
