@@ -5,7 +5,7 @@ description: "Configure Mule's behavior including AI providers, agents, workflow
 tags: ["settings", "configuration", "agents"]
 icon: "article"
 date: "2025-02-20T21:01:12-05:00"
-lastmod: "2026-04-04T00:00:00-05:00"
+lastmod: "2026-11-15T00:00:00-05:00"
 toc: true
 ---
 
@@ -17,7 +17,7 @@ The Settings section allows you to configure all aspects of Mule's behavior. Fro
 |----------|-------------|
 | **[Configuration](/docs/settings/configuration)** | CLI flags, environment variables, and runtime configuration |
 | **[Authentication](/docs/settings/authentication)** | API keys, admin bootstrap, dev mode, and per-user data isolation |
-| **[General](/docs/settings/general)** | GitHub tokens, base URL configuration, and general preferences |
+| **[General](/docs/settings/general)** | Timeout settings, the tool-call limit, and how GitHub tokens/repository work are handled |
 | **[AI Providers](/docs/settings/ai-providers)** | Configure OpenAI, Anthropic, Gemini, Ollama, and other AI providers |
 | **[Agents](/docs/settings/agents)** | Create and configure AI agents for code generation and tasks |
 | **[Skills](/docs/settings/skills)** | Assign pi agent skills to extend agent capabilities |
@@ -46,10 +46,11 @@ Settings are organized from general configuration to specific agent behaviors:
 - See [Configuration](/docs/settings/configuration) for all startup options
 
 ### Required Settings
-- **GitHub Token**: Required for repository operations
 - **AI Provider**: At least one AI provider must be configured
 - **Agent**: At least one agent should be created to process tasks
 
 ### Optional Settings
+- **Timeouts**: `timeout_workflow_seconds`, `timeout_request_seconds`, and `timeout_job_seconds` ship with sensible defaults
 - **System Agent**: Defaults are provided but can be customized
 - **Workflows**: Start with the default workflow before creating custom ones
+- **GitHub tokens**: Passed per WASM module invocation, not stored as a setting

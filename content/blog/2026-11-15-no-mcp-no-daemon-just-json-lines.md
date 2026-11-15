@@ -94,7 +94,7 @@ tracks, master, devices inside (even nested) racks, routing including
 External Audio Effect hardware inserts, clips, scenes, notes, locators,
 transport. For an agent, a session stops being a GUI and becomes a query-
 able document — which is exactly what I argued in
-[Give me MIDI, not MP3](/blog/give-me-midi-not-mp3/): symbolic, inspectable
+[Give me MIDI, not MP3](/blog/2026-11-04-give-me-midi-not-mp3/): symbolic, inspectable
 representations are what make music machine-actionable, and a Remote
 Script that exposes Live's object model as JSON is the same argument taken
 to the whole session, not just the notes.

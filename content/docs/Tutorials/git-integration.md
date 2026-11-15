@@ -5,7 +5,7 @@ description: "Automate Git operations using WASM modules and workflows"
 tags: ["tutorial", "git", "github", "automation"]
 icon: "article"
 date: "2026-04-04"
-lastmod: "2026-04-04T00:00:00-05:00"
+lastmod: "2026-11-15T00:00:00-05:00"
 toc: true
 ---
 
@@ -173,7 +173,8 @@ curl -X POST http://localhost:8140/api/v1/workflows/${WORKFLOW_ID}/steps \
 
 ### Creating Feature Branches
 
-Use the `git-branch-push` module to create and push branches:
+Use the `git-branch-push` module to commit the current worktree and push it as
+a branch:
 
 ```json
 {
@@ -181,24 +182,30 @@ Use the `git-branch-push` module to create and push branches:
   "wasm_module_id": "git-branch-push-uuid",
   "config": {
     "token": "{{GITHUB_TOKEN}}",
-    "remote": "origin",
-    "branch_suffix": "-fix",
-    "base_branch": "main",
-    "commit_message": "Fix: Implement solution for issue #123",
-    "push": true
+    "repository": "/srv/mule/checkouts/your-repo",
+    "user_name": "Mule",
+    "user_email": "mule@example.com",
+    "prompt": { "title": "Fix issue #123", "body": "Implements the fix for #123" }
   }
 }
 ```
 
+What the module actually does (via the `push_current_branch` host function):
+sets the git user config when `user_name`/`user_email` are given, stages and
+commits all changes, derives the branch name from the **current working
+directory (the worktree name)**, creates/checks out that branch, and pushes it
+to `origin` using `token` for authentication.
+
 ### Branch Naming Strategy
 
-Configure branch naming based on your workflow:
+The branch name comes from the worktree directory, so control it upstream by
+choosing the `worktree_name` in the preceding `git-worktree` step:
 
-| Suffix | Result | Use Case |
-|--------|--------|----------|
-| `-fix` | `issue-123-fix` | Bug fixes |
-| `-feature` | `issue-123-feature` | New features |
-| `-wip` | `issue-123-wip` | Work in progress |
+| Worktree name | Branch pushed | Use case |
+|---------------|---------------|----------|
+| `issue-123-fix` | `issue-123-fix` | Bug fixes |
+| `issue-123-feature` | `issue-123-feature` | New features |
+| `issue-123-wip` | `issue-123-wip` | Work in progress |
 
 ## GitHub Integration
 
@@ -211,10 +218,11 @@ After completing work, post a comment to the issue:
   "type": "wasm_module",
   "wasm_module_id": "github-comment-uuid",
   "config": {
-    "issue_number": 123,
-    "body": "I've implemented a fix for this issue. The PR is ready for review.",
-    "repo": "owner/repo",
-    "token": "{{GITHUB_TOKEN}}"
+    "token": "{{GITHUB_TOKEN}}",
+    "prompt": {
+      "issue": "https://api.github.com/repos/owner/repo/issues/123",
+      "comment": "I've implemented a fix for this issue. The PR is ready for review."
+    }
   }
 }
 ```
@@ -228,10 +236,15 @@ Use the `issues-to-markdown` module to create documentation from issues:
   "type": "wasm_module",
   "wasm_module_id": "issues-to-markdown-uuid",
   "config": {
-    "url": "https://api.github.com/repos/owner/repo/issues/123",
-    "format": "detailed",
-    "include_labels": true,
-    "include_assignees": true
+    "result": [
+      {
+        "title": "Fix login timeout",
+        "url": "https://github.com/owner/repo/issues/123",
+        "state": "open",
+        "body": "The session expires too quickly.",
+        "due_date": "2026-12-01"
+      }
+    ]
   }
 }
 ```

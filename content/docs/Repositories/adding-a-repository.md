@@ -5,7 +5,7 @@ description: "Using WASM modules for GitHub automation in Mule workflows"
 tags: ["repositories", "github", "getting-started"]
 icon: "article"
 date: "2025-02-20T21:04:16-05:00"
-lastmod: "2026-04-02T00:00:00-05:00"
+lastmod: "2026-11-15T00:00:00-05:00"
 toc: true
 ---
 
@@ -50,29 +50,29 @@ To create a GitHub pull request from a workflow:
 
 ### Posting Comments
 
-Post comments on GitHub issues or pull requests:
+Post comments on GitHub issues or pull requests (`issue` is the GitHub API URL
+of the issue):
 
 ```json
 {
   "token": "your-github-token",
-  "owner": "username",
-  "repo": "repository",
-  "issue_number": 42,
-  "comment": "This issue is being worked on by Mule AI agent"
+  "prompt": {
+    "issue": "https://api.github.com/repos/owner/repo/issues/42",
+    "comment": "This issue is being worked on by Mule AI agent"
+  }
 }
 ```
 
 ### Creating Git Worktrees
 
-Create isolated git worktrees for working on multiple issues simultaneously:
+Create isolated git worktrees for working on multiple issues simultaneously
+(the repository must already be checked out locally; `prompt` may also be a
+JSON string):
 
 ```json
 {
-  "token": "your-github-token",
-  "owner": "username",
-  "repo": "repository",
-  "base_branch": "main",
-  "worktree_branch": "mule/issue-42-fix-bug"
+  "prompt": { "worktree_name": "issue-42-fix-bug" },
+  "repository": "/srv/mule/checkouts/your-repo"
 }
 ```
 
