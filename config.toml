@@ -35,6 +35,9 @@ enableEmoji = true
     category = "categories"
 
 [params]
+    # Fallback description for pages without frontmatter description
+    # (used by the docs head partial via $.Param "description")
+    description = "Mule AI documentation and blog: a multi-agent AI development platform with workflows, proactive wakes, a policy engine, WASM modules, and OpenAI, Anthropic, Gemini, and Ollama support."
     [params.docs]
         darkMode = true
         # Enable flexsearch for static site search
