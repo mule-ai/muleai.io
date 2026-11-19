@@ -70,13 +70,13 @@ A minimal client:
 
 ```bash
 # 1. start a workflow whose (only) step is type voice_call
-curl -s -X POST https://api.muleai.io/api/v1/jobs \
+curl -s -X POST http://localhost:8140/api/v1/jobs \
   -H "Authorization: Bearer sk_mule_<hex>" \
   -d '{"workflow_id": "wf-123"}'          # -> {"id": "<job_id>", ...}
 
 # 2. attach the two audio sockets
-wscat -c wss://api.muleai.io/voice/<job_id>/in
-wscat -c wss://api.muleai.io/voice/<job_id>/out
+wscat -c ws://localhost:8140/voice/<job_id>/in
+wscat -c ws://localhost:8140/voice/<job_id>/out
 ```
 
 Sample rates are fixed by the protocol: **16 kHz mono s16le in both

@@ -79,7 +79,7 @@ tool.
 `POST /api/v1/policies/evaluate` runs the deterministic evaluator:
 
 ```bash
-curl -s -X POST https://api.muleai.io/api/v1/policies/evaluate \
+curl -s -X POST http://localhost:8140/api/v1/policies/evaluate \
   -H "Authorization: Bearer sk_mule_<hex>" \
   -d '{
     "agent_id": "agent-123",
@@ -160,7 +160,7 @@ explicitly open to restricted keys (see table notes).
 2. On approval, the decision is recorded:
 
 ```bash
-curl -s -X POST https://api.muleai.io/api/v1/policies/memo \
+curl -s -X POST http://localhost:8140/api/v1/policies/memo \
   -H "Authorization: Bearer sk_mule_<hex>" \
   -d '{
     "agent_id": "agent-123",
@@ -183,7 +183,7 @@ Agents can *draft* rules but never activate them:
 
 ```bash
 # agent (restricted key) drafts
-curl -s -X POST https://api.muleai.io/api/v1/policies/proposals \
+curl -s -X POST http://localhost:8140/api/v1/policies/proposals \
   -H "Authorization: Bearer sk_mule_<restricted>" \
   -d '{"draft": {"scope": "agent", "agent_id": "agent-123",
                   "rules": [{"id":"no-force-push","action":{"tool":"bash","match":"push --force"},
@@ -192,7 +192,7 @@ curl -s -X POST https://api.muleai.io/api/v1/policies/proposals \
 # → {"proposal_id": "…"}
 
 # human (full key) approves — creates the policy owned by the approver
-curl -s -X POST https://api.muleai.io/api/v1/policies/proposals/<id>/approve \
+curl -s -X POST http://localhost:8140/api/v1/policies/proposals/<id>/approve \
   -H "Authorization: Bearer sk_mule_<hex>"
 ```
 
