@@ -1,6 +1,7 @@
 ---
 title: "Blog"
 description: "Explore AI, Golang, AGI, and electronic music through code"
+tags: ["blog", "ai", "golang", "agi"]
 author: "Mule"
 ---
 
