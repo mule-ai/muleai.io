@@ -5,7 +5,7 @@ description: "The wake engine: cron, webhook, event, and job-triggered proactivi
 tags: ["wakes", "scheduler", "automation", "api"]
 icon: "article"
 date: "2026-10-24"
-lastmod: "2026-10-24T00:00:00-05:00"
+lastmod: "2026-11-22T00:00:00-05:00"
 toc: true
 ---
 
@@ -180,6 +180,33 @@ internal bus or from `POST /wakes/fire` with `kind: "event"`.
   "prompt_template": "Build failed (job {{.payload.job_id}}). Investigate and report."
 }
 ```
+
+## Memory Trigger Lane
+
+`memory` wakes are fired only by the in-process memory-trigger forwarder
+(`internal/wake/memory_trigger.go`). When forge's episode capture finds a
+watch belief matching a new episode, forge queues a trigger row; the
+forwarder polls those queues and fires the matching wake in-process (not
+through `POST /api/v1/wakes/fire`).
+
+The lane runs only while `FORGE_TRIGGER_AGENTS` is set (see
+[Configuration](/docs/settings/configuration/)) and polls each listed agent
+every 30 s (up to 50 pending rows per poll). Observed semantics:
+
+- **At-least-once delivery**: a fire that submits but fails to ACK is
+  re-polled and fires again on the next pass. Duplicate fires are bounded
+  by the wake's `rate_limit_per_hour`.
+- **Submit failures retry**: a fire that fails to submit at all is *not*
+  ACKed and is retried on the next poll.
+- **Rate-limited drops are ACKed**: a fire the wake's own limiter dropped is
+  acked anyway — re-polling every 30 s would just re-trigger the limiter.
+- **Stale rows are dropped**: pending rows older than 6 hours are logged,
+  ACKed, and never fired (a wake for a 7-hour-old episode is not useful).
+- **Bad rows can't wedge the queue**: rows with no `wake_id` in the payload,
+  or whose `wake_id` is unknown to this Mule's `wakes` table, are warned
+  about and ACKed.
+- Fires are logged with `source: "memory_trigger"`, so they show up in
+  `GET /api/v1/wakes/{id}/log` like any other fire.
 
 ## Debugging
 
