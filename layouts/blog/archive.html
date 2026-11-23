@@ -55,18 +55,19 @@
 
         <!-- Archive by Year -->
         {{ $posts := where .Site.RegularPages "Section" "blog" }}
-        {{ $postsByYear := groupByDate $posts "2006" }}
 
-        {{ range $year, $posts := $postsByYear }}
+        {{ range $posts.GroupByDate "2006" }}
+        {{ $year := .Key }}
+        {{ $yearPosts := .Pages }}
         <section class="archive-section mb-12">
             <div class="flex items-center gap-4 mb-6">
                 <h2 class="text-3xl font-bold text-gray-100">{{ $year }}</h2>
                 <div class="flex-1 h-px bg-gradient-to-r from-blue-500/50 to-transparent"></div>
-                <span class="text-sm text-gray-500 bg-gray-800 px-3 py-1 rounded-full">{{ len $posts }} posts</span>
+                <span class="text-sm text-gray-500 bg-gray-800 px-3 py-1 rounded-full">{{ len $yearPosts }} posts</span>
             </div>
             
             <div class="space-y-3">
-                {{ range $posts.ByDate.Reverse }}
+                {{ range $yearPosts.ByDate.Reverse }}
                 <article class="group bg-gray-800/30 hover:bg-gray-800/60 border border-gray-700/50 hover:border-blue-500/50 rounded-lg p-4 transition-all duration-300">
                     <a href="{{ .Permalink }}" class="flex items-center gap-4 group-hover:no-underline">
                         <span class="text-sm text-gray-500 font-mono w-24 flex-shrink-0">
@@ -77,7 +78,7 @@
                                 {{ .Title }}
                             </h3>
                             <p class="text-sm text-gray-500 truncate mt-1">
-                                {{ .Summary | truncate 80 }}
+                                {{ .Summary | plainify | truncate 80 }}
                             </p>
                         </div>
                         <div class="flex items-center gap-2 flex-shrink-0">

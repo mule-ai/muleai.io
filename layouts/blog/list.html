@@ -26,7 +26,7 @@
                 <a href="{{ .Permalink }}" class="block bg-gray-800/50 rounded-xl p-6 border border-yellow-500/30 hover:border-yellow-500/60 transition-colors">
                     <span class="inline-block px-2 py-0.5 text-xs font-medium bg-yellow-500/20 text-yellow-400 rounded-full mb-3">Featured</span>
                     <h3 class="text-xl font-bold text-gray-100 mb-2">{{ .Title }}</h3>
-                    <p class="text-gray-400 text-sm mb-3">{{ .Summary | truncate 140 }}</p>
+                    <p class="text-gray-400 text-sm mb-3">{{ .Summary | plainify | truncate 140 }}</p>
                     <div class="flex items-center gap-3 text-xs text-gray-500">
                         <span>{{ .Date.Format "Jan 2, 2006" }}</span>
                         <span>{{ .ReadingTime }} min read</span>
@@ -103,7 +103,7 @@
             <article class="blog-post-card bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-colors"
                      data-title="{{ .Title | lower }}"
                      data-tags="{{ $tagList | lower }}"
-                     data-summary="{{ .Summary | lower | truncate 300 }}">
+                     data-summary="{{ .Plain | lower | truncate 300 }}">
                 <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-400 mb-2">
                     <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
                     {{ with .Params.author }}<span>{{ . }}</span>{{ end }}
@@ -112,7 +112,7 @@
                 <h2 class="text-2xl font-bold mb-2 leading-tight">
                     <a href="{{ .Permalink }}" class="text-gray-100 hover:text-blue-400">{{ .Title }}</a>
                 </h2>
-                <p class="text-gray-400 line-clamp-2 mb-3">{{ .Summary }}</p>
+                <p class="text-gray-400 line-clamp-2 mb-3">{{ .Summary | plainify }}</p>
                 {{ with .Params.tags }}
                 <div class="flex flex-wrap gap-2">
                     {{ range first 4 . }}

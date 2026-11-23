@@ -242,7 +242,7 @@
                         {{ with $post.Params.tags }}<span class="chip {{ $chip }}">{{ index . 0 }}</span>{{ end }}
                     </div>
                     <h3 class="text-lg font-semibold mb-2 group-hover:text-blue-400 transition-colors">{{ $post.Title }}</h3>
-                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">{{ $post.Summary | truncate 180 }}</p>
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">{{ $post.Summary | plainify | truncate 180 }}</p>
                     <div class="flex items-center text-xs text-gray-500">
                         <span>{{ $post.Date.Format "January 2, 2006" }}</span>
                         <span class="mx-2">·</span>
