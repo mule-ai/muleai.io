@@ -5,7 +5,7 @@ description: "Configure AI agents with providers, models, skills, and tools"
 tags: ["settings", "agents", "pi", "tools"]
 icon: "article"
 date: "2025-02-20T20:54:52-05:00"
-lastmod: "2026-04-04T00:00:00-05:00"
+lastmod: "2026-11-24T00:00:00-05:00"
 toc: true
 ---
 
@@ -25,6 +25,23 @@ When creating an agent, you configure:
 - **Tools**: External capabilities the agent can use (filesystem, bash, HTTP, database, memory)
 - **Skills**: pi agent skills that extend the agent's capabilities
 - **PI Config**: Advanced settings for the PI runtime (thinking level, etc.)
+- **External Reference**: An optional identifier that links the agent to its counterpart in an external system (see [External Reference](#external-reference))
+
+## External Reference
+
+Every agent carries an optional `external_ref` field used for cross-system agent addressing. It stores the identifier of the agent's counterpart in an external system — for example, a forge agent UUID — so Mule jobs and wakes can refer back to the original agent.
+
+The field is a plain string on the agent JSON, accepted by `POST /api/v1/agents` and returned unchanged by the agent endpoints:
+
+```json
+{
+  "name": "forge-worker",
+  "model_id": "anthropic/claude-sonnet-4.5",
+  "external_ref": "3f2a1b9c-0d4e-4f60-9a11-52c7e8f0a1b2"
+}
+```
+
+It is backed by the `external_ref` column added in migration `0011_add_external_ref_to_agents.sql` (see [Database](/docs/settings/database/#migrations)). Leave it empty for agents that exist only inside Mule.
 
 ## PI Configuration
 
