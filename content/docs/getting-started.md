@@ -345,7 +345,7 @@ Before diving in, ensure you've completed these setup steps:
   - Relevant context or background
 - **Filter Issues with WASM**: When using GitHub WASM modules, configure filters to select specific issues (e.g., by label, state, or assignee). This allows Mule to focus on relevant tasks.
 - **Iterate**: Review the generated PRs and refine your agent prompts based on results. Small adjustments to system prompts can significantly improve output quality.
-- **Check Logs**: If something doesn't work, check the Logs page in the web UI for detailed error messages and API responses.
+- **Check Job Details**: If something doesn't work, open the run on the **Jobs** page in the web UI to inspect each step's status and its input/output data; per-step error messages come from `GET /api/v1/jobs/{id}/steps` and the server's stdout logs.
 - **Test with Read-Only Tasks First**: Before requesting code changes or GitHub modifications, try asking Mule to review code or explain functionality to understand its capabilities.
 
 #### What to Expect During First Run
@@ -401,7 +401,7 @@ The web UI automatically uses WebSocket for real-time updates in the Jobs page.
 
 If your first run doesn't go as expected:
 
-1. **Check the Logs page** in the web UI for error messages
+1. **Check the Jobs page** in the web UI for failed steps and their output
 2. **Verify your configuration** in Settings — a missing API key or token is the most common issue
 3. **Test your AI provider** independently to ensure API access is working
 4. **Review the issue label** on GitHub to confirm it matches your configuration
@@ -526,9 +526,9 @@ docker-compose ps postgres
 
 **Default configurations not created**
 On first run, Mule should create default providers, agents, and workflows. If these are missing:
-1. Check the logs: `docker-compose logs mule-api`
+1. Check the logs: `docker-compose logs mule`
 2. Verify the database is healthy: `docker-compose exec postgres psql -U mule -d mule -c "\dt"`
-3. Restart the container: `docker-compose restart mule-api`
+3. Restart the container: `docker-compose restart mule`
 
 ### Configuration Issues
 
@@ -589,7 +589,7 @@ sudo systemctl edit ollama
 
 **No changes generated**
 - Ensure input parameters are clear and actionable
-- Check Logs page for AI provider errors
+- Check the failed step's output on the Jobs page (and `GET /api/v1/jobs/{id}/steps`) for AI provider errors
 - Verify model context window isn't being exceeded
 - Review agent prompt template for clarity
 - Verify WASM modules received correct input data
@@ -611,7 +611,7 @@ docker stats
 
 ### Getting Help
 
-1. **Check the Logs page** in the web UI for detailed error messages
+1. **Check the Jobs page** in the web UI for failed steps and their output data
 2. **Verify configuration** in Settings — a missing API key is the most common issue
 3. **Test your connections** independently:
    - AI provider: `curl` your provider's API endpoint
@@ -619,4 +619,4 @@ docker stats
    - Database: `docker-compose exec postgres psql -U mule -d mule`
 4. **Review the issue label** on GitHub to confirm it matches your configuration
 
-For more help, check the logs at `~/.config/mule/mule.log` or use the Logs page in the web interface.
+For more help, check the server's stdout logs (`docker compose logs mule` for container runs) and the per-step data on the **Jobs** page — see [Web UI](/docs/settings/web-ui).

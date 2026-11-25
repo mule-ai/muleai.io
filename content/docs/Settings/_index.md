@@ -16,6 +16,7 @@ The Settings section allows you to configure all aspects of Mule's behavior. Fro
 | Category | Description |
 |----------|-------------|
 | **[Configuration](/docs/settings/configuration)** | CLI flags, environment variables, and runtime configuration |
+| **[Web UI](/docs/settings/web-ui)** | The embedded React interface: Dashboard, Workflow Builder, Jobs live view, WASM editor |
 | **[Authentication](/docs/settings/authentication)** | API keys, admin bootstrap, dev mode, and per-user data isolation |
 | **[General](/docs/settings/general)** | Timeout settings, the tool-call limit, and how GitHub tokens/repository work are handled |
 | **[AI Providers](/docs/settings/ai-providers)** | Configure OpenAI, Anthropic, Gemini, Ollama, and other AI providers |
