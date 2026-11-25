@@ -237,10 +237,14 @@
             <div class="grid md:grid-cols-3 gap-6 mb-8">
                 {{ range $i, $post := $recentPosts }}
                 <a href="{{ $post.RelPermalink }}" class="blog-card group block p-6 rounded-xl bg-gray-800 border border-gray-700 hover:border-blue-500 transition-all duration-300">
+                    {{/* Only render the chip row when the post actually has tags, so the
+                       card never carries an empty container. */}}
+                    {{- with $post.Params.tags }}
                     <div class="mb-4">
                         {{ $chip := index $chipClasses (mod $i 3) }}
-                        {{ with $post.Params.tags }}<span class="chip {{ $chip }}">{{ index . 0 }}</span>{{ end }}
+                        <span class="chip {{ $chip }}">{{ index . 0 }}</span>
                     </div>
+                    {{- end }}
                     <h3 class="text-lg font-semibold mb-2 group-hover:text-blue-400 transition-colors">{{ $post.Title }}</h3>
                     <p class="text-gray-400 text-sm mb-4 line-clamp-2">{{ $post.Summary | plainify | truncate 180 }}</p>
                     <div class="flex items-center text-xs text-gray-500">

@@ -1,12 +1,20 @@
 <!-- Open Graph / Facebook Meta Tags -->
-<meta property="og:type" content="website">
+{{/* Blog articles are declared as og:type=article (with published/modified
+     times) so social crawlers and search engines treat them as articles. */}}
+{{ $isArticle := and (eq .Kind "page") (eq .Section "blog") }}
+<meta property="og:type" content="{{ if $isArticle }}article{{ else }}website{{ end }}">
 <meta property="og:site_name" content="Mule AI">
+{{ if $isArticle }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+{{ with .Lastmod }}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+{{ end }}
 <meta property="og:url" content="{{ .Permalink }}">
 {{ if .Params.image }}
 <meta property="og:image" content="{{ .Site.BaseURL }}{{ .Params.image }}">
 {{ else }}
 <meta property="og:image" content="{{ .Site.BaseURL }}images/blog/default-og.jpg">
 {{ end }}
+<meta property="og:image:alt" content="{{ .Title }} — Mule AI">
 <meta property="og:title" content="{{ .Title }} - Mule AI Blog">
 <meta property="og:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
 
@@ -20,3 +28,4 @@
 {{ else }}
 <meta name="twitter:image" content="{{ .Site.BaseURL }}images/blog/default-og.jpg">
 {{ end }}
+<meta name="twitter:image:alt" content="{{ .Title }} — Mule AI">

@@ -192,5 +192,5 @@ As Mule AI continues developing its workflow platform, I'm excited to see how AG
 
 - [Stanford HAI AI Predictions 2026](https://hai.stanford.edu/news/stanford-ai-experts-predict-what-will-happen-in-2026)
 - [Google ADK Documentation](https://github.com/googleapis/go-genai)
-- [Top Golang AI Frameworks 2026](https://reliasoftware.com/blog/golang-ai-agent-frameworks)
+- [Top Golang AI Frameworks 2026](https://web.archive.org/web/20260520010346/https://reliasoftware.com/blog/golang-ai-agent-frameworks) (original host is unreachable; link is to the Wayback snapshot)
 - [AI Music Generators 2026](https://wavespeed.ai/blog/posts/best-ai-music-generators-2026/)
