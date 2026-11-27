@@ -593,42 +593,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
 
-                <!-- Related Posts -->
-                {{ $related := .Site.RegularPages.Related . | first 3 }}
-                {{ if $related }}
-                <div class="mb-10">
-                    <h4 class="text-lg font-semibold text-gray-100 mb-6 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                        Related Posts
-                    </h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {{ range $related }}
-                        <a href="{{ .Permalink }}" class="group block bg-gray-800/50 hover:bg-gray-800/80 border border-gray-700 hover:border-blue-500/50 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1">
-                            {{ with index .Params.tags 0 }}
-                            <span class="inline-block px-2 py-0.5 text-xs font-medium bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white mb-2">
-                                {{ . }}
-                            </span>
-                            {{ end }}
-                            <h5 class="text-gray-100 font-medium mb-2 group-hover:text-blue-400 transition-colors line-clamp-2">
-                                {{ .Title }}
-                            </h5>
-                            <p class="text-gray-400 text-sm line-clamp-2">
-                                {{ .Summary | truncate 100 }}
-                            </p>
-                            <div class="flex items-center gap-2 mt-3 text-xs text-gray-500">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                                {{ .Date.Format "Jan 2, 2006" }}
-                            </div>
-                        </a>
-                        {{ end }}
-                    </div>
-                </div>
-                {{ end }}
-                
                 <!-- Enhanced Author Bio with Social Links -->
                 <div class="author-bio">
                     {{ with .Site.Params.blog.authorAvatar }}
@@ -691,12 +655,30 @@ document.addEventListener('DOMContentLoaded', function() {
             </footer>
         </article>
 
-        <!-- Related Posts Section -->
-        {{ $related := first 3 (where (where site.RegularPages "Section" "blog") "Permalink" "!=" .Permalink) }}
+        <!-- Related Posts Section: single consolidated block.
+             Prefers tag/content-related posts (Hugo Related), padded with the
+             newest posts when fewer than 3 related posts are found. Replaces
+             the previous duplicated "Related Posts" + "More from the Blog"
+             sections that rendered two near-identical card grids per page. -->
+        {{ $cur := . }}
+        {{ $seen := dict $cur.RelPermalink true }}
+        {{ $related := slice }}
+        {{ range .Site.RegularPages.Related . }}
+            {{ if and (eq .Section "blog") (not (isset $seen .RelPermalink)) (lt (len $related) 3) }}
+                {{ $seen = merge $seen (dict .RelPermalink true) }}
+                {{ $related = $related | append . }}
+            {{ end }}
+        {{ end }}
+        {{ range $p := (where site.RegularPages "Section" "blog").ByDate.Reverse }}
+            {{ if and (not (isset $seen $p.RelPermalink)) (lt (len $related) 3) }}
+                {{ $seen = merge $seen (dict $p.RelPermalink true) }}
+                {{ $related = $related | append $p }}
+            {{ end }}
+        {{ end }}
         {{ if gt (len $related) 0 }}
         <section class="mt-16 pt-12 border-t border-gray-700">
             <div class="flex items-center gap-4 mb-8">
-                <h3 class="text-2xl font-bold text-gray-100">More from the Blog</h3>
+                <h2 class="text-2xl font-bold text-gray-100">More from the Blog</h2>
                 <div class="flex-1 h-px bg-gradient-to-r from-gray-700 to-transparent"></div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
