@@ -14,8 +14,12 @@
     {{ block "head/favicon" . }}{{ partialCached "head/favicon.html" . }}{{ end }}
     <!-- Google Fonts -->
     {{- partial "google-fonts" . }}
-    <!-- Tailwind CSS (for blog pages using Tailwind utilities) -->
+    <!-- Tailwind CSS: only pages whose layouts use Tailwind utilities load the
+         CDN script (blog section + tag/category taxonomy pages). Docs pages and
+         the homepage (standalone head + Tailwind 2 stylesheet) skip it. -->
+    {{- if or (eq .Section "blog") (eq .Kind "taxonomy") (eq .Kind "term") }}
     <script src="https://cdn.tailwindcss.com"></script>
+    {{- end }}
     <!-- Custom CSS -->
     {{- $options := dict "enableSourceMap" true }}
     {{- if hugo.IsProduction}}
@@ -100,7 +104,6 @@
     window.toggleTheme = function() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        console.log('Toggling theme from', currentTheme, 'to', newTheme);
 
         // Save preference
         localStorage.setItem('theme', newTheme);
@@ -130,8 +133,6 @@
 
     // Initialize theme on page load
     (function() {
-        console.log('Initializing theme...');
-
         // Wait a bit for DOM to render
         setTimeout(function() {
             // Check for saved user preference
@@ -147,8 +148,6 @@
             } else if (systemPrefersDark) {
                 theme = 'dark';
             }
-
-            console.log('Setting theme to:', theme);
 
             // Apply theme to document
             document.documentElement.setAttribute('data-theme', theme);
