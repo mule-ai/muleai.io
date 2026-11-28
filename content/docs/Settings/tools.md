@@ -5,7 +5,7 @@ description: "Reference for Mule agent tools: the five built-in tools (bash, fil
 tags: ["settings", "tools", "bash", "filesystem", "http"]
 icon: "article"
 date: "2026-03-29T00:00:00-05:00"
-lastmod: "2026-11-11T00:00:00-05:00"
+lastmod: "2026-11-28T00:00:00-05:00"
 toc: true
 ---
 
@@ -152,39 +152,53 @@ curl -X DELETE http://localhost:8140/api/v1/agents/{agent_id}/tools/{tool_id}
 
 ### Bash Tool
 
-The bash tool executes shell commands with configurable timeout and working directory:
+The bash tool executes shell commands via `bash -c` with a fixed 30-second
+timeout (set when the tool instance is constructed):
 
 ```yaml
 tool_type: bash
 command: "go build -o app ./cmd/api"
-timeout: 300  # 5 minutes
-working_directory: "/path/to/project"
 ```
 
 **Parameters:**
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `command` | string | The shell command to execute |
-| `timeout` | integer | Timeout in seconds (default: 300) |
-| `working_directory` | string | Directory to execute command in |
+| `command` | string | The shell command to execute (required) |
+
+**Behavior notes:**
+
+- Commands run through `bash -c`, so pipelines, redirects, and `&&`
+  chaining all work.
+- The timeout is baked into the tool instance (currently 30 s); a command
+  that exceeds it fails with `command timed out after 30s`. There is no
+  per-invocation `timeout` parameter.
+- The tool's working directory is an instance property (default: the
+  server's current directory, overridable per job via the job's
+  `working_directory`; see [Working Directory](/docs/tutorials/working-directory)).
+  It is not an execution parameter.
+- Results are returned as `{ "command", "exitCode", "stdout", "stderr" }`.
+  Output is captured combined (stderr merged into `stdout`), so `stderr`
+  is always empty.
 
 ### Filesystem Tool
 
-File operations for reading, writing, and managing files:
+File operations for reading, writing, and managing files. The tool is
+registered with its root pinned to the server's working directory; paths
+are resolved relative to it:
 
 ```yaml
 tool_type: filesystem
-operation: "read"  # read, write, delete, list, exists
-path: "/path/to/file.txt"
+action: "read"  # read, write, delete, list, exists
+path: "src/main.go"
 ```
 
-**Operations:**
-| Operation | Description | Parameters |
-|-----------|-------------|------------|
+**Actions:**
+| Action | Description | Parameters |
+|--------|-------------|------------|
 | `read` | Read file contents | `path` |
 | `write` | Write content to file | `path`, `content` |
 | `delete` | Delete a file | `path` |
-| `list` | List directory contents | `path` |
+| `list` | List directory contents | `path` (optional, defaults to the root) |
 | `exists` | Check if file exists | `path` |
 
 ### HTTP Tool
@@ -203,26 +217,29 @@ headers:
 **Parameters:**
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `url` | string | The URL to request |
-| `method` | string | HTTP method (GET, POST, PUT, DELETE) |
+| `url` | string | The URL to request (required; `http`/`https` only) |
+| `method` | string | HTTP method (default: `GET`; GET, POST, PUT, PATCH, DELETE) |
 | `headers` | object | Request headers |
-| `body` | object | Request body (for POST/PUT) |
+| `body` | object | Request body, JSON-encoded; for POST/PUT/PATCH the `Content-Type` defaults to `application/json` if not set |
 
 ### Database Tool
 
-Execute PostgreSQL queries:
+Run read-only PostgreSQL queries. The tool is deliberately **SELECT-only**:
+any statement not starting with `SELECT` is rejected with
+`only SELECT queries are allowed for security reasons`, and there is no
+write (`execute`) mode:
 
 ```yaml
 tool_type: database
-operation: "query"  # query, execute
-sql: "SELECT * FROM users WHERE active = true"
+query: "SELECT * FROM users WHERE active = true"
+connection_string: "postgres://user:pass@localhost:5432/mydb?sslmode=disable"
 ```
 
-**Operations:**
-| Operation | Description | Parameters |
-|-----------|-------------|------------|
-| `query` | Execute SELECT query | `sql` |
-| `execute` | Execute INSERT/UPDATE/DELETE | `sql` |
+**Parameters:**
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `query` | string | The SQL query to execute (required; must start with `SELECT`) |
+| `connection_string` | string | PostgreSQL connection string (required; the tool opens a fresh connection per call) |
 
 ### Memory Tool
 
